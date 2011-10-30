@@ -17,8 +17,33 @@ public enum ChineseCharacterCombinationType
 		return "";
 	}
 
-	static public ChineseCharacterCombinationType checkType()// TODO
+	public int toCodePoint()
 	{
+		String string = toString();
+		if (string.equals(""))
+			return 0;
+		return Character.toCodePoint(string.charAt(0), string.charAt(1));
+	}
+
+	static boolean isCombinationType(int codePoint)
+	{
+		for (ChineseCharacterCombinationType type : ChineseCharacterCombinationType
+				.values())
+		{
+			if (codePoint == type.toCodePoint())
+				return true;
+		}
+		return false;
+	}
+
+	static ChineseCharacterCombinationType toCombinationType(int codePoint)
+	{
+		for (ChineseCharacterCombinationType type : ChineseCharacterCombinationType
+				.values())
+		{
+			if (codePoint == type.toCodePoint())
+				return type;
+		}
 		return null;
 	}
 }

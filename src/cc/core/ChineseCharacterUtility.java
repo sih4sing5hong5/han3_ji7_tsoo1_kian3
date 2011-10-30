@@ -1,35 +1,64 @@
 package cc.core;
 
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+import java.util.Vector;
+
 public class ChineseCharacterUtility
 {
-	private CharSequence sequence;
-	private int start;
+	private StringCharacterIterator iterator;
 
-	public ChineseCharacterUtility(CharSequence sequence)
+	public ChineseCharacterUtility(String string)
 	{
-		this.sequence = sequence;
-		this.start = 0;
+		this.iterator = new StringCharacterIterator(string);
 	}
 
-	public ChineseCharacter parseTree()
+	public ChineseCharacterUtility(StringCharacterIterator iterator)
 	{
-		ChineseCharacter chineseCharacter = null;
-		if (Character.isHighSurrogate(sequence.charAt(start)))
+		this.iterator = iterator;
+	}
+
+	public Vector<ChineseCharacter> parseText()
+	{
+		Vector<ChineseCharacter> vector = new Vector<ChineseCharacter>();
+		while (iterator.current() != CharacterIterator.DONE)
 		{
-			if (start + 1 < sequence.length())
+			vector.add(parseCharacter());
+			// TODO catch EOF
+		}
+		return null;
+	}
+
+	ChineseCharacter parseCharacter()
+	{
+		if (iterator.current() == CharacterIterator.DONE)
+			;// TODO EOF throw
+		int codePoint = 0;
+		if (Character.isHighSurrogate(iterator.current()))
+		{
+			if (iterator.getIndex() + 1 != iterator.getEndIndex())
 			{
-				chineseCharacter = new ChineseCharacterBase(
-						Character.toCodePoint(sequence.charAt(start),
-								sequence.charAt(start + 1)));
-				start += 2;
+				codePoint = Character.toCodePoint(iterator.current(),
+						iterator.next());
 			}
 			else
-				start++;
+				;// TODO EOF throw
 		}
 		else
 		{
-			chineseCharacter=new ChineseCharacterCombination();
+			codePoint = iterator.current();
 		}
+		iterator.next();
+		ChineseCharacter chineseCharacter = null;
+		if (ChineseCharacterCombinationType.isCombinationType(codePoint))
+		{
+			chineseCharacter = new ChineseCharacterCombination(codePoint,
+					iterator);
+		}
+		else
+		{
+			chineseCharacter = new ChineseCharacterBase(codePoint);
+		}
+		return chineseCharacter;
 	}
-
 }

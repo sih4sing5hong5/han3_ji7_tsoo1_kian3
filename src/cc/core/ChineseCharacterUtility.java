@@ -4,6 +4,8 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.Vector;
 
+import cc.exception.CCParseTextException;
+
 public class ChineseCharacterUtility
 {
 	private StringCharacterIterator iterator;
@@ -23,17 +25,23 @@ public class ChineseCharacterUtility
 		Vector<ChineseCharacter> vector = new Vector<ChineseCharacter>();
 		while (iterator.current() != CharacterIterator.DONE)
 		{
-			vector.add(parseCharacter());
-			vector.lastElement().parent=null;
-			// TODO catch EOF
+			try
+			{
+				vector.add(parseCharacter());
+				vector.lastElement().parent = null;
+			}
+			catch (CCParseTextException e)
+			{
+				vector.add(null);
+			}
 		}
 		return null;
 	}
 
-	ChineseCharacter parseCharacter()
+	ChineseCharacter parseCharacter() throws CCParseTextException
 	{
 		if (iterator.current() == CharacterIterator.DONE)
-			;// TODO EOF throw
+			throw new CCParseTextException();// TODO EOF throw
 		int codePoint = 0;
 		if (Character.isHighSurrogate(iterator.current()))
 		{
@@ -43,7 +51,7 @@ public class ChineseCharacterUtility
 						iterator.next());
 			}
 			else
-				;// TODO EOF throw
+				throw new CCParseTextException();// TODO EOF throw
 		}
 		else
 		{

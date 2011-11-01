@@ -2,6 +2,8 @@ package cc.core;
 
 import java.text.StringCharacterIterator;
 
+import cc.exception.CCParseTextException;
+
 public class ChineseCharacterCombination extends ChineseCharacter
 {
 	private ChineseCharacterCombinationType type;
@@ -9,6 +11,7 @@ public class ChineseCharacterCombination extends ChineseCharacter
 	private boolean theSameChildren;
 
 	ChineseCharacterCombination(int codePoint, StringCharacterIterator iterator)
+			throws CCParseTextException
 	{
 		type = ChineseCharacterCombinationType.toCombinationType(codePoint);
 		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);

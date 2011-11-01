@@ -24,6 +24,7 @@ public class ChineseCharacterUtility
 		while (iterator.current() != CharacterIterator.DONE)
 		{
 			vector.add(parseCharacter());
+			vector.lastElement().parent=null;
 			// TODO catch EOF
 		}
 		return null;

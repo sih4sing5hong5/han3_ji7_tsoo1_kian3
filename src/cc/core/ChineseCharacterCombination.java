@@ -12,9 +12,12 @@ public class ChineseCharacterCombination extends ChineseCharacter
 	{
 		type = ChineseCharacterCombinationType.toCombinationType(codePoint);
 		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
-		children = new ChineseCharacterCombination[2];
-		children[0] = utility.parseCharacter();
-		children[1] = utility.parseCharacter();
+		children = new ChineseCharacterCombination[type.getNumberOfChildren()];
+		for (int i = 0; i < children.length; ++i)
+		{
+			children[i] = utility.parseCharacter();
+			children[i].parent = this;
+		}
 	}
 
 	ChineseCharacterCombinationType getType()

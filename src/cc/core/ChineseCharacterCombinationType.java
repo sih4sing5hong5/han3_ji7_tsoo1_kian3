@@ -17,6 +17,18 @@ public enum ChineseCharacterCombinationType
 		return "";
 	}
 
+	public int getNumberOfChildren()
+	{
+		switch (this)
+		{
+		case horizontal:
+		case vertical:
+		case wrap:
+			return 2;
+		}
+		return 0;
+	}
+
 	public int toCodePoint()
 	{
 		String string = toString();

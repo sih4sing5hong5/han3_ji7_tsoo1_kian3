@@ -1,5 +1,7 @@
 package cc.core;
 
+import cc.writer.ChineseCharacterWriter;
+
 public class ChineseCharacterBase extends ChineseCharacter
 {
 	private int codePoint;
@@ -9,8 +11,15 @@ public class ChineseCharacterBase extends ChineseCharacter
 		this.codePoint = codePoint;
 	}
 
+	@Override
+	public void generateByWriter(ChineseCharacterWriter writer)
+	{
+		writer.writeBase(this);
+	}
+
 	public int getCodePoint()
 	{
 		return codePoint;
 	}
+
 }

@@ -35,7 +35,7 @@ public class ChineseCharacterUtility
 				vector.add(null);
 			}
 		}
-		return null;
+		return vector;
 	}
 
 	ChineseCharacter parseCharacter() throws CCParseTextException

@@ -3,6 +3,7 @@ package cc.core;
 import java.text.StringCharacterIterator;
 
 import cc.exception.CCParseTextException;
+import cc.writer.ChineseCharacterWriter;
 
 public class ChineseCharacterCombination extends ChineseCharacter
 {
@@ -15,7 +16,7 @@ public class ChineseCharacterCombination extends ChineseCharacter
 	{
 		type = ChineseCharacterCombinationType.toCombinationType(codePoint);
 		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
-		children = new ChineseCharacterCombination[type.getNumberOfChildren()];
+		children = new ChineseCharacter[type.getNumberOfChildren()];
 		for (int i = 0; i < children.length; ++i)
 		{
 			children[i] = utility.parseCharacter();
@@ -23,22 +24,28 @@ public class ChineseCharacterCombination extends ChineseCharacter
 		}
 	}
 
-	ChineseCharacterCombinationType getType()
+	@Override
+	public void generateByWriter(ChineseCharacterWriter writer)
+	{
+		writer.writeCombination(this);
+	}
+
+	public ChineseCharacterCombinationType getType()
 	{
 		return type;
 	}
 
-	void setType(ChineseCharacterCombinationType type)
+	public ChineseCharacter[] getChildren()
 	{
-		this.type = type;
+		return children;
 	}
 
-	boolean isTheSameChildren()
+	public boolean isTheSameChildren()
 	{
 		return theSameChildren;
 	}
 
-	void setTheSameChildren(boolean theSameChildren)
+	public void setTheSameChildren(boolean theSameChildren)
 	{
 		this.theSameChildren = theSameChildren;
 	}

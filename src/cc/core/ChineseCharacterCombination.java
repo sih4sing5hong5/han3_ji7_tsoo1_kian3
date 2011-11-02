@@ -3,7 +3,7 @@ package cc.core;
 import java.text.StringCharacterIterator;
 
 import cc.exception.CCParseTextException;
-import cc.writer.ChineseCharacterWriter;
+import cc.typesetting.ChineseCharacterTypesetter;
 
 public class ChineseCharacterCombination extends ChineseCharacter
 {
@@ -25,7 +25,7 @@ public class ChineseCharacterCombination extends ChineseCharacter
 	}
 
 	@Override
-	public void generateByWriter(ChineseCharacterWriter writer)
+	public void generateByWriter(ChineseCharacterTypesetter writer)
 	{
 		writer.writeCombination(this);
 	}

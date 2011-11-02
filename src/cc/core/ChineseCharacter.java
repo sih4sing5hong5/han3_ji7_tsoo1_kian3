@@ -2,14 +2,14 @@ package cc.core;
 
 import java.awt.Point;
 
-import cc.writer.ChineseCharacterWriter;
+import cc.typesetting.ChineseCharacterTypesetter;
 
 public abstract class ChineseCharacter
 {
 	protected ChineseCharacter parent;
 	private Point area;
 
-	public abstract void generateByWriter(ChineseCharacterWriter writer);
+	public abstract void generateByWriter(ChineseCharacterTypesetter writer);
 
 	public Point getArea()
 	{

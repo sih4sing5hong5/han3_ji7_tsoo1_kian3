@@ -1,6 +1,6 @@
 package cc.core;
 
-import cc.writer.ChineseCharacterWriter;
+import cc.typesetting.ChineseCharacterTypesetter;
 
 public class ChineseCharacterBase extends ChineseCharacter
 {
@@ -12,7 +12,7 @@ public class ChineseCharacterBase extends ChineseCharacter
 	}
 
 	@Override
-	public void generateByWriter(ChineseCharacterWriter writer)
+	public void generateByWriter(ChineseCharacterTypesetter writer)
 	{
 		writer.writeBase(this);
 	}

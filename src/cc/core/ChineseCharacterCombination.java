@@ -27,7 +27,7 @@ public class ChineseCharacterCombination extends ChineseCharacter
 	@Override
 	public void generateByWriter(ChineseCharacterTypesetter writer)
 	{
-		writer.writeCombination(this);
+		writer.setCombination(this);
 	}
 
 	public ChineseCharacterCombinationType getType()

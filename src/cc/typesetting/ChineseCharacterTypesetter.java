@@ -5,6 +5,6 @@ import cc.core.ChineseCharacterCombination;
 
 public interface ChineseCharacterTypesetter
 {
-	void writeBase(ChineseCharacterBase base);
-	void writeCombination(ChineseCharacterCombination combination);
+	void setBase(ChineseCharacterBase base);
+	void setCombination(ChineseCharacterCombination combination);
 }

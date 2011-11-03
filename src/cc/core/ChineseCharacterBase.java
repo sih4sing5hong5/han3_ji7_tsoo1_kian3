@@ -14,7 +14,7 @@ public class ChineseCharacterBase extends ChineseCharacter
 	@Override
 	public void generateByWriter(ChineseCharacterTypesetter writer)
 	{
-		writer.writeBase(this);
+		writer.setBase(this);
 	}
 
 	public int getCodePoint()

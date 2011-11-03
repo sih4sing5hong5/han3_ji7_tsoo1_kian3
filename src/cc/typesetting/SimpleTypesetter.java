@@ -8,14 +8,14 @@ import cc.core.ChineseCharacterCombination;
 public class SimpleTypesetter implements ChineseCharacterTypesetter
 {
 	@Override
-	public void writeBase(ChineseCharacterBase base)
+	public void setBase(ChineseCharacterBase base)
 	{
 		base.setArea(new Point(100, 100));
 		return;
 	}
 
 	@Override
-	public void writeCombination(ChineseCharacterCombination combination)
+	public void setCombination(ChineseCharacterCombination combination)
 	{
 		for (int i = 0; i < combination.getType().getNumberOfChildren(); ++i)
 			combination.getChildren()[i].generateByWriter(this);

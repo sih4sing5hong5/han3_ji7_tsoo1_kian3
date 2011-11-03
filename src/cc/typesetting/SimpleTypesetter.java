@@ -4,13 +4,18 @@ import java.awt.Point;
 
 import cc.core.ChineseCharacterBase;
 import cc.core.ChineseCharacterCombination;
+import cc.moveable_type.ImageMoveableType;
 
 public class SimpleTypesetter implements ChineseCharacterTypesetter
 {
 	@Override
 	public void setBase(ChineseCharacterBase base)
 	{
-		base.setArea(new Point(100, 100));
+		ImageMoveableType moveableType = new ImageMoveableType();
+		moveableType.setRegion(new Point(100, 100));
+		moveableType.setPosition(new Point(0, 0));
+		moveableType.setScaler(new Point(100, 100));
+		base.setMovableType(moveableType);
 		return;
 	}
 
@@ -18,10 +23,10 @@ public class SimpleTypesetter implements ChineseCharacterTypesetter
 	public void setCombination(ChineseCharacterCombination combination)
 	{
 		for (int i = 0; i < combination.getType().getNumberOfChildren(); ++i)
-			combination.getChildren()[i].generateByWriter(this);
+			combination.getChildren()[i].typeset(this);
 		Point first = combination.getChildren()[0].getArea();
 		Point second = combination.getChildren()[1].getArea();
-		combination.setArea(new Point());
+		ImageMoveableType moveableType = new ImageMoveableType();
 		switch (combination.getType())
 		{
 		case horizontal:

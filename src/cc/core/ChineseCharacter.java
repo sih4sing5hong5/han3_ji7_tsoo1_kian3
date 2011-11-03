@@ -1,23 +1,25 @@
 package cc.core;
 
-import java.awt.Point;
-
+import cc.moveable_type.ChineseCharacterMovableType;
+import cc.printing.ChineseCharacterPrinter;
 import cc.typesetting.ChineseCharacterTypesetter;
 
 public abstract class ChineseCharacter
 {
 	protected ChineseCharacter parent;
-	private Point area;
+	private ChineseCharacterMovableType movableType;
 
-	public abstract void generateByWriter(ChineseCharacterTypesetter writer);
+	public abstract void typeset(ChineseCharacterTypesetter writer);
 
-	public Point getArea()
+	public abstract void print(ChineseCharacterPrinter printer);
+
+	public ChineseCharacterMovableType getMovableType()
 	{
-		return area;
+		return movableType;
 	}
 
-	public void setArea(Point area)
+	public void setMovableType(ChineseCharacterMovableType movableType)
 	{
-		this.area = area;
+		this.movableType = movableType;
 	}
 }

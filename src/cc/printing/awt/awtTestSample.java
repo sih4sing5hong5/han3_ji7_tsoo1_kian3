@@ -76,7 +76,7 @@ public class awtTestSample extends JPanel
 		ChineseCharacterTypesetter writer = new SimpleTypesetter();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccArray.elementAt(i).generateByWriter(writer);
+			ccArray.elementAt(i).typeset(writer);
 		}
 		System.out.println(ccArray.size());
 		for (int i = 0; i < ccArray.size(); ++i)

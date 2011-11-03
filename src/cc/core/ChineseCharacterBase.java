@@ -1,5 +1,6 @@
 package cc.core;
 
+import cc.printing.ChineseCharacterPrinter;
 import cc.typesetting.ChineseCharacterTypesetter;
 
 public class ChineseCharacterBase extends ChineseCharacter
@@ -11,15 +12,22 @@ public class ChineseCharacterBase extends ChineseCharacter
 		this.codePoint = codePoint;
 	}
 
-	@Override
-	public void generateByWriter(ChineseCharacterTypesetter writer)
-	{
-		writer.setBase(this);
-	}
-
 	public int getCodePoint()
 	{
 		return codePoint;
 	}
 
+	@Override
+	public void typeset(ChineseCharacterTypesetter writer)
+	{
+		writer.setBase(this);
+		return;
+	}
+
+	@Override
+	public void print(ChineseCharacterPrinter printer)
+	{
+		printer.printBase(this);
+		return;
+	}
 }

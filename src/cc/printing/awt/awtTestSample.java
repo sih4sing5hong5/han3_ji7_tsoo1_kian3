@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
+import cc.moveable_type.ChineseCharacterMovableType;
 import cc.typesetting.ChineseCharacterTypesetter;
 import cc.typesetting.SimpleTypesetter;
 
@@ -34,8 +35,10 @@ import cc.typesetting.SimpleTypesetter;
 public class awtTestSample extends JPanel
 {
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1500, HEIGHT = 800; // Size of our example
-	private String word = "⿰木火";
+	static final int WIDTH = 800, HEIGHT = 600; // Size of our example
+	private String word = "⿰木火⿱木火⿴口火";
+	private String FontName = "全字庫正宋體";
+	private int FontStyle = Font.BOLD;
 
 	public String getName()
 	{
@@ -61,36 +64,31 @@ public class awtTestSample extends JPanel
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;
-		 Font f = new Font("全字庫正宋體", Font.BOLD, 140);
-		// System.out.println(gv.getNumGlyphs());
-		// Shape shape = gv.getOutline();
-
+//		Font f = new Font(FontName, FontStyle, 140);
 		// Set drawing attributes and starting position
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(20, 160);
+		g.translate(20, 120);
+		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 		ChineseCharacterTypesetter writer = new SimpleTypesetter();
+		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccArray.elementAt(i).typeset(writer);
+			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
 		}
 		System.out.println(ccArray.size());
-		for (int i = 0; i < ccArray.size(); ++i)
+		AwtForImagePrinter awtForImagePrinter = new AwtForImagePrinter(g,
+				FontName, FontStyle);
+		for (int i = 0; i < ccmvArray.size(); ++i)
 		{
-			 GlyphVector gv = f.createGlyphVector(g.getFontRenderContext(), "永應");
+			ccmvArray.elementAt(i).print(awtForImagePrinter);
+			g.translate(160, 120);// move to the right
 		}
-
-		// // Draw the shape once with each stroke
-		// for (int i = 0; i < strokes.length; i++)
-		// {
-		// g.setStroke(strokes[i]); // set the stroke
-		// g.draw(shape); // draw the shape
-		// g.translate(0, 160); // move to the right
-		// }
+		return;
 	}
 
 	public static void main(String[] a)
@@ -104,7 +102,7 @@ public class awtTestSample extends JPanel
 			}
 		});
 		f.setContentPane(new awtTestSample());
-		f.setSize(1500, 800);
+		f.setSize(800, 600);
 		f.setVisible(true);
 	}
 

@@ -2,46 +2,61 @@ package cc.typesetting;
 
 import java.awt.Point;
 
-import cc.core.ChineseCharacterBase;
-import cc.core.ChineseCharacterCombination;
-import cc.moveable_type.ImageMoveableType;
+import cc.core.ChineseCharacterTzu;
+import cc.core.ChineseCharacterWen;
+import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.image.ImageMoveableType;
+import cc.moveable_type.image.ImageMoveableTypeTzu;
+import cc.moveable_type.image.ImageMoveableTypeWen;
 
 public class SimpleTypesetter implements ChineseCharacterTypesetter
 {
 	@Override
-	public void setBase(ChineseCharacterBase base)
+	public ImageMoveableTypeWen setWen(ChineseCharacterWen chineseCharacterWen)
 	{
-		ImageMoveableType moveableType = new ImageMoveableType();
+		ImageMoveableTypeWen moveableType = new ImageMoveableTypeWen(
+				chineseCharacterWen);
 		moveableType.setRegion(new Point(100, 100));
 		moveableType.setPosition(new Point(0, 0));
 		moveableType.setScaler(new Point(100, 100));
-		base.setMovableType(moveableType);
-		return;
+		return moveableType;
 	}
 
 	@Override
-	public void setCombination(ChineseCharacterCombination combination)
+	public ImageMoveableTypeTzu setTzu(ChineseCharacterTzu chineseCharacterTzu)
 	{
-		for (int i = 0; i < combination.getType().getNumberOfChildren(); ++i)
-			combination.getChildren()[i].typeset(this);
-		Point first = combination.getChildren()[0].getArea();
-		Point second = combination.getChildren()[1].getArea();
-		ImageMoveableType moveableType = new ImageMoveableType();
-		switch (combination.getType())
+		ImageMoveableTypeTzu imageMoveableTypeTzu = new ImageMoveableTypeTzu(
+				chineseCharacterTzu);
+		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
+		imageMoveableTypeTzu
+				.setChildren(new ChineseCharacterMovableType[childrenSize]);
+		for (int i = 0; i < childrenSize; ++i)
+		{
+			imageMoveableTypeTzu.getChildren()[i] = chineseCharacterTzu
+					.getChildren()[i].typeset(this);
+			imageMoveableTypeTzu.getChildren()[i]
+					.setParent(imageMoveableTypeTzu);
+		}
+		Point first = ((ImageMoveableType) imageMoveableTypeTzu.getChildren()[0])
+				.getRegion();
+		Point second = ((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
+				.getRegion();
+		imageMoveableTypeTzu.setRegion(new Point());
+		switch (chineseCharacterTzu.getType())
 		{
 		case horizontal:
-			combination.getArea().x = Math.max(first.x, second.x);
-			combination.getArea().y = first.y + second.y;
+			imageMoveableTypeTzu.getRegion().x = Math.max(first.x, second.x);
+			imageMoveableTypeTzu.getRegion().y = first.y + second.y;
 			break;
 		case vertical:
-			combination.getArea().x = first.x + second.x;
-			combination.getArea().y = Math.max(first.y, second.y);
+			imageMoveableTypeTzu.getRegion().x = first.x + second.x;
+			imageMoveableTypeTzu.getRegion().y = Math.max(first.y, second.y);
 			break;
 		case wrap:
-			combination.getArea().x = first.x << 1;
-			combination.getArea().y = first.y << 1;
+			imageMoveableTypeTzu.getRegion().x = first.x << 1;
+			imageMoveableTypeTzu.getRegion().y = first.y << 1;
 			break;
 		}
-		return;
+		return imageMoveableTypeTzu;
 	}
 }

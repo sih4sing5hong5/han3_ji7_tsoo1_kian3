@@ -1,11 +1,11 @@
 package cc.typesetting;
 
-import cc.core.ChineseCharacterBase;
-import cc.core.ChineseCharacterCombination;
+import cc.core.ChineseCharacterTzu;
+import cc.core.ChineseCharacterWen;
+import cc.moveable_type.ChineseCharacterMovableType;
 
 public interface ChineseCharacterTypesetter
 {
-	void setBase(ChineseCharacterBase base);
-
-	void setCombination(ChineseCharacterCombination combination);
+	public ChineseCharacterMovableType setWen(ChineseCharacterWen wen);
+	public ChineseCharacterMovableType setTzu(ChineseCharacterTzu tzu);
 }

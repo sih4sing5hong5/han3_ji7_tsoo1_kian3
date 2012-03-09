@@ -1,6 +1,6 @@
 package cc.core;
 
-public enum ChineseCharacterCombinationType
+public enum ChineseCharacterTzuCombinationType
 {
 	horizontal, vertical, wrap;// ⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻
 	public String toString()
@@ -43,7 +43,7 @@ public enum ChineseCharacterCombinationType
 
 	static boolean isCombinationType(int codePoint)
 	{
-		for (ChineseCharacterCombinationType type : ChineseCharacterCombinationType
+		for (ChineseCharacterTzuCombinationType type : ChineseCharacterTzuCombinationType
 				.values())
 		{
 			if (codePoint == type.toCodePoint())
@@ -52,9 +52,9 @@ public enum ChineseCharacterCombinationType
 		return false;
 	}
 
-	static ChineseCharacterCombinationType toCombinationType(int codePoint)
+	static ChineseCharacterTzuCombinationType toCombinationType(int codePoint)
 	{
-		for (ChineseCharacterCombinationType type : ChineseCharacterCombinationType
+		for (ChineseCharacterTzuCombinationType type : ChineseCharacterTzuCombinationType
 				.values())
 		{
 			if (codePoint == type.toCodePoint())

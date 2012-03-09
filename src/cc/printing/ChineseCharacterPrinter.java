@@ -1,11 +1,11 @@
 package cc.printing;
 
-import cc.core.ChineseCharacterBase;
-import cc.core.ChineseCharacterCombination;
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.ChineseCharacterMovableTypeWen;
 
 public interface ChineseCharacterPrinter
 {
-	void printBase(ChineseCharacterBase base);
+	void printWen(ChineseCharacterMovableTypeWen wen);
 
-	void printCombination(ChineseCharacterCombination combination);
+	void printTzu(ChineseCharacterMovableTypeTzu tzu);
 }

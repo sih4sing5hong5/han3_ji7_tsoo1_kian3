@@ -59,14 +59,14 @@ public class ChineseCharacterUtility
 		}
 		iterator.next();
 		ChineseCharacter chineseCharacter = null;
-		if (ChineseCharacterCombinationType.isCombinationType(codePoint))
+		if (ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
 		{
-			chineseCharacter = new ChineseCharacterCombination(codePoint,
+			chineseCharacter = new ChineseCharacterTzu(codePoint,
 					iterator);
 		}
 		else
 		{
-			chineseCharacter = new ChineseCharacterBase(codePoint);
+			chineseCharacter = new ChineseCharacterWen(codePoint);
 		}
 		return chineseCharacter;
 	}

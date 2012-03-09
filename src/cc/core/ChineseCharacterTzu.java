@@ -3,19 +3,19 @@ package cc.core;
 import java.text.StringCharacterIterator;
 
 import cc.exception.CCParseTextException;
-import cc.printing.ChineseCharacterPrinter;
+import cc.moveable_type.ChineseCharacterMovableType;
 import cc.typesetting.ChineseCharacterTypesetter;
 
-public class ChineseCharacterCombination extends ChineseCharacter
+public class ChineseCharacterTzu extends ChineseCharacter
 {
-	private ChineseCharacterCombinationType type;
+	private ChineseCharacterTzuCombinationType type;
 	private ChineseCharacter[] children;
 	private boolean theSameChildren;
 
-	ChineseCharacterCombination(int codePoint, StringCharacterIterator iterator)
+	ChineseCharacterTzu(int codePoint, StringCharacterIterator iterator)
 			throws CCParseTextException
 	{
-		type = ChineseCharacterCombinationType.toCombinationType(codePoint);
+		type = ChineseCharacterTzuCombinationType.toCombinationType(codePoint);
 		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
 		children = new ChineseCharacter[type.getNumberOfChildren()];
 		for (int i = 0; i < children.length; ++i)
@@ -26,20 +26,12 @@ public class ChineseCharacterCombination extends ChineseCharacter
 	}
 
 	@Override
-	public void typeset(ChineseCharacterTypesetter writer)
+	public ChineseCharacterMovableType typeset(ChineseCharacterTypesetter writer)
 	{
-		writer.setCombination(this);
-		return;
+		return writer.setTzu(this);
 	}
 
-	@Override
-	public void print(ChineseCharacterPrinter printer)
-	{
-		printer.printCombination(this);
-		return;
-	}
-
-	public ChineseCharacterCombinationType getType()
+	public ChineseCharacterTzuCombinationType getType()
 	{
 		return type;
 	}

@@ -1,7 +1,8 @@
 package cc.moveable_type;
 
+import cc.adjusting.ChineseCharacterTypeAdjuster;
 import cc.core.ChineseCharacter;
-import cc.printing.ChineseCharacterPrinter;
+import cc.printing.ChineseCharacterTypePrinter;
 
 public abstract class ChineseCharacterMovableType
 {
@@ -14,7 +15,9 @@ public abstract class ChineseCharacterMovableType
 		this.parent = null;
 	}
 
-	public abstract void print(ChineseCharacterPrinter printer);
+	public abstract void adjust(ChineseCharacterTypeAdjuster adjuster);
+
+	public abstract void print(ChineseCharacterTypePrinter printer);
 
 	public ChineseCharacter getChineseCharacter()
 	{

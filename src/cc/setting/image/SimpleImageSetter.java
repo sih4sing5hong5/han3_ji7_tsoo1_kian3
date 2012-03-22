@@ -1,4 +1,4 @@
-package cc.typesetting;
+package cc.setting.image;
 
 import java.awt.Point;
 
@@ -8,8 +8,9 @@ import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.image.ImageMoveableType;
 import cc.moveable_type.image.ImageMoveableTypeTzu;
 import cc.moveable_type.image.ImageMoveableTypeWen;
+import cc.setting.ChineseCharacterTypeSetter;
 
-public class SimpleTypesetter implements ChineseCharacterTypesetter
+public class SimpleImageSetter implements ChineseCharacterTypeSetter
 {
 	@Override
 	public ImageMoveableTypeWen setWen(ChineseCharacterWen chineseCharacterWen)
@@ -57,6 +58,7 @@ public class SimpleTypesetter implements ChineseCharacterTypesetter
 			imageMoveableTypeTzu.getRegion().y = first.y << 1;
 			break;
 		}
+		imageMoveableTypeTzu.setScaler(imageMoveableTypeTzu.getRegion());
 		return imageMoveableTypeTzu;
 	}
 }

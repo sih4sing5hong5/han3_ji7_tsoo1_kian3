@@ -3,6 +3,8 @@ package cc.printing.awt;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.font.GlyphVector;
+import java.awt.geom.AffineTransform;
 
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
@@ -10,9 +12,9 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.image.ImageMoveableType;
 import cc.moveable_type.image.ImageMoveableTypeWen;
-import cc.printing.ChineseCharacterPrinter;
+import cc.printing.ChineseCharacterTypePrinter;
 
-public class AwtForImagePrinter implements ChineseCharacterPrinter
+public class AwtForImagePrinter implements ChineseCharacterTypePrinter
 {
 	private Graphics2D graphics2d;
 	private String fontName;
@@ -31,14 +33,27 @@ public class AwtForImagePrinter implements ChineseCharacterPrinter
 	{
 		ImageMoveableTypeWen imageMoveableTypeWen = (ImageMoveableTypeWen) wen;
 		Point scaler = imageMoveableTypeWen.getScaler();
-		int length = Math.min(scaler.x, scaler.y);
+		double xScaler = 1.0, yScaler = 1.0;
+		if (scaler.x < scaler.y)
+		{
+			xScaler = (double) scaler.x / (double) scaler.y;
+		}
+		else
+		{
+			yScaler = (double) scaler.y / (double) scaler.x;
+		}
+		AffineTransform affineTransform = new AffineTransform();
+		affineTransform.setToScale(xScaler, yScaler);
+		int length = Math.max(scaler.x, scaler.y);
 		Font font = new Font(fontName, fontStyle, length);
 		Point position = imageMoveableTypeWen.getPosition();
 		graphics2d.translate(position.x, position.y);
-		graphics2d.draw(font.createGlyphVector(
-				graphics2d.getFontRenderContext(),
-				Character.toChars((((ChineseCharacterWen) wen
-						.getChineseCharacter()).getCodePoint()))).getOutline());
+		GlyphVector glyphVector = font.createGlyphVector(graphics2d
+				.getFontRenderContext(), Character
+				.toChars((((ChineseCharacterWen) wen.getChineseCharacter())
+						.getCodePoint())));
+		glyphVector.setGlyphTransform(0, affineTransform);
+		graphics2d.draw(glyphVector.getOutline());
 		graphics2d.translate(-position.x, -position.y);
 		return;
 	}

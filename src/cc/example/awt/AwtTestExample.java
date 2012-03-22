@@ -1,4 +1,4 @@
-package cc.printing.awt;
+package cc.example.awt;
 
 /*
  * Copyright (c) 2000 David Flanagan.  All rights reserved.
@@ -15,24 +15,27 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.font.GlyphVector;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cc.adjusting.image.SampleImageAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
-import cc.typesetting.ChineseCharacterTypesetter;
-import cc.typesetting.SimpleTypesetter;
+import cc.moveable_type.image.ImageMoveableType;
+import cc.printing.awt.AwtForImagePrinter;
+import cc.setting.ChineseCharacterTypeSetter;
+import cc.setting.image.SimpleImageSetter;
 
 /** A demonstration of writing custom Stroke classes */
-public class awtTestSample extends JPanel
+public class AwtTestExample extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	static final int WIDTH = 800, HEIGHT = 600; // Size of our example
@@ -64,21 +67,27 @@ public class awtTestSample extends JPanel
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;
-//		Font f = new Font(FontName, FontStyle, 140);
+		// Font f = new Font(FontName, FontStyle, 140);
 		// Set drawing attributes and starting position
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(20, 120);
+		g.translate(20, 220);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-		ChineseCharacterTypesetter writer = new SimpleTypesetter();
+		ChineseCharacterTypeSetter writer = new SimpleImageSetter();
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
+		}
+		for (int i = 0; i < ccArray.size(); ++i)
+		{
+			((ImageMoveableType) ccmvArray.elementAt(i)).setRegion(new Point(
+					200, 200));
+			ccmvArray.elementAt(i).adjust(new SampleImageAdjuster());
 		}
 		System.out.println(ccArray.size());
 		AwtForImagePrinter awtForImagePrinter = new AwtForImagePrinter(g,
@@ -86,7 +95,7 @@ public class awtTestSample extends JPanel
 		for (int i = 0; i < ccmvArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).print(awtForImagePrinter);
-			g.translate(160, 120);// move to the right
+			g.translate(200, 000);// move to the right
 		}
 		return;
 	}
@@ -101,7 +110,7 @@ public class awtTestSample extends JPanel
 				System.exit(0);
 			}
 		});
-		f.setContentPane(new awtTestSample());
+		f.setContentPane(new AwtTestExample());
 		f.setSize(800, 600);
 		f.setVisible(true);
 	}

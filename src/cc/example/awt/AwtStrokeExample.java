@@ -1,4 +1,4 @@
-package cc.printing.awt;
+package cc.example.awt;
 
 /*
  * Copyright (c) 2000 David Flanagan.  All rights reserved.
@@ -28,7 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /** A demonstration of writing custom Stroke classes */
-public class awtStrokeSample extends JPanel
+public class AwtStrokeExample extends JPanel
 {
 	/**
 	 * 
@@ -97,7 +97,7 @@ public class awtStrokeSample extends JPanel
 				System.exit(0);
 			}
 		});
-		f.setContentPane(new awtStrokeSample());
+		f.setContentPane(new AwtStrokeExample());
 		f.setSize(1500, 800);
 		f.setVisible(true);
 	}

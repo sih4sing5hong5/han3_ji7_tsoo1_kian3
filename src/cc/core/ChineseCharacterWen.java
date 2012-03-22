@@ -1,7 +1,7 @@
 package cc.core;
 
 import cc.moveable_type.ChineseCharacterMovableType;
-import cc.typesetting.ChineseCharacterTypesetter;
+import cc.setting.ChineseCharacterTypeSetter;
 
 public class ChineseCharacterWen extends ChineseCharacter
 {
@@ -18,7 +18,7 @@ public class ChineseCharacterWen extends ChineseCharacter
 	}
 
 	@Override
-	public ChineseCharacterMovableType typeset(ChineseCharacterTypesetter writer)
+	public ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter writer)
 	{
 		return writer.setWen(this);
 	}

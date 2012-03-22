@@ -1,7 +1,8 @@
 package cc.moveable_type;
 
+import cc.adjusting.ChineseCharacterTypeAdjuster;
 import cc.core.ChineseCharacter;
-import cc.printing.ChineseCharacterPrinter;
+import cc.printing.ChineseCharacterTypePrinter;
 
 public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 {
@@ -13,7 +14,14 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	protected ChineseCharacterMovableType[] children;
 
 	@Override
-	public void print(ChineseCharacterPrinter printer)
+	public void adjust(ChineseCharacterTypeAdjuster adjuster)
+	{
+		adjuster.adjustTzu(this);
+		return;
+	}
+
+	@Override
+	public void print(ChineseCharacterTypePrinter printer)
 	{
 		printer.printTzu(this);
 		return;

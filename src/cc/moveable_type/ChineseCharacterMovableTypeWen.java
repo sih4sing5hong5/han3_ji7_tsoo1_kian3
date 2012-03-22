@@ -1,10 +1,10 @@
 package cc.moveable_type;
 
+import cc.adjusting.ChineseCharacterTypeAdjuster;
 import cc.core.ChineseCharacter;
-import cc.printing.ChineseCharacterPrinter;
+import cc.printing.ChineseCharacterTypePrinter;
 
-public abstract class ChineseCharacterMovableTypeWen extends
-		ChineseCharacterMovableType
+public class ChineseCharacterMovableTypeWen extends ChineseCharacterMovableType
 {
 	public ChineseCharacterMovableTypeWen(ChineseCharacter chineseCharacter)
 	{
@@ -12,7 +12,14 @@ public abstract class ChineseCharacterMovableTypeWen extends
 	}
 
 	@Override
-	public void print(ChineseCharacterPrinter printer)
+	public void adjust(ChineseCharacterTypeAdjuster adjuster)
+	{
+		adjuster.adjustWen(this);
+		return;
+	}
+
+	@Override
+	public void print(ChineseCharacterTypePrinter printer)
 	{
 		printer.printWen(this);
 		return;

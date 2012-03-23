@@ -38,8 +38,8 @@ import cc.setting.image.SimpleImageSetter;
 public class AwtTestExample extends JPanel
 {
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 800, HEIGHT = 600; // Size of our example
-	private String word = "⿰木火⿱木火⿴口火";
+	static final int WIDTH = 1200, HEIGHT = 600; // Size of our example
+	private String word = "⿰木火⿱木火⿴口火⿱⿰⿰糸言糸攵⿰矛⿱攵力";
 	private String FontName = "全字庫正宋體";
 	private int FontStyle = Font.BOLD;
 
@@ -72,7 +72,7 @@ public class AwtTestExample extends JPanel
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(20, 220);
+//		g.translate(20, 20);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
@@ -111,7 +111,7 @@ public class AwtTestExample extends JPanel
 			}
 		});
 		f.setContentPane(new AwtTestExample());
-		f.setSize(800, 600);
+		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}
 

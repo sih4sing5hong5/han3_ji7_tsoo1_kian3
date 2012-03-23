@@ -6,11 +6,10 @@ import java.awt.Point;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 
-import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
-import cc.moveable_type.image.ImageMoveableType;
+import cc.moveable_type.image.ImageMoveableTypeTzu;
 import cc.moveable_type.image.ImageMoveableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
 
@@ -53,7 +52,9 @@ public class AwtForImagePrinter implements ChineseCharacterTypePrinter
 				.toChars((((ChineseCharacterWen) wen.getChineseCharacter())
 						.getCodePoint())));
 		glyphVector.setGlyphTransform(0, affineTransform);
+		graphics2d.translate(0, scaler.y);
 		graphics2d.draw(glyphVector.getOutline());
+		graphics2d.translate(0, -scaler.y);
 		graphics2d.translate(-position.x, -position.y);
 		return;
 	}
@@ -62,31 +63,13 @@ public class AwtForImagePrinter implements ChineseCharacterTypePrinter
 	public void printTzu(
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
-		Point moving = new Point();
-		switch (((ChineseCharacterTzu) chineseCharacterMovableTypeTzu
-				.getChineseCharacter()).getType())
-		{
-		case horizontal:
-			moving.x = 0;
-			moving.y = ((ImageMoveableType) chineseCharacterMovableTypeTzu
-					.getChildren()[0]).getRegion().y;
-			break;
-		case vertical:
-			moving.x = ((ImageMoveableType) chineseCharacterMovableTypeTzu
-					.getChildren()[0]).getRegion().x;
-			moving.y = 0;
-			break;
-		case wrap:
-			moving.x = ((ImageMoveableType) chineseCharacterMovableTypeTzu
-					.getChildren()[0]).getRegion().x >> 2;
-			moving.y = ((ImageMoveableType) chineseCharacterMovableTypeTzu
-					.getChildren()[0]).getRegion().y >> 2;
-			break;
-		}
+		ImageMoveableTypeTzu imageMoveableTypeTzu = (ImageMoveableTypeTzu) chineseCharacterMovableTypeTzu;
+		graphics2d.translate(imageMoveableTypeTzu.getPosition().x,
+				imageMoveableTypeTzu.getPosition().y);
 		chineseCharacterMovableTypeTzu.getChildren()[0].print(this);
-		graphics2d.translate(moving.x, moving.y);
 		chineseCharacterMovableTypeTzu.getChildren()[1].print(this);
-		graphics2d.translate(-moving.x, -moving.y);
+		graphics2d.translate(-imageMoveableTypeTzu.getPosition().x,
+				-imageMoveableTypeTzu.getPosition().y);
 		return;
 	}
 }

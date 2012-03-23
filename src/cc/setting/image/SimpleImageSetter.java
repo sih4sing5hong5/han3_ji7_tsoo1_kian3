@@ -46,18 +46,27 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 		switch (chineseCharacterTzu.getType())
 		{
 		case horizontal:
-			imageMoveableTypeTzu.getRegion().x = Math.max(first.x, second.x);
-			imageMoveableTypeTzu.getRegion().y = first.y + second.y;
-			break;
-		case vertical:
 			imageMoveableTypeTzu.getRegion().x = first.x + second.x;
 			imageMoveableTypeTzu.getRegion().y = Math.max(first.y, second.y);
+			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
+					.setPosition(new Point(first.x, 0));
+			break;
+		case vertical:
+			imageMoveableTypeTzu.getRegion().x = Math.max(first.x, second.x);
+			imageMoveableTypeTzu.getRegion().y = first.y + second.y;
+			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
+					.setPosition(new Point(0, first.y));
 			break;
 		case wrap:
 			imageMoveableTypeTzu.getRegion().x = first.x << 1;
 			imageMoveableTypeTzu.getRegion().y = first.y << 1;
+			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[0])
+					.setRegion(imageMoveableTypeTzu.getRegion());
+			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
+			.setPosition(new Point(first.x >> 1, first.y >> 1));
 			break;
 		}
+		imageMoveableTypeTzu.setPosition(new Point(0,0));
 		imageMoveableTypeTzu.setScaler(imageMoveableTypeTzu.getRegion());
 		return imageMoveableTypeTzu;
 	}

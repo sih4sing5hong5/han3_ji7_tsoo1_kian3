@@ -39,7 +39,15 @@ public class SampleImageAdjuster implements ChineseCharacterTypeAdjuster
 							* yScaler));
 			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[i])
 					.setRegion(region);
-			//TODO position
+			Point position = new Point((int) Math
+					.floor(((ImageMoveableType) imageMoveableTypeTzu
+							.getChildren()[i]).getPosition().x
+							* xScaler), (int) Math
+					.floor(((ImageMoveableType) imageMoveableTypeTzu
+							.getChildren()[i]).getPosition().y
+							* yScaler));
+			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[i])
+					.setPosition(position);
 			imageMoveableTypeTzu.getChildren()[i].adjust(this);
 		}
 		return;

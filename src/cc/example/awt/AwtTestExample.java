@@ -25,7 +25,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.adjusting.image.SampleImageAdjuster;
+import cc.adjusting.image.SimpleImageAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
@@ -79,7 +79,7 @@ public class AwtTestExample extends JPanel {
 			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
 		}
 		Point model = new Point(TYPE_SIZE, TYPE_SIZE);
-		SampleImageAdjuster sampleImageAdjuster = new SampleImageAdjuster();
+		SimpleImageAdjuster sampleImageAdjuster = new SimpleImageAdjuster();
 		for (int i = 0; i < ccArray.size(); ++i) {
 			((ImageMoveableType) ccmvArray.elementAt(i)).setRegion(model);
 			ccmvArray.elementAt(i).adjust(sampleImageAdjuster);

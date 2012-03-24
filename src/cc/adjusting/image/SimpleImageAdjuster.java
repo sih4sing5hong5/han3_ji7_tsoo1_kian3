@@ -9,7 +9,7 @@ import cc.moveable_type.image.ImageMoveableType;
 import cc.moveable_type.image.ImageMoveableTypeTzu;
 import cc.moveable_type.image.ImageMoveableTypeWen;
 
-public class SampleImageAdjuster implements ChineseCharacterTypeAdjuster
+public class SimpleImageAdjuster implements ChineseCharacterTypeAdjuster
 {
 	@Override
 	public void adjustWen(ChineseCharacterMovableTypeWen wen)

@@ -35,26 +35,23 @@ import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.image.SimpleImageSetter;
 
 /** A demonstration of writing custom Stroke classes */
-public class AwtTestExample extends JPanel
-{
+public class AwtTestExample extends JPanel {
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1200, HEIGHT = 600; // Size of our example
-	private String word = "⿰木火⿱木火⿴口火⿱⿰⿰糸言糸攵⿰矛⿱攵力";
+	static final int WIDTH = 1024, HEIGHT = 800; // Size of our example
+	static final int TYPE_SIZE = 200;
+	private String word = "囗囗囗⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森木攵力";
 	private String FontName = "全字庫正宋體";
 	private int FontStyle = Font.BOLD;
 
-	public String getName()
-	{
+	public String getName() {
 		return "Custom Strokes";
 	}
 
-	public int getWidth()
-	{
+	public int getWidth() {
 		return WIDTH;
 	}
 
-	public int getHeight()
-	{
+	public int getHeight() {
 		return HEIGHT;
 	}
 
@@ -64,49 +61,45 @@ public class AwtTestExample extends JPanel
 	};
 
 	/** Draw the example */
-	public void paint(Graphics g1)
-	{
+	public void paint(Graphics g1) {
 		Graphics2D g = (Graphics2D) g1;
 		// Font f = new Font(FontName, FontStyle, 140);
 		// Set drawing attributes and starting position
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-//		g.translate(20, 20);
+		g.translate(WIDTH - TYPE_SIZE - 20, 0);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 		ChineseCharacterTypeSetter writer = new SimpleImageSetter();
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
-		for (int i = 0; i < ccArray.size(); ++i)
-		{
+		for (int i = 0; i < ccArray.size(); ++i) {
 			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
 		}
-		for (int i = 0; i < ccArray.size(); ++i)
-		{
-			((ImageMoveableType) ccmvArray.elementAt(i)).setRegion(new Point(
-					200, 200));
-			ccmvArray.elementAt(i).adjust(new SampleImageAdjuster());
+		Point model = new Point(TYPE_SIZE, TYPE_SIZE);
+		SampleImageAdjuster sampleImageAdjuster = new SampleImageAdjuster();
+		for (int i = 0; i < ccArray.size(); ++i) {
+			((ImageMoveableType) ccmvArray.elementAt(i)).setRegion(model);
+			ccmvArray.elementAt(i).adjust(sampleImageAdjuster);
 		}
 		System.out.println(ccArray.size());
 		AwtForImagePrinter awtForImagePrinter = new AwtForImagePrinter(g,
 				FontName, FontStyle);
-		for (int i = 0; i < ccmvArray.size(); ++i)
-		{
+		for (int i = 0; i < ccmvArray.size(); ++i) {
 			ccmvArray.elementAt(i).print(awtForImagePrinter);
-			g.translate(200, 000);// move to the right
+			g.translate(0, TYPE_SIZE);// move to the down
+			if (i % 3 == 2)
+				g.translate(-TYPE_SIZE * 1, -TYPE_SIZE * 3);// the new line
 		}
 		return;
 	}
 
-	public static void main(String[] a)
-	{
+	public static void main(String[] a) {
 		JFrame f = new JFrame();
-		f.addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e)
-			{
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});

@@ -10,11 +10,9 @@ import cc.moveable_type.image.ImageMoveableTypeTzu;
 import cc.moveable_type.image.ImageMoveableTypeWen;
 import cc.setting.ChineseCharacterTypeSetter;
 
-public class SimpleImageSetter implements ChineseCharacterTypeSetter
-{
+public class SimpleImageSetter implements ChineseCharacterTypeSetter {
 	@Override
-	public ImageMoveableTypeWen setWen(ChineseCharacterWen chineseCharacterWen)
-	{
+	public ImageMoveableTypeWen setWen(ChineseCharacterWen chineseCharacterWen) {
 		ImageMoveableTypeWen moveableType = new ImageMoveableTypeWen(
 				chineseCharacterWen);
 		moveableType.setRegion(new Point(100, 100));
@@ -24,49 +22,49 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 	}
 
 	@Override
-	public ImageMoveableTypeTzu setTzu(ChineseCharacterTzu chineseCharacterTzu)
-	{
+	public ImageMoveableTypeTzu setTzu(ChineseCharacterTzu chineseCharacterTzu) {
 		ImageMoveableTypeTzu imageMoveableTypeTzu = new ImageMoveableTypeTzu(
 				chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
 		imageMoveableTypeTzu
 				.setChildren(new ChineseCharacterMovableType[childrenSize]);
-		for (int i = 0; i < childrenSize; ++i)
-		{
+		for (int i = 0; i < childrenSize; ++i) {
 			imageMoveableTypeTzu.getChildren()[i] = chineseCharacterTzu
 					.getChildren()[i].typeset(this);
 			imageMoveableTypeTzu.getChildren()[i]
 					.setParent(imageMoveableTypeTzu);
 		}
-		Point first = ((ImageMoveableType) imageMoveableTypeTzu.getChildren()[0])
-				.getRegion();
-		Point second = ((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
-				.getRegion();
+		ImageMoveableType firstChild = (ImageMoveableType) imageMoveableTypeTzu
+				.getChildren()[0];
+		ImageMoveableType secondChild = (ImageMoveableType) imageMoveableTypeTzu
+				.getChildren()[1];
+		Point firstRegion = firstChild.getRegion();
+		Point secondRegion = secondChild.getRegion();
 		imageMoveableTypeTzu.setRegion(new Point());
-		switch (chineseCharacterTzu.getType())
-		{
+		switch (chineseCharacterTzu.getType()) {
 		case horizontal:
-			imageMoveableTypeTzu.getRegion().x = first.x + second.x;
-			imageMoveableTypeTzu.getRegion().y = Math.max(first.y, second.y);
-			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
-					.setPosition(new Point(first.x, 0));
+			imageMoveableTypeTzu.getRegion().x = firstRegion.x + secondRegion.x;
+			imageMoveableTypeTzu.getRegion().y = Math.max(firstRegion.y,
+					secondRegion.y);
+			firstRegion.y=secondRegion.y=imageMoveableTypeTzu.getRegion().y;
+			secondChild.setPosition(new Point(firstRegion.x, 0));
 			break;
 		case vertical:
-			imageMoveableTypeTzu.getRegion().x = Math.max(first.x, second.x);
-			imageMoveableTypeTzu.getRegion().y = first.y + second.y;
-			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
-					.setPosition(new Point(0, first.y));
+			imageMoveableTypeTzu.getRegion().x = Math.max(firstRegion.x,
+					secondRegion.x);
+			imageMoveableTypeTzu.getRegion().y = firstRegion.y + secondRegion.y;
+			firstRegion.x=secondRegion.x=imageMoveableTypeTzu.getRegion().x;
+			secondChild.setPosition(new Point(0, firstRegion.y));
 			break;
 		case wrap:
-			imageMoveableTypeTzu.getRegion().x = first.x << 1;
-			imageMoveableTypeTzu.getRegion().y = first.y << 1;
-			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[0])
-					.setRegion(imageMoveableTypeTzu.getRegion());
-			((ImageMoveableType) imageMoveableTypeTzu.getChildren()[1])
-			.setPosition(new Point(first.x >> 1, first.y >> 1));
+			imageMoveableTypeTzu.getRegion().x = firstRegion.x << 1;
+			imageMoveableTypeTzu.getRegion().y = firstRegion.y << 1;
+			firstChild.setRegion(imageMoveableTypeTzu.getRegion());
+			secondChild.setPosition(new Point(firstRegion.x >> 1,
+					firstRegion.y >> 1));
 			break;
 		}
-		imageMoveableTypeTzu.setPosition(new Point(0,0));
+		imageMoveableTypeTzu.setPosition(new Point(0, 0));
 		imageMoveableTypeTzu.setScaler(imageMoveableTypeTzu.getRegion());
 		return imageMoveableTypeTzu;
 	}

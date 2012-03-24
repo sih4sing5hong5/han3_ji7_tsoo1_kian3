@@ -39,7 +39,7 @@ public class AwtTestExample extends JPanel {
 	private static final long serialVersionUID = 1L;
 	static final int WIDTH = 1024, HEIGHT = 800; // Size of our example
 	static final int TYPE_SIZE = 200;
-	private String word = "囗囗囗⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森木攵力";
+	private String word = "秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
 	private String FontName = "全字庫正宋體";
 	private int FontStyle = Font.BOLD;
 

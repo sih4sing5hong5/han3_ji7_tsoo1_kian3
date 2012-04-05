@@ -17,6 +17,11 @@ public class ChineseCharacterWen extends ChineseCharacter
 		return codePoint;
 	}
 
+	public char[] getChars()
+	{
+		return Character.toChars(codePoint);
+	}
+
 	@Override
 	public ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter writer)
 	{

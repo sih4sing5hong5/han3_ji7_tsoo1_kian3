@@ -15,7 +15,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
@@ -25,33 +24,39 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.adjusting.image.SimpleImageAdjuster;
+import cc.adjusting.area.SimpleAreaAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
-import cc.moveable_type.image.ImageMoveableType;
-import cc.printing.awt.AwtForImagePrinter;
+import cc.moveable_type.area.AreaMovableType;
+import cc.moveable_type.area.AreaTool;
+import cc.printing.awt.area.AwtForAreaPrinter;
 import cc.setting.ChineseCharacterTypeSetter;
-import cc.setting.image.SimpleImageSetter;
+import cc.setting.area.SimpleAreaSetter;
 
 /** A demonstration of writing custom Stroke classes */
-public class AwtTestExample extends JPanel {
+public class AwtTestExample extends JPanel
+{
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1024, HEIGHT = 800; // Size of our example
+	static final int WIDTH = 1400, HEIGHT = 900; // Size of our example
 	static final int TYPE_SIZE = 200;
-	private String word = "秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
+	static final int LINE_SIZE = 3;
+	private String word = /* "火";/ */"秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
 	private String FontName = "全字庫正宋體";
 	private int FontStyle = Font.BOLD;
 
-	public String getName() {
+	public String getName()
+	{
 		return "Custom Strokes";
 	}
 
-	public int getWidth() {
+	public int getWidth()
+	{
 		return WIDTH;
 	}
 
-	public int getHeight() {
+	public int getHeight()
+	{
 		return HEIGHT;
 	}
 
@@ -61,45 +66,65 @@ public class AwtTestExample extends JPanel {
 	};
 
 	/** Draw the example */
-	public void paint(Graphics g1) {
+	public void paint(Graphics g1)
+	{
 		Graphics2D g = (Graphics2D) g1;
 		// Font f = new Font(FontName, FontStyle, 140);
 		// Set drawing attributes and starting position
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(WIDTH - TYPE_SIZE - 20, 0);
+		g.translate(WIDTH - TYPE_SIZE, 0);
+		// g.translate(500, 500);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-		ChineseCharacterTypeSetter writer = new SimpleImageSetter();
+		ChineseCharacterTypeSetter writer = new SimpleAreaSetter(FontName,
+				FontStyle);
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
-		for (int i = 0; i < ccArray.size(); ++i) {
+		for (int i = 0; i < ccArray.size(); ++i)
+		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
 		}
-		Point model = new Point(TYPE_SIZE, TYPE_SIZE);
-		SimpleImageAdjuster sampleImageAdjuster = new SimpleImageAdjuster();
-		for (int i = 0; i < ccArray.size(); ++i) {
-			((ImageMoveableType) ccmvArray.elementAt(i)).setRegion(model);
+		// for (int i = 0; i < ccArray.size(); ++i)
+		// {
+		// if(((AreaMovableType) ccmvArray.elementAt(i)).getArea()!=null)
+		// g.draw(((AreaMovableType) ccmvArray.elementAt(i)).getArea());
+		// }
+		// Shape shape=((AreaMovableType)ccmvArray.elementAt(0)).getArea();
+		// System.out.println(shape.getBounds2D().getX()+" "+shape.getBounds2D().getY()+" "+shape.getBounds2D().getHeight());
+		// Area area=new
+		// Area(((AreaMovableType)ccmvArray.elementAt(0)).getArea());
+		// System.out.println(area.getBounds2D().getX()+" "+area.getBounds2D().getY()+" "+area.getBounds2D().getHeight());
+
+		SimpleAreaAdjuster sampleImageAdjuster = new SimpleAreaAdjuster();
+		for (int i = 0; i < ccArray.size(); ++i)
+		{
+			AreaTool.adjustSize(((AreaMovableType) ccmvArray.elementAt(i))
+					.getBound(), TYPE_SIZE, TYPE_SIZE);
 			ccmvArray.elementAt(i).adjust(sampleImageAdjuster);
 		}
 		System.out.println(ccArray.size());
-		AwtForImagePrinter awtForImagePrinter = new AwtForImagePrinter(g,
-				FontName, FontStyle);
-		for (int i = 0; i < ccmvArray.size(); ++i) {
+		AwtForAreaPrinter awtForImagePrinter = new AwtForAreaPrinter(g);
+		for (int i = 0; i < ccmvArray.size(); ++i)
+		{
 			ccmvArray.elementAt(i).print(awtForImagePrinter);
 			g.translate(0, TYPE_SIZE);// move to the down
-			if (i % 3 == 2)
-				g.translate(-TYPE_SIZE * 1, -TYPE_SIZE * 3);// the new line
+			if (i % LINE_SIZE == LINE_SIZE - 1)
+				g.translate(-TYPE_SIZE * 1.5, -TYPE_SIZE * LINE_SIZE);// the new
+			// line
 		}
 		return;
 	}
 
-	public static void main(String[] a) {
+	public static void main(String[] a)
+	{
 		JFrame f = new JFrame();
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
+		f.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
 				System.exit(0);
 			}
 		});

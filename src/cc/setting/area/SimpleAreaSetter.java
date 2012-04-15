@@ -6,7 +6,6 @@ package cc.setting.area;
 import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
@@ -28,14 +27,15 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 	private String fontName;
 	private int fontStyle;
 	private FontRenderContext fontRenderContext;
+	private int fontResolution;
 
-	public SimpleAreaSetter(String fontName, int fontStyle)
+	public SimpleAreaSetter(FontRenderContext fontRenderContext,
+			String fontName, int fontStyle, int fontResolution)
 	{
 		this.fontName = fontName;
 		this.fontStyle = fontStyle;
-		this.fontRenderContext = new FontRenderContext(new AffineTransform(),
-				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
+		this.fontResolution = fontResolution;
+		this.fontRenderContext = fontRenderContext;
 	}
 
 	@Override
@@ -43,13 +43,14 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 	{
 		AreaMovableTypeWen shapeMovableTypeWen = new AreaMovableTypeWen(
 				chineseCharacterWen);
-		Font font = new Font(fontName, fontStyle, 100);
+		Font font = new Font(fontName, fontStyle, fontResolution);
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
 				chineseCharacterWen.getChars());
 		Area area = new Area(glyphVector.getOutline());
 		AreaTool.moveToOrigin(area);
 		shapeMovableTypeWen.setArea(area);
-		shapeMovableTypeWen.setBound((Rectangle2D) shapeMovableTypeWen.getArea().getBounds().clone());
+		shapeMovableTypeWen.setBound((Rectangle2D) shapeMovableTypeWen
+				.getArea().getBounds().clone());
 		return shapeMovableTypeWen;
 	}
 
@@ -112,6 +113,46 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		shapeMovableTypeTzu.setArea(new Area(rectDouble));
 		shapeMovableTypeTzu.setBound(rectDouble);
 		return shapeMovableTypeTzu;
+	}
+
+	public String getFontName()
+	{
+		return fontName;
+	}
+
+	public void setFontName(String fontName)
+	{
+		this.fontName = fontName;
+	}
+
+	public int getFontStyle()
+	{
+		return fontStyle;
+	}
+
+	public void setFontStyle(int fontStyle)
+	{
+		this.fontStyle = fontStyle;
+	}
+
+	public FontRenderContext getFontRenderContext()
+	{
+		return fontRenderContext;
+	}
+
+	public void setFontRenderContext(FontRenderContext fontRenderContext)
+	{
+		this.fontRenderContext = fontRenderContext;
+	}
+
+	public int getFontResolution()
+	{
+		return fontResolution;
+	}
+
+	public void setFontResolution(int fontResolution)
+	{
+		this.fontResolution = fontResolution;
 	}
 
 }

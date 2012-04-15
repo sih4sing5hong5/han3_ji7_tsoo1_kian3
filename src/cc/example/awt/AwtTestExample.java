@@ -19,6 +19,8 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.util.Vector;
 
 import javax.swing.JFrame;
@@ -41,7 +43,7 @@ public class AwtTestExample extends JPanel
 	static final int WIDTH = 1400, HEIGHT = 900; // Size of our example
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 3;
-	private String word = /*"⿰禾火";// */"秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
+	private String word = /* "⿰禾火";// */"秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
 	private String FontName = "全字庫正宋體";
 	private int FontStyle = Font.BOLD;
 
@@ -80,8 +82,11 @@ public class AwtTestExample extends JPanel
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-		ChineseCharacterTypeSetter writer = new SimpleAreaSetter(FontName,
-				FontStyle);
+		ChineseCharacterTypeSetter writer = new SimpleAreaSetter(
+				new FontRenderContext(new AffineTransform(),
+						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
+				FontName, FontStyle, 100);
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
@@ -101,8 +106,9 @@ public class AwtTestExample extends JPanel
 		SimpleAreaAdjuster sampleImageAdjuster = new SimpleAreaAdjuster();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			AreaTool.adjustSize(((AreaMovableType) ccmvArray.elementAt(i))
-					.getBound(), TYPE_SIZE, TYPE_SIZE);
+			AreaTool.adjustSize(
+					((AreaMovableType) ccmvArray.elementAt(i)).getBound(),
+					TYPE_SIZE, TYPE_SIZE);
 			ccmvArray.elementAt(i).adjust(sampleImageAdjuster);
 		}
 		System.out.println(ccArray.size());

@@ -53,15 +53,11 @@ public class SimpleAreaAdjuster implements ChineseCharacterTypeAdjuster
 			AreaMovableType child = (AreaMovableType) areaMovableTypeTzu
 					.getChildren()[i];
 			Rectangle2D bound = child.getBound();
-			bound.setRect(bound.getX() * affineTransform.getScaleX(), bound
-					.getY()
-					* affineTransform.getScaleY(), bound.getWidth()
-					* affineTransform.getScaleX(), bound.getHeight()
-					* affineTransform.getScaleY());
-			// System.out.println(" " + affineTransform.getScaleX()
-			// + affineTransform.getScaleY());
+			bound.setRect(bound.getX() * affineTransform.getScaleX(),
+					bound.getY() * affineTransform.getScaleY(),
+					bound.getWidth() * affineTransform.getScaleX(),
+					bound.getHeight() * affineTransform.getScaleY());
 			areaMovableTypeTzu.getChildren()[i].adjust(this);
-			// areaMovableTypeTzu.getArea().add(child.getArea());
 		}
 	}
 
@@ -70,8 +66,8 @@ public class SimpleAreaAdjuster implements ChineseCharacterTypeAdjuster
 		Rectangle2D bound = areaMovableType.getBound();
 		Rectangle2D rectangle2d = areaMovableType.getArea().getBounds2D();
 		AffineTransform affineTransform = new AffineTransform();
-		affineTransform.setToScale(rectangle2d.getWidth() / bound.getWidth(),
-				rectangle2d.getHeight() / bound.getHeight());
+		affineTransform.setToScale(bound.getWidth() / rectangle2d.getWidth(),
+				bound.getHeight() / rectangle2d.getHeight());
 		return affineTransform;
 	}
 }

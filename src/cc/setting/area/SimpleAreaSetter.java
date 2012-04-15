@@ -4,7 +4,6 @@
 package cc.setting.area;
 
 import java.awt.Font;
-import java.awt.Rectangle;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
@@ -50,7 +49,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		Area area = new Area(glyphVector.getOutline());
 		AreaTool.moveToOrigin(area);
 		shapeMovableTypeWen.setArea(area);
-		shapeMovableTypeWen.setBound(shapeMovableTypeWen.getArea().getBounds());
+		shapeMovableTypeWen.setBound((Rectangle2D) shapeMovableTypeWen.getArea().getBounds().clone());
 		return shapeMovableTypeWen;
 	}
 
@@ -110,7 +109,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 					secondChild.getBound().getHeight());
 			break;
 		}
-		shapeMovableTypeTzu.setArea(new Area(new Rectangle(100,100)));
+		shapeMovableTypeTzu.setArea(new Area(rectDouble));
 		shapeMovableTypeTzu.setBound(rectDouble);
 		return shapeMovableTypeTzu;
 	}

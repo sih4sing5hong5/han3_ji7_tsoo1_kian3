@@ -41,7 +41,7 @@ public class AwtTestExample extends JPanel
 	static final int WIDTH = 1400, HEIGHT = 900; // Size of our example
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 3;
-	private String word = /* "火";/ */"秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
+	private String word = /*"⿰禾火";// */"秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
 	private String FontName = "全字庫正宋體";
 	private int FontStyle = Font.BOLD;
 

@@ -50,7 +50,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		AreaTool.moveToOrigin(area);
 		shapeMovableTypeWen.setArea(area);
 		shapeMovableTypeWen.setBound((Rectangle2D) shapeMovableTypeWen
-				.getArea().getBounds().clone());
+				.getArea().getBounds2D().clone());
 		return shapeMovableTypeWen;
 	}
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cc.moveable_type.rectangular_area;
+package cc.adjusting.piece;
 
 import java.awt.geom.Point2D;
 import java.util.Vector;
@@ -44,7 +44,7 @@ public class SimplePolygon
 			regionSize += previous.getX() * last.getY() - previous.getY()
 					* last.getX();
 		}
-		System.out.println("XD=" + circumference);
+//		System.out.println("XD=" + circumference);
 		return;
 	}
 

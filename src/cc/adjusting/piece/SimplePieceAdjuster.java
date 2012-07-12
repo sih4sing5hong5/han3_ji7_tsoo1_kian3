@@ -3,6 +3,8 @@
  */
 package cc.adjusting.piece;
 
+import java.awt.BasicStroke;
+import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
@@ -32,8 +34,22 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	{
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
 		RectangularArea rectangularArea = pieceMovableTypeWen.getPiece();
-		AffineTransform affineTransform = getAffineTransform(rectangularArea);
+		double originBoldCoefficient = computeBoldCoefficient(rectangularArea);
+		AffineTransform affineTransform = getAffineTransform(rectangularArea);// TODO
+																				// 不放太大
 		rectangularArea.transform(affineTransform);
+		System.out.println(affineTransform.getScaleX() + " "
+				+ affineTransform.getScaleY());
+		System.out.println("ori=" + originBoldCoefficient + " new="
+				+ computeBoldCoefficient(rectangularArea));
+		float strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
+				originBoldCoefficient);
+		System.out.println(strokeWidth);
+		Stroke basicStroke = new BasicStroke(strokeWidth);
+		RectangularArea blodSurface = new RectangularArea(
+				basicStroke.createStrokedShape(rectangularArea));
+//		rectangularArea.subtract(rectangularArea);
+		rectangularArea.add(blodSurface);
 		return;
 	}
 
@@ -79,5 +95,35 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 		affineTransform.setToScale(territory.getWidth() / bounds.getWidth(),
 				territory.getHeight() / bounds.getHeight());
 		return affineTransform;
+	}
+
+	private double computeBoldCoefficient(RectangularArea rectangularArea)
+	{
+		ShapeInformation shapeInformation = new ShapeInformation(
+				rectangularArea);
+		return shapeInformation.getApproximativeRegion()
+				/ shapeInformation.getApproximativeCircumference();
+	}
+
+	private float getStorkeWidthByCoefficient(RectangularArea rectangularArea,
+			double originBoldCoefficient)
+	{
+		float miniWidth = 0.0f, maxiWidth = (float) originBoldCoefficient;
+		while (miniWidth + 1e-1 < maxiWidth)
+		{
+			float middleWidth = 0.5f * (miniWidth + maxiWidth);
+			Stroke basicStroke = new BasicStroke(middleWidth);
+			RectangularArea blodSurface = new RectangularArea(
+					basicStroke.createStrokedShape(rectangularArea));
+			blodSurface.add(rectangularArea);
+			double nowBoldCoefficient = computeBoldCoefficient(blodSurface);
+//			System.out.println("now=" + nowBoldCoefficient + " mini="
+//					+ miniWidth + " maxi=" + maxiWidth);
+			if (nowBoldCoefficient < originBoldCoefficient)
+				miniWidth = middleWidth;
+			else
+				maxiWidth = middleWidth;
+		}
+		return miniWidth;
 	}
 }

@@ -78,8 +78,6 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 		AffineTransform affineTransform = new AffineTransform();
 		affineTransform.setToScale(territory.getWidth() / bounds.getWidth(),
 				territory.getHeight() / bounds.getHeight());
-		System.out.println("widh=" + territory.getWidth() + " "
-				+ territory.getHeight());
 		return affineTransform;
 	}
 }

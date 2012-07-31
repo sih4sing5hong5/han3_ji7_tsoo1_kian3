@@ -34,21 +34,9 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	{
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
 		RectangularArea rectangularArea = pieceMovableTypeWen.getPiece();
-		double originBoldCoefficient = computeBoldCoefficient(rectangularArea);
 		AffineTransform affineTransform = getAffineTransform(rectangularArea);// TODO
 																				// 不放太大
-		rectangularArea.transform(affineTransform);
-		// System.out.println(affineTransform.getScaleX() + " "
-		// + affineTransform.getScaleY());
-		// System.out.println("ori=" + originBoldCoefficient + " new="
-		// + computeBoldCoefficient(rectangularArea));
-		float strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
-				originBoldCoefficient);
-		// System.out.println(strokeWidth);
-		RectangularArea boldSurface = getBoldSurface(rectangularArea,
-				strokeWidth);
-		// rectangularArea.subtract(rectangularArea);
-		rectangularArea.add(boldSurface);
+		shrinkPieceByFixingStroke(rectangularArea, affineTransform);
 		return;
 	}
 
@@ -108,7 +96,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 			RectangularArea rectangularArea, double originBoldCoefficient)
 	{
 		float miniWidth = 0.0f, maxiWidth = (float) originBoldCoefficient;
-		while (miniWidth + 1e-1 < maxiWidth)
+		while (miniWidth + getPrecision() < maxiWidth)
 		{
 			float middleWidth = 0.5f * (miniWidth + maxiWidth);
 			RectangularArea boldSurface = getBoldSurface(rectangularArea,
@@ -132,5 +120,23 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 		Stroke basicStroke = new BasicStroke(strokeWidth);
 		return new RectangularArea(
 				basicStroke.createStrokedShape(rectangularArea));
+	}
+
+	protected void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
+			AffineTransform affineTransform)
+	{ // javadoc文件註解：不放太大
+		double originBoldCoefficient = computeBoldCoefficient(rectangularArea);
+		rectangularArea.transform(affineTransform);
+		float strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
+				originBoldCoefficient);
+		RectangularArea boldSurface = getBoldSurface(rectangularArea,
+				strokeWidth);
+		rectangularArea.add(boldSurface);
+		return;
+	}
+
+	public double getPrecision()
+	{
+		return 1e-1;
 	}
 }

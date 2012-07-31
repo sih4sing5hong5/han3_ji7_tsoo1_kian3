@@ -18,16 +18,13 @@ import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.adjusting.piece.ShapeInformation;
 import cc.adjusting.piece.SimplePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;

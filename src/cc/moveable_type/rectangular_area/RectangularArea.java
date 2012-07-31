@@ -23,7 +23,7 @@ public class RectangularArea extends Area
 	 */
 	public RectangularArea()
 	{
-		wantedTerritory= new Rectangle2D.Double();
+		wantedTerritory = new Rectangle2D.Double();
 	}
 
 	/**
@@ -33,9 +33,23 @@ public class RectangularArea extends Area
 	public RectangularArea(Shape s)
 	{
 		super(s);
-		wantedTerritory = new Rectangle2D.Double(s.getBounds2D().getX(), s
-				.getBounds2D().getY(), s.getBounds2D().getWidth(), s
-				.getBounds2D().getHeight());
+		wantedTerritory = new Rectangle2D.Double(getBounds2D().getX(),
+				getBounds2D().getY(), getBounds2D().getWidth(), getBounds2D()
+						.getHeight());
+	}
+
+	/**
+	 * 建構一個新的物件
+	 * 
+	 * @param rectangularArea
+	 */
+	public RectangularArea(RectangularArea rectangularArea)
+	{
+		super(rectangularArea);
+		wantedTerritory = new Rectangle2D.Double(rectangularArea.getTerritory()
+				.getX(), rectangularArea.getTerritory().getY(), rectangularArea
+				.getTerritory().getWidth(), rectangularArea.getTerritory()
+				.getHeight());
 	}
 
 	/**
@@ -77,6 +91,16 @@ public class RectangularArea extends Area
 	{
 		wantedTerritory.setRect(wantedTerritory.getX(), wantedTerritory.getY(),
 				width, height);
+		return;
+	}
+
+	/**
+	 * 圖形的預計大小調整成跟目前大小一樣
+	 */
+	public void setTerritoryDimensionSameAsPiece()
+	{
+		setTerritoryDimension(getBounds2D().getWidth(), getBounds2D()
+				.getHeight());
 		return;
 	}
 

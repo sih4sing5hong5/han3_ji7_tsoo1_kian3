@@ -38,13 +38,13 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 		AffineTransform affineTransform = getAffineTransform(rectangularArea);// TODO
 																				// 不放太大
 		rectangularArea.transform(affineTransform);
-		System.out.println(affineTransform.getScaleX() + " "
-				+ affineTransform.getScaleY());
-		System.out.println("ori=" + originBoldCoefficient + " new="
-				+ computeBoldCoefficient(rectangularArea));
+//		System.out.println(affineTransform.getScaleX() + " "
+//				+ affineTransform.getScaleY());
+//		System.out.println("ori=" + originBoldCoefficient + " new="
+//				+ computeBoldCoefficient(rectangularArea));
 		float strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
 				originBoldCoefficient);
-		System.out.println(strokeWidth);
+//		System.out.println(strokeWidth);
 		Stroke basicStroke = new BasicStroke(strokeWidth);
 		RectangularArea blodSurface = new RectangularArea(
 				basicStroke.createStrokedShape(rectangularArea));
@@ -87,7 +87,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            計算縮放的目標
 	 * @return 相對應的縮放矩陣
 	 */
-	private AffineTransform getAffineTransform(RectangularArea rectangularArea)
+	protected AffineTransform getAffineTransform(RectangularArea rectangularArea)
 	{
 		Rectangle2D territory = rectangularArea.getTerritory();
 		Rectangle2D bounds = rectangularArea.getBounds2D();
@@ -97,7 +97,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 		return affineTransform;
 	}
 
-	private double computeBoldCoefficient(RectangularArea rectangularArea)
+	protected double computeBoldCoefficient(RectangularArea rectangularArea)
 	{
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea);
@@ -105,7 +105,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 				/ shapeInformation.getApproximativeCircumference();
 	}
 
-	private float getStorkeWidthByCoefficient(RectangularArea rectangularArea,
+	protected float getStorkeWidthByCoefficient(RectangularArea rectangularArea,
 			double originBoldCoefficient)
 	{
 		float miniWidth = 0.0f, maxiWidth = (float) originBoldCoefficient;

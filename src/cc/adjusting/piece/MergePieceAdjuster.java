@@ -176,6 +176,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		return;
 	}
 
+	/**
+	 * 
+	 * @param scaler
+	 * @return
+	 */
 	protected AffineTransform getAffineTransform(double scaler)
 	{
 		AffineTransform affineTransform = new AffineTransform();

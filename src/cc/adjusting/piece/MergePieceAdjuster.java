@@ -18,13 +18,14 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class MergePieceAdjuster extends SimplePieceAdjuster
 {
+	private int fontResolution;
 
 	/**
 	 * 
 	 */
-	public MergePieceAdjuster()
+	public MergePieceAdjuster(int fontResolution)
 	{
-		// TODO Auto-generated constructor stub
+		this.fontResolution = fontResolution;
 	}
 
 	/**
@@ -86,11 +87,16 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			greater = right;
 			smaller = left;
 		}
-		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
+		// TODO 要哪一個尚未決定
+//		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
+//				.getTerritory().getHeight()
+//				/ greater.getPiece().getTerritory().getHeight());
+		AffineTransform shrinkTransform = getAffineTransform(1.0,smaller.getPiece()
 				.getTerritory().getHeight()
 				/ greater.getPiece().getTerritory().getHeight());
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+		greaterPiece.setTerritoryDimensionSameAsPiece();
 
 		double miniPos = 0.0, maxiPos = right.getPiece().getTerritory().getX();
 		while (miniPos + getPrecision() < maxiPos)
@@ -109,6 +115,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(left.getPiece());
 		pieceMovableTypeTzu.getPiece().add(right.getPiece());
+		pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
 		right.getPiece().moveToOrigin();// TODO Territory功能要再想好
 		return;
 	}
@@ -134,11 +141,15 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			greater = down;
 			smaller = up;
 		}
+//		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
+//				.getTerritory().getHeight()
+//				/ greater.getPiece().getTerritory().getHeight());
 		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
 				.getTerritory().getHeight()
-				/ greater.getPiece().getTerritory().getHeight());
+				/ greater.getPiece().getTerritory().getHeight(),1.0);
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+		greaterPiece.setTerritoryDimensionSameAsPiece();
 
 		double miniPos = 0.0, maxiPos = down.getPiece().getTerritory().getY();
 		while (miniPos + getPrecision() < maxiPos)
@@ -157,6 +168,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(up.getPiece());
 		pieceMovableTypeTzu.getPiece().add(down.getPiece());
+		pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
 		down.getPiece().moveToOrigin();// TODO Territory功能要再想好
 		return;
 	}
@@ -167,12 +179,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void wrapMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
+		//TODO 暫時替代用
 		PieceMovableType out = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(out.getPiece());
 		pieceMovableTypeTzu.getPiece().add(in.getPiece());
+		pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
 		return;
 	}
 
@@ -202,4 +216,21 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		rectangularArea.subtract(second);
 		return !rectangularArea.equals(first);
 	}
+
+	public RectangularArea format(PieceMovableType pieceMovableType)
+	{
+		RectangularArea target = new RectangularArea(
+				pieceMovableType.getPiece());
+		double widthCoefficient = 1.0, heightCoefficient = 1.0;
+		if (target.getBounds2D().getWidth() > fontResolution)
+			widthCoefficient = fontResolution / target.getBounds2D().getWidth();
+		if (target.getBounds2D().getHeight() > fontResolution)
+			heightCoefficient = fontResolution
+					/ target.getBounds2D().getHeight();
+		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
+				heightCoefficient);
+		shrinkPieceByFixingStroke(target, shrinkTransform);
+		return target;
+	}
+	// TODO 調整函式順序
 }

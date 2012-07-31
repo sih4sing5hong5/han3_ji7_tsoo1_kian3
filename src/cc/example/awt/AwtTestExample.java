@@ -18,23 +18,19 @@ import java.awt.RenderingHints;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.adjusting.piece.ShapeInformation;
-import cc.adjusting.piece.SimplePieceAdjuster;
+import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.ChineseCharacterTypePrinter;
-import cc.printing.awt.piece.AwtForPiecePrinter;
+import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.SimplePieceSetter;
 
@@ -45,7 +41,7 @@ public class AwtTestExample extends JPanel
 	static final int WIDTH = 1420, HEIGHT = 1050; // Size of our example
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 4;
-	private String word = /* "⿰禾火秋"; // */"秋漿國一" + "⿰禾火⿱將水⿴囗或二"
+	private String word =  /*"    ⿰禾火秋⿰⿰火牙阝"; */ "秋漿國一" + "⿰禾火⿱將水⿴囗或二"
 			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木三" + "變務森四" + "攵力木五";// */;
 	static final String SUNG_FONT = "全字庫正宋體";
 	static final String KAI_FONT = "全字庫正楷體";
@@ -106,19 +102,20 @@ public class AwtTestExample extends JPanel
 		// Area(((AreaMovableType)ccmvArray.elementAt(0)).getArea());
 		// System.out.println(area.getBounds2D().getX()+" "+area.getBounds2D().getY()+" "+area.getBounds2D().getHeight());
 
-		ChineseCharacterTypeAdjuster adjuster = new SimplePieceAdjuster();
+		MergePieceAdjuster adjuster = new MergePieceAdjuster(TYPE_SIZE);
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			((PieceMovableType) ccmvArray.elementAt(i)).getPiece()
-					.setTerritoryDimension(TYPE_SIZE, TYPE_SIZE); // TODO 模組化
+//			((PieceMovableType) ccmvArray.elementAt(i)).getPiece()
+//					.setTerritoryDimension(TYPE_SIZE, TYPE_SIZE); // TODO 模組化
 			ccmvArray.elementAt(i).adjust(adjuster);
 		}
 
 		System.out.println(ccArray.size());
-		ChineseCharacterTypePrinter printer = new AwtForPiecePrinter(g);
+		ChineseCharacterTypePrinter printer = new AwtForSinglePiecePrinter(g);
 		for (int i = 0; i < ccmvArray.size(); ++i)
 		{
-			ccmvArray.elementAt(i).print(printer);
+//			ccmvArray.elementAt(i).print(printer); TODO 以後printer沒用處或專門負責排版？
+			g.draw(adjuster.format((PieceMovableType)ccmvArray.elementAt(i)));
 			g.translate(0, TYPE_SIZE);// move to the down
 			if (i % LINE_SIZE == LINE_SIZE - 1)
 				g.translate(-TYPE_SIZE * 1.5, -TYPE_SIZE * LINE_SIZE);// the new

@@ -15,7 +15,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Shape;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
@@ -73,49 +72,7 @@ public class AwtTestExample extends JPanel
 	/** Draw the example */
 	public void paint(Graphics g1)
 	{
-		boolean ok = false;
-		if (ok)
-		{
-			Graphics2D g = (Graphics2D) g1;
-			final int TEST = 144;
-			Font f = new Font("全字庫正宋體", Font.BOLD, TEST);
-			GlyphVector gv = f
-					.createGlyphVector(
-							((Graphics2D) g1).getFontRenderContext(),
-							"一二三變務森國龜龘"/* ⿻ab!" */);
-			// System.out.println(gv.getNumGlyphs());
-			// Shape shape = gv.getGlyphLogicalBounds(0);
-			System.out.println(gv.getGlyphLogicalBounds(0));
-			System.out.println(gv.getGlyphOutline(0).getBounds());
-
-			g.setStroke(new NullStroke());
-			g.translate(0, 144);
-			for (int i = 0; i < gv.getNumGlyphs(); ++i)
-			{
-				g.translate(1, 0);
-				g.setColor(Color.GRAY);
-				g.draw(gv.getGlyphLogicalBounds(i));
-				g.setColor(Color.LIGHT_GRAY);
-				g.draw(gv.getGlyphVisualBounds(i));
-				g.setColor(Color.BLACK);
-				g.draw(gv.getGlyphOutline(i));// TODO
-
-				System.out.println((new Area(gv.getGlyphLogicalBounds(i)))
-						.getBounds2D());
-				System.out.println((new Area(gv.getGlyphVisualBounds(i)))
-						.getBounds2D());
-				// System.out.println(gv.getGlyphPosition(i));
-				ShapeInformation shapeInformation = new ShapeInformation(
-						new Area(gv.getGlyphOutline(i)));
-				System.out.println(i + "="
-						+ shapeInformation.getApproximativeRegion()
-						/ shapeInformation.getApproximativeCircumference()
-						/ TEST + "="
-						+ shapeInformation.getApproximativeRegion() + "/"
-						+ shapeInformation.getApproximativeCircumference()
-						+ "/" + TEST);
-			}
-		}
+		
 		// Font f = new Font(FontName, FontStyle, 140);
 		// Set drawing attributes and starting position
 		Graphics2D g = (Graphics2D) g1;

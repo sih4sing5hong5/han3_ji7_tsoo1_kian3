@@ -10,7 +10,6 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
-import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
@@ -19,14 +18,11 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class MergePieceAdjuster extends SimplePieceAdjuster
 {
-	private int fontResolution;
-
 	/**
 	 * 
 	 */
-	public MergePieceAdjuster(int fontResolution)
+	public MergePieceAdjuster()
 	{
-		this.fontResolution = fontResolution;
 	}
 
 	/**
@@ -39,8 +35,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	public void adjustWen(
 			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen)
 	{
-		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
-		pieceMovableTypeWen.getPiece().setTerritoryDimensionSameAsPiece();
+		// PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen)
+		// chineseCharacterMovableTypeWen;
+		// pieceMovableTypeWen.getPiece().setTerritoryDimensionSameAsPiece();
 		return;
 	}
 
@@ -79,8 +76,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				.getChildren()[0], right = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		PieceMovableType greater = null, smaller = null;
-		if (left.getPiece().getTerritory().getHeight() > right.getPiece()
-				.getTerritory().getHeight())
+		if (left.getPiece().getBounds2D().getHeight() > right.getPiece()
+				.getBounds2D().getHeight())
 		{
 			greater = left;
 			smaller = right;
@@ -91,17 +88,19 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			smaller = left;
 		}
 		// TODO 要哪一個尚未決定，不知為合正方形收縮記憶體會不足
-//		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
-//				.getTerritory().getHeight()
-//				/ greater.getPiece().getTerritory().getHeight());
-		 AffineTransform shrinkTransform = getAffineTransform(1.0, smaller
-		 .getPiece().getTerritory().getHeight()
-		 / greater.getPiece().getTerritory().getHeight());
+		// AffineTransform shrinkTransform =
+		// getAffineTransform(smaller.getPiece()
+		// .getBounds2D().getHeight()
+		// / greater.getPiece().getBounds2D().getHeight());
+		AffineTransform shrinkTransform = getAffineTransform(1.0, smaller
+				.getPiece().getBounds2D().getHeight()
+				/ greater.getPiece().getBounds2D().getHeight());
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
-		greaterPiece.setTerritoryDimensionSameAsPiece();
+		// greaterPiece.setTerritoryDimensionSameAsPiece();
 
-		double miniPos = 0.0, maxiPos = right.getPiece().getTerritory().getX();
+		double miniPos = 0.0, maxiPos = left.getPiece().getBounds2D()
+				.getWidth();
 		while (miniPos + getPrecision() < maxiPos)
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
@@ -114,11 +113,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 		right.getPiece().moveToOrigin();
 		right.getPiece().moveTo(miniPos, 0);
-		right.getPiece().getTerritory().x = miniPos;
+		// right.getPiece().getTerritory().x = miniPos;
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(left.getPiece());
 		pieceMovableTypeTzu.getPiece().add(right.getPiece());
-		pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
+		// pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
 		right.getPiece().moveToOrigin();// TODO Territory功能要再想好
 		return;
 	}
@@ -133,8 +132,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				.getChildren()[0], down = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		PieceMovableType greater = null, smaller = null;
-		if (up.getPiece().getTerritory().getWidth() > down.getPiece()
-				.getTerritory().getWidth())
+		if (up.getPiece().getBounds2D().getWidth() > down.getPiece()
+				.getBounds2D().getWidth())
 		{
 			greater = up;
 			smaller = down;
@@ -146,16 +145,16 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 		// AffineTransform shrinkTransform =
 		// getAffineTransform(smaller.getPiece()
-		// .getTerritory().getWidth()
-		// / greater.getPiece().getTerritory().getWidth());
+		// .getBounds2D().getWidth()
+		// / greater.getPiece().getBounds2D().getWidth());
 		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
-				.getTerritory().getWidth()
-				/ greater.getPiece().getTerritory().getWidth(), 1.0);
+				.getBounds2D().getWidth()
+				/ greater.getPiece().getBounds2D().getWidth(), 1.0);
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
-		greaterPiece.setTerritoryDimensionSameAsPiece();
+		// greaterPiece.setTerritoryDimensionSameAsPiece();
 
-		double miniPos = 0.0, maxiPos = down.getPiece().getTerritory().getY();
+		double miniPos = 0.0, maxiPos = up.getPiece().getBounds2D().getHeight();
 		while (miniPos + getPrecision() < maxiPos)
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
@@ -168,11 +167,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 		down.getPiece().moveToOrigin();
 		down.getPiece().moveTo(0, miniPos);
-		down.getPiece().getTerritory().y = miniPos;
+		// down.getPiece().getTerritory().y = miniPos;
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(up.getPiece());
 		pieceMovableTypeTzu.getPiece().add(down.getPiece());
-		pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
+		// pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
 		down.getPiece().moveToOrigin();// TODO Territory功能要再想好
 		return;
 	}
@@ -190,7 +189,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(out.getPiece());
 		pieceMovableTypeTzu.getPiece().add(in.getPiece());
-		pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
+		// pieceMovableTypeTzu.getPiece().setTerritoryDimensionSameAsPiece();
 		return;
 	}
 
@@ -226,15 +225,28 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		RectangularArea target = new RectangularArea(
 				pieceMovableType.getPiece());
 		double widthCoefficient = 1.0, heightCoefficient = 1.0;
-		if (target.getBounds2D().getWidth() > fontResolution)
-			widthCoefficient = fontResolution / target.getBounds2D().getWidth();
-		if (target.getBounds2D().getHeight() > fontResolution)
-			heightCoefficient = fontResolution
-					/ target.getBounds2D().getHeight();
+		// if (target.getBounds2D().getWidth() >
+		// target.getTerritory().getWidth())
+		widthCoefficient = target.getTerritory().getWidth()
+				/ target.getBounds2D().getWidth();
+		// if (target.getBounds2D().getHeight() > target.getTerritory()
+		// .getHeight())
+		heightCoefficient = target.getTerritory().getHeight()
+				/ target.getBounds2D().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(target, shrinkTransform);
+		target.moveTo(target.getTerritory().getX(), target.getTerritory().getY());
 		return target;
 	}
+
+	@Override
+	protected void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
+			AffineTransform affineTransform)
+	{
+		// super(rectangularArea,affineTransform);
+		rectangularArea.transform(affineTransform);
+	}
+
 	// TODO 調整函式順序
 }

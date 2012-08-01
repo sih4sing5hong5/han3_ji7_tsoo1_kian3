@@ -29,10 +29,9 @@ import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.piece.PieceMovableType;
-import cc.printing.ChineseCharacterTypePrinter;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
-import cc.setting.piece.SimplePieceSetter;
+import cc.setting.piece.MergePieceSetter;
 
 /** A demonstration of writing custom Stroke classes */
 public class AwtTestExample extends JPanel
@@ -76,13 +75,13 @@ public class AwtTestExample extends JPanel
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(WIDTH - TYPE_SIZE * 1.1, 0);
+		g.translate(WIDTH - TYPE_SIZE * 1.1, TYPE_SIZE);
 		// g.translate(500, 500);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-		ChineseCharacterTypeSetter setter = new SimplePieceSetter(
+		ChineseCharacterTypeSetter setter = new MergePieceSetter(
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
@@ -103,7 +102,7 @@ public class AwtTestExample extends JPanel
 		// Area(((AreaMovableType)ccmvArray.elementAt(0)).getArea());
 		// System.out.println(area.getBounds2D().getX()+" "+area.getBounds2D().getY()+" "+area.getBounds2D().getHeight());
 
-		MergePieceAdjuster adjuster = new MergePieceAdjuster(TYPE_SIZE);
+		MergePieceAdjuster adjuster = new MergePieceAdjuster();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 //			((PieceMovableType) ccmvArray.elementAt(i)).getPiece()
@@ -112,11 +111,11 @@ public class AwtTestExample extends JPanel
 		}
 
 		System.out.println(ccArray.size());
-		ChineseCharacterTypePrinter printer = new AwtForSinglePiecePrinter(g);
+		AwtForSinglePiecePrinter printer = new AwtForSinglePiecePrinter(g);
 		for (int i = 0; i < ccmvArray.size(); ++i)
 		{
-//			ccmvArray.elementAt(i).print(printer); TODO 以後printer沒用處或專門負責排版？
-			g.draw(adjuster.format((PieceMovableType)ccmvArray.elementAt(i)));
+//			ccmvArray.elementAt(i).print(printer); //TODO 以後printer沒用處或專門負責排版？
+			printer.printPiece(adjuster.format((PieceMovableType)ccmvArray.elementAt(i)));
 			g.translate(0, TYPE_SIZE);// move to the down
 			if (i % LINE_SIZE == LINE_SIZE - 1)
 				g.translate(-TYPE_SIZE * 1.5, -TYPE_SIZE * LINE_SIZE);// the new

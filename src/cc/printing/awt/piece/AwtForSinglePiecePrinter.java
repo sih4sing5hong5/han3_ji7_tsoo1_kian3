@@ -6,6 +6,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
+import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.printing.ChineseCharacterTypePrinter;
 
 public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
@@ -32,6 +33,14 @@ public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
 		graphics2d.draw(pieceMovableTypeTzu.getPiece());
+		return;
+	}
+
+	public void printPiece(RectangularArea rectangularArea)
+	{
+		// PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu)
+		// chineseCharacterMovableTypeTzu;
+		graphics2d.draw(rectangularArea);
 		return;
 	}
 }

@@ -42,13 +42,13 @@ public class AwtTestExample extends JPanel
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 4;
 	private String word =  /*"    ⿰禾火秋⿰⿰火牙阝"; */ "秋漿國一" + "⿰禾火⿱將水⿴囗或二"
-			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木三" + "變務森四" + "攵力木五";// */;
+			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木⿰車⿱一⿱口田" + "變務森輻" + "攵力木五";// */;
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	static final String 全字庫正楷體 = "全字庫正楷體";
 	static final String 文泉驛正黑 = "文泉驛正黑";
 	static final String 文鼎中圓 = "文鼎中圓";
 	static final String 超研澤中圓 = "超研澤中圓";
-	static private final String FontName = 文泉驛正黑;
+	static private final String FontName = 全字庫正宋體;
 	private int FontStyle = Font.BOLD;
 
 	public String getName()

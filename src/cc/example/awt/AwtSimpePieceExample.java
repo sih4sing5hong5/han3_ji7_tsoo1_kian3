@@ -67,6 +67,7 @@ public class AwtSimpePieceExample extends JPanel
 	}
 
 	/** Draw the example */
+	@SuppressWarnings("deprecation")
 	public void paint(Graphics g1)
 	{
 		

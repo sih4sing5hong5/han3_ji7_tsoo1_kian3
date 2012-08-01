@@ -53,6 +53,33 @@ public class RectangularArea extends Area
 	}
 
 	/**
+	 * 建構一個新的物件
+	 * 
+	 * @param rectangularArea
+	 */
+	public RectangularArea(RectangularArea rectangularArea,
+			Rectangle2D wantedTerritory)
+	{
+		super(rectangularArea);
+		this.wantedTerritory = new Rectangle2D.Double(wantedTerritory.getX(),
+				wantedTerritory.getY(), wantedTerritory.getWidth(),
+				wantedTerritory.getHeight());
+	}
+
+	/**
+	 * 建構一個新的物件
+	 * 
+	 * @param rectangularArea
+	 */
+	public RectangularArea(Rectangle2D wantedTerritory)
+	{
+		super();
+		this.wantedTerritory = new Rectangle2D.Double(wantedTerritory.getX(),
+				wantedTerritory.getY(), wantedTerritory.getWidth(),
+				wantedTerritory.getHeight());
+	}
+
+	/**
 	 * 把圖形移回原點
 	 */
 	public void moveToOrigin()
@@ -77,6 +104,17 @@ public class RectangularArea extends Area
 	/**
 	 * 調整圖形的預計位置
 	 */
+	@Deprecated
+	public void setTerritoryToOrigin()
+	{
+		setTerritoryPosition(-wantedTerritory.getX(), -wantedTerritory.getY());
+		return;
+	}
+
+	/**
+	 * 調整圖形的預計位置
+	 */
+	@Deprecated
 	public void setTerritoryPosition(double x, double y)
 	{
 		wantedTerritory.setRect(x, y, wantedTerritory.getWidth(),
@@ -87,6 +125,7 @@ public class RectangularArea extends Area
 	/**
 	 * 調整圖形的預計大小
 	 */
+	@Deprecated
 	public void setTerritoryDimension(double width, double height)
 	{
 		wantedTerritory.setRect(wantedTerritory.getX(), wantedTerritory.getY(),
@@ -97,6 +136,7 @@ public class RectangularArea extends Area
 	/**
 	 * 圖形的預計大小調整成跟目前大小一樣
 	 */
+	@Deprecated
 	public void setTerritoryDimensionSameAsPiece()
 	{
 		setTerritoryDimension(getBounds2D().getWidth(), getBounds2D()

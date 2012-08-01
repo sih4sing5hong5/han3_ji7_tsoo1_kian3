@@ -23,12 +23,14 @@ import cc.setting.ChineseCharacterTypeSetter;
  * @author Ihc
  * 
  */
+@SuppressWarnings("deprecation")
 public class SimplePieceSetter implements ChineseCharacterTypeSetter
 {
 	private String fontName;
 	private int fontStyle;
-	private FontRenderContext fontRenderContext;
 	private int fontResolution;
+	protected FontRenderContext fontRenderContext;
+	protected Font font;
 
 	public SimplePieceSetter(FontRenderContext fontRenderContext,
 			String fontName, int fontStyle, int fontResolution)
@@ -37,6 +39,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		this.fontStyle = fontStyle;
 		this.fontResolution = fontResolution;
 		this.fontRenderContext = fontRenderContext;
+		this.font = new Font(fontName, fontStyle, fontResolution);
 	}
 
 	@Override
@@ -44,7 +47,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	{
 		PieceMovableTypeWen shapeMovableTypeWen = new PieceMovableTypeWen(
 				chineseCharacterWen);
-		Font font = new Font(fontName, fontStyle, fontResolution);
+		// Font font = new Font(fontName, fontStyle, fontResolution);
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
 				chineseCharacterWen.getChars());
 		RectangularArea rectangularArea = new RectangularArea(

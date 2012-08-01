@@ -10,6 +10,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
+import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
@@ -38,6 +39,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	public void adjustWen(
 			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen)
 	{
+		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
+		pieceMovableTypeWen.getPiece().setTerritoryDimensionSameAsPiece();
 		return;
 	}
 
@@ -88,11 +91,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			smaller = left;
 		}
 		// TODO 要哪一個尚未決定
-//		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
-//				.getTerritory().getHeight()
-//				/ greater.getPiece().getTerritory().getHeight());
-		AffineTransform shrinkTransform = getAffineTransform(1.0,smaller.getPiece()
-				.getTerritory().getHeight()
+		// AffineTransform shrinkTransform =
+		// getAffineTransform(smaller.getPiece()
+		// .getTerritory().getHeight()
+		// / greater.getPiece().getTerritory().getHeight());
+		AffineTransform shrinkTransform = getAffineTransform(1.0, smaller
+				.getPiece().getTerritory().getHeight()
 				/ greater.getPiece().getTerritory().getHeight());
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
@@ -141,15 +145,16 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			greater = down;
 			smaller = up;
 		}
-//		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
-//				.getTerritory().getHeight()
-//				/ greater.getPiece().getTerritory().getHeight());
+		// AffineTransform shrinkTransform =
+		// getAffineTransform(smaller.getPiece()
+		// .getTerritory().getHeight()
+		// / greater.getPiece().getTerritory().getHeight());
 		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
-				.getTerritory().getHeight()
-				/ greater.getPiece().getTerritory().getHeight(),1.0);
+				.getTerritory().getWidth()
+				/ greater.getPiece().getTerritory().getWidth(), 1.0);
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
-		greaterPiece.setTerritoryDimensionSameAsPiece();
+		 greaterPiece.setTerritoryDimensionSameAsPiece();
 
 		double miniPos = 0.0, maxiPos = down.getPiece().getTerritory().getY();
 		while (miniPos + getPrecision() < maxiPos)
@@ -179,7 +184,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void wrapMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
-		//TODO 暫時替代用
+		// TODO 暫時替代用
 		PieceMovableType out = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
@@ -229,7 +234,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 					/ target.getBounds2D().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
-		shrinkPieceByFixingStroke(target, shrinkTransform);
+		 shrinkPieceByFixingStroke(target, shrinkTransform);
 		return target;
 	}
 	// TODO 調整函式順序

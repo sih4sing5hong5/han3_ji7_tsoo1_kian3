@@ -236,7 +236,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(target, shrinkTransform);
-		target.moveTo(target.getTerritory().getX(), target.getTerritory().getY());
+		target.moveTo(target.getTerritory().getX(), target.getTerritory()
+				.getY());
 		return target;
 	}
 
@@ -244,7 +245,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
 			AffineTransform affineTransform)
 	{
-		// super(rectangularArea,affineTransform);
+		// super.shrinkPieceByFixingStroke(rectangularArea, affineTransform);
 		rectangularArea.transform(affineTransform);
 	}
 

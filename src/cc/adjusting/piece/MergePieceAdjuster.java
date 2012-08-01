@@ -90,14 +90,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			greater = right;
 			smaller = left;
 		}
-		// TODO 要哪一個尚未決定
-		// AffineTransform shrinkTransform =
-		// getAffineTransform(smaller.getPiece()
-		// .getTerritory().getHeight()
-		// / greater.getPiece().getTerritory().getHeight());
-		AffineTransform shrinkTransform = getAffineTransform(1.0, smaller
-				.getPiece().getTerritory().getHeight()
-				/ greater.getPiece().getTerritory().getHeight());
+		// TODO 要哪一個尚未決定，不知為合正方形收縮記憶體會不足
+//		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
+//				.getTerritory().getHeight()
+//				/ greater.getPiece().getTerritory().getHeight());
+		 AffineTransform shrinkTransform = getAffineTransform(1.0, smaller
+		 .getPiece().getTerritory().getHeight()
+		 / greater.getPiece().getTerritory().getHeight());
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
 		greaterPiece.setTerritoryDimensionSameAsPiece();
@@ -147,14 +146,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 		// AffineTransform shrinkTransform =
 		// getAffineTransform(smaller.getPiece()
-		// .getTerritory().getHeight()
-		// / greater.getPiece().getTerritory().getHeight());
+		// .getTerritory().getWidth()
+		// / greater.getPiece().getTerritory().getWidth());
 		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
 				.getTerritory().getWidth()
 				/ greater.getPiece().getTerritory().getWidth(), 1.0);
 		RectangularArea greaterPiece = greater.getPiece();
 		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
-		 greaterPiece.setTerritoryDimensionSameAsPiece();
+		greaterPiece.setTerritoryDimensionSameAsPiece();
 
 		double miniPos = 0.0, maxiPos = down.getPiece().getTerritory().getY();
 		while (miniPos + getPrecision() < maxiPos)
@@ -234,7 +233,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 					/ target.getBounds2D().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
-		 shrinkPieceByFixingStroke(target, shrinkTransform);
+		shrinkPieceByFixingStroke(target, shrinkTransform);
 		return target;
 	}
 	// TODO 調整函式順序

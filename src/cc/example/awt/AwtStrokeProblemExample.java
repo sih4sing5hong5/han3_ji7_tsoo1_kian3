@@ -20,7 +20,6 @@ import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 
 import javax.swing.JFrame;

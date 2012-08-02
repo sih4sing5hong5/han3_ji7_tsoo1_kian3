@@ -1,15 +1,5 @@
 package cc.example.awt;
 
-/*
- * Copyright (c) 2000 David Flanagan.  All rights reserved.
- * This code is from the book Java Examples in a Nutshell, 2nd Edition.
- * It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.
- * You may study, use, and modify it for any non-commercial purpose.
- * You may distribute it non-commercially as long as you retain this notice.
- * For a commercial use license, or to purchase the book (recommended),
- * visit http://www.davidflanagan.com/javaexamples2.
- */
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -33,21 +23,20 @@ import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.MergePieceSetter;
 
-/** A demonstration of writing custom Stroke classes */
 public class AwtTestExample extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	static final int WIDTH = 1420, HEIGHT = 1050; // Size of our example
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 4;
-	private String word =  /*"    ⿰禾火秋⿰⿰火牙阝"; */ "秋漿國一" + "⿰禾火⿱將水⿴囗或二"
+	private String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"秋漿國一" + "⿰禾火⿱將水⿴囗或二"
 			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木⿰車⿱一⿱口田" + "變務森輻" + "攵力木五";// */;
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	static final String 全字庫正楷體 = "全字庫正楷體";
 	static final String 文泉驛正黑 = "文泉驛正黑";
 	static final String 文鼎中圓 = "文鼎中圓";
 	static final String 超研澤中圓 = "超研澤中圓";
-	static private final String FontName = 全字庫正宋體;
+	static private final String FontName = 文鼎中圓;
 	private int FontStyle = Font.BOLD;
 
 	public String getName()
@@ -65,18 +54,13 @@ public class AwtTestExample extends JPanel
 		return HEIGHT;
 	}
 
-	/** Draw the example */
 	public void paint(Graphics g1)
 	{
-		
-		// Font f = new Font(FontName, FontStyle, 140);
-		// Set drawing attributes and starting position
 		Graphics2D g = (Graphics2D) g1;
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		g.translate(WIDTH - TYPE_SIZE * 1.1, TYPE_SIZE);
-		// g.translate(500, 500);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
@@ -85,28 +69,16 @@ public class AwtTestExample extends JPanel
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
-				FontName, FontStyle, TYPE_SIZE);// TODO
+				FontName, FontStyle, TYPE_SIZE);
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter));
 		}
-		// for (int i = 0; i < ccArray.size(); ++i)
-		// {
-		// if(((AreaMovableType) ccmvArray.elementAt(i)).getArea()!=null)
-		// g.draw(((AreaMovableType) ccmvArray.elementAt(i)).getArea());
-		// }
-		// Shape shape=((AreaMovableType)ccmvArray.elementAt(0)).getArea();
-		// System.out.println(shape.getBounds2D().getX()+" "+shape.getBounds2D().getY()+" "+shape.getBounds2D().getHeight());
-		// Area area=new
-		// Area(((AreaMovableType)ccmvArray.elementAt(0)).getArea());
-		// System.out.println(area.getBounds2D().getX()+" "+area.getBounds2D().getY()+" "+area.getBounds2D().getHeight());
 
 		MergePieceAdjuster adjuster = new MergePieceAdjuster();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-//			((PieceMovableType) ccmvArray.elementAt(i)).getPiece()
-//					.setTerritoryDimension(TYPE_SIZE, TYPE_SIZE); // TODO 模組化
 			ccmvArray.elementAt(i).adjust(adjuster);
 		}
 
@@ -114,8 +86,10 @@ public class AwtTestExample extends JPanel
 		AwtForSinglePiecePrinter printer = new AwtForSinglePiecePrinter(g);
 		for (int i = 0; i < ccmvArray.size(); ++i)
 		{
-//			ccmvArray.elementAt(i).print(printer); //TODO 以後printer沒用處或專門負責排版？
-			printer.printPiece(adjuster.format((PieceMovableType)ccmvArray.elementAt(i)));
+			// ccmvArray.elementAt(i).print(printer); //TODO
+			// 以後printer沒用處或專門負責排版？
+			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
+					.elementAt(i)));
 			g.translate(0, TYPE_SIZE);// move to the down
 			if (i % LINE_SIZE == LINE_SIZE - 1)
 				g.translate(-TYPE_SIZE * 1.5, -TYPE_SIZE * LINE_SIZE);// the new
@@ -138,5 +112,4 @@ public class AwtTestExample extends JPanel
 		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}
-
 }

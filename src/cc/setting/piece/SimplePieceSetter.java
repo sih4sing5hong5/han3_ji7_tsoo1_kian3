@@ -31,6 +31,8 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	private int fontResolution;
 	protected FontRenderContext fontRenderContext;
 	protected Font font;
+	protected final String TZU_MODEL = "意";
+	protected final Rectangle2D TZU_MODEL_TERRITORY;
 
 	public SimplePieceSetter(FontRenderContext fontRenderContext,
 			String fontName, int fontStyle, int fontResolution)
@@ -40,6 +42,9 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		this.fontResolution = fontResolution;
 		this.fontRenderContext = fontRenderContext;
 		this.font = new Font(fontName, fontStyle, fontResolution);
+		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
+				this.TZU_MODEL);
+		this.TZU_MODEL_TERRITORY = glyphVector.getOutline().getBounds2D();
 	}
 
 	@Override

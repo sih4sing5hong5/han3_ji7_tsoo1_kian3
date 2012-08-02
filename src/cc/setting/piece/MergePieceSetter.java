@@ -4,7 +4,6 @@
 package cc.setting.piece;
 
 import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
 import java.awt.geom.Rectangle2D;
 
 import cc.core.ChineseCharacterTzu;
@@ -17,8 +16,6 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class MergePieceSetter extends SimplePieceSetter
 {
-	protected final String TZU_MODEL = "意";
-	protected final Rectangle2D TZU_MODEL_TERRITORY;
 
 	/**
 	 * 
@@ -31,9 +28,6 @@ public class MergePieceSetter extends SimplePieceSetter
 			String fontName, int fontStyle, int fontResolution)
 	{
 		super(fontRenderContext, fontName, fontStyle, fontResolution);
-		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
-				TZU_MODEL);
-		TZU_MODEL_TERRITORY = glyphVector.getOutline().getBounds2D();
 	}
 
 	@Override

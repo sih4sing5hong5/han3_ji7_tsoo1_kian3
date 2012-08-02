@@ -3,6 +3,7 @@
  */
 package cc.setting.piece;
 
+import java.awt.BasicStroke;
 import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
@@ -32,6 +33,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	protected Font font;
 	protected final String TZU_MODEL = "意";
 	protected final Rectangle2D TZU_MODEL_TERRITORY;
+	protected final Area TZU_MODEL_AREA;
 
 	public SimplePieceSetter(FontRenderContext fontRenderContext,
 			String fontName, int fontStyle, int fontResolution)
@@ -44,6 +46,9 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
 				this.TZU_MODEL);
 		this.TZU_MODEL_TERRITORY = glyphVector.getOutline().getBounds2D();
+		BasicStroke basicStroke = new BasicStroke();
+		this.TZU_MODEL_AREA = new Area(
+				basicStroke.createStrokedShape(TZU_MODEL_TERRITORY));
 	}
 
 	@Override
@@ -51,11 +56,17 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	{
 		PieceMovableTypeWen shapeMovableTypeWen = new PieceMovableTypeWen(
 				chineseCharacterWen);
-		// Font font = new Font(fontName, fontStyle, fontResolution);
-		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
-				chineseCharacterWen.getChars());
-		RectangularArea rectangularArea = new RectangularArea(
-				glyphVector.getOutline());
+		RectangularArea rectangularArea = null;
+		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
+		{
+			GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
+					chineseCharacterWen.getChars());
+			rectangularArea = new RectangularArea(glyphVector.getOutline());
+		}
+		else
+		{
+			rectangularArea = findWenForNoBuiltIn(chineseCharacterWen);
+		}
 		rectangularArea.moveToOrigin();
 		shapeMovableTypeWen.setPiece(rectangularArea);
 		return shapeMovableTypeWen;
@@ -85,8 +96,14 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 
 		if (pieceMovableTypeTzu.getChineseCharacter().getParent() == null)
 			pieceMovableTypeTzu.getPiece().setTerritory(TZU_MODEL_TERRITORY);
-		
+
 		return pieceMovableTypeTzu;
+	}
+
+	protected RectangularArea findWenForNoBuiltIn(
+			ChineseCharacterWen chineseCharacterWen)
+	{
+		return new RectangularArea(TZU_MODEL_AREA);
 	}
 
 	protected void setChildren(

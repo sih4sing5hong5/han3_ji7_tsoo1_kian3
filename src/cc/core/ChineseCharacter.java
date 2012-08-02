@@ -7,5 +7,11 @@ public abstract class ChineseCharacter
 {
 	protected ChineseCharacter parent;
 
-	public abstract ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter writer);
+	public abstract ChineseCharacterMovableType typeset(
+			ChineseCharacterTypeSetter writer);
+
+	public ChineseCharacter getParent()
+	{
+		return parent;
+	}
 }

@@ -4,7 +4,6 @@
 package cc.setting.piece;
 
 import java.awt.font.FontRenderContext;
-import java.awt.geom.Rectangle2D;
 
 import cc.core.ChineseCharacterTzu;
 import cc.moveable_type.piece.PieceMovableTypeTzu;

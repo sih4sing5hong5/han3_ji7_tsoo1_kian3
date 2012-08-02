@@ -9,26 +9,40 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
 /**
- * 把AreaTool和裡面的bound全部整合起來，末來使用時比較方便
+ * 活字型態。把AreaTool和預設位置大小整合起來，使用時比較方便。
  * 
  * @author Ihc
  * 
  */
 public class RectangularArea extends Area
 {
-	private Rectangle2D.Double wantedTerritory;
+	private Rectangle2D.Double territory;
 
 	/**
-	 * 預設建構子
+	 * 建立一個空的活字。
 	 */
 	public RectangularArea()
 	{
-		wantedTerritory = new Rectangle2D.Double();
+		territory = new Rectangle2D.Double();
 	}
 
 	/**
+	 * 建立一個空的活字，並用<code>Rectangle2D</code>指定活字預計位置及大小
+	 * 
+	 * @param territory
+	 *            預計位置及大小
+	 */
+	public RectangularArea(Rectangle2D territory)
+	{
+		super();
+		setTerritory(territory);
+	}
+
+	/**
+	 * 用<code>Shape</code>建立一個相同形狀的活字。
+	 * 
 	 * @param s
-	 *            the Shape from which the area is constructed
+	 *            字塊的形狀
 	 */
 	public RectangularArea(Shape s)
 	{
@@ -37,9 +51,10 @@ public class RectangularArea extends Area
 	}
 
 	/**
-	 * 建構一個新的物件
+	 * 建立一個和<code>RectangularArea</code>相同的活字。
 	 * 
 	 * @param rectangularArea
+	 *            參考的活字
 	 */
 	public RectangularArea(RectangularArea rectangularArea)
 	{
@@ -48,30 +63,22 @@ public class RectangularArea extends Area
 	}
 
 	/**
-	 * 建構一個新的物件
+	 * 用<code>Shape</code>建立一個相同形狀的活字， 並用<code>Rectangle2D</code>指定目標位置及大小。
 	 * 
 	 * @param rectangularArea
+	 *            參考的活字
+	 * @param territory
+	 *            預計位置及大小
 	 */
 	public RectangularArea(RectangularArea rectangularArea,
-			Rectangle2D wantedTerritory)
+			Rectangle2D territory)
 	{
 		super(rectangularArea);
-		setTerritory(wantedTerritory);
+		setTerritory(territory);
 	}
 
 	/**
-	 * 建構一個新的物件
-	 * 
-	 * @param rectangularArea
-	 */
-	public RectangularArea(Rectangle2D wantedTerritory)
-	{
-		super();
-		setTerritory(wantedTerritory);
-	}
-
-	/**
-	 * 把圖形移回原點
+	 * 把活字座標移回原點
 	 */
 	public void moveToOrigin()
 	{
@@ -81,7 +88,12 @@ public class RectangularArea extends Area
 	}
 
 	/**
-	 * 把圖形移至指點座標
+	 * 把活字座標移至指點座標
+	 * 
+	 * @param x
+	 *            要移動的水平距離
+	 * @param y
+	 *            要移動的垂直距離
 	 */
 
 	public void moveTo(double x, double y)
@@ -93,65 +105,56 @@ public class RectangularArea extends Area
 	}
 
 	/**
-	 * 調整圖形的預計位置
+	 * 設定活字預計位置及大小
+	 * 
+	 * @param territory
+	 *            預計位置及大小
 	 */
-	
-	public void setTerritoryToOrigin()
+
+	public void setTerritory(Rectangle2D territory)
 	{
-		setTerritoryPosition(-wantedTerritory.getX(), -wantedTerritory.getY());
+		this.territory = new Rectangle2D.Double(territory.getX(),
+				territory.getY(), territory.getWidth(), territory.getHeight());
 		return;
 	}
 
 	/**
-	 * 調整圖形的預計位置
+	 * 設定活字預計位置
+	 * 
+	 * @param x
+	 *            水平位置
+	 * @param y
+	 *            垂直位置
 	 */
-	
-	public void setTerritory(Rectangle2D wantedTerritory)
-	{
-		this.wantedTerritory = new Rectangle2D.Double(wantedTerritory.getX(),
-				wantedTerritory.getY(), wantedTerritory.getWidth(),
-				wantedTerritory.getHeight());
-		return;
-	}
 
-	/**
-	 * 調整圖形的預計位置
-	 */
-	
 	public void setTerritoryPosition(double x, double y)
 	{
-		wantedTerritory.setRect(x, y, wantedTerritory.getWidth(),
-				wantedTerritory.getHeight());
+		territory.setRect(x, y, territory.getWidth(), territory.getHeight());
 		return;
 	}
 
 	/**
-	 * 調整圖形的預計大小
+	 * 設定活字預計大小
+	 * 
+	 * @param width
+	 *            寬度
+	 * @param height
+	 *            高度
 	 */
-	
+
 	public void setTerritoryDimension(double width, double height)
 	{
-		wantedTerritory.setRect(wantedTerritory.getX(), wantedTerritory.getY(),
-				width, height);
+		territory.setRect(territory.getX(), territory.getY(), width, height);
 		return;
 	}
 
 	/**
-	 * 圖形的預計大小調整成跟目前大小一樣
-	 */
-	
-	public void setTerritoryDimensionSameAsPiece()
-	{
-		setTerritoryDimension(getBounds2D().getWidth(), getBounds2D()
-				.getHeight());
-		return;
-	}
-
-	/**
-	 * @return 圖形預計區域
+	 * 取得活字預計位置及大小
+	 * 
+	 * @return 圖形預計位置及大小
 	 */
 	public Rectangle2D.Double getTerritory()
 	{
-		return wantedTerritory;
+		return territory;
 	}
 }

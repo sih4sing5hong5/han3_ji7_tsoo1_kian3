@@ -6,38 +6,67 @@ import java.util.Vector;
 
 import cc.exception.CCParseTextException;
 
+/**
+ * 用來分析漢字部件的工具。給一字串，分析出含所有漢字的部件結構。
+ * 
+ * @author Ihc
+ */
 public class ChineseCharacterUtility
 {
 	private StringCharacterIterator iterator;
 
+	/**
+	 * 以<code>String</code>建立一個分析工具
+	 * 
+	 * @param string
+	 *            欲分析的字串
+	 */
 	public ChineseCharacterUtility(String string)
 	{
 		this.iterator = new StringCharacterIterator(string);
 	}
 
+	/**
+	 * 以<code>StringCharacterIterator</code>建立一個分析工具
+	 * 
+	 * @param iterator
+	 *            欲分析的字串
+	 */
 	public ChineseCharacterUtility(StringCharacterIterator iterator)
 	{
 		this.iterator = iterator;
 	}
 
+	/**
+	 * 分析字串並回傳字串中全部的漢字部件
+	 * 
+	 * @return 字串中全部的漢字部件。若字串格式有錯，陣列最後會補上一個null當作通知
+	 */
 	public Vector<ChineseCharacter> parseText()
 	{
 		Vector<ChineseCharacter> vector = new Vector<ChineseCharacter>();
-		while (iterator.current() != CharacterIterator.DONE)
+		try
 		{
-			try
+			while (iterator.current() != CharacterIterator.DONE)
 			{
 				vector.add(parseCharacter());
 				vector.lastElement().parent = null;
 			}
-			catch (CCParseTextException e)
-			{
-				vector.add(null);
-			}
+		}
+		catch (CCParseTextException e)
+		{
+			vector.add(null);
 		}
 		return vector;
 	}
 
+	/**
+	 * 分析下一個漢字部件
+	 * 
+	 * @return 下一個漢字部件
+	 * @throws CCParseTextException
+	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
+	 */
 	ChineseCharacter parseCharacter() throws CCParseTextException
 	{
 		if (iterator.current() == CharacterIterator.DONE)
@@ -51,7 +80,10 @@ public class ChineseCharacterUtility
 						iterator.next());
 			}
 			else
+			{
+				iterator.next();
 				throw new CCParseTextException();// TODO EOF throw
+			}
 		}
 		else
 		{
@@ -61,8 +93,7 @@ public class ChineseCharacterUtility
 		ChineseCharacter chineseCharacter = null;
 		if (ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
 		{
-			chineseCharacter = new ChineseCharacterTzu(codePoint,
-					iterator);
+			chineseCharacter = new ChineseCharacterTzu(codePoint, iterator);
 		}
 		else
 		{

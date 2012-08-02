@@ -40,7 +40,7 @@ public class ChineseCharacterUtility
 	/**
 	 * 分析字串並回傳字串中全部的漢字部件
 	 * 
-	 * @return 字串中全部的漢字部件。若字串格式有錯，陣列最後會補上一個null當作通知
+	 * @return 字串中全部的漢字部件。若字串格式有錯，不完整的部件不會被加上去，並且在陣列最後會補上一個null當作通知
 	 */
 	public Vector<ChineseCharacter> parseText()
 	{

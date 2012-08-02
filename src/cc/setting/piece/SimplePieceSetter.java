@@ -23,7 +23,6 @@ import cc.setting.ChineseCharacterTypeSetter;
  * @author Ihc
  * 
  */
-@SuppressWarnings("deprecation")
 public class SimplePieceSetter implements ChineseCharacterTypeSetter
 {
 	private String fontName;
@@ -83,6 +82,10 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			wrapSetting(pieceMovableTypeTzu);
 			break;
 		}
+
+		if (pieceMovableTypeTzu.getChineseCharacter().getParent() == null)
+			pieceMovableTypeTzu.getPiece().setTerritory(TZU_MODEL_TERRITORY);
+		
 		return pieceMovableTypeTzu;
 	}
 

@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
-import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
@@ -23,7 +22,11 @@ public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen)
 	{
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
+		graphics2d.translate(pieceMovableTypeWen.getPiece().getTerritory()
+				.getX(), pieceMovableTypeWen.getPiece().getTerritory().getY());
 		graphics2d.draw(pieceMovableTypeWen.getPiece());
+		graphics2d.translate(-pieceMovableTypeWen.getPiece().getTerritory()
+				.getX(), -pieceMovableTypeWen.getPiece().getTerritory().getY());
 		return;
 	}
 
@@ -32,16 +35,16 @@ public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
+		graphics2d.translate(pieceMovableTypeTzu.getPiece().getTerritory()
+				.getX(), pieceMovableTypeTzu.getPiece().getTerritory().getY());
 		for (int i = 0; i < pieceMovableTypeTzu.getChildren().length; ++i)
 		{
-			PieceMovableType child = (PieceMovableType) pieceMovableTypeTzu
-					.getChildren()[i];
-			graphics2d.translate(child.getPiece().getTerritory().getX(), child
-					.getPiece().getTerritory().getY());
+//			PieceMovableType child = (PieceMovableType) pieceMovableTypeTzu
+//					.getChildren()[i];
 			pieceMovableTypeTzu.getChildren()[i].print(this);
-			graphics2d.translate(-child.getPiece().getTerritory().getX(),
-					-child.getPiece().getTerritory().getY());
 		}
+		graphics2d.translate(-pieceMovableTypeTzu.getPiece().getTerritory()
+				.getX(), -pieceMovableTypeTzu.getPiece().getTerritory().getY());
 		return;
 	}
 }

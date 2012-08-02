@@ -29,7 +29,6 @@ import cc.adjusting.piece.SimplePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
-import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.ChineseCharacterTypePrinter;
 import cc.printing.awt.piece.AwtForPiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -67,18 +66,13 @@ public class AwtSimpePieceExample extends JPanel
 	}
 
 	/** Draw the example */
-	@SuppressWarnings("deprecation")
 	public void paint(Graphics g1)
 	{
-		
-		// Font f = new Font(FontName, FontStyle, 140);
-		// Set drawing attributes and starting position
 		Graphics2D g = (Graphics2D) g1;
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(WIDTH - TYPE_SIZE * 1.1, 0);
-		// g.translate(500, 500);
+		g.translate(WIDTH - TYPE_SIZE * 1.1, TYPE_SIZE);
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
@@ -93,22 +87,12 @@ public class AwtSimpePieceExample extends JPanel
 		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter));
 		}
-		// for (int i = 0; i < ccArray.size(); ++i)
-		// {
-		// if(((AreaMovableType) ccmvArray.elementAt(i)).getArea()!=null)
-		// g.draw(((AreaMovableType) ccmvArray.elementAt(i)).getArea());
-		// }
-		// Shape shape=((AreaMovableType)ccmvArray.elementAt(0)).getArea();
-		// System.out.println(shape.getBounds2D().getX()+" "+shape.getBounds2D().getY()+" "+shape.getBounds2D().getHeight());
-		// Area area=new
-		// Area(((AreaMovableType)ccmvArray.elementAt(0)).getArea());
-		// System.out.println(area.getBounds2D().getX()+" "+area.getBounds2D().getY()+" "+area.getBounds2D().getHeight());
 
 		ChineseCharacterTypeAdjuster adjuster = new SimplePieceAdjuster();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			((PieceMovableType) ccmvArray.elementAt(i)).getPiece()
-					.setTerritoryDimension(TYPE_SIZE, TYPE_SIZE); // TODO 模組化
+			// ((PieceMovableType) ccmvArray.elementAt(i)).getPiece()
+			// .setTerritoryDimension(TYPE_SIZE, TYPE_SIZE); // 直接由setter處理掉
 			ccmvArray.elementAt(i).adjust(adjuster);
 		}
 

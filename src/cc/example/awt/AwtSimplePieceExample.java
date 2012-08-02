@@ -1,15 +1,5 @@
 package cc.example.awt;
 
-/*
- * Copyright (c) 2000 David Flanagan.  All rights reserved.
- * This code is from the book Java Examples in a Nutshell, 2nd Edition.
- * It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.
- * You may study, use, and modify it for any non-commercial purpose.
- * You may distribute it non-commercially as long as you retain this notice.
- * For a commercial use license, or to purchase the book (recommended),
- * visit http://www.davidflanagan.com/javaexamples2.
- */
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -34,11 +24,10 @@ import cc.printing.awt.piece.AwtForPiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.SimplePieceSetter;
 
-/** A demonstration of writing custom Stroke classes */
-public class AwtSimpePieceExample extends JPanel
+public class AwtSimplePieceExample extends JPanel
 {
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1420, HEIGHT = 1050; // Size of our example
+	static final int WIDTH = 1420, HEIGHT = 1050;
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 4;
 	private String word = /* "⿰禾火秋"; // */"秋漿國一" + "⿰禾火⿱將水⿴囗或二"
@@ -47,12 +36,12 @@ public class AwtSimpePieceExample extends JPanel
 	static final String KAI_FONT = "全字庫正楷體";
 	static final String BLACK_FONT = "文泉驛正黑";
 	static final String 文鼎中圓 = "文鼎中圓";
-	static private final String FontName = SUNG_FONT;
+	static private final String FontName = 文鼎中圓;
 	private int FontStyle = Font.BOLD;
 
 	public String getName()
 	{
-		return "Custom Strokes";
+		return "AwtSimplePieceExample";
 	}
 
 	public int getWidth()
@@ -65,7 +54,6 @@ public class AwtSimpePieceExample extends JPanel
 		return HEIGHT;
 	}
 
-	/** Draw the example */
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;
@@ -81,7 +69,7 @@ public class AwtSimpePieceExample extends JPanel
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
-				FontName, FontStyle, TYPE_SIZE);// TODO
+				FontName, FontStyle, TYPE_SIZE);
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
@@ -119,9 +107,8 @@ public class AwtSimpePieceExample extends JPanel
 				System.exit(0);
 			}
 		});
-		f.setContentPane(new AwtSimpePieceExample());
+		f.setContentPane(new AwtSimplePieceExample());
 		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}
-
 }

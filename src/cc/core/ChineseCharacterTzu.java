@@ -38,7 +38,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	ChineseCharacterTzu(int codePoint, StringCharacterIterator iterator)
 			throws CCParseTextException, IllegalArgumentException
 	{
-		if (ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
+		if (!ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
 			throw new IllegalArgumentException("這不是部件組合符號!!");
 		type = ChineseCharacterTzuCombinationType.toCombinationType(codePoint);
 		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);

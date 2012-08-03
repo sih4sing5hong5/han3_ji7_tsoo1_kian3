@@ -13,6 +13,9 @@ import cc.exception.CCParseTextException;
  */
 public class ChineseCharacterUtility
 {
+	/**
+	 * 字串目前處理到的位置
+	 */
 	private StringCharacterIterator iterator;
 
 	/**

@@ -11,6 +11,9 @@ import cc.setting.ChineseCharacterTypeSetter;
  */
 public class ChineseCharacterWen extends ChineseCharacter
 {
+	/**
+	 * 部件的Unicode編碼
+	 */
 	private final int codePoint;
 
 	/**

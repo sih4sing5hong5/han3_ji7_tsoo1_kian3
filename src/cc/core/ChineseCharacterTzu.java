@@ -14,7 +14,13 @@ import cc.setting.ChineseCharacterTypeSetter;
  */
 public class ChineseCharacterTzu extends ChineseCharacter
 {
+	/**
+	 * 部件的組合方式
+	 */
 	private final ChineseCharacterTzuCombinationType type;
+	/**
+	 * 底下的各個部件
+	 */
 	private final ChineseCharacter[] children;
 
 	/**

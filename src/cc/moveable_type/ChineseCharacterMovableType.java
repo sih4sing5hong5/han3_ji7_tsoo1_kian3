@@ -74,15 +74,4 @@ public abstract class ChineseCharacterMovableType
 	{
 		return parent;
 	}
-
-//	/**
-//	 * 設定上一層部件結構
-//	 * 
-//	 * @param parent
-//	 *            上一層部件結構
-//	 */
-//	public void setParent(ChineseCharacterMovableType parent)
-//	{
-//		this.parent = parent;
-//	}
 }

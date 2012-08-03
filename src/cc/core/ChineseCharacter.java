@@ -35,6 +35,8 @@ public abstract class ChineseCharacter
 	 * 
 	 * @param chineseCharacterTypeSetter
 	 *            欲採用的活字設定工具
+	 * @param parent
+	 *            此活字結構的上層活字
 	 * @return 產生出來的活字結構
 	 */
 	public abstract ChineseCharacterMovableType typeset(

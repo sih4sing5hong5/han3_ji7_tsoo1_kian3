@@ -37,7 +37,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 * @throws IllegalArgumentException
 	 *             如果<code>codePoint</code>不是部件組合符號
 	 */
-	ChineseCharacterTzu(ChineseCharacter parent, int codePoint,
+	ChineseCharacterTzu(ChineseCharacterTzu parent, int codePoint,
 			StringCharacterIterator iterator) throws CCParseTextException,
 			IllegalArgumentException
 	{

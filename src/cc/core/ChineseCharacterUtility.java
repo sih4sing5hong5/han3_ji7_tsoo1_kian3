@@ -71,7 +71,7 @@ public class ChineseCharacterUtility
 	 * @throws CCParseTextException
 	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
 	 */
-	ChineseCharacter parseCharacter(ChineseCharacter parent)
+	ChineseCharacter parseCharacter(ChineseCharacterTzu parent)
 			throws CCParseTextException
 	{
 		if (iterator.current() == CharacterIterator.DONE)

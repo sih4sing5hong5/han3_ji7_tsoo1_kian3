@@ -24,7 +24,7 @@ public class ChineseCharacterWen extends ChineseCharacter
 	 * @param codePoint
 	 *            部件的Unicode編碼
 	 */
-	ChineseCharacterWen(ChineseCharacter parent,int codePoint)
+	ChineseCharacterWen(ChineseCharacterTzu parent,int codePoint)
 	{
 		super(parent);
 		this.codePoint = codePoint;

@@ -15,7 +15,7 @@ public abstract class ChineseCharacter
 	/**
 	 * 指向上一層的部件結構
 	 */
-	private final ChineseCharacter parent;
+	private final ChineseCharacterTzu parent;
 
 	/**
 	 * 建立漢字部件結構
@@ -23,7 +23,7 @@ public abstract class ChineseCharacter
 	 * @param parent
 	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
 	 */
-	public ChineseCharacter(ChineseCharacter parent)
+	public ChineseCharacter(ChineseCharacterTzu parent)
 	{
 		this.parent = parent;
 	}

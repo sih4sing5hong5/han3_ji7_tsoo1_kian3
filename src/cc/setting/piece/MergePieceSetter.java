@@ -11,23 +11,31 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * @author Ihc
+ * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
+ * <code>ChineseCharacterMovableType</code>）。
+ * <p>
+ * MergePiece看兩兩部件大小調整同高或同寬後再組合，彈性大，但現階段受加粗邊角問題影響。
  * 
+ * @author Ihc
  */
 public class MergePieceSetter extends SimplePieceSetter
 {
-
 	/**
+	 * 建立物件活字設定工具
 	 * 
-	 * @param fontRenderContext
 	 * @param fontName
+	 *            活字字型的名稱
 	 * @param fontStyle
+	 *            活字字型的選項
 	 * @param fontResolution
+	 *            活字的點距
+	 * @param fontRenderContext
+	 *            活字的渲染屬性
 	 */
-	public MergePieceSetter(FontRenderContext fontRenderContext,
-			String fontName, int fontStyle, int fontResolution)
+	public MergePieceSetter(String fontName, int fontStyle, int fontResolution,
+			FontRenderContext fontRenderContext)
 	{
-		super(fontRenderContext, fontName, fontStyle, fontResolution);
+		super(fontName, fontStyle, fontResolution, fontRenderContext);
 	}
 
 	@Override
@@ -36,10 +44,9 @@ public class MergePieceSetter extends SimplePieceSetter
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
 				parent, chineseCharacterTzu, new RectangularArea(
-						TZU_MODEL_TERRITORY));
-		// pieceMovableTypeTzu.setPiece();
+						tzuModelTerritory));
 
-		setChildren(pieceMovableTypeTzu, chineseCharacterTzu);
+		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
 		return pieceMovableTypeTzu;
 	}

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cc.setting.piece;
 
 import java.awt.BasicStroke;
@@ -12,7 +9,6 @@ import java.awt.geom.Rectangle2D;
 
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
@@ -21,22 +17,61 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
- * @author Ihc
+ * 物件活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
+ * <code>PieceMovableType</code>）。把活字的資訊全部集中在同一個物件上（<code>Piece</code>，
+ * <code>RectangularArea</code>型態 ），方便函式傳遞與使用，而且物件上也有相對應操縱的函式。
  * 
+ * @author Ihc
  */
 public class SimplePieceSetter implements ChineseCharacterTypeSetter
 {
+	/**
+	 * 活字字型的名稱
+	 */
 	private String fontName;
+	/**
+	 * 活字字型的選項
+	 */
 	private int fontStyle;
+	/**
+	 * 活字的點距
+	 */
 	private int fontResolution;
+	/**
+	 * 活字的渲染屬性
+	 */
 	protected FontRenderContext fontRenderContext;
+	/**
+	 * 活字的字體
+	 */
 	protected Font font;
-	protected final String TZU_MODEL = "意";
-	protected final Rectangle2D TZU_MODEL_TERRITORY;
-	protected final Area TZU_MODEL_AREA;
+	/**
+	 * 合體字組合符號參考的規範字
+	 */
+	protected final String tzuModelCharacter = "意";
+	/**
+	 * 合體字組合符號參考的位置及大小
+	 */
+	protected final Rectangle2D tzuModelTerritory;
+	/**
+	 * 獨體字缺字的替代物件
+	 */
+	protected final Area pieceForNoBuiltInWen;
 
-	public SimplePieceSetter(FontRenderContext fontRenderContext,
-			String fontName, int fontStyle, int fontResolution)
+	/**
+	 * 建立物件活字設定工具
+	 * 
+	 * @param fontName
+	 *            活字字型的名稱
+	 * @param fontStyle
+	 *            活字字型的選項
+	 * @param fontResolution
+	 *            活字的點距
+	 * @param fontRenderContext
+	 *            活字的渲染屬性
+	 */
+	public SimplePieceSetter(String fontName, int fontStyle,
+			int fontResolution, FontRenderContext fontRenderContext)
 	{
 		this.fontName = fontName;
 		this.fontStyle = fontStyle;
@@ -44,11 +79,11 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		this.fontRenderContext = fontRenderContext;
 		this.font = new Font(fontName, fontStyle, fontResolution);
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
-				this.TZU_MODEL);
-		this.TZU_MODEL_TERRITORY = glyphVector.getOutline().getBounds2D();
+				this.tzuModelCharacter);
+		this.tzuModelTerritory = glyphVector.getOutline().getBounds2D();
 		BasicStroke basicStroke = new BasicStroke();
-		this.TZU_MODEL_AREA = new Area(
-				basicStroke.createStrokedShape(TZU_MODEL_TERRITORY));
+		this.pieceForNoBuiltInWen = new Area(
+				basicStroke.createStrokedShape(tzuModelTerritory));
 	}
 
 	@Override
@@ -84,7 +119,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 				parent, chineseCharacterTzu, new RectangularArea());
 		// pieceMovableTypeTzu.setPiece();
 
-		setChildren(pieceMovableTypeTzu, chineseCharacterTzu);
+		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
 		switch (chineseCharacterTzu.getType())
 		{
@@ -100,35 +135,51 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		}
 
 		if (pieceMovableTypeTzu.getParent() == null)
-			pieceMovableTypeTzu.getPiece().setTerritory(TZU_MODEL_TERRITORY);
+			pieceMovableTypeTzu.getPiece().setTerritory(tzuModelTerritory);
 
 		return pieceMovableTypeTzu;
 	}
 
+	/**
+	 * 字體缺字的替代方案
+	 * 
+	 * @param chineseCharacterWen
+	 *            所缺的字部件
+	 * @return 替代圖案或文字
+	 */
 	protected RectangularArea findWenForNoBuiltIn(
 			ChineseCharacterWen chineseCharacterWen)
 	{
-		return new RectangularArea(TZU_MODEL_AREA);
+		return new RectangularArea(pieceForNoBuiltInWen);
 	}
 
-	protected void setChildren(
+	/**
+	 * 設定底下活字部件
+	 * 
+	 * @param chineseCharacterMovableTypeTzu
+	 *            目前設定的合體活字
+	 * @param chineseCharacterTzu
+	 *            目前設定的字部件
+	 */
+	protected void setChildrenRecursively(
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu,
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
-		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-		// chineseCharacterMovableTypeTzu
-		// .setChildren(new ChineseCharacterMovableType[childrenSize]);
-		for (int i = 0; i < childrenSize; ++i)
+		for (int i = 0; i < chineseCharacterMovableTypeTzu.getChildren().length; ++i)
 		{
 			chineseCharacterMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
 					.getChildren()[i].typeset(this,
 					chineseCharacterMovableTypeTzu);
-			// chineseCharacterMovableTypeTzu.getChildren()[i]
-			// .setParent(chineseCharacterMovableTypeTzu);
 		}
 		return;
 	}
 
+	/**
+	 * 水平組合活字
+	 * 
+	 * @param pieceMovableTypeTzu
+	 *            要設定的合體活字
+	 */
 	protected void horizontalSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
 		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
@@ -159,6 +210,12 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 
 	}
 
+	/**
+	 * 垂直組合活字
+	 * 
+	 * @param pieceMovableTypeTzu
+	 *            要設定的合體活字
+	 */
 	protected void verticalSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
 		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
@@ -186,6 +243,12 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		return;
 	}
 
+	/**
+	 * 包圍組合活字
+	 * 
+	 * @param pieceMovableTypeTzu
+	 *            要設定的合體活字
+	 */
 	protected void wrapSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
 		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
@@ -212,44 +275,44 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		return;
 	}
 
+	/**
+	 * 取得活字字型的名稱
+	 * 
+	 * @return 活字字型的名稱
+	 */
 	public String getFontName()
 	{
 		return fontName;
 	}
 
-	public void setFontName(String fontName)
-	{
-		this.fontName = fontName;
-	}
-
+	/**
+	 * 取得活字字型的選項
+	 * 
+	 * @return 活字字型的選項
+	 */
 	public int getFontStyle()
 	{
 		return fontStyle;
 	}
 
-	public void setFontStyle(int fontStyle)
-	{
-		this.fontStyle = fontStyle;
-	}
-
-	public FontRenderContext getFontRenderContext()
-	{
-		return fontRenderContext;
-	}
-
-	public void setFontRenderContext(FontRenderContext fontRenderContext)
-	{
-		this.fontRenderContext = fontRenderContext;
-	}
-
+	/**
+	 * 取得活字的點距
+	 * 
+	 * @return 活字的點距
+	 */
 	public int getFontResolution()
 	{
 		return fontResolution;
 	}
 
-	public void setFontResolution(int fontResolution)
+	/**
+	 * 取得活字的渲染屬性
+	 * 
+	 * @return 活字的渲染屬性
+	 */
+	public FontRenderContext getFontRenderContext()
 	{
-		this.fontResolution = fontResolution;
+		return fontRenderContext;
 	}
 
 }

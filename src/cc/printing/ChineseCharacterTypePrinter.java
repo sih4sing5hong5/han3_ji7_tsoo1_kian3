@@ -5,7 +5,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 
 public interface ChineseCharacterTypePrinter
 {
-	void printWen(ChineseCharacterMovableTypeWen wen);
+	void printWen(ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen);
 
-	void printTzu(ChineseCharacterMovableTypeTzu tzu);
+	void printTzu(ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu);
 }

@@ -6,7 +6,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * 漢字活字樹狀結構的葉子。把活字的資訊全部集中在同一個物件上（<code>Piece</code>，
+ * 物件活字樹狀結構的葉子。把活字的資訊全部集中在同一個物件上（<code>Piece</code>，
  * <code>RectangularArea</code>型態 ），方便函式傳遞與使用，而且物件上也有相對應操縱的函式。
  * 
  * @author Ihc
@@ -16,7 +16,7 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 		implements PieceMovableType
 {
 	/**
-	 * 活字物件
+	 * 物件活字
 	 */
 	private final RectangularArea rectangularArea;
 
@@ -28,7 +28,7 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 	 * @param chineseCharacterWen
 	 *            文部件結構
 	 * @param rectangularArea
-	 *            活字物件
+	 *            物件活字
 	 */
 	public PieceMovableTypeWen(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterWen chineseCharacterWen,

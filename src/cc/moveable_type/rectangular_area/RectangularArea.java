@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cc.moveable_type.rectangular_area;
 
 import java.awt.Shape;
@@ -9,13 +6,17 @@ import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
 /**
- * 活字型態。把AreaTool和預設位置大小整合起來，使用時比較方便。
+ * 活字型態。把<code>AreaTool</code>和預設位置大小整合起來，使用時比較方便。把<code>Area</code>
+ * 的預計大小，改由繼承的方式重新撰寫<code>RectangularArea</code>，並將物件活字取名為<code>Piece-</code>。
+ * 修改Area相關工具，使得Piece-也有相對應工具，並在逐步模組化。
  * 
  * @author Ihc
- * 
  */
 public class RectangularArea extends Area
 {
+	/**
+	 * 活字預計位置及大小
+	 */
 	private Rectangle2D.Double territory;
 
 	/**

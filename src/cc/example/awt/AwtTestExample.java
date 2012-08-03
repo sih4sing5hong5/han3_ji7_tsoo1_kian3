@@ -66,14 +66,16 @@ public class AwtTestExample extends JPanel
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 		ChineseCharacterTypeSetter setter = new MergePieceSetter(
+				FontName,
+				FontStyle,
+				TYPE_SIZE,
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
-				FontName, FontStyle, TYPE_SIZE);
+						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(setter,null));
+			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
 		}
 
 		MergePieceAdjuster adjuster = new MergePieceAdjuster();

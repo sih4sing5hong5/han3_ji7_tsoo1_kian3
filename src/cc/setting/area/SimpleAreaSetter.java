@@ -11,7 +11,6 @@ import java.awt.geom.Rectangle2D;
 
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableType;
 import cc.moveable_type.area.AreaMovableTypeTzu;
@@ -63,8 +62,8 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(parent,
 				chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-		shapeMovableTypeTzu
-				.setChildren(new ChineseCharacterMovableType[childrenSize]);
+//		shapeMovableTypeTzu
+//				.setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			shapeMovableTypeTzu.getChildren()[i] = chineseCharacterTzu

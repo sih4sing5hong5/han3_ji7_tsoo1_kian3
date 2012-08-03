@@ -3,7 +3,7 @@ package cc.moveable_type.area;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.ChineseCharacter;
+import cc.core.ChineseCharacterWen;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 
@@ -17,9 +17,10 @@ public class AreaMovableTypeWen extends ChineseCharacterMovableTypeWen
 	private Area area;
 	private Rectangle2D bound;
 
-	public AreaMovableTypeWen(	ChineseCharacterMovableTypeTzu parent,ChineseCharacter chineseCharacter)
+	public AreaMovableTypeWen(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterWen chineseCharacterWen)
 	{
-		super(	 parent,chineseCharacter);
+		super(parent, chineseCharacterWen);
 	}
 
 	@Override

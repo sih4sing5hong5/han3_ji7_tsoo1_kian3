@@ -1,7 +1,7 @@
 package cc.moveable_type;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.core.ChineseCharacter;
+import cc.core.ChineseCharacterTzu;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
@@ -12,6 +12,12 @@ import cc.printing.ChineseCharacterTypePrinter;
  */
 public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 {
+
+	/**
+	 * 底下的各個活字
+	 */
+	protected ChineseCharacterMovableType[] children;
+
 	/**
 	 * 以<code>ChineseCharacter</code>部件結構建立字活字結構
 	 * 
@@ -22,15 +28,12 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	 */
 	public ChineseCharacterMovableTypeTzu(
 			ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacter chineseCharacter)
+			ChineseCharacterTzu chineseCharacterTzu)
 	{
-		super(parent, chineseCharacter);
+		super(parent, chineseCharacterTzu);
+		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
+		this.children=new ChineseCharacterMovableType[childrenSize];
 	}
-
-	/**
-	 * 底下的各個活字
-	 */
-	protected ChineseCharacterMovableType[] children;
 
 	@Override
 	public void adjust(ChineseCharacterTypeAdjuster adjuster)
@@ -56,14 +59,14 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 		return children;
 	}
 
-	/**
-	 * 設定底下的各個部件
-	 * 
-	 * @param children
-	 *            底下的各個部件
-	 */
-	public void setChildren(ChineseCharacterMovableType[] children)
-	{
-		this.children = children;
-	}
+	// /**
+	// * 設定底下的各個部件
+	// *
+	// * @param children
+	// * 底下的各個部件
+	// */
+	// public void setChildren(ChineseCharacterMovableType[] children)
+	// {
+	// this.children = children;
+	// }
 }

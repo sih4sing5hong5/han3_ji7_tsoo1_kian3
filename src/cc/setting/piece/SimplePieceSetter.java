@@ -113,8 +113,8 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-		chineseCharacterMovableTypeTzu
-				.setChildren(new ChineseCharacterMovableType[childrenSize]);
+//		chineseCharacterMovableTypeTzu
+//				.setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			chineseCharacterMovableTypeTzu.getChildren()[i] = chineseCharacterTzu

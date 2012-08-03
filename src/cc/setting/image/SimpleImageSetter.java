@@ -32,8 +32,8 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 		ImageMoveableTypeTzu imageMoveableTypeTzu = new ImageMoveableTypeTzu(
 				parent, chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-		imageMoveableTypeTzu
-				.setChildren(new ChineseCharacterMovableType[childrenSize]);
+//		imageMoveableTypeTzu
+//				.setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			imageMoveableTypeTzu.getChildren()[i] = chineseCharacterTzu

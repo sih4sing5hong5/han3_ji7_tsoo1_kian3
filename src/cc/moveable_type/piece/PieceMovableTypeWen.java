@@ -1,6 +1,6 @@
 package cc.moveable_type.piece;
 
-import cc.core.ChineseCharacter;
+import cc.core.ChineseCharacterWen;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
@@ -15,9 +15,9 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 	private RectangularArea rectangularArea;
 
 	public PieceMovableTypeWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacter chineseCharacter)
+			ChineseCharacterWen chineseCharacterWen)
 	{
-		super(parent, chineseCharacter);
+		super(parent, chineseCharacterWen);
 		rectangularArea = new RectangularArea();
 	}
 

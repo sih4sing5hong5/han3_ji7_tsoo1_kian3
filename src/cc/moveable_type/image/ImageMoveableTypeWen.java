@@ -2,16 +2,17 @@ package cc.moveable_type.image;
 
 import java.awt.Point;
 
-import cc.core.ChineseCharacter;
+import cc.core.ChineseCharacterWen;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 
 public class ImageMoveableTypeWen extends ChineseCharacterMovableTypeWen
 		implements ImageMoveableType
 {
-	public ImageMoveableTypeWen(	ChineseCharacterMovableTypeTzu parent,ChineseCharacter chineseCharacter)
+	public ImageMoveableTypeWen(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterWen chineseCharacterWen)
 	{
-		super(	 parent,chineseCharacter);
+		super(parent, chineseCharacterWen);
 	}
 
 	private Point region, position, scaler;

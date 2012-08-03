@@ -117,9 +117,9 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	protected RectangularArea getBoldSurface(RectangularArea rectangularArea,
 			float strokeWidth)
 	{
-		Stroke basicStroke = new BasicStroke(strokeWidth);
+		Stroke stroke = new BasicStroke(strokeWidth);
 		return new RectangularArea(
-				basicStroke.createStrokedShape(rectangularArea));
+				stroke.createStrokedShape(rectangularArea));
 	}
 
 	protected void shrinkPieceByFixingStroke(RectangularArea rectangularArea,

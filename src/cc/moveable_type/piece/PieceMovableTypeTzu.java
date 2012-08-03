@@ -16,10 +16,11 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 {
 	private RectangularArea rectangularArea;
 
-	public PieceMovableTypeTzu(ChineseCharacter chineseCharacter)
+	public PieceMovableTypeTzu(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacter chineseCharacter)
 	{
-		super(chineseCharacter);
-		rectangularArea=new RectangularArea();
+		super(parent, chineseCharacter);
+		rectangularArea = new RectangularArea();
 	}
 
 	@Override

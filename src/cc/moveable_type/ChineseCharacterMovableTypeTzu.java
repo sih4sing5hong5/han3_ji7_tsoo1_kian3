@@ -15,12 +15,16 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	/**
 	 * 以<code>ChineseCharacter</code>部件結構建立字活字結構
 	 * 
+	 * @param parent
+	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
 	 * @param chineseCharacter
 	 *            部件結構
 	 */
-	public ChineseCharacterMovableTypeTzu(ChineseCharacter chineseCharacter)
+	public ChineseCharacterMovableTypeTzu(
+			ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacter chineseCharacter)
 	{
-		super(chineseCharacter);
+		super(parent, chineseCharacter);
 	}
 
 	/**
@@ -44,6 +48,7 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 
 	/**
 	 * 取得底下的各個部件
+	 * 
 	 * @return 底下的各個部件
 	 */
 	public ChineseCharacterMovableType[] getChildren()
@@ -53,7 +58,9 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 
 	/**
 	 * 設定底下的各個部件
-	 * @param children 底下的各個部件
+	 * 
+	 * @param children
+	 *            底下的各個部件
 	 */
 	public void setChildren(ChineseCharacterMovableType[] children)
 	{

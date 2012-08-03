@@ -6,6 +6,7 @@ package cc.setting.piece;
 import java.awt.font.FontRenderContext;
 
 import cc.core.ChineseCharacterTzu;
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
@@ -30,10 +31,11 @@ public class MergePieceSetter extends SimplePieceSetter
 	}
 
 	@Override
-	public PieceMovableTypeTzu setTzu(ChineseCharacterTzu chineseCharacterTzu)
+	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				chineseCharacterTzu);
+				parent, chineseCharacterTzu);
 		pieceMovableTypeTzu.setPiece(new RectangularArea(TZU_MODEL_TERRITORY));
 
 		setChildren(pieceMovableTypeTzu, chineseCharacterTzu);

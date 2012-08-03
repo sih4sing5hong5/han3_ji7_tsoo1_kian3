@@ -76,7 +76,7 @@ public class AwtImageExample extends JPanel {
 		ChineseCharacterTypeSetter writer = new SimpleImageSetter();
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i) {
-			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
+			ccmvArray.add(ccArray.elementAt(i).typeset(writer,null));
 		}
 		Point model = new Point(TYPE_SIZE, TYPE_SIZE);
 		SimpleImageAdjuster sampleImageAdjuster = new SimpleImageAdjuster();

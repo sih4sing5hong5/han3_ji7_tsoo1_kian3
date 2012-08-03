@@ -17,22 +17,24 @@ public abstract class ChineseCharacterMovableType
 	/**
 	 * 產生活字的部件結構
 	 */
-	protected ChineseCharacter chineseCharacter;
+	private final ChineseCharacter chineseCharacter;
 	/**
 	 * 指向上一層的活字結構
 	 */
-	protected ChineseCharacterMovableType parent;
+	private final ChineseCharacterMovableTypeTzu parent;
 
 	/**
 	 * 以<code>ChineseCharacter</code>部件結構建立部件結構
 	 * 
+	 * @param parent
+	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
 	 * @param chineseCharacter
 	 *            部件結構
 	 */
-	public ChineseCharacterMovableType(ChineseCharacter chineseCharacter)
+	public ChineseCharacterMovableType(ChineseCharacterMovableTypeTzu parent,ChineseCharacter chineseCharacter)
 	{
 		this.chineseCharacter = chineseCharacter;
-		this.parent = null;
+		this.parent = parent;
 	}
 
 	/**
@@ -73,14 +75,14 @@ public abstract class ChineseCharacterMovableType
 		return parent;
 	}
 
-	/**
-	 * 設定上一層部件結構
-	 * 
-	 * @param parent
-	 *            上一層部件結構
-	 */
-	public void setParent(ChineseCharacterMovableType parent)
-	{
-		this.parent = parent;
-	}
+//	/**
+//	 * 設定上一層部件結構
+//	 * 
+//	 * @param parent
+//	 *            上一層部件結構
+//	 */
+//	public void setParent(ChineseCharacterMovableType parent)
+//	{
+//		this.parent = parent;
+//	}
 }

@@ -12,6 +12,7 @@ import java.awt.geom.Rectangle2D;
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
 import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableType;
 import cc.moveable_type.area.AreaMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableTypeWen;
@@ -39,9 +40,10 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 	}
 
 	@Override
-	public AreaMovableTypeWen setWen(ChineseCharacterWen chineseCharacterWen)
+	public AreaMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterWen chineseCharacterWen)
 	{
-		AreaMovableTypeWen shapeMovableTypeWen = new AreaMovableTypeWen(
+		AreaMovableTypeWen shapeMovableTypeWen = new AreaMovableTypeWen(parent,
 				chineseCharacterWen);
 		Font font = new Font(fontName, fontStyle, fontResolution);
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
@@ -55,9 +57,10 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 	}
 
 	@Override
-	public AreaMovableTypeTzu setTzu(ChineseCharacterTzu chineseCharacterTzu)
+	public AreaMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterTzu chineseCharacterTzu)
 	{
-		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(
+		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(parent,
 				chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
 		shapeMovableTypeTzu
@@ -65,8 +68,8 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			shapeMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
-					.getChildren()[i].typeset(this);
-			shapeMovableTypeTzu.getChildren()[i].setParent(shapeMovableTypeTzu);
+					.getChildren()[i].typeset(this, parent);
+			// shapeMovableTypeTzu.getChildren()[i].setParent(shapeMovableTypeTzu);
 		}
 		AreaMovableType firstChild = (AreaMovableType) shapeMovableTypeTzu
 				.getChildren()[0], secondChild = (AreaMovableType) shapeMovableTypeTzu

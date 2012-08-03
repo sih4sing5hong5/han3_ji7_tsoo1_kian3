@@ -1,6 +1,7 @@
 package cc.core;
 
 import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
@@ -37,7 +38,8 @@ public abstract class ChineseCharacter
 	 * @return 產生出來的活字結構
 	 */
 	public abstract ChineseCharacterMovableType typeset(
-			ChineseCharacterTypeSetter chineseCharacterTypeSetter);
+			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+			ChineseCharacterMovableTypeTzu parent);
 
 	/**
 	 * 取得上一層部件結構。

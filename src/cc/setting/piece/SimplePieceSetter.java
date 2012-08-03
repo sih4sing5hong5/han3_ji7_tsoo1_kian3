@@ -52,10 +52,11 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	}
 
 	@Override
-	public PieceMovableTypeWen setWen(ChineseCharacterWen chineseCharacterWen)
+	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterWen chineseCharacterWen)
 	{
 		PieceMovableTypeWen shapeMovableTypeWen = new PieceMovableTypeWen(
-				chineseCharacterWen);
+				parent, chineseCharacterWen);
 		RectangularArea rectangularArea = null;
 		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
 		{
@@ -73,10 +74,11 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	}
 
 	@Override
-	public PieceMovableTypeTzu setTzu(ChineseCharacterTzu chineseCharacterTzu)
+	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				chineseCharacterTzu);
+				parent, chineseCharacterTzu);
 		pieceMovableTypeTzu.setPiece(new RectangularArea());
 
 		setChildren(pieceMovableTypeTzu, chineseCharacterTzu);
@@ -94,7 +96,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			break;
 		}
 
-		if (pieceMovableTypeTzu.getChineseCharacter().getParent() == null)
+		if (pieceMovableTypeTzu.getParent() == null)
 			pieceMovableTypeTzu.getPiece().setTerritory(TZU_MODEL_TERRITORY);
 
 		return pieceMovableTypeTzu;
@@ -116,9 +118,9 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			chineseCharacterMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
-					.getChildren()[i].typeset(this);
-			chineseCharacterMovableTypeTzu.getChildren()[i]
-					.setParent(chineseCharacterMovableTypeTzu);
+					.getChildren()[i].typeset(this,chineseCharacterMovableTypeTzu);
+//			chineseCharacterMovableTypeTzu.getChildren()[i]
+//					.setParent(chineseCharacterMovableTypeTzu);
 		}
 		return;
 	}

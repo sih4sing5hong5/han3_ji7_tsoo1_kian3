@@ -73,7 +73,7 @@ public class AwtSimplePieceExample extends JPanel
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(setter));
+			ccmvArray.add(ccArray.elementAt(i).typeset(setter,null));
 		}
 
 		ChineseCharacterTypeAdjuster adjuster = new SimplePieceAdjuster();

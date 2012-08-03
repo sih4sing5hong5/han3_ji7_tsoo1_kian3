@@ -7,9 +7,9 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 
 public class ImageMoveableTypeTzu extends ChineseCharacterMovableTypeTzu implements ImageMoveableType
 {
-	public ImageMoveableTypeTzu(ChineseCharacter chineseCharacter)
+	public ImageMoveableTypeTzu(	ChineseCharacterMovableTypeTzu parent,ChineseCharacter chineseCharacter)
 	{
-		super(chineseCharacter);
+		super(	 parent,chineseCharacter);
 	}
 
 	private Point region, position, scaler;

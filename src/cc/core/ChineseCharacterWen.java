@@ -1,6 +1,7 @@
 package cc.core;
 
 import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
@@ -24,16 +25,18 @@ public class ChineseCharacterWen extends ChineseCharacter
 	 * @param codePoint
 	 *            部件的Unicode編碼
 	 */
-	ChineseCharacterWen(ChineseCharacterTzu parent,int codePoint)
+	ChineseCharacterWen(ChineseCharacterTzu parent, int codePoint)
 	{
 		super(parent);
 		this.codePoint = codePoint;
 	}
 
 	@Override
-	public ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter writer)
+	public ChineseCharacterMovableType typeset(
+			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+			ChineseCharacterMovableTypeTzu parent)
 	{
-		return writer.setWen(this);
+		return chineseCharacterTypeSetter.setWen(parent, this);
 	}
 
 	/**

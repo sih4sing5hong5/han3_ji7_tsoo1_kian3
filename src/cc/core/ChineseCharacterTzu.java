@@ -4,6 +4,7 @@ import java.text.StringCharacterIterator;
 
 import cc.exception.CCParseTextException;
 import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
@@ -54,9 +55,10 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	}
 
 	@Override
-	public ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter writer)
+	public ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+			ChineseCharacterMovableTypeTzu parent)
 	{
-		return writer.setTzu(this);
+		return chineseCharacterTypeSetter.setTzu(parent,this);
 	}
 
 	/**

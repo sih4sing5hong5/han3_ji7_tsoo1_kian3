@@ -90,7 +90,7 @@ public class AwtAreaExample extends JPanel
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(writer));
+			ccmvArray.add(ccArray.elementAt(i).typeset(writer,null));
 		}
 		// for (int i = 0; i < ccArray.size(); ++i)
 		// {

@@ -19,9 +19,9 @@ public class AreaMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	private Area area;
 	private Rectangle2D bound;
 
-	public AreaMovableTypeTzu(ChineseCharacter chineseCharacter)
+	public AreaMovableTypeTzu(	ChineseCharacterMovableTypeTzu parent,ChineseCharacter chineseCharacter)
 	{
-		super(chineseCharacter);
+		super(	 parent,chineseCharacter);
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class ChineseCharacterMovableTypeWen extends ChineseCharacterMovableType
 	 * @param parent
 	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
 	 * @param chineseCharacterWen
-	 *            部件結構
+	 *            文部件結構
 	 */
 	public ChineseCharacterMovableTypeWen(
 			ChineseCharacterMovableTypeTzu parent,

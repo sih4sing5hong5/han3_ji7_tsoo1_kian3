@@ -26,6 +26,8 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	/**
 	 * 建立一個字部件
 	 * 
+	 * @param parent
+	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
 	 * @param codePoint
 	 *            組合符號的Unicode編碼
 	 * @param iterator
@@ -35,9 +37,11 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 * @throws IllegalArgumentException
 	 *             如果<code>codePoint</code>不是部件組合符號
 	 */
-	ChineseCharacterTzu(int codePoint, StringCharacterIterator iterator)
-			throws CCParseTextException, IllegalArgumentException
+	ChineseCharacterTzu(ChineseCharacter parent, int codePoint,
+			StringCharacterIterator iterator) throws CCParseTextException,
+			IllegalArgumentException
 	{
+		super(parent);
 		if (!ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
 			throw new IllegalArgumentException("這不是部件組合符號!!");
 		type = ChineseCharacterTzuCombinationType.toCombinationType(codePoint);
@@ -45,8 +49,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 		children = new ChineseCharacter[type.getNumberOfChildren()];
 		for (int i = 0; i < children.length; ++i)
 		{
-			children[i] = utility.parseCharacter();
-			children[i].setParent(this);
+			children[i] = utility.parseCharacter(this);
 		}
 	}
 

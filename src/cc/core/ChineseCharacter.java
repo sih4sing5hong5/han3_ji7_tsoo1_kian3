@@ -15,7 +15,18 @@ public abstract class ChineseCharacter
 	/**
 	 * 指向上一層的部件結構
 	 */
-	private ChineseCharacter parent;
+	private final ChineseCharacter parent;
+
+	/**
+	 * 建立漢字部件結構
+	 * 
+	 * @param parent
+	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
+	 */
+	public ChineseCharacter(ChineseCharacter parent)
+	{
+		this.parent = parent;
+	}
 
 	/**
 	 * 以此部件結構產生活字結構。用<code>ChineseCharacterTypeSetter</code>
@@ -36,14 +47,5 @@ public abstract class ChineseCharacter
 	public ChineseCharacter getParent()
 	{
 		return parent;
-	}
-
-	/**
-	 * 設定上一層部件結構
-	 * @param parent 上一層部件結構
-	 */
-	void setParent(ChineseCharacter parent)
-	{
-		this.parent = parent;
 	}
 }

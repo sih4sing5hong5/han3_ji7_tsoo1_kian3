@@ -52,8 +52,7 @@ public class ChineseCharacterUtility
 		{
 			while (iterator.current() != CharacterIterator.DONE)
 			{
-				vector.add(parseCharacter());
-				vector.lastElement().setParent(null);
+				vector.add(parseCharacter(null));
 			}
 		}
 		catch (CCParseTextException e)
@@ -66,14 +65,17 @@ public class ChineseCharacterUtility
 	/**
 	 * 分析下一個漢字部件
 	 * 
+	 * @param parent
+	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
 	 * @return 下一個漢字部件
 	 * @throws CCParseTextException
 	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
 	 */
-	ChineseCharacter parseCharacter() throws CCParseTextException
+	ChineseCharacter parseCharacter(ChineseCharacter parent)
+			throws CCParseTextException
 	{
 		if (iterator.current() == CharacterIterator.DONE)
-			throw new CCParseTextException();// TODO EOF throw
+			throw new CCParseTextException();
 		int codePoint = 0;
 		if (Character.isHighSurrogate(iterator.current()))
 		{
@@ -85,7 +87,7 @@ public class ChineseCharacterUtility
 			else
 			{
 				iterator.next();
-				throw new CCParseTextException();// TODO EOF throw
+				throw new CCParseTextException();
 			}
 		}
 		else
@@ -96,11 +98,12 @@ public class ChineseCharacterUtility
 		ChineseCharacter chineseCharacter = null;
 		if (ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
 		{
-			chineseCharacter = new ChineseCharacterTzu(codePoint, iterator);
+			chineseCharacter = new ChineseCharacterTzu(parent, codePoint,
+					iterator);
 		}
 		else
 		{
-			chineseCharacter = new ChineseCharacterWen(codePoint);
+			chineseCharacter = new ChineseCharacterWen(parent, codePoint);
 		}
 		return chineseCharacter;
 	}

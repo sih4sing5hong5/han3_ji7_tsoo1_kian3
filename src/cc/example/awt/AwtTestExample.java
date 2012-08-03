@@ -14,6 +14,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cc.adjusting.bolder.EmptyBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
@@ -36,7 +37,7 @@ public class AwtTestExample extends JPanel
 	static final String 文泉驛正黑 = "文泉驛正黑";
 	static final String 文鼎中圓 = "文鼎中圓";
 	static final String 超研澤中圓 = "超研澤中圓";
-	static private final String FontName = 文鼎中圓;
+	static private final String FontName = 全字庫正宋體;
 	private int FontStyle = Font.BOLD;
 
 	public String getName()
@@ -78,7 +79,8 @@ public class AwtTestExample extends JPanel
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
 		}
 
-		MergePieceAdjuster adjuster = new MergePieceAdjuster();
+		MergePieceAdjuster adjuster = new MergePieceAdjuster(new EmptyBolder(),
+				1e-1);
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);

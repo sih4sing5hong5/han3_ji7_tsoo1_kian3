@@ -8,8 +8,6 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 /**
  * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
  * <code>ChineseCharacterMovableType</code>）。
- * <p>
- * SimplePiece是兩兩配對後定框，再調部件大小，但無法物件距離難貼近或拉開。
  * 
  * @author Ihc
  */

@@ -20,6 +20,8 @@ import cc.setting.ChineseCharacterTypeSetter;
  * 物件活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
  * <code>PieceMovableType</code>）。把活字的資訊全部集中在同一個物件上（<code>Piece</code>，
  * <code>RectangularArea</code>型態 ），方便函式傳遞與使用，而且物件上也有相對應操縱的函式。
+ * <p>
+ * <code>SimplePiece</code>是在設定時兩兩配對後定框，調整時更改部件大小，但無法物件難實作距離貼近或拉開。
  * 
  * @author Ihc
  */
@@ -140,7 +142,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		return pieceMovableTypeTzu;
 	}
 
-	/**
+	/**MergePiece
 	 * 字體缺字的替代方案
 	 * 
 	 * @param chineseCharacterWen
@@ -251,6 +253,7 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	 */
 	protected void wrapSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
+		// TODO 暫時替代用
 		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];

@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
+import cc.adjusting.bolder.BasicBolder;
 import cc.adjusting.piece.SimplePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
@@ -78,7 +79,8 @@ public class AwtSimplePieceExample extends JPanel
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
 		}
 
-		ChineseCharacterTypeAdjuster adjuster = new SimplePieceAdjuster();
+		ChineseCharacterTypeAdjuster adjuster = new SimplePieceAdjuster(
+				new BasicBolder(), 1e-1);
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			// ((PieceMovableType) ccmvArray.elementAt(i)).getPiece()

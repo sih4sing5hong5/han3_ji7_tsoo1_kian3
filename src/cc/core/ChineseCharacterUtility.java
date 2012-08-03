@@ -53,7 +53,7 @@ public class ChineseCharacterUtility
 			while (iterator.current() != CharacterIterator.DONE)
 			{
 				vector.add(parseCharacter());
-				vector.lastElement().parent = null;
+				vector.lastElement().setParent(null);
 			}
 		}
 		catch (CCParseTextException e)

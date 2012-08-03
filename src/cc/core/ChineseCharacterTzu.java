@@ -46,7 +46,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 		for (int i = 0; i < children.length; ++i)
 		{
 			children[i] = utility.parseCharacter();
-			children[i].parent = this;
+			children[i].setParent(this);
 		}
 	}
 

@@ -55,8 +55,8 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterWen chineseCharacterWen)
 	{
-		PieceMovableTypeWen shapeMovableTypeWen = new PieceMovableTypeWen(
-				parent, chineseCharacterWen);
+		// PieceMovableTypeWen pieceMovableTypeWen = new PieceMovableTypeWen(
+		// parent, chineseCharacterWen);
 		RectangularArea rectangularArea = null;
 		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
 		{
@@ -69,8 +69,11 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			rectangularArea = findWenForNoBuiltIn(chineseCharacterWen);
 		}
 		rectangularArea.moveToOrigin();
-		shapeMovableTypeWen.setPiece(rectangularArea);
-		return shapeMovableTypeWen;
+		// pieceMovableTypeWen.setPiece(rectangularArea);
+
+		PieceMovableTypeWen pieceMovableTypeWen = new PieceMovableTypeWen(
+				parent, chineseCharacterWen, rectangularArea);
+		return pieceMovableTypeWen;
 	}
 
 	@Override
@@ -78,8 +81,8 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				parent, chineseCharacterTzu);
-		pieceMovableTypeTzu.setPiece(new RectangularArea());
+				parent, chineseCharacterTzu, new RectangularArea());
+		// pieceMovableTypeTzu.setPiece();
 
 		setChildren(pieceMovableTypeTzu, chineseCharacterTzu);
 
@@ -113,14 +116,15 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-//		chineseCharacterMovableTypeTzu
-//				.setChildren(new ChineseCharacterMovableType[childrenSize]);
+		// chineseCharacterMovableTypeTzu
+		// .setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			chineseCharacterMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
-					.getChildren()[i].typeset(this,chineseCharacterMovableTypeTzu);
-//			chineseCharacterMovableTypeTzu.getChildren()[i]
-//					.setParent(chineseCharacterMovableTypeTzu);
+					.getChildren()[i].typeset(this,
+					chineseCharacterMovableTypeTzu);
+			// chineseCharacterMovableTypeTzu.getChildren()[i]
+			// .setParent(chineseCharacterMovableTypeTzu);
 		}
 		return;
 	}

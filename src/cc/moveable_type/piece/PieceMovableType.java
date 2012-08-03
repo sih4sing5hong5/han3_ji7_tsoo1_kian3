@@ -23,5 +23,5 @@ public interface PieceMovableType
 	 * @param rectangularArea
 	 *            活字物件
 	 */
-	public void setPiece(RectangularArea rectangularArea);
+//	public void setPiece(RectangularArea rectangularArea);
 }

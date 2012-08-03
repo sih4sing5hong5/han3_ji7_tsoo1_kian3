@@ -18,7 +18,7 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 	/**
 	 * 活字物件
 	 */
-	private RectangularArea rectangularArea;
+	private final RectangularArea rectangularArea;
 
 	/**
 	 * 建立字活字結構
@@ -27,12 +27,15 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
 	 * @param chineseCharacterWen
 	 *            文部件結構
+	 * @param rectangularArea
+	 *            活字物件
 	 */
 	public PieceMovableTypeWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			ChineseCharacterWen chineseCharacterWen,
+			RectangularArea rectangularArea)
 	{
 		super(parent, chineseCharacterWen);
-		rectangularArea = new RectangularArea();
+		this.rectangularArea = rectangularArea;
 	}
 
 	@Override
@@ -41,9 +44,9 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 		return rectangularArea;
 	}
 
-	@Override
-	public void setPiece(RectangularArea rectangularArea)
-	{
-		this.rectangularArea = rectangularArea;
-	}
+	// @Override
+	// public void setPiece(RectangularArea rectangularArea)
+	// {
+	// this.rectangularArea = rectangularArea;
+	// }
 }

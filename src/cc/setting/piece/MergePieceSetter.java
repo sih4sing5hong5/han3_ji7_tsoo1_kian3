@@ -35,8 +35,9 @@ public class MergePieceSetter extends SimplePieceSetter
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				parent, chineseCharacterTzu);
-		pieceMovableTypeTzu.setPiece(new RectangularArea(TZU_MODEL_TERRITORY));
+				parent, chineseCharacterTzu, new RectangularArea(
+						TZU_MODEL_TERRITORY));
+		// pieceMovableTypeTzu.setPiece();
 
 		setChildren(pieceMovableTypeTzu, chineseCharacterTzu);
 

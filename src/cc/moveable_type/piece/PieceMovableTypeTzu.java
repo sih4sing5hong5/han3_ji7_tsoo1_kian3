@@ -20,7 +20,7 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	/**
 	 * 活字物件
 	 */
-	private RectangularArea rectangularArea;
+	private final RectangularArea rectangularArea;
 
 	/**
 	 * 建立字活字結構
@@ -29,12 +29,15 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
 	 * @param chineseCharacterTzu
 	 *            字部件結構
+	 * @param rectangularArea
+	 *            活字物件
 	 */
 	public PieceMovableTypeTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			ChineseCharacterTzu chineseCharacterTzu,
+			 RectangularArea rectangularArea)
 	{
 		super(parent, chineseCharacterTzu);
-		rectangularArea = new RectangularArea();
+		this.rectangularArea = rectangularArea;
 	}
 
 	@Override
@@ -43,9 +46,9 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 		return rectangularArea;
 	}
 
-	@Override
-	public void setPiece(RectangularArea rectangularArea)
-	{
-		this.rectangularArea = rectangularArea;
-	}
+	// @Override
+	// public void setPiece(RectangularArea rectangularArea)
+	// {
+	// this.rectangularArea = rectangularArea;
+	// }
 }

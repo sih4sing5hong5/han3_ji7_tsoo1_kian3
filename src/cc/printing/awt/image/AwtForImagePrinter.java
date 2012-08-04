@@ -1,4 +1,4 @@
-package cc.printing.awt;
+package cc.printing.awt.image;
 
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -13,12 +13,31 @@ import cc.moveable_type.image.ImageMoveableTypeTzu;
 import cc.moveable_type.image.ImageMoveableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
 
+/**
+ * 圖片活字遞迴列印工具。接收<code>ImageMovableTypeWen</code>或
+ * <code>ImageMovableTypeTzu</code>，依結構遞迴找出字體並列印在<code>Graphics2D</code>上。
+ * 
+ * @author Ihc
+ */
 public class AwtForImagePrinter implements ChineseCharacterTypePrinter
 {
+	/** 要輸出的目的地 */
 	private Graphics2D graphics2d;
+	/** 列印的字型名稱 */
 	private String fontName;
+	/** 列印字型的選項 */
 	private int fontStyle;
 
+	/**
+	 * 建立圖片活字列印工具
+	 * 
+	 * @param graphics2d
+	 *            要輸出的目的地
+	 * @param fontName
+	 *            列印的字型名稱
+	 * @param fontStyle
+	 *            列印字型的選項
+	 */
 	public AwtForImagePrinter(Graphics2D graphics2d, String fontName,
 			int fontStyle)
 	{

@@ -4,13 +4,20 @@ import java.awt.Point;
 
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.image.ImageMoveableType;
 import cc.moveable_type.image.ImageMoveableTypeTzu;
 import cc.moveable_type.image.ImageMoveableTypeWen;
 import cc.setting.ChineseCharacterTypeSetter;
 
+/**
+ * 圖片活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
+ * <code>ImageMoveableType</code>）。<code>ImageMoveableType</code>
+ * 在列印時才讀取字體，處理時不考慮部件的差異，皆視為同樣大小，每個部件當做矩形，記錄預計長寬（<code>region</code>）及位置（
+ * <code>position</code>），目前長寬（<code>scaler</code> ）是給合體活字儲存紀錄的。
+ * 
+ * @author Ihc
+ */
 public class SimpleImageSetter implements ChineseCharacterTypeSetter
 {
 	@Override
@@ -32,14 +39,10 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 		ImageMoveableTypeTzu imageMoveableTypeTzu = new ImageMoveableTypeTzu(
 				parent, chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-//		imageMoveableTypeTzu
-//				.setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			imageMoveableTypeTzu.getChildren()[i] = chineseCharacterTzu
 					.getChildren()[i].typeset(this, parent);
-//			imageMoveableTypeTzu.getChildren()[i]
-//					.setParent(imageMoveableTypeTzu);
 		}
 		ImageMoveableType firstChild = (ImageMoveableType) imageMoveableTypeTzu
 				.getChildren()[0];

@@ -18,10 +18,22 @@ import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.image.ImageMoveableType;
-import cc.printing.awt.AwtForImagePrinter;
+import cc.printing.awt.image.AwtForImagePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.image.SimpleImageSetter;
 
+/**
+ * 圖片活字範例。
+ * 
+ * <pre>
+ * 活字型態：<code>ImageMoveableType</code>ImageMoveableType
+ * 活字設定工具：<code>SimpleImageSetter</code>
+ * 活字調整工具：<code>SimpleImageAdjuster</code>
+ * 活字列印工具：<code>AwtForImagePrinter</code>
+ * </pre>
+ * 
+ * @author Ihc
+ */
 public class AwtImageExample extends JPanel
 {
 	/** 序列化編號 */
@@ -51,11 +63,11 @@ public class AwtImageExample extends JPanel
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-		ChineseCharacterTypeSetter writer = new SimpleImageSetter();
+		ChineseCharacterTypeSetter setter = new SimpleImageSetter();
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(writer, null));
+			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
 		}
 		Point model = new Point(TYPE_SIZE, TYPE_SIZE);
 		SimpleImageAdjuster sampleImageAdjuster = new SimpleImageAdjuster();
@@ -100,8 +112,8 @@ public class AwtImageExample extends JPanel
 
 	@Override
 	public String getName()
-	{// TODO
-		return "範例";
+	{
+		return "圖片活字範例";
 	}
 
 	@Override

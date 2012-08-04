@@ -68,6 +68,7 @@ public class AwtSimplePieceExample extends JPanel
 	/** 測試用屬性 */
 	static private final int FontStyle = Font.BOLD;
 
+	@Override
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;

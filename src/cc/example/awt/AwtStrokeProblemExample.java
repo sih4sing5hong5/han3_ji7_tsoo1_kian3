@@ -1,22 +1,11 @@
 package cc.example.awt;
 
-/*
- * Copyright (c) 2000 David Flanagan.  All rights reserved.
- * This code is from the book Java Examples in a Nutshell, 2nd Edition.
- * It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.
- * You may study, use, and modify it for any non-commercial purpose.
- * You may distribute it non-commercially as long as you retain this notice.
- * For a commercial use license, or to purchase the book (recommended),
- * visit http://www.davidflanagan.com/javaexamples2.
- */
-
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.GlyphVector;
@@ -25,70 +14,50 @@ import java.awt.geom.Area;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/** A demonstration of writing custom Stroke classes */
+/**
+ * 邊角問題重現。
+ * 
+ * @author Ihc
+ */
 public class AwtStrokeProblemExample extends JPanel
 {
-	/**
-	 * 
-	 */
+	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1500, HEIGHT = 800; // Size of our example
+	/** 視窗寬度 */
+	static final int WIDTH = 1420;
+	/** 視窗高度 */
+	static final int HEIGHT = 1050;
 
-	public String getName()
-	{
-		return "Custom Strokes";
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
-	}
-
-	// These are the various stroke objects we'll demonstrate
-	Stroke[] strokes = new Stroke[] { new BasicStroke(6.0f), // The standard,
-			// predefined
-			// stroke
-			new NullStroke(), // A Stroke that does nothing
-			new DoubleStroke(8.0f, 2.0f), // A Stroke that strokes twice
-			new ControlPointsStroke(2.0f), // Shows the vertices & control
-			// points
-			new SloppyStroke(2.0f, 3.0f) // Perturbs the shape before stroking
-	};
-
-	/** Draw the example */
+	@Override
 	public void paint(Graphics g1)
 	{
-		Graphics2D g = (Graphics2D) g1;
-		// Get a shape to work with. Here we'll use the letter B
+		Graphics2D graphics2D = (Graphics2D) g1;
 		Font f = new Font("全字庫正宋體", Font.BOLD, 140);
-		GlyphVector gv = f.createGlyphVector(g.getFontRenderContext(), "永應言木森");
+		GlyphVector gv = f.createGlyphVector(graphics2D.getFontRenderContext(),
+				"永應言木森變");
 		System.out.println(gv.getNumGlyphs());
 		Area area = new Area(gv.getOutline());
-//		AffineTransform affineTransform = new AffineTransform();
-//		affineTransform.setToScale(.9, .9);
-//		affineTransform.setToScale(1., 1.);
-//		area.transform(affineTransform);
-		// Set drawing attributes and starting position
-		g.setColor(Color.black);
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+		graphics2D.setColor(Color.black);
+		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		g.translate(20, 160);
-
-		// Draw the shape once with each stroke
-		for (int i = 0; i < strokes.length; i++)
+		graphics2D.translate(20, 130);
+		for (int i = 0; i <= 10; i += 2)
 		{
-			g.setStroke(strokes[i]); // set the stroke
-			g.draw(area); // draw the shape
-			g.translate(0, 160); // move to the right
+			graphics2D.setStroke(new BasicStroke(i));
+			graphics2D.draw(area);
+			graphics2D.setStroke(new NullStroke());
+			graphics2D.draw(area);
+			graphics2D.translate(0, 160);
 		}
 	}
 
-	public static void main(String[] a)
+	/**
+	 * 主函式，設定相關視窗資訊。
+	 * 
+	 * @param args
+	 *            呼叫引數
+	 */
+	public static void main(String[] args)
 	{
 		JFrame f = new JFrame();
 		f.addWindowListener(new WindowAdapter()
@@ -99,8 +68,25 @@ public class AwtStrokeProblemExample extends JPanel
 			}
 		});
 		f.setContentPane(new AwtStrokeProblemExample());
-		f.setSize(1500, 800);
+		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}
 
+	@Override
+	public String getName()
+	{
+		return "邊角問題重現";
+	}
+
+	@Override
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return HEIGHT;
+	}
 }

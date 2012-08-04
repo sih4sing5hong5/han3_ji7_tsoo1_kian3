@@ -28,34 +28,31 @@ import cc.adjusting.piece.ShapeInformation;
 /** A demonstration of writing custom Stroke classes */
 public class AwtTypesettingTest extends JPanel
 {
+	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1420, HEIGHT = 1050; // Size of our example
+	/** 視窗寬度 */
+	static final int WIDTH = 1420;
+	/** 視窗高度 */
+	static final int HEIGHT = 1050;
+	/** 字型大小 */
 	static final int TYPE_SIZE = 200;
+	/** 每行字數 */
 	static final int LINE_SIZE = 4;
+	/** 測試漢字 */
 	String word = /* "⿰禾火秋"; // */"秋漿國一" + "⿰禾火⿱將水⿴囗或二" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木三"
 			+ "變務森四" + "攵力木五";// */;
+	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
+	/** 全字庫正楷體 */
 	static final String 全字庫正楷體 = "全字庫正楷體";
+	/** 文泉驛正黑 */
 	static final String 文泉驛正黑 = "文泉驛正黑";
+	/** 文鼎中圓 */
 	static final String 文鼎中圓 = "文鼎中圓";
+	/** 超研澤中圓 */
 	static final String 超研澤中圓 = "超研澤中圓";
 
-	public String getName()
-	{
-		return "Custom Strokes";
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
-	}
-
-	/** Draw the example */
+	@Override
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;
@@ -82,7 +79,7 @@ public class AwtTypesettingTest extends JPanel
 			g.setColor(Color.LIGHT_GRAY);
 			g.draw(gv.getGlyphVisualBounds(i));
 			g.setColor(Color.BLACK);
-			g.draw(gv.getGlyphOutline(i));// TODO
+			g.draw(gv.getGlyphOutline(i));// TODO 忘記要幹麻了＠＠
 
 			System.out.println((new Area(gv.getGlyphLogicalBounds(i)))
 					.getBounds2D());
@@ -106,7 +103,13 @@ public class AwtTypesettingTest extends JPanel
 		return;
 	}
 
-	public static void main(String[] a)
+	/**
+	 * 主函式，設定相關視窗資訊。
+	 * 
+	 * @param args
+	 *            呼叫引數
+	 */
+	public static void main(String[] args)
 	{
 		JFrame f = new JFrame();
 		f.addWindowListener(new WindowAdapter()
@@ -121,4 +124,21 @@ public class AwtTypesettingTest extends JPanel
 		f.setVisible(true);
 	}
 
+	@Override
+	public String getName()
+	{
+		return "排版測試";
+	}
+
+	@Override
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return HEIGHT;
+	}
 }

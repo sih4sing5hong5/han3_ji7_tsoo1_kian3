@@ -1,23 +1,11 @@
 package cc.example.awt;
 
-/*
- * Copyright (c) 2000 David Flanagan.  All rights reserved.
- * This code is from the book Java Examples in a Nutshell, 2nd Edition.
- * It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.
- * You may study, use, and modify it for any non-commercial purpose.
- * You may distribute it non-commercially as long as you retain this notice.
- * For a commercial use license, or to purchase the book (recommended),
- * visit http://www.davidflanagan.com/javaexamples2.
- */
-
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
@@ -34,37 +22,27 @@ import cc.printing.awt.AwtForImagePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.image.SimpleImageSetter;
 
-/** A demonstration of writing custom Stroke classes */
-public class AwtImageExample extends JPanel {
+public class AwtImageExample extends JPanel
+{
+	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1024, HEIGHT = 800; // Size of our example
+	/** 視窗寬度 */
+	static final int WIDTH = 1420;
+	/** 視窗高度 */
+	static final int HEIGHT = 1050;
+	/** 字型大小 */
 	static final int TYPE_SIZE = 200;
+	/** 測試漢字 */
 	private String word = "秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
+	/** 測試用字體 */
 	private String FontName = "全字庫正宋體";
+	/** 測試用屬性 */
 	private int FontStyle = Font.BOLD;
 
-	public String getName() {
-		return "Custom Strokes";
-	}
-
-	public int getWidth() {
-		return WIDTH;
-	}
-
-	public int getHeight() {
-		return HEIGHT;
-	}
-
-	Stroke[] strokes = new Stroke[] { new BasicStroke(4.0f), // The standard,
-	// predefined
-	// stroke
-	};
-
-	/** Draw the example */
-	public void paint(Graphics g1) {
+	@Override
+	public void paint(Graphics g1)
+	{
 		Graphics2D g = (Graphics2D) g1;
-		// Font f = new Font(FontName, FontStyle, 140);
-		// Set drawing attributes and starting position
 		g.setColor(Color.black);
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -75,19 +53,22 @@ public class AwtImageExample extends JPanel {
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 		ChineseCharacterTypeSetter writer = new SimpleImageSetter();
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
-		for (int i = 0; i < ccArray.size(); ++i) {
-			ccmvArray.add(ccArray.elementAt(i).typeset(writer,null));
+		for (int i = 0; i < ccArray.size(); ++i)
+		{
+			ccmvArray.add(ccArray.elementAt(i).typeset(writer, null));
 		}
 		Point model = new Point(TYPE_SIZE, TYPE_SIZE);
 		SimpleImageAdjuster sampleImageAdjuster = new SimpleImageAdjuster();
-		for (int i = 0; i < ccArray.size(); ++i) {
+		for (int i = 0; i < ccArray.size(); ++i)
+		{
 			((ImageMoveableType) ccmvArray.elementAt(i)).setRegion(model);
 			ccmvArray.elementAt(i).adjust(sampleImageAdjuster);
 		}
 		System.out.println(ccArray.size());
 		AwtForImagePrinter awtForImagePrinter = new AwtForImagePrinter(g,
 				FontName, FontStyle);
-		for (int i = 0; i < ccmvArray.size(); ++i) {
+		for (int i = 0; i < ccmvArray.size(); ++i)
+		{
 			ccmvArray.elementAt(i).print(awtForImagePrinter);
 			g.translate(0, TYPE_SIZE);// move to the down
 			if (i % 3 == 2)
@@ -96,10 +77,19 @@ public class AwtImageExample extends JPanel {
 		return;
 	}
 
-	public static void main(String[] a) {
+	/**
+	 * 主函式，設定相關視窗資訊。
+	 * 
+	 * @param args
+	 *            呼叫引數
+	 */
+	public static void main(String[] args)
+	{
 		JFrame f = new JFrame();
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
+		f.addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
 				System.exit(0);
 			}
 		});
@@ -108,4 +98,21 @@ public class AwtImageExample extends JPanel {
 		f.setVisible(true);
 	}
 
+	@Override
+	public String getName()
+	{// TODO
+		return "範例";
+	}
+
+	@Override
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return HEIGHT;
+	}
 }

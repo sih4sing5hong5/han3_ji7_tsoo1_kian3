@@ -87,7 +87,13 @@ public class AwtStrokeExample extends JPanel
 		}
 	}
 
-	public static void main(String[] a)
+	/**
+	 * 主函式，設定相關視窗資訊。
+	 * 
+	 * @param args
+	 *            呼叫引數
+	 */
+	public static void main(String[] args)
 	{
 		JFrame f = new JFrame();
 		f.addWindowListener(new WindowAdapter()

@@ -39,35 +39,24 @@ import cc.setting.area.SimpleAreaSetter;
 /** A demonstration of writing custom Stroke classes */
 public class AwtAreaExample extends JPanel
 {
+	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1400, HEIGHT = 900; // Size of our example
+	/** 視窗寬度 */
+	static final int WIDTH = 1420;
+	/** 視窗高度 */
+	static final int HEIGHT = 1050;
+	/** 字型大小 */
 	static final int TYPE_SIZE = 200;
+	/** 每行字數 */
 	static final int LINE_SIZE = 3;
+	/** 測試漢字 */
 	private String word = /* "⿰禾火";// */"秋漿國⿰禾火⿱將水⿴囗或⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木變務森攵力木";
+	/** 測試用字體 */
 	private String FontName = "全字庫正宋體";
+	/** 測試用屬性 */
 	private int FontStyle = Font.BOLD;
 
-	public String getName()
-	{
-		return "Custom Strokes";
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
-	}
-
-	Stroke[] strokes = new Stroke[] { new BasicStroke(4.0f), // The standard,
-	// predefined
-	// stroke
-	};
-
-	/** Draw the example */
+	@Override
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;
@@ -90,7 +79,7 @@ public class AwtAreaExample extends JPanel
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(writer,null));
+			ccmvArray.add(ccArray.elementAt(i).typeset(writer, null));
 		}
 		// for (int i = 0; i < ccArray.size(); ++i)
 		// {
@@ -124,7 +113,13 @@ public class AwtAreaExample extends JPanel
 		return;
 	}
 
-	public static void main(String[] a)
+	/**
+	 * 主函式，設定相關視窗資訊。
+	 * 
+	 * @param args
+	 *            呼叫引數
+	 */
+	public static void main(String[] args)
 	{
 		JFrame f = new JFrame();
 		f.addWindowListener(new WindowAdapter()
@@ -139,4 +134,21 @@ public class AwtAreaExample extends JPanel
 		f.setVisible(true);
 	}
 
+	@Override
+	public String getName()
+	{// TODO
+		return "範例";
+	}
+
+	@Override
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return HEIGHT;
+	}
 }

@@ -65,7 +65,7 @@ public class AwtTestExample extends JPanel
 	/** 測試用字體 */
 	static private final String FontName = 全字庫正宋體;
 	/** 測試用屬性 */
-	static private final int FontStyle = Font.BOLD;
+	static private final int FontStyle = Font.BOLD/* 0 */;
 
 	@Override
 	public void paint(Graphics g1)

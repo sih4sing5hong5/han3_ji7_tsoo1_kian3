@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
 import cc.adjusting.bolder.BasicBolder;
+import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.SimplePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;

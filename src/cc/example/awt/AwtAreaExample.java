@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.area.SimpleAreaAdjuster;
+import cc.adjusting.bolder.NullStroke;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.ChineseCharacterMovableType;

@@ -23,6 +23,7 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.ShapeInformation;
 
 /** A demonstration of writing custom Stroke classes */

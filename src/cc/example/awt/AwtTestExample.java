@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.bolder.BasicBolder;
+import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;

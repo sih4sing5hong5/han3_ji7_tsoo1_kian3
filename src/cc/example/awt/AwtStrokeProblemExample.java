@@ -14,6 +14,8 @@ import java.awt.geom.Area;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cc.adjusting.bolder.NullStroke;
+
 
 /**
  * 邊角問題重現。

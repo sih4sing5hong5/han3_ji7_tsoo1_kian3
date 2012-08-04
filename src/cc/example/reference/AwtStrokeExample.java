@@ -1,4 +1,4 @@
-package cc.example.awt;
+package cc.example.reference;
 
 /*
  * Copyright (c) 2000 David Flanagan.  All rights reserved.

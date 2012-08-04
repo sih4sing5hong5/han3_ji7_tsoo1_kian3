@@ -2,7 +2,7 @@ package cc.core;
 
 import java.text.StringCharacterIterator;
 
-import cc.exception.CCParseTextException;
+import cc.exception.CCFormatException;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -33,13 +33,13 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 *            組合符號的Unicode編碼
 	 * @param iterator
 	 *            目前分析到的字串位置
-	 * @throws CCParseTextException
+	 * @throws CCFormatException
 	 *             如果字串格式錯誤
 	 * @throws IllegalArgumentException
 	 *             如果<code>codePoint</code>不是部件組合符號
 	 */
 	ChineseCharacterTzu(ChineseCharacterTzu parent, int codePoint,
-			StringCharacterIterator iterator) throws CCParseTextException,
+			StringCharacterIterator iterator) throws CCFormatException,
 			IllegalArgumentException
 	{
 		super(parent);

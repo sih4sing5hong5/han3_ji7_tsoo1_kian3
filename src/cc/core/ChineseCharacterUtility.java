@@ -4,7 +4,7 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.Vector;
 
-import cc.exception.CCParseTextException;
+import cc.exception.CCFormatException;
 
 /**
  * 用來分析漢字部件的工具。給一字串，分析出含所有漢字的部件結構。
@@ -55,7 +55,7 @@ public class ChineseCharacterUtility
 				vector.add(parseCharacter(null));
 			}
 		}
-		catch (CCParseTextException e)
+		catch (CCFormatException e)
 		{
 			vector.add(null);
 		}
@@ -68,14 +68,14 @@ public class ChineseCharacterUtility
 	 * @param parent
 	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
 	 * @return 下一個漢字部件
-	 * @throws CCParseTextException
+	 * @throws CCFormatException
 	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
 	 */
 	ChineseCharacter parseCharacter(ChineseCharacterTzu parent)
-			throws CCParseTextException
+			throws CCFormatException
 	{
 		if (iterator.current() == CharacterIterator.DONE)
-			throw new CCParseTextException();
+			throw new CCFormatException();
 		int codePoint = 0;
 		if (Character.isHighSurrogate(iterator.current()))
 		{
@@ -87,7 +87,7 @@ public class ChineseCharacterUtility
 			else
 			{
 				iterator.next();
-				throw new CCParseTextException();
+				throw new CCFormatException();
 			}
 		}
 		else

@@ -28,7 +28,7 @@ import cc.setting.piece.MergePieceSetter;
  * 主要測試的範例。
  * 
  * <pre>
- * 活字型態：PieceMovableType
+ * 活字型態：<code>PieceMovableType</code>
  * 活字設定工具：<code>MergePieceSetter</code>
  * 活字調整工具：<code>MergePieceAdjuster</code>
  * 活字列印工具：<code>AwtForSinglePiecePrinter</code>

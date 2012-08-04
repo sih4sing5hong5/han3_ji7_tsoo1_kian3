@@ -29,7 +29,7 @@ import cc.setting.piece.SimplePieceSetter;
  * 主要測試的範例。
  * 
  * <pre>
- * 活字型態：PieceMovableType
+ * 活字型態：<code>PieceMovableType</code>
  * 活字設定工具：<code>SimplePieceSetter</code>
  * 活字調整工具：<code>SimplePieceAdjuster</code>
  * 活字列印工具：<code>AwtForPiecePrinter</code>

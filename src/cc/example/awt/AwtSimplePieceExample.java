@@ -25,35 +25,48 @@ import cc.printing.awt.piece.AwtForPiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.SimplePieceSetter;
 
+/**
+ * 主要測試的範例。
+ * 
+ * <pre>
+ * 活字型態：PieceMovableType
+ * 活字設定工具：<code>SimplePieceSetter</code>
+ * 活字調整工具：<code>SimplePieceAdjuster</code>
+ * 活字列印工具：<code>AwtForPiecePrinter</code>
+ * </pre>
+ * 
+ * @author Ihc
+ */
 public class AwtSimplePieceExample extends JPanel
 {
+	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1420, HEIGHT = 1050;
+	/** 視窗寬度 */
+	static final int WIDTH = 1420;
+	/** 視窗高度 */
+	static final int HEIGHT = 1050;
+	/** 字型大小 */
 	static final int TYPE_SIZE = 200;
+	/** 每行字數 */
 	static final int LINE_SIZE = 4;
-	private String word = /* "⿰禾火秋"; // */"秋漿國一" + "⿰禾火⿱將水⿴囗或⿴辶⿱宀⿱珤⿰隹⿰貝招"
-			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木⿰車⿱一⿱口田" + "變務森輻" + "攵力木五";// */;
+	/** 測試漢字 */
+	static private final String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"秋漿國一"
+			+ "⿰禾火⿱將水⿴囗或⿴辶⿱宀⿱珤⿰隹⿰貝招" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木⿰車⿱一⿱口田" + "變務森輻"
+			+ "攵力木五";// */;
+	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
+	/** 全字庫正楷體 */
 	static final String 全字庫正楷體 = "全字庫正楷體";
+	/** 文泉驛正黑 */
 	static final String 文泉驛正黑 = "文泉驛正黑";
+	/** 文鼎中圓 */
 	static final String 文鼎中圓 = "文鼎中圓";
+	/** 超研澤中圓 */
+	static final String 超研澤中圓 = "超研澤中圓";
+	/** 測試用字體 */
 	static private final String FontName = 全字庫正宋體;
-	private int FontStyle = Font.BOLD;
-
-	public String getName()
-	{
-		return "AwtSimplePieceExample";
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
-	}
+	/** 測試用屬性 */
+	static private final int FontStyle = Font.BOLD;
 
 	public void paint(Graphics g1)
 	{
@@ -101,7 +114,13 @@ public class AwtSimplePieceExample extends JPanel
 		return;
 	}
 
-	public static void main(String[] a)
+	/**
+	 * 主函式，設定相關視窗資訊。
+	 * 
+	 * @param args
+	 *            呼叫引數
+	 */
+	public static void main(String[] args)
 	{
 		JFrame f = new JFrame();
 		f.addWindowListener(new WindowAdapter()
@@ -114,5 +133,23 @@ public class AwtSimplePieceExample extends JPanel
 		f.setContentPane(new AwtSimplePieceExample());
 		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
+	}
+
+	@Override
+	public String getName()
+	{
+		return "物件活字範例";
+	}
+
+	@Override
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return HEIGHT;
 	}
 }

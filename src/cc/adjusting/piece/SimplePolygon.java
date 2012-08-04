@@ -1,19 +1,26 @@
-/**
- * 
- */
 package cc.adjusting.piece;
 
 import java.awt.geom.Point2D;
 import java.util.Vector;
 
 /**
- * @author Ihc
+ * 用來計算多邊形的資訊。其中頂點的順序按照<code>Area</code>為主，順時鐘代表圖形實心，逆時鐘代表圖形挖空。
  * 
+ * @author Ihc
  */
 public class SimplePolygon
 {
+	/**
+	 * 依序記錄每個頂點位置
+	 */
 	private Vector<Point2D> apex = new Vector<Point2D>();
+	/**
+	 * 目前頂點間的長度（不包含頭尾）
+	 */
 	private double circumference = 0.0;
+	/**
+	 * 目前多邊形的面積（不包含行列式的最後一行）
+	 */
 	private double regionSize = 0.0;
 
 	/**
@@ -44,7 +51,6 @@ public class SimplePolygon
 			regionSize += previous.getX() * last.getY() - previous.getY()
 					* last.getX();
 		}
-//		System.out.println("XD=" + circumference);
 		return;
 	}
 

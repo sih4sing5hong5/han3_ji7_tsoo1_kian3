@@ -8,10 +8,25 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
 
+/**
+ * 物件活字遞迴列印工具。接收<code>PieceMovableTypeWen</code>或
+ * <code>PieceMovableTypeTzu</code>，並依結構遞迴列印在<code>Graphics2D</code>上。
+ * 
+ * @author Ihc
+ */
 public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 {
+	/**
+	 * 要輸出的目的地
+	 */
 	private Graphics2D graphics2d;
 
+	/**
+	 * 建立物件活字遞迴列印工具
+	 * 
+	 * @param graphics2d
+	 *            要輸出的目的地
+	 */
 	public AwtForPiecePrinter(Graphics2D graphics2d)
 	{
 		this.graphics2d = graphics2d;
@@ -39,8 +54,6 @@ public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 				.getX(), pieceMovableTypeTzu.getPiece().getTerritory().getY());
 		for (int i = 0; i < pieceMovableTypeTzu.getChildren().length; ++i)
 		{
-//			PieceMovableType child = (PieceMovableType) pieceMovableTypeTzu
-//					.getChildren()[i];
 			pieceMovableTypeTzu.getChildren()[i].print(this);
 		}
 		graphics2d.translate(-pieceMovableTypeTzu.getPiece().getTerritory()

@@ -9,10 +9,25 @@ import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.printing.ChineseCharacterTypePrinter;
 
+/**
+ * 物件活字單一列印工具。接收<code>PieceMovableTypeWen</code>或
+ * <code>PieceMovableTypeTzu</code>，並列印該活字在<code>Graphics2D</code>上。
+ * 
+ * @author Ihc
+ */
 public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 {
+	/**
+	 * 要輸出的目的地
+	 */
 	private Graphics2D graphics2d;
 
+	/**
+	 * 建立物件活字遞迴列印工具
+	 * 
+	 * @param graphics2d
+	 *            要輸出的目的地
+	 */
 	public AwtForSinglePiecePrinter(Graphics2D graphics2d)
 	{
 		this.graphics2d = graphics2d;
@@ -36,10 +51,14 @@ public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 		return;
 	}
 
+	/**
+	 * 列印活字物件
+	 * 
+	 * @param rectangularArea
+	 *            活字物件
+	 */
 	public void printPiece(RectangularArea rectangularArea)
 	{
-		// PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu)
-		// chineseCharacterMovableTypeTzu;
 		graphics2d.draw(rectangularArea);
 		return;
 	}

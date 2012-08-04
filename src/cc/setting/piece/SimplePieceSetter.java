@@ -76,8 +76,6 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterWen chineseCharacterWen)
 	{
-		// PieceMovableTypeWen pieceMovableTypeWen = new PieceMovableTypeWen(
-		// parent, chineseCharacterWen);
 		RectangularArea rectangularArea = null;
 		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
 		{
@@ -90,7 +88,6 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			rectangularArea = findWenForNoBuiltIn(chineseCharacterWen);
 		}
 		rectangularArea.moveToOrigin();
-		// pieceMovableTypeWen.setPiece(rectangularArea);
 
 		PieceMovableTypeWen pieceMovableTypeWen = new PieceMovableTypeWen(
 				parent, chineseCharacterWen, rectangularArea);
@@ -103,7 +100,6 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
 				parent, chineseCharacterTzu, new RectangularArea());
-		// pieceMovableTypeTzu.setPiece();
 
 		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
@@ -301,5 +297,4 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	{
 		return fontRenderContext;
 	}
-
 }

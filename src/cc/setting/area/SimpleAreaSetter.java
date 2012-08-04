@@ -79,13 +79,10 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(parent,
 				chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-		// shapeMovableTypeTzu
-		// .setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			shapeMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
 					.getChildren()[i].typeset(this, parent);
-			// shapeMovableTypeTzu.getChildren()[i].setParent(shapeMovableTypeTzu);
 		}
 		AreaMovableType firstChild = (AreaMovableType) shapeMovableTypeTzu
 				.getChildren()[0], secondChild = (AreaMovableType) shapeMovableTypeTzu

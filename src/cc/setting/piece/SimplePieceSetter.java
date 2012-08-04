@@ -27,37 +27,21 @@ import cc.setting.ChineseCharacterTypeSetter;
  */
 public class SimplePieceSetter implements ChineseCharacterTypeSetter
 {
-	/**
-	 * 活字字型的名稱
-	 */
+	/** 活字字型的名稱 */
 	private String fontName;
-	/**
-	 * 活字字型的選項
-	 */
+	/** 活字字型的選項 */
 	private int fontStyle;
-	/**
-	 * 活字的點距
-	 */
+	/** 活字的點距 */
 	private int fontResolution;
-	/**
-	 * 活字的渲染屬性
-	 */
+	/** 活字的渲染屬性 */
 	protected FontRenderContext fontRenderContext;
-	/**
-	 * 活字的字體
-	 */
+	/** 活字的字體 */
 	protected Font font;
-	/**
-	 * 合體字組合符號參考的規範字
-	 */
+	/** 合體字組合符號參考的規範字 */
 	protected final String tzuModelCharacter = "意";
-	/**
-	 * 合體字組合符號參考的位置及大小
-	 */
+	/** 合體字組合符號參考的位置及大小 */
 	protected final Rectangle2D tzuModelTerritory;
-	/**
-	 * 獨體字缺字的替代物件
-	 */
+	/** 獨體字缺字的替代物件 */
 	protected final Area pieceForNoBuiltInWen;
 
 	/**
@@ -142,8 +126,8 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 		return pieceMovableTypeTzu;
 	}
 
-	/**MergePiece
-	 * 字體缺字的替代方案
+	/**
+	 * MergePiece 字體缺字的替代方案
 	 * 
 	 * @param chineseCharacterWen
 	 *            所缺的字部件

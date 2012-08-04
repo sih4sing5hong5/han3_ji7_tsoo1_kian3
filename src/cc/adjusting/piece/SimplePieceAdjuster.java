@@ -17,7 +17,7 @@ import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * 物件活字調整工具。把活字的資訊全部集中在同一個物件上（<code>Piece</code>， <code>RectangularArea</code>型態
+ * 物件活字調整工具。調整<code>PieceMovableType</code>，因為把活字的資訊全部集中在同一個物件上（<code>Piece</code>， <code>RectangularArea</code>型態
  * ），方便函式傳遞與使用，而且物件上也有相對應操縱的函式。
  * <p>
  * <code>SimplePiece</code>是在設定時兩兩配對後定框，調整時更改部件大小，但無法物件難實作距離貼近或拉開。

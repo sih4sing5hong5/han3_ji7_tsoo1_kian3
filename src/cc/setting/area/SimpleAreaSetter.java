@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cc.setting.area;
 
 import java.awt.Font;
@@ -19,18 +16,38 @@ import cc.moveable_type.area.AreaTool;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
- * @author Ihc
+ * 區塊活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
+ * <code>AreaMovableType</code>）。<code>AreaMovableType</code>
+ * 在設定時就讀取字體，處理時要考慮部件的差異，<code>area</code>（區塊活字）記錄目前長寬位置及部件形狀，<code>bound</code>
+ * 記錄預計長寬位置。
  * 
+ * @author Ihc
  */
 public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 {
-	private String fontName;
-	private int fontStyle;
-	private FontRenderContext fontRenderContext;
-	private int fontResolution;
+	/** 建立物件活字設定工具 */
+	protected final String fontName;
+	/** 活字字型的選項 */
+	protected final int fontStyle;
+	/** 活字的點距 */
+	protected final int fontResolution;
+	/** 活字的渲染屬性 */
+	protected final FontRenderContext fontRenderContext;
 
-	public SimpleAreaSetter(FontRenderContext fontRenderContext,
-			String fontName, int fontStyle, int fontResolution)
+	/**
+	 * 建立區塊活字設定工具
+	 * 
+	 * @param fontName
+	 *            建立物件活字設定工具
+	 * @param fontStyle
+	 *            活字字型的選項
+	 * @param fontResolution
+	 *            活字的點距
+	 * @param fontRenderContext
+	 *            活字的渲染屬性
+	 */
+	public SimpleAreaSetter(String fontName, int fontStyle, int fontResolution,
+			FontRenderContext fontRenderContext)
 	{
 		this.fontName = fontName;
 		this.fontStyle = fontStyle;
@@ -62,8 +79,8 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(parent,
 				chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-//		shapeMovableTypeTzu
-//				.setChildren(new ChineseCharacterMovableType[childrenSize]);
+		// shapeMovableTypeTzu
+		// .setChildren(new ChineseCharacterMovableType[childrenSize]);
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			shapeMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
@@ -117,44 +134,43 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		return shapeMovableTypeTzu;
 	}
 
+	/**
+	 * 取得活字字型的名稱
+	 * 
+	 * @return 活字字型的名稱
+	 */
 	public String getFontName()
 	{
 		return fontName;
 	}
 
-	public void setFontName(String fontName)
-	{
-		this.fontName = fontName;
-	}
-
+	/**
+	 * 取得活字字型的選項
+	 * 
+	 * @return 活字字型的選項
+	 */
 	public int getFontStyle()
 	{
 		return fontStyle;
 	}
 
-	public void setFontStyle(int fontStyle)
-	{
-		this.fontStyle = fontStyle;
-	}
-
-	public FontRenderContext getFontRenderContext()
-	{
-		return fontRenderContext;
-	}
-
-	public void setFontRenderContext(FontRenderContext fontRenderContext)
-	{
-		this.fontRenderContext = fontRenderContext;
-	}
-
+	/**
+	 * 取得活字的點距
+	 * 
+	 * @return 活字的點距
+	 */
 	public int getFontResolution()
 	{
 		return fontResolution;
 	}
 
-	public void setFontResolution(int fontResolution)
+	/**
+	 * 取得活字的渲染屬性
+	 * 
+	 * @return 活字的渲染屬性
+	 */
+	public FontRenderContext getFontRenderContext()
 	{
-		this.fontResolution = fontResolution;
+		return fontRenderContext;
 	}
-
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cc.adjusting.area;
 
 import java.awt.geom.AffineTransform;
@@ -14,18 +11,14 @@ import cc.moveable_type.area.AreaMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableTypeWen;
 
 /**
- * @author Ihc
+ * 區塊活字調整工具。調整<code>AreaMovableType</code>，<code>AreaMovableType</code>
+ * 在設定時就讀取字體，處理時要考慮部件的差異，<code>area</code>（區塊活字）記錄目前長寬位置及部件形狀，<code>bound</code>
+ * 記錄預計長寬位置。
  * 
+ * @author Ihc
  */
 public class SimpleAreaAdjuster implements ChineseCharacterTypeAdjuster
 {
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * cc.adjusting.ChineseCharacterTypeAdjuster#adjustWen(cc.moveable_type.
-	 * ChineseCharacterMovableTypeWen)
-	 */
 	@Override
 	public void adjustWen(ChineseCharacterMovableTypeWen wen)
 	{
@@ -35,13 +28,6 @@ public class SimpleAreaAdjuster implements ChineseCharacterTypeAdjuster
 		return;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * cc.adjusting.ChineseCharacterTypeAdjuster#adjustTzu(cc.moveable_type.
-	 * ChineseCharacterMovableTypeTzu)
-	 */
 	@Override
 	public void adjustTzu(ChineseCharacterMovableTypeTzu tzu)
 	{
@@ -61,6 +47,13 @@ public class SimpleAreaAdjuster implements ChineseCharacterTypeAdjuster
 		}
 	}
 
+	/**
+	 * 依區塊活字目前和預計的長寬，產生出能轉換成預計長寬的縮放矩陣
+	 * 
+	 * @param areaMovableType
+	 *            區塊活字
+	 * @return 縮放矩陣
+	 */
 	private AffineTransform getAffineTransform(AreaMovableType areaMovableType)
 	{
 		Rectangle2D bound = areaMovableType.getBound();

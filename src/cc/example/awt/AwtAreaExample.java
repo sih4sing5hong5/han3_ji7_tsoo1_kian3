@@ -1,22 +1,10 @@
 package cc.example.awt;
 
-/*
- * Copyright (c) 2000 David Flanagan.  All rights reserved.
- * This code is from the book Java Examples in a Nutshell, 2nd Edition.
- * It is provided AS-IS, WITHOUT ANY WARRANTY either expressed or implied.
- * You may study, use, and modify it for any non-commercial purpose.
- * You may distribute it non-commercially as long as you retain this notice.
- * For a commercial use license, or to purchase the book (recommended),
- * visit http://www.davidflanagan.com/javaexamples2.
- */
-
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
@@ -36,7 +24,18 @@ import cc.printing.awt.area.AwtForAreaPrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.area.SimpleAreaSetter;
 
-/** A demonstration of writing custom Stroke classes */
+/**
+ * 區塊活字範例。
+ * 
+ * <pre>
+ * 活字型態：<code>AwtForAreaPrinter</code>
+ * 活字設定工具：<code>SimpleAreaSetter</code>
+ * 活字調整工具：<code>SimpleAreaAdjuster</code>
+ * 活字列印工具：<code>AwtForAreaPrinter</code>
+ * </pre>
+ * 
+ * @author Ihc
+ */
 public class AwtAreaExample extends JPanel
 {
 	/** 序列化編號 */
@@ -71,27 +70,19 @@ public class AwtAreaExample extends JPanel
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-		ChineseCharacterTypeSetter writer = new SimpleAreaSetter(
+		ChineseCharacterTypeSetter setter = new SimpleAreaSetter(
+				FontName,
+				FontStyle,
+				100,
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
-				FontName, FontStyle, 100);
+						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(writer, null));
+			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
 		}
-		// for (int i = 0; i < ccArray.size(); ++i)
-		// {
-		// if(((AreaMovableType) ccmvArray.elementAt(i)).getArea()!=null)
-		// g.draw(((AreaMovableType) ccmvArray.elementAt(i)).getArea());
-		// }
-		// Shape shape=((AreaMovableType)ccmvArray.elementAt(0)).getArea();
-		// System.out.println(shape.getBounds2D().getX()+" "+shape.getBounds2D().getY()+" "+shape.getBounds2D().getHeight());
-		// Area area=new
-		// Area(((AreaMovableType)ccmvArray.elementAt(0)).getArea());
-		// System.out.println(area.getBounds2D().getX()+" "+area.getBounds2D().getY()+" "+area.getBounds2D().getHeight());
-
+		
 		SimpleAreaAdjuster sampleImageAdjuster = new SimpleAreaAdjuster();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{

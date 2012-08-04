@@ -27,31 +27,17 @@ import java.awt.geom.PathIterator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/** A demonstration of writing custom Stroke classes */
+/** 修改自http://www.java2s.com/Code/Java/2D-Graphics-GUI/CustomStrokes.htm */
 public class AwtStrokeExample extends JPanel
 {
-	/**
-	 * 
-	 */
+	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
-	static final int WIDTH = 1500, HEIGHT = 800; // Size of our example
+	/** 視窗寬度 */
+	static final int WIDTH = 1420;
+	/** 視窗高度 */
+	static final int HEIGHT = 1050;
 
-	public String getName()
-	{
-		return "Custom Strokes";
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
-	}
-
-	// These are the various stroke objects we'll demonstrate
+	/** These are the various stroke objects we'll demonstrate */
 	Stroke[] strokes = new Stroke[] { new BasicStroke(4.0f), // The standard,
 			// predefined
 			// stroke
@@ -62,7 +48,7 @@ public class AwtStrokeExample extends JPanel
 			new SloppyStroke(2.0f, 3.0f) // Perturbs the shape before stroking
 	};
 
-	/** Draw the example */
+	@Override
 	public void paint(Graphics g1)
 	{
 		Graphics2D g = (Graphics2D) g1;
@@ -108,6 +94,23 @@ public class AwtStrokeExample extends JPanel
 		f.setVisible(true);
 	}
 
+	@Override
+	public String getName()
+	{
+		return "筆劃使用範例";
+	}
+
+	@Override
+	public int getWidth()
+	{
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight()
+	{
+		return HEIGHT;
+	}
 }
 
 /**
@@ -115,7 +118,6 @@ public class AwtStrokeExample extends JPanel
  * returns an unmodified shape. Thus, drawing a shape with this Stroke is the
  * same as filling that shape!
  */
-
 class NullStroke implements Stroke
 {
 	public Shape createStrokedShape(Shape s)
@@ -129,17 +131,32 @@ class NullStroke implements Stroke
  * draw with this Stroke, then instead of outlining the shape, you're outlining
  * the outline of the shape.
  */
-
 class DoubleStroke implements Stroke
 {
-	BasicStroke stroke1, stroke2; // the two strokes to use
+	/**
+	 * 第一層筆劃
+	 */
+	BasicStroke stroke1;
+	/**
+	 * 第二層筆劃
+	 */
+	BasicStroke stroke2; // the two strokes to use
 
+	/**
+	 * 建立雙層筆劃
+	 * 
+	 * @param width1
+	 *            第一層筆劃寬度
+	 * @param width2
+	 *            第二層筆劃寬度
+	 */
 	public DoubleStroke(float width1, float width2)
 	{
 		stroke1 = new BasicStroke(width1); // Constructor arguments specify
 		stroke2 = new BasicStroke(width2); // the line widths for the strokes
 	}
 
+	@Override
 	public Shape createStrokedShape(Shape s)
 	{
 		// Use the first stroke to create an outline of the shape
@@ -161,13 +178,21 @@ class DoubleStroke implements Stroke
 
 class ControlPointsStroke implements Stroke
 {
+	/** 控制點大小 */
 	float radius; // how big the control point markers should be
 
+	/**
+	 * 建立顯示控制點的筆劃
+	 * 
+	 * @param radius
+	 *            控制點大小
+	 */
 	public ControlPointsStroke(float radius)
 	{
 		this.radius = radius;
 	}
 
+	@Override
 	public Shape createStrokedShape(Shape shape)
 	{
 		// Start off by stroking the shape with a thin line. Store the
@@ -179,13 +204,11 @@ class ControlPointsStroke implements Stroke
 		// curve segments of the shape. For each one, mark the endpoint and
 		// control points (if any) by adding a rectangle to the GeneralPath
 		float[] coords = new float[6];
-		int cnt=0;
+		int cnt = 0;
 		for (PathIterator i = shape.getPathIterator(null); !i.isDone(); i
 				.next())
 		{
 			int type = i.currentSegment(coords);
-//			Shape s = null, s2 = null, s3 = null;
-//			if(cnt==12)//TODO
 			switch (type)
 			{
 			case PathIterator.SEG_CUBICTO:
@@ -200,11 +223,21 @@ class ControlPointsStroke implements Stroke
 			}
 			++cnt;
 		}
-System.out.println(cnt);
+		System.out.println(cnt);
 		return strokedShape;
 	}
 
-	/** Add a small square centered at (x,y) to the specified path */
+	/**
+	 * 標上控制點 原註解：Add a small square centered at (x,y) to the specified path
+	 * 
+	 * @param path
+	 *            要加上的路徑
+	 * @param x
+	 *            水平位置
+	 * @param y
+	 *            垂直位置
+	 */
+
 	void markPoint(GeneralPath path, float x, float y)
 	{
 		path.moveTo(x - radius, y - radius); // Begin a new sub-path
@@ -222,19 +255,28 @@ System.out.println(cnt);
  * Finally, it uses a BasicStroke to stroke the modified shape. The result is a
  * "sloppy" looking shape.
  */
-
 class SloppyStroke implements Stroke
 {
+	/** 要使用的筆劃 */
 	BasicStroke stroke;
-
+	/** 潦草度 */
 	float sloppiness;
 
+	/**
+	 * 建立一個潦草筆劃
+	 * 
+	 * @param width
+	 *            筆劃寬度
+	 * @param sloppiness
+	 *            潦草度
+	 */
 	public SloppyStroke(float width, float sloppiness)
 	{
 		this.stroke = new BasicStroke(width); // Used to stroke modified shape
 		this.sloppiness = sloppiness; // How sloppy should we be?
 	}
 
+	@Override
 	public Shape createStrokedShape(Shape shape)
 	{
 		GeneralPath newshape = new GeneralPath(); // Start with an empty shape
@@ -277,6 +319,14 @@ class SloppyStroke implements Stroke
 
 	// Randomly modify the specified number of coordinates, by an amount
 	// specified by the sloppiness field.
+	/**
+	 * 建立抖動位置
+	 * 
+	 * @param coords
+	 *            預修改位置
+	 * @param numCoords
+	 *            點的數量
+	 */
 	void perturb(float[] coords, int numCoords)
 	{
 		for (int i = 0; i < numCoords; i++)

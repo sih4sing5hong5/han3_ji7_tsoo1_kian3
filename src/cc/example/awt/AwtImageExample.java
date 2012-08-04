@@ -26,7 +26,7 @@ import cc.setting.image.SimpleImageSetter;
  * 圖片活字範例。
  * 
  * <pre>
- * 活字型態：<code>ImageMoveableType</code>ImageMoveableType
+ * 活字型態：<code>ImageMoveableType</code>
  * 活字設定工具：<code>SimpleImageSetter</code>
  * 活字調整工具：<code>SimpleImageAdjuster</code>
  * 活字列印工具：<code>AwtForImagePrinter</code>

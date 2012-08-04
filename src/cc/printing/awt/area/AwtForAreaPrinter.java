@@ -9,10 +9,23 @@ import cc.moveable_type.area.AreaMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
 
+/**
+ * 區塊活字遞迴列印工具。接收<code>AreaMovableTypeWen</code>或 <code>AreaMovableTypeTzu</code>
+ * ，依結構遞迴列印在<code>Graphics2D</code>上。
+ * 
+ * @author Ihc
+ */
 public class AwtForAreaPrinter implements ChineseCharacterTypePrinter
 {
+	/** 要輸出的目的地 */
 	private Graphics2D graphics2d;
 
+	/**
+	 * 建立區塊活字列印工具
+	 * 
+	 * @param graphics2d
+	 *            要輸出的目的地
+	 */
 	public AwtForAreaPrinter(Graphics2D graphics2d)
 	{
 		this.graphics2d = graphics2d;

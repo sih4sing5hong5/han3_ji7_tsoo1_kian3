@@ -14,7 +14,7 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.adjusting.bolder.EmptyBolder;
+import cc.adjusting.bolder.BasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
@@ -30,7 +30,7 @@ public class AwtTestExample extends JPanel
 	static final int WIDTH = 1420, HEIGHT = 1050; // Size of our example
 	static final int TYPE_SIZE = 200;
 	static final int LINE_SIZE = 4;
-	private String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"秋漿國一" + "⿰禾火⿱將水⿴囗或二"
+	private String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"秋漿國一" + "⿰禾火⿱將水⿴囗或⿴辶⿱宀⿱珤⿰隹⿰貝招"
 			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木⿰車⿱一⿱口田" + "變務森輻" + "攵力木五";// */;
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	static final String 全字庫正楷體 = "全字庫正楷體";
@@ -79,8 +79,10 @@ public class AwtTestExample extends JPanel
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
 		}
 
-		MergePieceAdjuster adjuster = new MergePieceAdjuster(new EmptyBolder(),
+		MergePieceAdjuster adjuster = new MergePieceAdjuster(new BasicBolder(),
 				1e-1);
+		// adjuster = new MergePieceAdjuster(new EmptyBolder(),
+		// 1e-1);//TODO
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);

@@ -75,13 +75,7 @@ public class SimplePolygon
 	{
 		if (apex.size() != 0 && !apex.firstElement().equals(apex.lastElement()))
 		{
-			// System.out.println("a=" + getCircumference());
-			// System.out.println(apex.firstElement());
-			// System.out.println(apex.lastElement());
 			addPoint(apex.firstElement());
-			// System.out.println("b=" + getCircumference());
-			// System.out.println(apex.firstElement());
-			// System.out.println(apex.lastElement());
 		}
 		return;
 	}

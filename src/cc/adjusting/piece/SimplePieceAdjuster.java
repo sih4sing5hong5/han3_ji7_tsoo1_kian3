@@ -135,13 +135,13 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            粗細係數
 	 * @return 筆劃加寬度
 	 */
-	protected float getStorkeWidthByCoefficient(
+	protected double getStorkeWidthByCoefficient(
 			RectangularArea rectangularArea, double originBoldCoefficient)
 	{
-		float miniWidth = 0.0f, maxiWidth = (float) originBoldCoefficient;
+		double miniWidth = 0.0, maxiWidth = (double) originBoldCoefficient;
 		while (miniWidth + getPrecision() < maxiWidth)
 		{
-			float middleWidth = 0.5f * (miniWidth + maxiWidth);
+			double middleWidth = 0.5 * (miniWidth + maxiWidth);
 			RectangularArea boldSurface = getBoldSurface(rectangularArea,
 					middleWidth);
 			boldSurface.add(rectangularArea);
@@ -164,7 +164,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 * @return 物件活字外框
 	 */
 	protected RectangularArea getBoldSurface(RectangularArea rectangularArea,
-			float strokeWidth)
+			double strokeWidth)
 	{
 		Stroke stroke = chineseCharacterTypeBolder.getStroke(strokeWidth);
 		return new RectangularArea(stroke.createStrokedShape(rectangularArea));
@@ -185,7 +185,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	{
 		double originBoldCoefficient = computeBoldCoefficient(rectangularArea);
 		rectangularArea.transform(affineTransform);
-		float strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
+		double strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
 				originBoldCoefficient);
 		RectangularArea boldSurface = getBoldSurface(rectangularArea,
 				strokeWidth);
@@ -201,7 +201,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	// * 加寬的寬度
 	// * @return 筆劃加寬物件
 	// */
-	// public Stroke getStroke(float width)
+	// public Stroke getStroke(double width)
 	// {
 	// return new BasicStroke(width);
 	// }

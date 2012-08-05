@@ -17,5 +17,5 @@ public interface ChineseCharacterTypeBolder
 	 *            加寬的寬度
 	 * @return 筆劃加寬物件
 	 */
-	public Stroke getStroke(float width);
+	public Stroke getStroke(double width);
 }

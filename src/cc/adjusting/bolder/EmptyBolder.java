@@ -19,7 +19,7 @@ public class EmptyBolder implements ChineseCharacterTypeBolder
 	}
 
 	@Override
-	public Stroke getStroke(float width)
+	public Stroke getStroke(double width)
 	{
 		return EMPTY_STROKE;
 	}

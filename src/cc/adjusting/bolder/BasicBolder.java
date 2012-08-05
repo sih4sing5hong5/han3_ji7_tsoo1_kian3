@@ -11,9 +11,9 @@ import java.awt.Stroke;
 public class BasicBolder implements ChineseCharacterTypeBolder
 {
 	@Override
-	public Stroke getStroke(float width)
+	public Stroke getStroke(double width)
 	{
-		return new BasicStroke(width);
+		return new BasicStroke((float) width);
 	}
 
 }

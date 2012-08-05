@@ -115,8 +115,24 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			else
 				maxiPos = middlePos;
 		}
+
+		double rightBoldCoefficient = computeBoldCoefficient(right.getPiece());
+
+		right.getPiece().moveToOrigin();// TODO 人工參數
+		right.getPiece().moveTo(miniPos - rightBoldCoefficient * 2.6, 0);
+		double nonsuitableToClose = nonsuitableToClose(left.getPiece(),
+				right.getPiece(), right.getPiece().getBounds2D().getHeight());
+
 		right.getPiece().moveToOrigin();
 		right.getPiece().moveTo(miniPos, 0);
+
+		if (nonsuitableToClose > 1.6)// TODO 人工參數
+			right.getPiece().moveTo(+rightBoldCoefficient * 3.0, 0);
+		else if (nonsuitableToClose > 0.8)
+			right.getPiece().moveTo(0, 0);
+		else
+			right.getPiece().moveTo(-rightBoldCoefficient * 1.2, 0);
+
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(left.getPiece());
 		pieceMovableTypeTzu.getPiece().add(right.getPiece());
@@ -170,14 +186,21 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 
 		double downBoldCoefficient = computeBoldCoefficient(down.getPiece());
-		down.getPiece().moveTo(0, -downBoldCoefficient);
-		if (areSuitableToClose(up.getPiece(), down.getPiece()))
-			down.getPiece().moveTo(0, +downBoldCoefficient * 2);
-		else
-			down.getPiece().moveTo(0, +downBoldCoefficient);
+		down.getPiece().moveToOrigin();// TODO 人工參數
+		down.getPiece().moveTo(0, miniPos - downBoldCoefficient * 2.6);
+		double nonsuitableToClose = nonsuitableToClose(up.getPiece(),
+				down.getPiece(), down.getPiece().getBounds2D().getWidth());
 
 		down.getPiece().moveToOrigin();
 		down.getPiece().moveTo(0, miniPos);
+
+		if (nonsuitableToClose > 1.6)// TODO 人工參數
+			down.getPiece().moveTo(0, +downBoldCoefficient * 3.0);
+		else if (nonsuitableToClose > 0.8)
+			down.getPiece().moveTo(0, 0);
+		else
+			down.getPiece().moveTo(0, -downBoldCoefficient * 1.2);
+
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(up.getPiece());
 		pieceMovableTypeTzu.getPiece().add(down.getPiece());
@@ -242,9 +265,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 * 判斷二個物件活字是否重疊。用在調整部件間的距離，<code>Area</code>內建的減去實作。
 	 * 
 	 * @param first
-	 *            第一個物件活字
+	 *            第一個活字物件
 	 * @param second
-	 *            第二個物件活字
+	 *            第二個活字物件
 	 * @return 是否重疊
 	 */
 	protected boolean areIntersected(RectangularArea first,
@@ -256,16 +279,18 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
-	 * 判斷二個物件活字是否適合太接近，筆劃角度太相同會黏在一起。用來調整部件間的距離，用邊長減少長度來看。
+	 * 判斷二個物件活字適合接近的係數，筆劃角度太相同會黏在一起。用來調整部件間的距離，用邊長減少長度除以邊界長度來計算。
 	 * 
 	 * @param first
-	 *            第一個物件活字
+	 *            第一個活字物件
 	 * @param second
-	 *            第二個物件活字
-	 * @return 是否重疊
+	 *            第二個活字物件
+	 * @param boundaryLength
+	 *            用來比較消失邊長的邊界長度
+	 * @return 適合接近的係數
 	 */
-	protected boolean areSuitableToClose(RectangularArea first,
-			RectangularArea second)
+	protected double nonsuitableToClose(RectangularArea first,
+			RectangularArea second, double boundaryLength)
 	{// TODO
 		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
 				second);
@@ -273,13 +298,23 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		rectangularArea.add(second);
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea);
-		double firstLength = first.getBounds2D().getWidth();
-		if (shapeInformation.getApproximativeCircumference() + 1.5
-				* firstLength < firstInformation
-				.getApproximativeCircumference()
-				+ secondInformation.getApproximativeCircumference())
-			return false;
-		return true;
+		// System.out
+		// .println("s="
+		// + shapeInformation.getApproximativeCircumference()
+		// + " len="
+		// + boundaryLength
+		// + " fi="
+		// + firstInformation.getApproximativeCircumference()
+		// + " sec="
+		// + secondInformation.getApproximativeCircumference()
+		// + " fs="
+		// + (firstInformation.getApproximativeCircumference() +
+		// secondInformation
+		// .getApproximativeCircumference()));
+		// TODO 人工參數
+		return (firstInformation.getApproximativeCircumference()
+				+ secondInformation.getApproximativeCircumference() - shapeInformation
+				.getApproximativeCircumference()) / boundaryLength;
 	}
 
 	/**

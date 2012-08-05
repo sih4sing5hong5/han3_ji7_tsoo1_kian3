@@ -24,7 +24,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.bolder.NullStroke;
-import cc.adjusting.piece.ShapeInformation;
+import cc.moveable_type.rectangular_area.ShapeInformation;
 
 /** A demonstration of writing custom Stroke classes */
 public class AwtTypesettingTest extends JPanel

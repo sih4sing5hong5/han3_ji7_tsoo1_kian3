@@ -1,4 +1,4 @@
-package cc.adjusting.piece;
+package cc.moveable_type.rectangular_area;
 
 import java.awt.Shape;
 import java.awt.geom.Area;

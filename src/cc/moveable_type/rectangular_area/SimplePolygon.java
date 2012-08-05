@@ -1,4 +1,4 @@
-package cc.adjusting.piece;
+package cc.moveable_type.rectangular_area;
 
 import java.awt.geom.Point2D;
 import java.util.Vector;

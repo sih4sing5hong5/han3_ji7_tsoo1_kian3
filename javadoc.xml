@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="protected" author="true" classpath="." destdir="doc" doctitle="漢字組建" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="cc.core,cc.moveable_type.area,cc.example.awt,cc.printing.awt.piece,cc.moveable_type.rectangular_area,cc.setting.piece,cc.printing.awt.image,cc.adjusting.piece,cc.example.reference,cc.setting,cc.setting.image,cc.printing.awt.area,cc.setting.area,cc.moveable_type,cc.adjusting.image,cc.adjusting.area,cc.adjusting,cc.adjusting.bolder,cc.exception,cc.moveable_type.image,cc.printing,cc.moveable_type.piece" source="1.6" sourcepath="/home/Ihc/project/workspace/ChineseCharacter/src" splitindex="true" use="true" version="true">
+            <link href="http://java.sun.com/javase/6/docs/api/"/>
+        </javadoc>
+    </target>
+</project>

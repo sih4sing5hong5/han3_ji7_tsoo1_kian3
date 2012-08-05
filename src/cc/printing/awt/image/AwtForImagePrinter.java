@@ -14,8 +14,7 @@ import cc.moveable_type.image.ImageMoveableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
- * 圖片活字遞迴列印工具。接收<code>ImageMovableTypeWen</code>或
- * <code>ImageMovableTypeTzu</code>，依結構遞迴找出字體並列印在<code>Graphics2D</code>上。
+ * 圖片活字遞迴列印工具。接收圖片活字結構（<code>ImageMovableType</code>），依結構遞迴找出字體並列印在<code>Graphics2D</code>上。
  * 
  * @author Ihc
  */

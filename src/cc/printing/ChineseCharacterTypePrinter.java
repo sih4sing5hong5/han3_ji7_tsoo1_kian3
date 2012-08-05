@@ -4,8 +4,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 
 /**
- * 活字列印工具。接收<code>ChineseCharacterMovableTypeWen</code>或
- * <code>ChineseCharacterMovableTypeTzu</code>，並列印出來。
+ * 活字列印工具。接收活字結構（<code>ChineseCharacterMovableType</code>），並列印出來。
  * 
  * @author Ihc
  */

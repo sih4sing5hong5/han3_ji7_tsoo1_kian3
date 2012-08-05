@@ -10,8 +10,8 @@ import cc.moveable_type.area.AreaMovableTypeWen;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
- * 區塊活字遞迴列印工具。接收<code>AreaMovableTypeWen</code>或 <code>AreaMovableTypeTzu</code>
- * ，依結構遞迴列印在<code>Graphics2D</code>上。
+ * 區塊活字遞迴列印工具。接收區塊活字結構（<code>AreaMovableType</code>），依結構遞迴列印在
+ * <code>Graphics2D</code>上。
  * 
  * @author Ihc
  */

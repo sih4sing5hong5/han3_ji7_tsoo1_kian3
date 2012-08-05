@@ -10,8 +10,7 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
- * 物件活字單一列印工具。接收<code>PieceMovableTypeWen</code>或
- * <code>PieceMovableTypeTzu</code>，並列印該活字在<code>Graphics2D</code>上。
+ * 物件活字單一列印工具。接收物件活字結構（<code>PieceMovableType</code>），並列印該活字在<code>Graphics2D</code>上。
  * 
  * @author Ihc
  */

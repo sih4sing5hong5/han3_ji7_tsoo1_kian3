@@ -27,7 +27,7 @@ public class AwtStrokeProblemExample extends JPanel
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
 	/** 視窗寬度 */
-	static final int WIDTH = 1420;
+	static final int WIDTH = 1620;
 	/** 視窗高度 */
 	static final int HEIGHT = 1050;
 
@@ -35,22 +35,24 @@ public class AwtStrokeProblemExample extends JPanel
 	public void paint(Graphics g1)
 	{
 		Graphics2D graphics2D = (Graphics2D) g1;
-		Font f = new Font("全字庫正宋體", Font.BOLD, 140);
+		Font f = new Font("全字庫正宋體", Font.BOLD, 700);
 		GlyphVector gv = f.createGlyphVector(graphics2D.getFontRenderContext(),
-				"永應言木森變");
+				"永森應言木變");
 		System.out.println(gv.getNumGlyphs());
 		Area area = new Area(gv.getOutline());
 		graphics2D.setColor(Color.black);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics2D.translate(20, 130);
-		for (int i = 0; i <= 10; i += 2)
+		graphics2D.translate(20, 700);
+		for (int i = 10; i >= 0; i -= 2)
 		{
-			graphics2D.setStroke(new BasicStroke(i));
+			Color color=new Color((10-i)*0x151515);
+			graphics2D.setColor(color);
+			graphics2D.setStroke(new BasicStroke(i*10));
 			graphics2D.draw(area);
 			graphics2D.setStroke(new NullStroke());
 			graphics2D.draw(area);
-			graphics2D.translate(0, 160);
+//			graphics2D.translate(10, 0);
 		}
 	}
 

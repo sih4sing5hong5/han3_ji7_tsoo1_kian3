@@ -22,16 +22,26 @@ public class ShapeInformation
 	private double approximativeRegion;
 
 	/**
-	 * 建立一個物件
+	 * 建立一個相關資訊物件
 	 * 
 	 * @param shape
 	 *            要計算資訊的shape
 	 */
 	public ShapeInformation(Shape shape)
 	{
+		this(new Area(shape));// Area保證他的順逆時針
+	}
+
+	/**
+	 * 建立一個相關資訊物件
+	 * 
+	 * @param area
+	 *            要計算資訊的area
+	 */
+	public ShapeInformation(Area area)
+	{
 		approximativeCircumference = 0.0;
 		approximativeRegion = 0.0;
-		Area area = new Area(shape);// 保證他的順逆時針
 		double[] coords = new double[6];
 		SimplePolygon simplePolygon = new SimplePolygon();
 		for (PathIterator pp = area.getPathIterator(null); !pp.isDone(); pp
@@ -56,6 +66,7 @@ public class ShapeInformation
 				simplePolygon.addPoint(coords[0], coords[1]);
 				break;
 			case PathIterator.SEG_CLOSE:
+				simplePolygon.finish();
 				approximativeCircumference += simplePolygon.getCircumference();
 				approximativeRegion += simplePolygon.getRegionSize();
 				simplePolygon.clear();

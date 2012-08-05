@@ -69,6 +69,24 @@ public class SimplePolygon
 	}
 
 	/**
+	 * 把第一個加到最後，讓行列式和距離算完。
+	 */
+	public void finish()
+	{
+		if (apex.size() != 0 && !apex.firstElement().equals(apex.lastElement()))
+		{
+			// System.out.println("a=" + getCircumference());
+			// System.out.println(apex.firstElement());
+			// System.out.println(apex.lastElement());
+			addPoint(apex.firstElement());
+			// System.out.println("b=" + getCircumference());
+			// System.out.println(apex.firstElement());
+			// System.out.println(apex.lastElement());
+		}
+		return;
+	}
+
+	/**
 	 * 算出目前多邊形的周長
 	 * 
 	 * @return 多邊形的周長

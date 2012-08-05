@@ -3,12 +3,14 @@ package cc.adjusting.piece;
 import java.awt.geom.AffineTransform;
 
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
+import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.ShapeInformation;
 
 /**
  * 物件活字調整工具。把活字的資訊全部集中在同一個物件上（<code>Piece</code>， <code>RectangularArea</code>型態
@@ -166,6 +168,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			else
 				maxiPos = middlePos;
 		}
+
+		double downBoldCoefficient = computeBoldCoefficient(down.getPiece());
+		down.getPiece().moveTo(0, -downBoldCoefficient);
+		if (areSuitableToClose(up.getPiece(), down.getPiece()))
+			down.getPiece().moveTo(0, +downBoldCoefficient * 2);
+		else
+			down.getPiece().moveTo(0, +downBoldCoefficient);
+
 		down.getPiece().moveToOrigin();
 		down.getPiece().moveTo(0, miniPos);
 		pieceMovableTypeTzu.getPiece().reset();
@@ -183,7 +193,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void wrapMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
-		// TODO 暫時替代用
+		// TODO 暫時替代用 冖宀
+		ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) pieceMovableTypeTzu
+				.getChineseCharacter();
+		ChineseCharacter chineseCharacter = chineseCharacterTzu.getChildren()[0];
+		switch (chineseCharacter.getCodePoint())
+		{
+		case 2:// TODO
+		}
 		PieceMovableType out = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
@@ -239,6 +256,33 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
+	 * 判斷二個物件活字是否適合太接近，筆劃角度太相同會黏在一起。用來調整部件間的距離，用邊長減少長度來看。
+	 * 
+	 * @param first
+	 *            第一個物件活字
+	 * @param second
+	 *            第二個物件活字
+	 * @return 是否重疊
+	 */
+	protected boolean areSuitableToClose(RectangularArea first,
+			RectangularArea second)
+	{// TODO
+		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
+				second);
+		RectangularArea rectangularArea = new RectangularArea(first);
+		rectangularArea.add(second);
+		ShapeInformation shapeInformation = new ShapeInformation(
+				rectangularArea);
+		double firstLength = first.getBounds2D().getWidth();
+		if (shapeInformation.getApproximativeCircumference() + 1.5
+				* firstLength < firstInformation
+				.getApproximativeCircumference()
+				+ secondInformation.getApproximativeCircumference())
+			return false;
+		return true;
+	}
+
+	/**
 	 * 要給<code>AwtForSinglePiecePrinter</code>列印前必須把物件活字依預計位置及大小（
 	 * <code>getTerritory()</code>）產生一個新的物件。
 	 * 
@@ -260,14 +304,4 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				.getY());
 		return target;
 	}
-
-//	@Override
-//	protected void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
-//			AffineTransform affineTransform)
-//	{
-//		// super.shrinkPieceByFixingStroke(rectangularArea, affineTransform);
-//		rectangularArea.transform(affineTransform);
-//	}
-
-	// TODO 調整函式順序
 }

@@ -42,28 +42,28 @@ public class ShapeInformation
 	{
 		approximativeCircumference = 0.0;
 		approximativeRegion = 0.0;
-		double[] coords = new double[6];
+		double[] controlPoint = new double[6];
 		SimplePolygon simplePolygon = new SimplePolygon();
 		for (PathIterator pp = area.getPathIterator(null); !pp.isDone(); pp
 				.next())
 		{
-			int type = pp.currentSegment(coords);
+			int type = pp.currentSegment(controlPoint);
 			switch (type)
 			{
 			case PathIterator.SEG_CUBICTO:
-				simplePolygon.addPoint(coords[0], coords[1]);
-				simplePolygon.addPoint(coords[2], coords[3]);
-				simplePolygon.addPoint(coords[4], coords[5]);
+				simplePolygon.addPoint(controlPoint[0], controlPoint[1]);
+				simplePolygon.addPoint(controlPoint[2], controlPoint[3]);
+				simplePolygon.addPoint(controlPoint[4], controlPoint[5]);
 				break;
 			case PathIterator.SEG_QUADTO:
-				simplePolygon.addPoint(coords[0], coords[1]);
-				simplePolygon.addPoint(coords[2], coords[3]);
+				simplePolygon.addPoint(controlPoint[0], controlPoint[1]);
+				simplePolygon.addPoint(controlPoint[2], controlPoint[3]);
 				break;
 			case PathIterator.SEG_LINETO:
-				simplePolygon.addPoint(coords[0], coords[1]);
+				simplePolygon.addPoint(controlPoint[0], controlPoint[1]);
 				break;
 			case PathIterator.SEG_MOVETO:
-				simplePolygon.addPoint(coords[0], coords[1]);
+				simplePolygon.addPoint(controlPoint[0], controlPoint[1]);
 				break;
 			case PathIterator.SEG_CLOSE:
 				simplePolygon.finish();

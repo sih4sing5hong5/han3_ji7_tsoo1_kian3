@@ -52,4 +52,19 @@ public abstract class ChineseCharacter
 	{
 		return parent;
 	}
+	/**
+	 * 取得部件Unicode編碼
+	 * 
+	 * @return 部件Unicode編碼
+	 */
+	public abstract int getCodePoint();
+	/**
+	 * 取得部件的字元形態
+	 * 
+	 * @return 部件字元形態
+	 */
+	public char[] getChars()
+	{
+		return Character.toChars(getCodePoint());
+	}
 }

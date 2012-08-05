@@ -48,14 +48,4 @@ public class ChineseCharacterWen extends ChineseCharacter
 	{
 		return codePoint;
 	}
-
-	/**
-	 * 取得部件的字元形態
-	 * 
-	 * @return 部件字元形態
-	 */
-	public char[] getChars()
-	{
-		return Character.toChars(codePoint);
-	}
 }

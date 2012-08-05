@@ -38,8 +38,8 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 *             如果<code>codePoint</code>不是部件組合符號
 	 */
 	ChineseCharacterTzu(ChineseCharacterTzu parent, int codePoint,
-			StringCharacterIterator iterator) throws ChineseCharacterFormatException,
-			IllegalArgumentException
+			StringCharacterIterator iterator)
+			throws ChineseCharacterFormatException, IllegalArgumentException
 	{
 		super(parent);
 		if (!ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
@@ -54,10 +54,11 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	}
 
 	@Override
-	public ChineseCharacterMovableType typeset(ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+	public ChineseCharacterMovableType typeset(
+			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
 			ChineseCharacterMovableTypeTzu parent)
 	{
-		return chineseCharacterTypeSetter.setTzu(parent,this);
+		return chineseCharacterTypeSetter.setTzu(parent, this);
 	}
 
 	/**
@@ -78,5 +79,11 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	public ChineseCharacter[] getChildren()
 	{
 		return children;
+	}
+
+	@Override
+	public int getCodePoint()
+	{
+		return getType().toCodePoint();
 	}
 }

@@ -27,6 +27,8 @@ import java.awt.geom.PathIterator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cc.adjusting.bolder.NullStroke;
+
 /** 修改自http://www.java2s.com/Code/Java/2D-Graphics-GUI/CustomStrokes.htm */
 public class AwtStrokeExample extends JPanel
 {
@@ -113,18 +115,18 @@ public class AwtStrokeExample extends JPanel
 	}
 }
 
-/**
- * This Stroke implementation does nothing. Its createStrokedShape() method
- * returns an unmodified shape. Thus, drawing a shape with this Stroke is the
- * same as filling that shape!
- */
-class NullStroke implements Stroke
-{
-	public Shape createStrokedShape(Shape s)
-	{
-		return s;
-	}
-}
+///**
+// * This Stroke implementation does nothing. Its createStrokedShape() method
+// * returns an unmodified shape. Thus, drawing a shape with this Stroke is the
+// * same as filling that shape!
+// */
+//class NullStroke implements Stroke
+//{
+//	public Shape createStrokedShape(Shape s)
+//	{
+//		return s;
+//	}
+//}
 
 /**
  * This Stroke implementation applies a BasicStroke to a shape twice. If you

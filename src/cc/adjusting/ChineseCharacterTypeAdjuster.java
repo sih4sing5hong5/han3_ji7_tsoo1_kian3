@@ -6,7 +6,6 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 /**
  * 活字調整工具。依活字結構（<code>ChineseCharacterMovableType</code>）本身的組合調整大小位置粗細…等等資訊。
  * <p>
- * SimplePiece是兩兩配對後定框，再調部件大小，但無法物件距離難貼近或拉開。
  * 
  * @author Ihc
  */

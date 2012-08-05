@@ -101,6 +101,20 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	}
 
 	/**
+	 * 計算物件活字粗細半徑
+	 * 
+	 * @param rectangularArea
+	 *            物件活字
+	 * @return 粗細半徑
+	 */
+	protected double computePieceRadius(RectangularArea rectangularArea)
+	{
+		ShapeInformation shapeInformation = new ShapeInformation(
+				rectangularArea);
+		return shapeInformation.getApproximativeRegion()
+				/ shapeInformation.getApproximativeCircumference();
+	}
+	/**
 	 * 計算物件活字粗細係數
 	 * 
 	 * @param rectangularArea
@@ -109,10 +123,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 */
 	protected double computeBoldCoefficient(RectangularArea rectangularArea)
 	{
-		ShapeInformation shapeInformation = new ShapeInformation(
-				rectangularArea);
-		return shapeInformation.getApproximativeRegion()
-				/ shapeInformation.getApproximativeCircumference();
+		return computePieceRadius(rectangularArea);
 	}
 
 	/**

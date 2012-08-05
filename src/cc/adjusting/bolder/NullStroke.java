@@ -14,7 +14,7 @@ public class NullStroke implements Stroke
 	@Override
 	public Shape createStrokedShape(Shape p)
 	{
-		return new Area();
+		return new Area(p);
 	}
 
 }

@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import cc.adjusting.bolder.BasicBolder;
 import cc.adjusting.bolder.EmptyBolder;
 import cc.adjusting.bolder.NullStroke;
+import cc.adjusting.bolder.RadialBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
@@ -52,9 +53,9 @@ public class AwtTestExample extends JPanel
 	static final int LINE_SIZE = 6;
 	/** 測試漢字 */
 	static private final String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"一百二十三尺"
-			+ "秋漿國變務森" + "⿰禾火⿱將水⿴囗或" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木" 
-			+ "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田" +
-					"⿱口⿰口口⿱夕夕，" + "⿴辶⿱宀⿱珤⿰隹⿰貝招⿱宀⿱珤⿰隹⿰貝招";// */;
+			+ "秋漿國變務森" + "⿰禾火⿱將水⿴囗或" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木"
+			+ "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田" + "⿱口⿰口口⿱夕夕，"
+			+ "⿴辶⿱宀⿱珤⿰隹⿰貝招⿱宀⿱珤⿰隹⿰貝招辶";// */;
 	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	/** 全字庫正楷體 */
@@ -68,7 +69,7 @@ public class AwtTestExample extends JPanel
 	/** 測試用字體 */
 	static private final String FontName = 全字庫正宋體;
 	/** 測試用屬性 */
-	static private final int FontStyle = Font.BOLD/* 0 */;
+	static private final int FontStyle = Font.BOLD/* 0;//*/ ;
 
 	@Override
 	public void paint(Graphics g1)
@@ -101,8 +102,9 @@ public class AwtTestExample extends JPanel
 
 		System.out.println("調整中～～ 時間：" + System.currentTimeMillis());
 		MergePieceAdjuster adjuster = new MergePieceAdjuster(new BasicBolder(),
-				1e-1);
+				1e1);
 //		adjuster = new MergePieceAdjuster(new EmptyBolder(), 1e-1);// TODO
+		// adjuster = new MergePieceAdjuster(new RadialBolder(), 1e-1);//QQ
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);

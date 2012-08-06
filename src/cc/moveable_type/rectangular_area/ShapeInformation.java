@@ -44,10 +44,10 @@ public class ShapeInformation
 		approximativeRegion = 0.0;
 		double[] controlPoint = new double[6];
 		SimplePolygon simplePolygon = new SimplePolygon();
-		for (PathIterator pp = area.getPathIterator(null); !pp.isDone(); pp
+		for (PathIterator pathIterator = area.getPathIterator(null); !pathIterator.isDone(); pathIterator
 				.next())
 		{
-			int type = pp.currentSegment(controlPoint);
+			int type = pathIterator.currentSegment(controlPoint);
 			switch (type)
 			{
 			case PathIterator.SEG_CUBICTO:

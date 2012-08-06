@@ -102,7 +102,8 @@ public class AwtTestExample extends JPanel
 
 		System.out.println("調整中～～ 時間：" + System.currentTimeMillis());
 		MergePieceAdjuster adjuster = new MergePieceAdjuster(new BasicBolder(),
-				1e1);
+				1e-1);
+		System.out.println();
 //		adjuster = new MergePieceAdjuster(new EmptyBolder(), 1e-1);// TODO
 		// adjuster = new MergePieceAdjuster(new RadialBolder(), 1e-1);//QQ
 		for (int i = 0; i < ccArray.size(); ++i)

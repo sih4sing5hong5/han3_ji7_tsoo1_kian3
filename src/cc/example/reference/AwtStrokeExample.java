@@ -92,7 +92,7 @@ public class AwtStrokeExample extends JPanel
 			}
 		});
 		f.setContentPane(new AwtStrokeExample());
-		f.setSize(1500, 800);
+		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}
 
@@ -115,18 +115,18 @@ public class AwtStrokeExample extends JPanel
 	}
 }
 
-///**
+// /**
 // * This Stroke implementation does nothing. Its createStrokedShape() method
 // * returns an unmodified shape. Thus, drawing a shape with this Stroke is the
 // * same as filling that shape!
 // */
-//class NullStroke implements Stroke
-//{
-//	public Shape createStrokedShape(Shape s)
-//	{
-//		return s;
-//	}
-//}
+// class NullStroke implements Stroke
+// {
+// public Shape createStrokedShape(Shape s)
+// {
+// return s;
+// }
+// }
 
 /**
  * This Stroke implementation applies a BasicStroke to a shape twice. If you

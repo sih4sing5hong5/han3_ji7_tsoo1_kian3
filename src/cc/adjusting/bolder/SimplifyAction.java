@@ -2,6 +2,7 @@ package cc.adjusting.bolder;
 
 import java.awt.geom.GeneralPath;
 
+import cc.moveable_type.rectangular_area.PathAction;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
 
 public class SimplifyAction implements PathAction

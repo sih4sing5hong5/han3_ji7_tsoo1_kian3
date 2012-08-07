@@ -14,11 +14,11 @@ import cc.moveable_type.rectangular_area.Point2DWithVector;
 import cc.moveable_type.rectangular_area.ShapeAnalyst;
 import cc.moveable_type.rectangular_area.SimplePolygon;
 
-public class SimplifyStroke implements Stroke
+public class UnsharpenStroke implements Stroke
 {
 	private final double width;
 
-	public SimplifyStroke(double width)
+	public UnsharpenStroke(double width)
 	{
 		this.width = width;
 	}
@@ -31,12 +31,12 @@ public class SimplifyStroke implements Stroke
 
 	public Shape createStrokedShape(GeneralPath generalPath)
 	{
-		SimplifyAction simplifyAction = new SimplifyAction(
+		UnsharpenAction unsharpenAction =new UnsharpenAction(
 				generalPath.getWindingRule());
-		PathTravel pathTravel = new PathTravel(simplifyAction);
+		PathTravel pathTravel = new PathTravel(unsharpenAction);
 		pathTravel.travelOn(generalPath);
-		new ShapeAnalyst(simplifyAction.getCurrnetPath());
-		return simplifyAction.getCurrnetPath();
+//		unsharpenAction.doActionOnFinish();
+		return unsharpenAction.getCurrnetPath();
 	}
 
 }

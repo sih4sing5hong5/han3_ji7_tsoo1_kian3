@@ -1,5 +1,6 @@
 package cc.example.awt;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,7 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.bolder.NullStroke;
-import cc.adjusting.bolder.RadialStroke;
+import cc.adjusting.bolder.SimplifyStroke;
+import cc.adjusting.bolder.UnsharpenStroke;
 import cc.example.reference.ControlPointsStroke;
 
 /**
@@ -57,11 +59,11 @@ public class AwtStrokeWidthTest extends JPanel
 		graphics2D.setColor(Color.RED);
 		graphics2D.setStroke(new ControlPointsStroke(5));
 		graphics2D.translate(10, 610);
-		Stroke stroke = new RadialStroke(5);
+		Stroke stroke = new SimplifyStroke(10);
 		System.out.println("--");
 		// ShapeAnalyst shapeAnalyst = new ShapeAnalyst(area);
 		System.out.println("--");
-		// area = new Area(stroke.createStrokedShape(area));
+		 area = new Area(stroke.createStrokedShape(area));
 		// shapeAnalyst = new ShapeAnalyst(area);
 		System.out.println("--");
 		graphics2D.draw(area);
@@ -73,10 +75,14 @@ public class AwtStrokeWidthTest extends JPanel
 		{
 			Color color = new Color((10 - i) * 0x101000 + 0xff);
 			graphics2D.setColor(color);
-			graphics2D.setStroke(new NullStroke());
-			stroke = new RadialStroke(i * 5);
-			area = new Area(stroke.createStrokedShape(area));
+			graphics2D.setStroke(new BasicStroke(i*5));
+//			stroke = new RadialStroke(i * 5);
+//			area = new Area();
 			graphics2D.draw(area);
+//			graphics2D.draw(stroke.createStrokedShape(area));
+			graphics2D.setStroke(new NullStroke());
+			graphics2D.draw(area);
+//			graphics2D.draw(stroke.createStrokedShape(area));
 			// graphics2D.translate(10, 0);
 		}
 		Color color = new Color(12 * 0x101000 + 0xff);

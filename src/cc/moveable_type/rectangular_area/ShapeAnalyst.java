@@ -44,11 +44,12 @@ public class ShapeAnalyst
 		approximativeRegion = 0.0;
 		double[] controlPoint = new double[6];
 		SimplePolygon simplePolygon = new SimplePolygon();
+		int i=0;
 		for (PathIterator pathIterator = area.getPathIterator(null); !pathIterator
 				.isDone(); pathIterator.next())
 		{
 			int type = pathIterator.currentSegment(controlPoint);
-			System.out.println("main=" + type + " " + controlPoint[0] + " "
+			System.out.println(i+" main=" + type + " " + controlPoint[0] + " "
 					+ controlPoint[1] + " " + controlPoint[2] + " "
 					+ controlPoint[3] + " " + controlPoint[4] + " "
 					+ controlPoint[5]);
@@ -77,6 +78,7 @@ public class ShapeAnalyst
 				System.out.println("closer");
 				break;
 			}
+			i++;
 		}
 	}
 

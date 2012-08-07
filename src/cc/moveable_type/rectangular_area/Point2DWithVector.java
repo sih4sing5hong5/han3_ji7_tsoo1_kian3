@@ -101,6 +101,11 @@ public class Point2DWithVector extends Point2D
 		return;
 	}
 
+	public double innerProduct(Point2DWithVector point2dWithVector)
+	{
+		return x * point2dWithVector.x + y * point2dWithVector.y;
+	}
+
 	public void multipleByPolarSystem(Point2DWithVector point2dWithVector)
 	{
 		double a = this.x, b = this.y;
@@ -135,11 +140,14 @@ public class Point2DWithVector extends Point2D
 
 	public boolean areTheSameAs(double x, double y)
 	{
-		if (Math.abs(this.x - x) > getPrecision())
-			return false;
-		if (Math.abs(this.y - y) > getPrecision())
+		if (distance(x, y) > getPrecision())
 			return false;
 		return true;
+	}
+
+	public double getLength()
+	{
+		return distance(origin);
 	}
 
 	public double getPrecision()

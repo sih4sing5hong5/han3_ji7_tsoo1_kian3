@@ -1,7 +1,27 @@
 package cc.moveable_type.rectangular_area;
 
+/**
+ * 提供貝茲曲線的位置和斜率的計算公式。
+ * 
+ * @author Ihc
+ */
 public class CurveInformation
 {
+	/**
+	 * 給定直線參數式以及參數，計算點的位置
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param y1
+	 *            第一個點垂直位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param y2
+	 *            第二個點垂直位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應位置
+	 */
 	public Point2DWithVector getLinePoint(double x1, double y1, double x2,
 			double y2, double t)
 	{
@@ -10,6 +30,25 @@ public class CurveInformation
 		return answer;
 	}
 
+	/**
+	 * 給定二維曲線參數式以及參數，計算點的位置
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param y1
+	 *            第一個點垂直位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param y2
+	 *            第二個點垂直位置
+	 * @param x3
+	 *            第三個點水平位置
+	 * @param y3
+	 *            第三個點垂直位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應位置
+	 */
 	public Point2DWithVector getQuadPoint(double x1, double y1, double x2,
 			double y2, double x3, double y3, double t)
 	{
@@ -18,6 +57,29 @@ public class CurveInformation
 		return answer;
 	}
 
+	/**
+	 * 給定三維曲線參數式以及參數，計算點的位置
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param y1
+	 *            第一個點垂直位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param y2
+	 *            第二個點垂直位置
+	 * @param x3
+	 *            第三個點水平位置
+	 * @param y3
+	 *            第三個點垂直位置
+	 * @param x4
+	 *            第四個點水平位置
+	 * @param y4
+	 *            第四個點垂直位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應位置
+	 */
 	public Point2DWithVector getCubicPoint(double x1, double y1, double x2,
 			double y2, double x3, double y3, double x4, double y4, double t)
 	{
@@ -26,6 +88,21 @@ public class CurveInformation
 		return answer;
 	}
 
+	/**
+	 * 給定直線參數式以及參數，計算點的斜率
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param y1
+	 *            第一個點垂直位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param y2
+	 *            第二個點垂直位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應斜率
+	 */
 	public Point2DWithVector getLineSlope(double x1, double y1, double x2,
 			double y2, double t)
 	{
@@ -34,6 +111,25 @@ public class CurveInformation
 		return answer;
 	}
 
+	/**
+	 * 給定二維曲線參數式以及參數，計算點的斜率
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param y1
+	 *            第一個點垂直位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param y2
+	 *            第二個點垂直位置
+	 * @param x3
+	 *            第三個點水平位置
+	 * @param y3
+	 *            第三個點垂直位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應斜率
+	 */
 	public Point2DWithVector getQuadSlope(double x1, double y1, double x2,
 			double y2, double x3, double y3, double t)
 	{
@@ -43,6 +139,29 @@ public class CurveInformation
 		return answer;
 	}
 
+	/**
+	 * 給定三維曲線參數式以及參數，計算點的斜率
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param y1
+	 *            第一個點垂直位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param y2
+	 *            第二個點垂直位置
+	 * @param x3
+	 *            第三個點水平位置
+	 * @param y3
+	 *            第三個點垂直位置
+	 * @param x4
+	 *            第四個點水平位置
+	 * @param y4
+	 *            第四個點垂直位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應斜率
+	 */
 	public Point2DWithVector getCubicSlope(double x1, double y1, double x2,
 			double y2, double x3, double y3, double x4, double y4, double t)
 	{
@@ -52,14 +171,40 @@ public class CurveInformation
 		return answer;
 	}
 
+	/**
+	 * 給定二維曲線參數式以及參數，計算點的位置
+	 * 
+	 * @param x1
+	 *            第一個點位置
+	 * @param x2
+	 *            第二個點位置
+	 * @param x3
+	 *            第三個點位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應位置
+	 */
 	private double getQuadPoint(double x1, double x2, double x3, double t)
 	{
-		// System.out.println("qq="+x1+" "+x2+" "+x3+" "+t);
-		// System.out.println((2 * t - 2) * x1 + (2 - 4 * t) * x2 + 2 * t * x3);
 		double u = 1 - t;
 		return u * u * x1 + 2 * u * t * x2 + t * t * x3;
 	}
 
+	/**
+	 * 給定三維曲線參數式以及參數，計算點的位置
+	 * 
+	 * @param x1
+	 *            第一個點水平位置
+	 * @param x2
+	 *            第二個點水平位置
+	 * @param x3
+	 *            第三個點水平位置
+	 * @param x4
+	 *            第四個點水平位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應位置
+	 */
 	private double getCubicPoint(double x1, double x2, double x3, double x4,
 			double t)
 	{
@@ -68,13 +213,39 @@ public class CurveInformation
 				* t * x4;
 	}
 
+	/**
+	 * 給定二維曲線參數式以及參數，計算點的斜率
+	 * 
+	 * @param x1
+	 *            第一個點位置
+	 * @param x2
+	 *            第二個點位置
+	 * @param x3
+	 *            第三個點位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應斜率
+	 */
 	private double getQuadSlope(double x1, double x2, double x3, double t)
 	{
-		// System.out.println("qq="+x1+" "+x2+" "+x3+" "+t);
-		// System.out.println((2 * t - 2) * x1 + (2 - 4 * t) * x2 + 2 * t * x3);
 		return (2 * t - 2) * x1 + (2 - 4 * t) * x2 + 2 * t * x3;
 	}
 
+	/**
+	 * 給定三維曲線參數式以及參數，計算點的斜率
+	 * 
+	 * @param x1
+	 *            第一個點位置
+	 * @param x2
+	 *            第二個點位置
+	 * @param x3
+	 *            第三個點位置
+	 * @param x4
+	 *            第四個點位置
+	 * @param t
+	 *            參數
+	 * @return 參數t的對應斜率
+	 */
 	private double getCubicSlope(double x1, double x2, double x3, double x4,
 			double t)
 	{

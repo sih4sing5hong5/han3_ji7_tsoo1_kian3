@@ -3,15 +3,33 @@ package cc.moveable_type.rectangular_area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
 
+/**
+ * 路徑循訪公用型態。
+ * 
+ * @author Ihc
+ */
 public class PathTravel
 {
+	/** 循訪路徑動作 */
 	private PathAction pathAction;
 
+	/**
+	 * 建立路徑循訪物件。
+	 * 
+	 * @param pathAction
+	 *            反應動作物件
+	 */
 	public PathTravel(PathAction pathAction)
 	{
 		this.pathAction = pathAction;
 	}
 
+	/**
+	 * 循訪路徑。
+	 * 
+	 * @param generalPath
+	 *            欲循訪的路徑
+	 */
 	public void travelOn(GeneralPath generalPath)
 	{
 		double[] controlPoint = new double[6];

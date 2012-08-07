@@ -1,6 +1,5 @@
 package cc.adjusting.bolder;
 
-import java.awt.BasicStroke;
 import java.awt.Stroke;
 
 /**
@@ -10,24 +9,49 @@ import java.awt.Stroke;
  */
 public class FunctinoalBasicBolder implements ChineseCharacterTypeBolder
 {
+	/** 筆劃加寬前的預先處理 */
 	private Stroke[] functionalStroke;
+	/** 筆劃加寬的分段數 */
 	private int times;
 
+	/**
+	 * 建立物件活字筆劃加寬工具。
+	 */
 	public FunctinoalBasicBolder()
 	{
 		this(null, 1);
 	}
 
+	/**
+	 * 建立物件活字筆劃加寬工具。
+	 * 
+	 * @param times
+	 *            筆劃加寬的分段數
+	 */
 	public FunctinoalBasicBolder(int times)
 	{
 		this(null, times);
 	}
 
+	/**
+	 * 建立物件活字筆劃加寬工具。
+	 * 
+	 * @param functionalStroke
+	 *            筆劃加寬前的預先處理
+	 */
 	public FunctinoalBasicBolder(Stroke[] functionalStroke)
 	{
 		this(functionalStroke, 1);
 	}
 
+	/**
+	 * 建立物件活字筆劃加寬工具。
+	 * 
+	 * @param functionalStroke
+	 *            筆劃加寬前的預先處理
+	 * @param times
+	 *            筆劃加寬的分段數
+	 */
 	public FunctinoalBasicBolder(Stroke[] functionalStroke, int times)
 	{
 		this.functionalStroke = functionalStroke;

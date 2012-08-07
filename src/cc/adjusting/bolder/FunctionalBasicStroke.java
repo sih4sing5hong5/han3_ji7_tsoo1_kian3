@@ -5,15 +5,29 @@ import java.awt.Shape;
 import java.awt.Stroke;
 
 /**
+ * 多功能筆劃加寬器。可以在加寬前對物件做一些處理，而且分多次加寬，減少問題。
  * 
  * @author Ihc
  */
 public class FunctionalBasicStroke implements Stroke
 {
+	/** 筆劃加寬前的預先處理 */
 	private Stroke[] functionalStroke;
+	/** 筆劃加寬的分段數 */
 	int times;
+	/** 筆劃加寬工貝 */
 	BasicStroke basicStroke;
 
+	/**
+	 * 建立多功能筆劃加寬器。
+	 * 
+	 * @param functionalStroke
+	 *            筆劃加寬前的預先處理
+	 * @param times
+	 *            筆劃加寬的分段數
+	 * @param width
+	 *            筆劃加寬工貝
+	 */
 	public FunctionalBasicStroke(Stroke[] functionalStroke, int times,
 			double width)
 	{
@@ -34,5 +48,4 @@ public class FunctionalBasicStroke implements Stroke
 			p = basicStroke.createStrokedShape(p);
 		return p;
 	}
-
 }

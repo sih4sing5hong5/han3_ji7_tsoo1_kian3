@@ -14,10 +14,8 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.adjusting.bolder.BasicBolder;
-import cc.adjusting.bolder.EmptyBolder;
+import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.bolder.NullStroke;
-import cc.adjusting.bolder.RadialBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
@@ -69,7 +67,7 @@ public class AwtTestExample extends JPanel
 	/** 測試用字體 */
 	static private final String FontName = 全字庫正宋體;
 	/** 測試用屬性 */
-	static private final int FontStyle = Font.BOLD/* 0;//*/ ;
+	static private final int FontStyle = Font.BOLD/* 0;// */;
 
 	@Override
 	public void paint(Graphics g1)
@@ -101,11 +99,9 @@ public class AwtTestExample extends JPanel
 		}
 
 		System.out.println("調整中～～ 時間：" + System.currentTimeMillis());
-		MergePieceAdjuster adjuster = new MergePieceAdjuster(new BasicBolder(),
-				1e-1);
+		MergePieceAdjuster adjuster = new MergePieceAdjuster(
+				new FunctinoalBasicBolder(), 1e-1);// TODO
 		System.out.println();
-//		adjuster = new MergePieceAdjuster(new EmptyBolder(), 1e-1);// TODO
-		// adjuster = new MergePieceAdjuster(new RadialBolder(), 1e-1);//QQ
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);

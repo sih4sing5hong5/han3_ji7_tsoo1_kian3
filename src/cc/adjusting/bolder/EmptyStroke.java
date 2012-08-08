@@ -5,7 +5,7 @@ import java.awt.Stroke;
 import java.awt.geom.Area;
 
 /**
- * 什麼都不產生的筆劃工具。
+ * 空白的物件活字的筆劃工具。
  * 
  * @author Ihc
  */

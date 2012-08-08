@@ -7,12 +7,21 @@ import java.awt.geom.Point2D;
 import cc.moveable_type.rectangular_area.CurveInformation;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
 
+/**
+ * 路徑線段。並包含相關處理函式。
+ * 
+ * @author Ihc
+ */
 public class SinglePath
 {
+	/** 線段型態 */
 	private int type;
+	/** 線段起始點 */
 	private Point2DWithVector currentPoint;
+	/** 線段控制點 */
 	private double[] controlPoint;
 
+	/** 建立線段物件 */
 	public SinglePath()
 	{
 		type = PathIterator.SEG_CLOSE;
@@ -20,12 +29,28 @@ public class SinglePath
 		controlPoint = new double[6];
 	}
 
+	/**
+	 * 建立線段物件。
+	 * 
+	 * @param type
+	 *            線段型態
+	 * @param currentPoint
+	 *            線段起始點
+	 * @param controlPoint
+	 *            線段控制點
+	 */
 	public SinglePath(int type, Point2D currentPoint, double[] controlPoint)
 	{
 		this.controlPoint = new double[6];
 		setPath(type, currentPoint, controlPoint);
 	}
 
+	/**
+	 * 把線段加到路徑中。
+	 * 
+	 * @param generalPath
+	 *            目標路徑
+	 */
 	public void addTo(GeneralPath generalPath)
 	{
 		switch (type)
@@ -51,6 +76,11 @@ public class SinglePath
 		}
 	}
 
+	/**
+	 * 將線段前部份切掉一小部份以利路徑圓滑工具使用。
+	 * 
+	 * @return 新的啟始點
+	 */
 	public Point2DWithVector cutHead()
 	{
 		reverse();
@@ -59,6 +89,11 @@ public class SinglePath
 		return point2dWithVector;
 	}
 
+	/**
+	 * 將線段後部份切掉一小部份以利路徑圓滑工具使用。
+	 * 
+	 * @return 新的結束點
+	 */
 	public Point2DWithVector cutTail()
 	{
 		System.out.println("cut~~");
@@ -66,7 +101,7 @@ public class SinglePath
 		Point2DWithVector tailSlope = getSlope(1.0);
 		if (tailSlope != null)
 		{
-			double newT = 1 - getPrecision()/* / tailSlope.getLength() */;
+			double newT = 1 - getLengthRatio()/* / tailSlope.getLength() */;
 			// TODO 不一定《1
 
 			Point2DWithVector headSlope = getSlope(0.0);
@@ -131,6 +166,7 @@ public class SinglePath
 		return newEnd;
 	}
 
+	/** 將線段前後點順序顛倒。 */
 	private void reverse()
 	{
 		Point2DWithVector tmp = currentPoint;
@@ -170,7 +206,9 @@ public class SinglePath
 	}
 
 	/**
-	 * @return the type
+	 * 取得線段型態。
+	 * 
+	 * @return 線段型態
 	 */
 	int getType()
 	{
@@ -178,13 +216,20 @@ public class SinglePath
 	}
 
 	/**
-	 * @return the controlPoint
+	 * 取得線段控制點。
+	 * 
+	 * @return 線段控制點
 	 */
 	double[] getControlPoint()
 	{
 		return controlPoint;
 	}
 
+	/**
+	 * 取得線段最後一個控制點。
+	 * 
+	 * @return 最後一個控制點
+	 */
 	Point2DWithVector getLastPoint()
 	{
 		Point2DWithVector point2dWithVector = null;
@@ -212,6 +257,13 @@ public class SinglePath
 		return point2dWithVector;
 	}
 
+	/**
+	 * 取得線段該點斜率。
+	 * 
+	 * @param t
+	 *            參數
+	 * @return 線段斜率
+	 */
 	public Point2DWithVector getSlope(double t)
 	{
 		Point2DWithVector point2dWithVector = null;
@@ -243,8 +295,14 @@ public class SinglePath
 	}
 
 	/**
+	 * 設定線段屬性。
+	 * 
+	 * @param type
+	 *            線段控制點
+	 * @param currentPoint
+	 *            線段啟始點
 	 * @param controlPoint
-	 *            the controlPoint to set
+	 *            線段控制點
 	 */
 	void setPath(int type, Point2D currentPoint, double[] controlPoint)
 	{
@@ -256,14 +314,25 @@ public class SinglePath
 		return;
 	}
 
+	/**
+	 * 設定線段型態。
+	 * 
+	 * @param type
+	 *            線段型態
+	 */
 	void setPath(int type)
 	{
 		this.type = type;
 		return;
 	}
 
-	public double getPrecision()
+	/**
+	 * 取得圓滑長度比例。
+	 * 
+	 * @return 圓滑長度比例
+	 */
+	public double getLengthRatio()
 	{
-		return 1e-1;//TODO 參數
+		return 1e-1;// TODO 參數
 	}
 }

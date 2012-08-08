@@ -3,7 +3,7 @@ package cc.adjusting.bolder;
 import java.awt.Stroke;
 
 /**
- * 使用<code>FunctionalBasicStroke</code>的物件活字筆劃加寬工具。
+ * 使用<code>FunctionalBasicStroke</code>的物件活字筆劃加寬工具包。
  * 
  * @author Ihc
  */

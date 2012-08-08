@@ -2,16 +2,28 @@ package cc.adjusting.bolder;
 
 import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
 
 import cc.moveable_type.rectangular_area.PathAction;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
 
+/**
+ * 圓滑筆劃的循訪反應動作介面。
+ * 
+ * @author Ihc
+ */
 public class UnsharpenAction implements PathAction
 {
+	/** 圓滑後結果 */
 	private GeneralPath generalPath;
+	/** 前一個線段 */
 	private SinglePath previousPath;
 
+	/**
+	 * 建立圓滑筆劃的循訪反應動作介面。
+	 * 
+	 * @param rule
+	 *            要移動的距離
+	 */
 	public UnsharpenAction(int rule)
 	{
 		generalPath = new GeneralPath(rule);
@@ -91,11 +103,22 @@ public class UnsharpenAction implements PathAction
 		return;
 	}
 
+	/**
+	 * 取得去掉冗點的結果
+	 * 
+	 * @return 去掉冗點的結果
+	 */
 	public GeneralPath getCurrnetPath()
 	{
 		return generalPath;
 	}
 
+	/**
+	 * 檢查是否兩線段角度，看情況加入圓角。
+	 * 
+	 * @param currentPath
+	 *            新進來的線段
+	 */
 	private void checkAngleAndAddPath(SinglePath currentPath)
 	{
 		Point2DWithVector previousSlope = previousPath.getSlope(1.0);
@@ -105,7 +128,7 @@ public class UnsharpenAction implements PathAction
 		{
 			previousSlope.setUnit();
 			currentSlope.setUnit();
-			if (previousSlope.innerProduct(currentSlope) < 0.9)
+			if (previousSlope.innerProduct(currentSlope) < 0.9) // TODO 人工參數
 			{
 				System.out.println("@@");
 				Point2DWithVector apex = previousPath.getLastPoint();

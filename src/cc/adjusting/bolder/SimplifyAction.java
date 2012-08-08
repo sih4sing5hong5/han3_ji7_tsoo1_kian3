@@ -5,10 +5,22 @@ import java.awt.geom.GeneralPath;
 import cc.moveable_type.rectangular_area.PathAction;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
 
+/**
+ * 去掉冗點的循訪反應動作介面。
+ * 
+ * @author Ihc
+ */
 public class SimplifyAction implements PathAction
 {
+	/** 去掉冗點的結果 */
 	private GeneralPath generalPath;
 
+	/**
+	 * 建立去掉冗點循訪反應動作介面。
+	 * 
+	 * @param rule
+	 *            圖形填圖規則
+	 */
 	public SimplifyAction(int rule)
 	{
 		generalPath = new GeneralPath(rule);
@@ -68,6 +80,11 @@ public class SimplifyAction implements PathAction
 		return;
 	}
 
+	/**
+	 * 取得去掉冗點的結果。
+	 * 
+	 * @return 去掉冗點的結果
+	 */
 	public GeneralPath getCurrnetPath()
 	{
 		return generalPath;

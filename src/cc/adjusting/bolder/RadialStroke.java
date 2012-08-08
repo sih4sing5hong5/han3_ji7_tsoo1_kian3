@@ -11,12 +11,25 @@ import java.util.Vector;
 import cc.moveable_type.rectangular_area.CurveInformation;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
 import cc.moveable_type.rectangular_area.ShapeAnalyst;
-import cc.moveable_type.rectangular_area.SimplePolygon;
 
+/**
+ * 物件活字邊長外移筆劃加寬工具。此工具仍有問題，每個邊往外調，不顧及前後的邊，字會不平滑。而且尚有許多問題尚末解決。因為時間因素放棄，
+ * 待日後系統完成後再行考慮。
+ * 
+ * @author Ihc
+ */
+@Deprecated
 public class RadialStroke implements Stroke
 {
+	/** 要移動的距離 */
 	private final double width;
 
+	/**
+	 * 建立邊長外移筆劃加寬工具
+	 * 
+	 * @param width
+	 *            要移動的距離
+	 */
 	public RadialStroke(double width)
 	{
 		this.width = width;
@@ -28,6 +41,13 @@ public class RadialStroke implements Stroke
 		return createStrokedShape(new Area(shape));// Area保證他的順逆時針
 	}
 
+	/**
+	 * 加寬傳入物件。把每段路徑切開，去處理。
+	 * 
+	 * @param area
+	 *            物件
+	 * @return 加寬完的物件
+	 */
 	public Shape createStrokedShape(Area area)
 	{
 		Area sum = new Area();// TODO change name
@@ -146,7 +166,7 @@ public class RadialStroke implements Stroke
 				}
 				generalPath.closePath();
 				System.out.println("＠＠1");
-				ShapeAnalyst shapeAnalyst = new ShapeAnalyst(generalPath);
+				new ShapeAnalyst(generalPath);
 				System.out.println("＠＠2");
 
 				Area modify = new Area(getBold(generalPath, apexMoveVector));
@@ -161,6 +181,15 @@ public class RadialStroke implements Stroke
 		return sum;
 	}
 
+	/**
+	 * 給一段路徑，把筆劃加寬
+	 * 
+	 * @param generalPath
+	 *            一段路徑
+	 * @param apexMoveVector
+	 *            每組頭尾控制點要移動的方向
+	 * @return 加寬後的路徑
+	 */
 	private GeneralPath getBold(GeneralPath generalPath,
 			Vector<Point2DWithVector> apexMoveVector)
 	{
@@ -192,7 +221,7 @@ public class RadialStroke implements Stroke
 			// ShapeAnalyst shapeAnalyst = new ShapeAnalyst(target);
 			// System.out.println("P2");
 			// target.getCurrentPoint();
-			Point2DWithVector previous = new Point2DWithVector(), next = new Point2DWithVector();
+//			Point2DWithVector previous = new Point2DWithVector(), next = new Point2DWithVector();
 			Point2DWithVector targetDifference;
 			Point2DWithVector originDifference;
 			switch (type)
@@ -247,7 +276,7 @@ public class RadialStroke implements Stroke
 						+ " " + quad.getX() + " " + quad.getY());
 				//
 				q0.setLocation(apexMoveVector.elementAt(index - 1));
-				q0.addLocation(apexMoveVector.elementAt(index ));
+				q0.addLocation(apexMoveVector.elementAt(index));
 				q0.multiple(0.5);
 				q0.addLocation(controlPoint[0], controlPoint[1]);
 				//

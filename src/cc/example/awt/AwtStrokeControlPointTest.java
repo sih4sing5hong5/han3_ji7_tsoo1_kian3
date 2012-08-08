@@ -11,15 +11,12 @@ import java.awt.event.WindowEvent;
 import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
-import java.lang.reflect.UndeclaredThrowableException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.adjusting.bolder.NullStroke;
-import cc.adjusting.bolder.RadialStroke;
 import cc.adjusting.bolder.SimplifyStroke;
-import cc.adjusting.bolder.UnsharpenStroke;
 import cc.example.reference.ControlPointsStroke;
 import cc.moveable_type.rectangular_area.ShapeAnalyst;
 
@@ -74,7 +71,7 @@ public class AwtStrokeControlPointTest extends JPanel
 		graphics2D.setColor(Color.RED);
 		graphics2D.setStroke(new ControlPointsStroke(5));
 		graphics2D.translate(10, 610);
-		Stroke stroke = new SimplifyStroke(22);
+		Stroke stroke = new SimplifyStroke();
 		System.out.println("--1");
 		 new ShapeAnalyst(area);
 		System.out.println("--2");
@@ -86,16 +83,16 @@ public class AwtStrokeControlPointTest extends JPanel
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2D.translate(750, 000);
-		Area a = area;
+//		Area a = area;
 		for (int i = 10; i >= 10; i -= 2)
 		{
 			Color color = new Color((10 - i) * 0x101000 + 0xff);
 			graphics2D.setColor(color);
 			graphics2D.setStroke(new NullStroke());
-			graphics2D.setStroke(new RadialStroke(i * 5));
+//			graphics2D.setStroke(new RadialStroke(i * 5));
 			graphics2D.setStroke(new ControlPointsStroke(5));
 //			graphics2D.setStroke(new SimplifyStroke(5));
-			stroke = new SimplifyStroke(1);
+			stroke = new SimplifyStroke();
 //			area = new Area(stroke.createStrokedShape(area));
 			graphics2D.draw(stroke.createStrokedShape(area));
 //			graphics2D.draw(area);

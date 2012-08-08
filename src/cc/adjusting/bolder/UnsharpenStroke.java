@@ -2,41 +2,37 @@ package cc.adjusting.bolder;
 
 import java.awt.Shape;
 import java.awt.Stroke;
-import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.util.Vector;
 
-import cc.moveable_type.rectangular_area.CurveInformation;
 import cc.moveable_type.rectangular_area.PathTravel;
-import cc.moveable_type.rectangular_area.Point2DWithVector;
-import cc.moveable_type.rectangular_area.ShapeAnalyst;
-import cc.moveable_type.rectangular_area.SimplePolygon;
 
+/**
+ * 圓滑筆劃工具。把銳角或是較尖的角變成二維曲線，減少基本筆劃工具（<code>BasicStroke</code>
+ * ）的問題。測試結果仍有不明問題。看二條相鄰筆劃的角度，決定是否改成曲線。
+ * 
+ * @author Ihc
+ */
 public class UnsharpenStroke implements Stroke
 {
-	private final double width;
-
-	public UnsharpenStroke(double width)
-	{
-		this.width = width;
-	}
-
 	@Override
 	public Shape createStrokedShape(Shape shape)
 	{
-		return createStrokedShape(new GeneralPath(shape));// Area保證他的順逆時針
+		return createStrokedShape(new GeneralPath(shape));
 	}
 
+	/**
+	 * 圓滑該路徑的頂點。
+	 * 
+	 * @param generalPath
+	 *            路徑物件
+	 * @return 圓滑後的結果
+	 */
 	public Shape createStrokedShape(GeneralPath generalPath)
 	{
-		UnsharpenAction unsharpenAction =new UnsharpenAction(
+		UnsharpenAction unsharpenAction = new UnsharpenAction(
 				generalPath.getWindingRule());
 		PathTravel pathTravel = new PathTravel(unsharpenAction);
 		pathTravel.travelOn(generalPath);
-//		unsharpenAction.doActionOnFinish();
 		return unsharpenAction.getCurrnetPath();
 	}
-
 }

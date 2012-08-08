@@ -3,7 +3,7 @@ package cc.adjusting.bolder;
 import java.awt.Stroke;
 
 /**
- * 產生空白的物件活字筆劃加寬工具。
+ * 產生空白的物件活字筆劃加寬工具包。
  * 
  * @author Ihc
  */

@@ -1,6 +1,5 @@
 package cc.example.awt;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,9 +14,9 @@ import java.awt.geom.Area;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.bolder.SimplifyStroke;
-import cc.adjusting.bolder.UnsharpenStroke;
 import cc.example.reference.ControlPointsStroke;
 
 /**
@@ -59,36 +58,39 @@ public class AwtStrokeWidthTest extends JPanel
 		graphics2D.setColor(Color.RED);
 		graphics2D.setStroke(new ControlPointsStroke(5));
 		graphics2D.translate(10, 610);
-		Stroke stroke = new SimplifyStroke(10);
+//		Stroke stroke = new SimplifyStroke();
 		System.out.println("--");
 		// ShapeAnalyst shapeAnalyst = new ShapeAnalyst(area);
 		System.out.println("--");
-		 area = new Area(stroke.createStrokedShape(area));
+//		area = new Area(stroke.createStrokedShape(area));
 		// shapeAnalyst = new ShapeAnalyst(area);
 		System.out.println("--");
 		graphics2D.draw(area);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics2D.translate(750, 000);
-		Area a=area;
+		FunctinoalBasicBolder functinoalBasicBolder = new FunctinoalBasicBolder(
+				new Stroke[] {  new SimplifyStroke()/*,new UnsharpenStroke(1.0) */}, 1);
+		Area a = area;
 		for (int i = 10; i >= 0; i -= 2)
 		{
-			Color color = new Color((10 - i) * 0x101000 + 0xff);
+			Color color = new Color((10 - i) * 0x001010 + 0xff0000);
 			graphics2D.setColor(color);
-			graphics2D.setStroke(new BasicStroke(i*5));
-//			stroke = new RadialStroke(i * 5);
-//			area = new Area();
+			graphics2D.setStroke(functinoalBasicBolder.getStroke(i * 5));
+//			graphics2D.setStroke(new BasicStroke(i * 5));
+			// stroke = new RadialStroke(i * 5);
+			// area = new Area();
 			graphics2D.draw(area);
-//			graphics2D.draw(stroke.createStrokedShape(area));
+			// graphics2D.draw(stroke.createStrokedShape(area));
 			graphics2D.setStroke(new NullStroke());
 			graphics2D.draw(area);
-//			graphics2D.draw(stroke.createStrokedShape(area));
+			// graphics2D.draw(stroke.createStrokedShape(area));
 			// graphics2D.translate(10, 0);
 		}
-		Color color = new Color(12 * 0x101000 + 0xff);
+		Color color = new Color(12 * 0x001010 + 0xff0000);
 		graphics2D.setColor(color);
-//		graphics2D.setStroke(new NullStroke());
-		 graphics2D.draw(a);
+		// graphics2D.setStroke(new NullStroke());
+		graphics2D.draw(a);
 		System.out.println("XD");
 	}
 

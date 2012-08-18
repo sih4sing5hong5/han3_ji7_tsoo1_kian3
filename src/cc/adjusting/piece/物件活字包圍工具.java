@@ -53,10 +53,10 @@ public abstract class 物件活字包圍工具
 	}
 
 	/**
-	 * 用此工具合併合體活字
+	 * 用此工具組合合體活字。
 	 * 
 	 * @param pieceMovableTypeTzu
 	 *            合體活字
 	 */
-	public abstract void 合併(PieceMovableTypeTzu pieceMovableTypeTzu);
+	public abstract void 組合(PieceMovableTypeTzu pieceMovableTypeTzu);
 }

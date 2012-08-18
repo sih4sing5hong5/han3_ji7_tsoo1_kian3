@@ -64,7 +64,7 @@ public class 包圍整合分派工具
 		物件活字包圍工具 包圍工具 = 包圍部件工具表.get(外部活字控制碼);
 		if (包圍工具 != null)
 		{
-			包圍工具.合併(pieceMovableTypeTzu);
+			包圍工具.組合(pieceMovableTypeTzu);
 			return true;
 		}
 		return false;

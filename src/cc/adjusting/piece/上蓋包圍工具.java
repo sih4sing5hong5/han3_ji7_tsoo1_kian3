@@ -28,7 +28,7 @@ public class 上蓋包圍工具 extends 物件活字包圍工具
 	}
 
 	@Override
-	public void 合併(PieceMovableTypeTzu pieceMovableTypeTzu)
+	public void 組合(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
 		PieceMovableType up = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[0], down = (PieceMovableType) pieceMovableTypeTzu

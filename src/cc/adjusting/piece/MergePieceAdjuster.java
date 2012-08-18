@@ -22,6 +22,9 @@ import cc.moveable_type.rectangular_area.ShapeInformation;
  */
 public class MergePieceAdjuster extends SimplePieceAdjuster
 {
+	/** 處理包圍關係的活字時所使用的工具 */
+	private 包圍整合分派工具 分派工具;
+
 	/**
 	 * 建立物件活字調整工具
 	 * 
@@ -35,6 +38,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			double precision)
 	{
 		super(chineseCharacterTypeBolder, precision);
+		分派工具 = new 包圍整合分派工具();
+		分派工具.add(new 上蓋包圍工具(this));
 	}
 
 	@Override
@@ -216,20 +221,24 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void wrapMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
-		// TODO 暫時替代用 冖宀
-		ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) pieceMovableTypeTzu
-				.getChineseCharacter();
-		ChineseCharacter chineseCharacter = chineseCharacterTzu.getChildren()[0];
-		switch (chineseCharacter.getCodePoint())
+		if (!分派工具.組合(pieceMovableTypeTzu))
 		{
-		case 2:// TODO
+
+			ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) pieceMovableTypeTzu
+					.getChineseCharacter();
+			ChineseCharacter chineseCharacter = chineseCharacterTzu
+					.getChildren()[0];
+			switch (chineseCharacter.getCodePoint())
+			{
+			case 2:// TODO
+			}
+			PieceMovableType out = (PieceMovableType) pieceMovableTypeTzu
+					.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
+					.getChildren()[1];
+			pieceMovableTypeTzu.getPiece().reset();
+			pieceMovableTypeTzu.getPiece().add(out.getPiece());
+			pieceMovableTypeTzu.getPiece().add(in.getPiece());
 		}
-		PieceMovableType out = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[1];
-		pieceMovableTypeTzu.getPiece().reset();
-		pieceMovableTypeTzu.getPiece().add(out.getPiece());
-		pieceMovableTypeTzu.getPiece().add(in.getPiece());
 		return;
 	}
 

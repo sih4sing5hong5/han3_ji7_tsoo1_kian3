@@ -40,6 +40,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		super(chineseCharacterTypeBolder, precision);
 		分派工具 = new 包圍整合分派工具();
 		分派工具.add(new 上蓋包圍工具(this));
+		分派工具.add(new 左下包圍工具(this));
+		分派工具.add(new 四面包圍工具(this));
 	}
 
 	@Override
@@ -300,7 +302,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	protected double nonsuitableToClose(RectangularArea first,
 			RectangularArea second, double boundaryLength)
-	{// TODO
+	{
+		// TODO
 		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
 				second);
 		RectangularArea rectangularArea = new RectangularArea(first);
@@ -332,12 +335,22 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 * 
 	 * @param pieceMovableType
 	 *            物件活字
-	 * @return 活字的物件資訊
+	 * @return 格式過後的活字物件資訊
 	 */
 	public RectangularArea format(PieceMovableType pieceMovableType)
 	{
-		RectangularArea target = new RectangularArea(
-				pieceMovableType.getPiece());
+		return format(new RectangularArea(pieceMovableType.getPiece()));
+	}
+
+	/**
+	 * 把物件活字依預計位置及大小（<code>getTerritory()</code>）產生一個新的物件。
+	 * 
+	 * @param target
+	 *            活字物件
+	 * @return 格式過後的活字物件資訊
+	 */
+	public RectangularArea format(RectangularArea target)
+	{
 		double widthCoefficient = target.getTerritory().getWidth()
 				/ target.getBounds2D().getWidth(), heightCoefficient = target
 				.getTerritory().getHeight() / target.getBounds2D().getHeight();

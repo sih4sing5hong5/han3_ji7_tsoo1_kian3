@@ -60,7 +60,6 @@ public class 包圍整合分派工具
 				.getChineseCharacter();
 		ChineseCharacter chineseCharacter = chineseCharacterTzu.getChildren()[0];
 		int 外部活字控制碼 = chineseCharacter.getCodePoint();
-		System.out.println("gogog=" + 外部活字控制碼);
 		物件活字包圍工具 包圍工具 = 包圍部件工具表.get(外部活字控制碼);
 		if (包圍工具 != null)
 		{

@@ -53,7 +53,7 @@ public class AwtTestExample extends JPanel
 	static private final String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"一百二十三尺"
 			+ "秋漿國變務森" + "⿰禾火⿱將水⿴囗或" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木"
 			+ "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田" + "⿱口⿰口口⿱夕夕，"
-			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴宀⿱珤⿰隹⿰貝招辶"+"⿴冖儿⿴冖几宀寶";// */;
+			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴宀⿱珤⿰隹⿰貝招辶"+"⿴冖儿⿴冖几宀寶建⿴廴聿";// */;
 	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	/** 全字庫正楷體 */
@@ -117,7 +117,7 @@ public class AwtTestExample extends JPanel
 					.elementAt(i)));
 			graphics2D.translate(0, TYPE_SIZE);// move to the down
 			if (i % LINE_SIZE == LINE_SIZE - 1)
-				graphics2D.translate(-TYPE_SIZE * 1.5, -TYPE_SIZE * LINE_SIZE);// the
+				graphics2D.translate(-TYPE_SIZE * 1.2, -TYPE_SIZE * LINE_SIZE);// the
 																				// new
 			// line
 		}

@@ -114,7 +114,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
 			right.getPiece().moveToOrigin();
-			right.getPiece().moveTo(middlePos, 0);
+			right.getPiece().moveBy(middlePos, 0);
 			if (areIntersected(left.getPiece(), right.getPiece()))
 				miniPos = middlePos;
 			else
@@ -124,19 +124,19 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		double rightRadius = computePieceRadius(right.getPiece());
 
 		right.getPiece().moveToOrigin();// TODO 人工參數
-		right.getPiece().moveTo(miniPos - rightRadius * 2.6, 0);
+		right.getPiece().moveBy(miniPos - rightRadius * 2.6, 0);
 		double nonsuitableToClose = nonsuitableToClose(left.getPiece(),
 				right.getPiece(), right.getPiece().getBounds2D().getHeight());
 
 		right.getPiece().moveToOrigin();
-		right.getPiece().moveTo(miniPos, 0);
+		right.getPiece().moveBy(miniPos, 0);
 
 		if (nonsuitableToClose > 1.6)// TODO 人工參數
-			right.getPiece().moveTo(+rightRadius * 3.0, 0);
+			right.getPiece().moveBy(+rightRadius * 3.0, 0);
 		else if (nonsuitableToClose > 0.8)
-			right.getPiece().moveTo(0, 0);
+			right.getPiece().moveBy(0, 0);
 		else
-			right.getPiece().moveTo(-rightRadius * 1.2, 0);
+			right.getPiece().moveBy(-rightRadius * 1.2, 0);
 
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(left.getPiece());
@@ -183,7 +183,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
 			down.getPiece().moveToOrigin();
-			down.getPiece().moveTo(0, middlePos);
+			down.getPiece().moveBy(0, middlePos);
 			if (areIntersected(up.getPiece(), down.getPiece()))
 				miniPos = middlePos;
 			else
@@ -192,19 +192,19 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 
 		double downRadius = computePieceRadius(down.getPiece());
 		down.getPiece().moveToOrigin();// TODO 人工參數
-		down.getPiece().moveTo(0, miniPos - downRadius * 2.6);
+		down.getPiece().moveBy(0, miniPos - downRadius * 2.6);
 		double nonsuitableToClose = nonsuitableToClose(up.getPiece(),
 				down.getPiece(), down.getPiece().getBounds2D().getWidth());
 
 		down.getPiece().moveToOrigin();
-		down.getPiece().moveTo(0, miniPos);
+		down.getPiece().moveBy(0, miniPos);
 
 		if (nonsuitableToClose > 1.6)// TODO 人工參數
-			down.getPiece().moveTo(0, +downRadius * 3.0);
+			down.getPiece().moveBy(0, +downRadius * 3.0);
 		else if (nonsuitableToClose > 0.8)
-			down.getPiece().moveTo(0, 0);
+			down.getPiece().moveBy(0, 0);
 		else
-			down.getPiece().moveTo(0, -downRadius * 1.2);
+			down.getPiece().moveBy(0, -downRadius * 1.2);
 
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(up.getPiece());
@@ -344,7 +344,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(target, shrinkTransform);
-		target.moveTo(target.getTerritory().getX(), target.getTerritory()
+		target.moveBy(target.getTerritory().getX(), target.getTerritory()
 				.getY());
 		return target;
 	}

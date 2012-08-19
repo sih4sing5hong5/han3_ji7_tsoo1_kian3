@@ -84,12 +84,12 @@ public class RectangularArea extends Area
 	public void moveToOrigin()
 	{
 		Rectangle2D rectangle2d = this.getBounds2D();
-		moveTo(-rectangle2d.getX(), -rectangle2d.getY());
+		moveBy(-rectangle2d.getX(), -rectangle2d.getY());
 		return;
 	}
 
 	/**
-	 * 把活字座標移至指點座標
+	 * 把活字座標移動指定距離
 	 * 
 	 * @param x
 	 *            要移動的水平距離
@@ -97,7 +97,7 @@ public class RectangularArea extends Area
 	 *            要移動的垂直距離
 	 */
 
-	public void moveTo(double x, double y)
+	public void moveBy(double x, double y)
 	{
 		AffineTransform affineTransform = new AffineTransform();
 		affineTransform.setTransform(1, 0, 0, 1, x, y);

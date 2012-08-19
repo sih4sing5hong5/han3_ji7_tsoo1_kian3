@@ -66,7 +66,7 @@ public class 上蓋包圍工具 extends 物件活字包圍工具
 			double middlePos = 0.5 * (miniPos + maxiPos);
 			down.getPiece().moveToOrigin();
 			down.getPiece()
-					.moveTo(down.getPiece().getBounds2D().getWidth()
+					.moveBy(down.getPiece().getBounds2D().getWidth()
 							* (1.0 - insideShrinkRate) / insideShrinkRate * 0.5,
 							middlePos);
 			if (調整工具.areIntersected(up.getPiece(), down.getPiece()))
@@ -77,7 +77,7 @@ public class 上蓋包圍工具 extends 物件活字包圍工具
 
 		double downRadius = 調整工具.computePieceRadius(down.getPiece());
 		down.getPiece().moveToOrigin();// TODO 人工參數
-		down.getPiece().moveTo(
+		down.getPiece().moveBy(
 				down.getPiece().getBounds2D().getWidth()
 						* (1.0 - insideShrinkRate) / insideShrinkRate * 0.5,
 				miniPos - downRadius * 2.6);
@@ -85,17 +85,17 @@ public class 上蓋包圍工具 extends 物件活字包圍工具
 				down.getPiece(), down.getPiece().getBounds2D().getWidth());
 
 		down.getPiece().moveToOrigin();
-		down.getPiece().moveTo(
+		down.getPiece().moveBy(
 				down.getPiece().getBounds2D().getWidth()
 						* (1.0 - insideShrinkRate) / insideShrinkRate * 0.5,
 				miniPos);
 
 		if (nonsuitableToClose > 1.6)// TODO 人工參數
-			down.getPiece().moveTo(0, +downRadius * 3.0);
+			down.getPiece().moveBy(0, +downRadius * 3.0);
 		else if (nonsuitableToClose > 0.8)
-			down.getPiece().moveTo(0, 0);
+			down.getPiece().moveBy(0, 0);
 		else
-			down.getPiece().moveTo(0, -downRadius * 1.2);
+			down.getPiece().moveBy(0, -downRadius * 1.2);
 
 		pieceMovableTypeTzu.getPiece().reset();
 		pieceMovableTypeTzu.getPiece().add(up.getPiece());

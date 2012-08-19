@@ -7,22 +7,29 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * 用於四面的包圍部件。從四面包住，像是「囗」等等。
+ * 用於左上的包圍部件。從左上方包住，像是「厂」、「广」、「尸」和「『左』的左上方」等等。
  * 
  * @author Ihc
  */
-public class 四面包圍工具 extends 物件活字包圍工具
+public class 左上包圍工具 extends 物件活字包圍工具
 {
 	/**
-	 * 建立四面包圍工具
+	 * 建立左下包圍工具
 	 * 
 	 * @param 調整工具
 	 *            使用此包圍工具的調整工具，並使用其自身合併相關函式
 	 */
-	public 四面包圍工具(MergePieceAdjuster 調整工具)
+	public 左上包圍工具(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
-		支援包圍部件.add("囗");
+		支援包圍部件.add("厂");
+		支援包圍部件.add("广");
+		支援包圍部件.add("疒");
+		支援包圍部件.add("尸");
+		支援包圍部件.add("戶");
+		支援包圍部件.add("户");
+		支援包圍部件.add("虍");
+		// TODO　/*歷廈病居房灰老虐遞…*/
 	}
 
 	@Override
@@ -39,18 +46,19 @@ public class 四面包圍工具 extends 物件活字包圍工具
 		double value = Math.min(insidePiece.getTerritory().getWidth(),
 				insidePiece.getTerritory().getHeight());
 		insidePiece.setTerritoryDimension(value, value);
-		 調整工具.format(insidePiece);//TODO
+		調整工具.format(insidePiece);// TODO
 		while (miniPos + 調整工具.getPrecision() < maxiPos)
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
+			System.out.println("mid=" + middlePos);
 			RectangularArea rectangularArea = new RectangularArea(insidePiece);
 			AffineTransform affineTransform = 調整工具.getAffineTransform(middlePos
 					/ insidePiece.getBounds2D().getHeight());
 			rectangularArea.transform(affineTransform);
-			rectangularArea.moveBy(out.getPiece().getBounds2D().getCenterX()
-					- rectangularArea.getBounds2D().getCenterX(), out
-					.getPiece().getBounds2D().getCenterY()
-					- rectangularArea.getBounds2D().getCenterY());
+			rectangularArea.moveBy(out.getPiece().getBounds2D().getWidth()
+					- rectangularArea.getBounds2D().getWidth(), out.getPiece()
+					.getBounds2D().getHeight()
+					- rectangularArea.getBounds2D().getHeight());
 			if (調整工具.areIntersected(out.getPiece(), rectangularArea))
 				maxiPos = middlePos;
 			else
@@ -59,10 +67,10 @@ public class 四面包圍工具 extends 物件活字包圍工具
 		AffineTransform affineTransform = 調整工具.getAffineTransform(miniPos
 				/ insidePiece.getBounds2D().getHeight());
 		insidePiece.transform(affineTransform);
-		insidePiece.moveBy(out.getPiece().getBounds2D().getCenterX()
-				- insidePiece.getBounds2D().getCenterX(), out.getPiece()
-				.getBounds2D().getCenterY()
-				- insidePiece.getBounds2D().getCenterY());
+		insidePiece.moveBy(out.getPiece().getBounds2D().getWidth()
+				- insidePiece.getBounds2D().getWidth(), out.getPiece()
+				.getBounds2D().getHeight()
+				- insidePiece.getBounds2D().getHeight());
 
 		// double downRadius = 調整工具.computePieceRadius(in.getPiece());
 		// in.getPiece().moveToOrigin();// TODO 人工參數

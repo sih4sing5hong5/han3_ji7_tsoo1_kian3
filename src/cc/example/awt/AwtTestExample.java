@@ -42,7 +42,7 @@ public class AwtTestExample extends JPanel
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
 	/** 視窗寬度 */
-	static final int WIDTH = 1420;
+	static final int WIDTH = 1440;
 	/** 視窗高度 */
 	static final int HEIGHT = 1050;
 	/** 字型大小 */
@@ -53,7 +53,8 @@ public class AwtTestExample extends JPanel
 	static private final String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"一百二十三尺"
 			+ "秋漿國變務森" + "⿰禾火⿱將水⿴囗或" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木"
 			+ "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田" + "⿱口⿰口口⿱夕夕，"
-			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴宀⿱珤⿰隹⿰貝招辶"+"⿴冖儿⿴冖几宀寶建⿴廴聿";// */;
+			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴宀⿱珤⿰隹⿰貝招辶"+"⿴冖儿⿴冖几宀寶建⿴廴聿" +
+					"⿴厂猒⿴广夏⿴疒丙⿴尸古⿴戶方⿴户方";// */;
 	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	/** 全字庫正楷體 */

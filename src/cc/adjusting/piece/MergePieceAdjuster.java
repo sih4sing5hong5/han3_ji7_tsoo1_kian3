@@ -41,6 +41,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分派工具 = new 包圍整合分派工具();
 		分派工具.add(new 上蓋包圍工具(this));
 		分派工具.add(new 左下包圍工具(this));
+		分派工具.add(new 左上包圍工具(this));
 		分派工具.add(new 四面包圍工具(this));
 	}
 
@@ -225,7 +226,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	{
 		if (!分派工具.組合(pieceMovableTypeTzu))
 		{
-
+			System.out.println("QQ 沒組合工具");
 			ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) pieceMovableTypeTzu
 					.getChineseCharacter();
 			ChineseCharacter chineseCharacter = chineseCharacterTzu

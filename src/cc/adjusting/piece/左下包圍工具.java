@@ -45,7 +45,6 @@ public class 左下包圍工具 extends 物件活字包圍工具
 		while (miniPos + 調整工具.getPrecision() < maxiPos)
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
-			System.out.println("mid=" + middlePos);
 			RectangularArea rectangularArea = new RectangularArea(insidePiece);
 			AffineTransform affineTransform = 調整工具.getAffineTransform(middlePos
 					/ insidePiece.getBounds2D().getHeight());

@@ -34,7 +34,6 @@ public class 左下包圍工具 extends 物件活字包圍工具
 				.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 
-		double miniPos = 0.0, maxiPos = in.getPiece().getBounds2D().getHeight();
 		in.getPiece().moveToOrigin();
 		RectangularArea insidePiece = new RectangularArea(in.getPiece());
 		insidePiece.setTerritory(insidePiece.getBounds2D());
@@ -42,6 +41,7 @@ public class 左下包圍工具 extends 物件活字包圍工具
 				insidePiece.getTerritory().getHeight());
 		insidePiece.setTerritoryDimension(value, value);
 		調整工具.format(insidePiece);//TODO
+		double miniPos = 0.0, maxiPos = insidePiece.getBounds2D().getHeight();
 		while (miniPos + 調整工具.getPrecision() < maxiPos)
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);

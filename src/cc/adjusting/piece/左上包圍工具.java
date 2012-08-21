@@ -39,13 +39,13 @@ public class 左上包圍工具 extends 物件活字包圍工具
 				.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 
-		in.getPiece().moveToOrigin();
+//		in.getPiece().moveToOrigin();
 		RectangularArea insidePiece = 調整工具.getPieceWithSquareTerritory(in.getPiece());
 		double miniPos = 0.0, maxiPos = insidePiece.getBounds2D().getHeight();
 		while (miniPos + 調整工具.getPrecision() < maxiPos)
 		{
 			double middlePos = 0.5 * (miniPos + maxiPos);
-			System.out.println("mid=" + middlePos);
+
 			RectangularArea rectangularArea = new RectangularArea(insidePiece);
 			AffineTransform affineTransform = 調整工具.getAffineTransform(middlePos
 					/ insidePiece.getBounds2D().getHeight());
@@ -54,6 +54,7 @@ public class 左上包圍工具 extends 物件活字包圍工具
 					- rectangularArea.getBounds2D().getWidth(), out.getPiece()
 					.getBounds2D().getHeight()
 					- rectangularArea.getBounds2D().getHeight());
+			
 			if (調整工具.areIntersected(out.getPiece(), rectangularArea))
 				maxiPos = middlePos;
 			else

@@ -105,11 +105,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		// getAffineTransform(smaller.getPiece()
 		// .getBounds2D().getHeight()
 		// / greater.getPiece().getBounds2D().getHeight());
-		AffineTransform shrinkTransform = getAffineTransform(1.0, smaller
-				.getPiece().getBounds2D().getHeight()
-				/ greater.getPiece().getBounds2D().getHeight());
-		RectangularArea greaterPiece = greater.getPiece();
-		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+		double value = smaller.getPiece().getBounds2D().getHeight()
+				/ greater.getPiece().getBounds2D().getHeight();
+		if (value > 0.0)
+		{
+			AffineTransform shrinkTransform = getAffineTransform(1.0, value);
+			shrinkPieceByFixingStroke(greater.getPiece(), shrinkTransform);
+		}
 
 		double miniPos = 0.0, maxiPos = left.getPiece().getBounds2D()
 				.getWidth();
@@ -175,11 +177,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		// getAffineTransform(smaller.getPiece()
 		// .getBounds2D().getWidth()
 		// / greater.getPiece().getBounds2D().getWidth());
-		AffineTransform shrinkTransform = getAffineTransform(smaller.getPiece()
-				.getBounds2D().getWidth()
-				/ greater.getPiece().getBounds2D().getWidth(), 1.0);
-		RectangularArea greaterPiece = greater.getPiece();
-		shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+		double value = smaller.getPiece().getBounds2D().getWidth()
+				/ greater.getPiece().getBounds2D().getWidth();
+		if (value > 0.0)
+		{
+			AffineTransform shrinkTransform = getAffineTransform(value, 1.0);
+			shrinkPieceByFixingStroke(greater.getPiece(), shrinkTransform);
+		}
 
 		double miniPos = 0.0, maxiPos = up.getPiece().getBounds2D().getHeight();
 		while (miniPos + getPrecision() < maxiPos)

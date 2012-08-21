@@ -340,17 +340,18 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public RectangularArea format(PieceMovableType pieceMovableType)
 	{
-		return format(new RectangularArea(pieceMovableType.getPiece()));
+		return getNewPieceByTerritory(new RectangularArea(
+				pieceMovableType.getPiece()));
 	}
 
 	/**
-	 * 把物件活字依預計位置及大小（<code>getTerritory()</code>）產生一個新的物件。
+	 * 把物件活字依預計位置及大小（<code>getTerritory()</code>）產生一個新的活字物件。
 	 * 
 	 * @param target
 	 *            活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea format(RectangularArea target)
+	public RectangularArea getNewPieceByTerritory(RectangularArea target)
 	{
 		double widthCoefficient = target.getTerritory().getWidth()
 				/ target.getBounds2D().getWidth(), heightCoefficient = target
@@ -361,5 +362,21 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		target.moveBy(target.getTerritory().getX(), target.getTerritory()
 				.getY());
 		return target;
+	}
+
+	/**
+	 * 產生一個相同圖形的正方體活字物件。
+	 * 
+	 * @param target
+	 *            活字物件
+	 * @return 格式過後的活字物件資訊
+	 */
+	public RectangularArea getPieceWithSquareTerritory(RectangularArea target)
+	{
+		target.setTerritory(target.getBounds2D());
+		double value = Math.min(target.getTerritory().getWidth(), target
+				.getTerritory().getHeight());
+		target.setTerritoryDimension(value, value);
+		return getNewPieceByTerritory(target);
 	}
 }

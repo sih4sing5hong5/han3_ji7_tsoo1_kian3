@@ -6,9 +6,9 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
-public class 左下接合模組 extends 縮放接合模組
+public class 左上接合模組 extends 縮放接合模組
 {
-	public 左下接合模組(MergePieceAdjuster 調整工具)
+	public 左上接合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}
@@ -21,7 +21,9 @@ public class 左下接合模組 extends 縮放接合模組
 				/ insidePiece.getBounds2D().getHeight());
 		調整工具.shrinkPieceByFixingStroke(rectangularArea, affineTransform);
 		rectangularArea.moveBy(outsidePiece.getBounds2D().getWidth()
-				- rectangularArea.getBounds2D().getWidth(), 0);
+				- rectangularArea.getBounds2D().getWidth(), outsidePiece
+				.getBounds2D().getHeight()
+				- rectangularArea.getBounds2D().getHeight());
 		return;
 	}
 }

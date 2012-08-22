@@ -6,9 +6,10 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
-public class 左下接合模組 extends 縮放接合模組
+public class 四面接合模組 extends 縮放接合模組
 {
-	public 左下接合模組(MergePieceAdjuster 調整工具)
+
+	public 四面接合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}
@@ -20,8 +21,10 @@ public class 左下接合模組 extends 縮放接合模組
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.getBounds2D().getHeight());
 		調整工具.shrinkPieceByFixingStroke(rectangularArea, affineTransform);
-		rectangularArea.moveBy(outsidePiece.getBounds2D().getWidth()
-				- rectangularArea.getBounds2D().getWidth(), 0);
+		rectangularArea.moveBy(outsidePiece.getBounds2D().getCenterX()
+				- rectangularArea.getBounds2D().getCenterX(), outsidePiece
+				.getBounds2D().getCenterY()
+				- rectangularArea.getBounds2D().getCenterY());
 		return;
 	}
 }

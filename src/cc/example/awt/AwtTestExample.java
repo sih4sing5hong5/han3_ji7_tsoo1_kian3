@@ -54,8 +54,8 @@ public class AwtTestExample extends JPanel
 			+ "秋漿國變務森" + "⿰禾火⿱將水⿴囗或" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木"
 			+ "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田" + "⿱口⿰口口⿱夕夕，"
 			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴宀⿱珤⿰隹⿰貝招辶" + "⿴冖儿⿴冖几宀寶建⿴廴聿"
-			+ "⿴厂猒⿴广夏⿴疒丙⿴尸古⿴戶方⿴户方⿴户 ⿱户　⿰户　" + "⿴气亥⿴气乃⿴气亞⿴冂⿱儿口⿴門月⿴鬥市⿱⿴乃又皿" +
-					"⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口";// */;
+			+ "⿴厂猒⿴广夏⿴疒丙⿴尸古⿴戶方⿴户方⿴户 ⿱户　⿰户　" + "⿴气亥⿴气乃⿴气亞⿴冂⿱儿口⿴門月⿴鬥市⿱⿴乃又皿"
+			+ "⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口";// */;
 	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	/** 全字庫正楷體 */
@@ -74,7 +74,6 @@ public class AwtTestExample extends JPanel
 	@Override
 	public void paint(Graphics g1)
 	{
-		System.out.println('\u2f16');
 		System.out.println("初使化～～ 時間：" + System.currentTimeMillis());
 		Graphics2D graphics2D = (Graphics2D) g1;
 		graphics2D.setColor(Color.black);

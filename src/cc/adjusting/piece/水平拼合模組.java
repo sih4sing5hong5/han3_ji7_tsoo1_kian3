@@ -4,12 +4,12 @@ import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
 
-public class 水平組合模組 extends 二元搜尋貼合模組
+public class 水平拼合模組 extends 平移拼合模組
 {
 	private RectangularArea leftPiece;
 	private RectangularArea rightPiece;
 
-	public 水平組合模組(MergePieceAdjuster 調整工具)
+	public 水平拼合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}
@@ -17,7 +17,7 @@ public class 水平組合模組 extends 二元搜尋貼合模組
 	@Override
 	public void 初使化(RectangularArea[] rectangularAreas)
 	{
-		leftPiece =rectangularAreas[0];
+		leftPiece = rectangularAreas[0];
 		rightPiece = rectangularAreas[1];
 		RectangularArea greaterPiece = null, smallerPiece = null;
 		if (leftPiece.getBounds2D().getHeight() > rightPiece.getBounds2D()
@@ -55,22 +55,10 @@ public class 水平組合模組 extends 二元搜尋貼合模組
 	}
 
 	@Override
-	public boolean 條件成立變大()
-	{
-		return true;
-	}
-
-	@Override
-	public void 變形處理(double middlePos)
+	public void 變形處理(double middleValue)
 	{
 		rightPiece.moveToOrigin();
-		rightPiece.moveBy(middlePos, 0);
-		return;
-	}
-
-	@Override
-	public void 調整後處理()
-	{
+		rightPiece.moveBy(middleValue, 0);
 		return;
 	}
 

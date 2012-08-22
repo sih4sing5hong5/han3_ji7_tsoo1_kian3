@@ -85,78 +85,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void horizontalMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
-		水平組合模組 模組=new 水平組合模組(this);
+		水平拼合模組 模組=new 水平拼合模組(this);
 		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
 		貼合工具.執行(pieceMovableTypeTzu);
-//		
-//		PieceMovableType left = (PieceMovableType) pieceMovableTypeTzu
-//				.getChildren()[0], right = (PieceMovableType) pieceMovableTypeTzu
-//				.getChildren()[1];
-//		PieceMovableType greater = null, smaller = null;
-//		if (left.getPiece().getBounds2D().getHeight() > right.getPiece()
-//				.getBounds2D().getHeight())
-//		{
-//			greater = left;
-//			smaller = right;
-//		}
-//		else
-//		{
-//			greater = right;
-//			smaller = left;
-//		}
-//		// TODO 要哪一個尚未決定，不知為何正方形收縮記憶體會不足
-//		// AffineTransform shrinkTransform =
-//		// getAffineTransform(smaller.getPiece()
-//		// .getBounds2D().getHeight()
-//		// / greater.getPiece().getBounds2D().getHeight());
-//		double value = smaller.getPiece().getBounds2D().getHeight()
-//				/ greater.getPiece().getBounds2D().getHeight();
-//		if (value > 0.0)
-//		{
-//			AffineTransform shrinkTransform = getAffineTransform(1.0, value);
-//			shrinkPieceByFixingStroke(greater.getPiece(), shrinkTransform);
-//		}
-//
-//		double miniPos = 0.0, maxiPos = left.getPiece().getBounds2D()
-//				.getWidth();
-//		while (miniPos + getPrecision() < maxiPos)
-//		{
-//			double middlePos = 0.5 * (miniPos + maxiPos);
-//			right.getPiece().moveToOrigin();
-//			right.getPiece().moveBy(middlePos, 0);
-//			if (areIntersected(left.getPiece(), right.getPiece()))
-//				miniPos = middlePos;
-//			else
-//				maxiPos = middlePos;
-//		}
-//
-//		double rightRadius = computePieceRadius(right.getPiece());
-//
-//		right.getPiece().moveToOrigin();// TODO 人工參數
-//		right.getPiece().moveBy(miniPos - rightRadius * 2.6, 0);
-//		double nonsuitableToClose = nonsuitableToClose(left.getPiece(),
-//				right.getPiece(), right.getPiece().getBounds2D().getHeight());
-//
-//		right.getPiece().moveToOrigin();
-//		right.getPiece().moveBy(miniPos, 0);
-//
-//		if (nonsuitableToClose > 1.6)// TODO 人工參數
-//			right.getPiece().moveBy(+rightRadius * 3.0, 0);
-//		else if (nonsuitableToClose > 0.8)
-//			right.getPiece().moveBy(0, 0);
-//		else
-//			right.getPiece().moveBy(-rightRadius * 1.2, 0);
-//
-//		pieceMovableTypeTzu.getPiece().reset();
-//		pieceMovableTypeTzu.getPiece().add(left.getPiece());
-//		pieceMovableTypeTzu.getPiece().add(right.getPiece());
-//		right.getPiece().moveToOrigin();
-		
-		RectangularArea[] areas=模組.取得調整後活字物件();
+
+		RectangularArea[] 調整結果=模組.取得調整後活字物件();
 		pieceMovableTypeTzu.getPiece().reset();
-		pieceMovableTypeTzu.getPiece().add(areas[0]);
-		pieceMovableTypeTzu.getPiece().add(areas[1]);
-//		right.getPiece().moveToOrigin();
+		pieceMovableTypeTzu.getPiece().add(調整結果[0]);
+		pieceMovableTypeTzu.getPiece().add(調整結果[1]);
 		return;
 	}
 
@@ -168,65 +104,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void verticalMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
-		PieceMovableType up = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[0], down = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[1];
-		PieceMovableType greater = null, smaller = null;
-		if (up.getPiece().getBounds2D().getWidth() > down.getPiece()
-				.getBounds2D().getWidth())
-		{
-			greater = up;
-			smaller = down;
-		}
-		else
-		{
-			greater = down;
-			smaller = up;
-		}
-		// AffineTransform shrinkTransform =
-		// getAffineTransform(smaller.getPiece()
-		// .getBounds2D().getWidth()
-		// / greater.getPiece().getBounds2D().getWidth());
-		double value = smaller.getPiece().getBounds2D().getWidth()
-				/ greater.getPiece().getBounds2D().getWidth();
-		if (value > 0.0)
-		{
-			AffineTransform shrinkTransform = getAffineTransform(value, 1.0);
-			shrinkPieceByFixingStroke(greater.getPiece(), shrinkTransform);
-		}
+		垂直拼合模組 模組=new 垂直拼合模組(this);
+		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
+		貼合工具.執行(pieceMovableTypeTzu);
 
-		double miniPos = 0.0, maxiPos = up.getPiece().getBounds2D().getHeight();
-		while (miniPos + getPrecision() < maxiPos)
-		{
-			double middlePos = 0.5 * (miniPos + maxiPos);
-			down.getPiece().moveToOrigin();
-			down.getPiece().moveBy(0, middlePos);
-			if (areIntersected(up.getPiece(), down.getPiece()))
-				miniPos = middlePos;
-			else
-				maxiPos = middlePos;
-		}
-
-		double downRadius = computePieceRadius(down.getPiece());
-		down.getPiece().moveToOrigin();// TODO 人工參數
-		down.getPiece().moveBy(0, miniPos - downRadius * 2.6);
-		double nonsuitableToClose = nonsuitableToClose(up.getPiece(),
-				down.getPiece(), down.getPiece().getBounds2D().getWidth());
-
-		down.getPiece().moveToOrigin();
-		down.getPiece().moveBy(0, miniPos);
-
-		if (nonsuitableToClose > 1.6)// TODO 人工參數
-			down.getPiece().moveBy(0, +downRadius * 3.0);
-		else if (nonsuitableToClose > 0.8)
-			down.getPiece().moveBy(0, 0);
-		else
-			down.getPiece().moveBy(0, -downRadius * 1.2);
-
+		RectangularArea[] 調整結果=模組.取得調整後活字物件();
 		pieceMovableTypeTzu.getPiece().reset();
-		pieceMovableTypeTzu.getPiece().add(up.getPiece());
-		pieceMovableTypeTzu.getPiece().add(down.getPiece());
-		down.getPiece().moveToOrigin();
+		pieceMovableTypeTzu.getPiece().add(調整結果[0]);
+		pieceMovableTypeTzu.getPiece().add(調整結果[1]);
 		return;
 	}
 

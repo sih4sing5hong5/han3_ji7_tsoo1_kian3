@@ -31,7 +31,7 @@ public abstract class 二元搜尋貼合模組
 
 	public abstract boolean 條件成立變大();
 
-	public abstract void 變形處理(double middlePos);
+	public abstract void 變形處理(double middleValue);
 
 	public abstract void 調整後處理();
 

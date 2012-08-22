@@ -80,53 +80,53 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	/**
 	 * 水平組合活字
 	 * 
-	 * @param pieceMovableTypeTzu
+	 * @param 物件活字
 	 *            要調整的合體活字
 	 */
-	void horizontalMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
+	void horizontalMerging(PieceMovableTypeTzu 物件活字)
 	{
 		水平拼合模組 模組=new 水平拼合模組(this);
 		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
-		貼合工具.執行(pieceMovableTypeTzu);
+		貼合工具.執行(物件活字);
 
 		RectangularArea[] 調整結果=模組.取得調整後活字物件();
-		pieceMovableTypeTzu.getPiece().reset();
-		pieceMovableTypeTzu.getPiece().add(調整結果[0]);
-		pieceMovableTypeTzu.getPiece().add(調整結果[1]);
+		物件活字.getPiece().reset();
+		物件活字.getPiece().add(調整結果[0]);
+		物件活字.getPiece().add(調整結果[1]);
 		return;
 	}
 
 	/**
 	 * 垂直組合活字
 	 * 
-	 * @param pieceMovableTypeTzu
+	 * @param 物件活字
 	 *            要調整的合體活字
 	 */
-	void verticalMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
+	void verticalMerging(PieceMovableTypeTzu 物件活字)
 	{
 		垂直拼合模組 模組=new 垂直拼合模組(this);
 		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
-		貼合工具.執行(pieceMovableTypeTzu);
+		貼合工具.執行(物件活字);
 
 		RectangularArea[] 調整結果=模組.取得調整後活字物件();
-		pieceMovableTypeTzu.getPiece().reset();
-		pieceMovableTypeTzu.getPiece().add(調整結果[0]);
-		pieceMovableTypeTzu.getPiece().add(調整結果[1]);
+		物件活字.getPiece().reset();
+		物件活字.getPiece().add(調整結果[0]);
+		物件活字.getPiece().add(調整結果[1]);
 		return;
 	}
 
 	/**
 	 * 包圍組合活字
 	 * 
-	 * @param pieceMovableTypeTzu
+	 * @param 物件活字
 	 *            要調整的合體活字
 	 */
-	void wrapMerging(PieceMovableTypeTzu pieceMovableTypeTzu)
+	void wrapMerging(PieceMovableTypeTzu 物件活字)
 	{
-		if (!分派工具.組合(pieceMovableTypeTzu))
+		if (!分派工具.組合(物件活字))
 		{
 			System.out.println("QQ 沒組合工具");
-			ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) pieceMovableTypeTzu
+			ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) 物件活字
 					.getChineseCharacter();
 			ChineseCharacter chineseCharacter = chineseCharacterTzu
 					.getChildren()[0];
@@ -134,12 +134,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			{
 			case 2:// TODO
 			}
-			PieceMovableType out = (PieceMovableType) pieceMovableTypeTzu
-					.getChildren()[0], in = (PieceMovableType) pieceMovableTypeTzu
+			PieceMovableType out = (PieceMovableType) 物件活字
+					.getChildren()[0], in = (PieceMovableType) 物件活字
 					.getChildren()[1];
-			pieceMovableTypeTzu.getPiece().reset();
-			pieceMovableTypeTzu.getPiece().add(out.getPiece());
-			pieceMovableTypeTzu.getPiece().add(in.getPiece());
+			物件活字.getPiece().reset();
+			物件活字.getPiece().add(out.getPiece());
+			物件活字.getPiece().add(in.getPiece());
 		}
 		return;
 	}

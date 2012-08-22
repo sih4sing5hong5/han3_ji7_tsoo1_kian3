@@ -41,12 +41,9 @@ public class 二元搜尋貼合工具
 		}
 
 		double 活字寬度 = 模組.活字寬度();
-		// down.getPiece().moveToOrigin();
-		// down.getPiece().moveBy(0, miniPos - downRadius * 2.6);
 		模組.變形處理(mininumValue - 活字寬度 * 2.6 * 縮放參數());
-		模組.調整後處理();
-		double 活字相斥值 = 模組.活字相斥值();
 
+		double 活字相斥值 = 模組.活字相斥值();
 		if (活字相斥值 > 1.6)// TODO 人工參數
 			mininumValue += 活字寬度 * 3.0 * 縮放參數();
 		else if (活字相斥值 > 0.8)
@@ -55,7 +52,7 @@ public class 二元搜尋貼合工具
 			mininumValue += -活字寬度 * 1.2 * 縮放參數();
 
 		模組.變形處理(mininumValue);
-		模組.調整後處理();
+		模組.最後處理();
 		return;
 	}
 

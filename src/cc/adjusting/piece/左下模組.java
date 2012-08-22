@@ -10,7 +10,7 @@ public class 左下模組 extends 二元搜尋貼合模組
 {
 	protected RectangularArea outsidePiece;
 	protected RectangularArea insidePiece;
-	private RectangularArea rectangularArea;
+	protected RectangularArea rectangularArea;
 
 	public 左下模組(MergePieceAdjuster 調整工具)
 	{
@@ -37,7 +37,7 @@ public class 左下模組 extends 二元搜尋貼合模組
 		rectangularArea = new RectangularArea(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.getBounds2D().getHeight());
-		rectangularArea.transform(affineTransform);
+		調整工具.shrinkPieceByFixingStroke(rectangularArea, affineTransform);
 		rectangularArea.moveBy(outsidePiece.getBounds2D().getWidth()
 				- rectangularArea.getBounds2D().getWidth(), 0);
 		return;
@@ -52,11 +52,11 @@ public class 左下模組 extends 二元搜尋貼合模組
 	@Override
 	public boolean 條件成立變大()
 	{
-		return true;
+		return false;
 	}
 
 	@Override
-	public void 調整後處理()
+	public void 最後處理()
 	{
 		insidePiece = rectangularArea;
 	}
@@ -70,14 +70,14 @@ public class 左下模組 extends 二元搜尋貼合模組
 	@Override
 	public double 接觸邊長()
 	{
-		return insidePiece.getBounds2D().getWidth()
-				+ insidePiece.getBounds2D().getHeight();
+		return rectangularArea.getBounds2D().getWidth()
+				+ rectangularArea.getBounds2D().getHeight();
 	}
 
 	@Override
 	public double 活字相斥值()
 	{
-		return 調整工具.nonsuitableToClose(outsidePiece, insidePiece, 接觸邊長());
+		return 調整工具.nonsuitableToClose(outsidePiece, rectangularArea, 接觸邊長());
 	}
 
 	@Override

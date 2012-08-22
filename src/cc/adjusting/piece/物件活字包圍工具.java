@@ -58,5 +58,5 @@ public abstract class 物件活字包圍工具
 	 * @param pieceMovableTypeTzu
 	 *            合體活字
 	 */
-	public abstract void 組合(PieceMovableTypeTzu pieceMovableTypeTzu);
+	public abstract void 組合(PieceMovableTypeTzu 物件活字);
 }

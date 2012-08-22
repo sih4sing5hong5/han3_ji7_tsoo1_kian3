@@ -6,8 +6,8 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 
 public class 水平拼合模組 extends 平移拼合模組
 {
-	private RectangularArea leftPiece;
-	private RectangularArea rightPiece;
+	protected RectangularArea leftPiece;
+	protected RectangularArea rightPiece;
 
 	public 水平拼合模組(MergePieceAdjuster 調整工具)
 	{

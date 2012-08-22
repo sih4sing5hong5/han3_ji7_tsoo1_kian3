@@ -1,41 +1,33 @@
 package cc.adjusting.piece;
 
-import java.awt.geom.AffineTransform;
-
-import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * 用於左上的包圍部件。從左上方包住，像是「厂」、「广」、「尸」和「『左』的左上方」等等。
+ * 用於上下左的包圍部件。從上下左三邊包住，像是「匚」和「⼖」等等。
  * 
  * @author Ihc
  */
-public class 左上包圍工具 extends 物件活字包圍工具
+public class 上下左三邊包圍工具 extends 物件活字包圍工具
 {
 	/**
-	 * 建立左上包圍工具
+	 * 建立上下左三邊包圍工具
 	 * 
 	 * @param 調整工具
 	 *            使用此包圍工具的調整工具，並使用其自身合併相關函式
 	 */
-	public 左上包圍工具(MergePieceAdjuster 調整工具)
+	public 上下左三邊包圍工具(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
-		支援包圍部件.add("厂");
-		支援包圍部件.add("广");
-		支援包圍部件.add("疒");
-		支援包圍部件.add("尸");
-		支援包圍部件.add("戶");
-		支援包圍部件.add("户");
-		支援包圍部件.add("虍");
-		// TODO　/*歷廈病居房灰老名虐遞…*/
+		支援包圍部件.add("匚");//音方，方器義
+		支援包圍部件.add("⼖");//音夕，藏匿義
+		// TODO　/*匣區…*/
 	}
 
 	@Override
 	public void 組合(PieceMovableTypeTzu 物件活字)
 	{
-		左上接合模組 模組=new 左上接合模組(調整工具);
+		上下左三邊接合模組 模組=new 上下左三邊接合模組(調整工具);
 		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
 		貼合工具.執行(物件活字);
 

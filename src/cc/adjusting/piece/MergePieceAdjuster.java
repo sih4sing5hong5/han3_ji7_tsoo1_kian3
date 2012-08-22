@@ -42,6 +42,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分派工具.add(new 上蓋包圍工具(this));
 		分派工具.add(new 左下包圍工具(this));
 		分派工具.add(new 左上包圍工具(this));
+		分派工具.add(new 右上包圍工具(this));
+		分派工具.add(new 左右上三邊包圍工具(this));
+		分派工具.add(new 左右下三邊包圍工具(this));
+		分派工具.add(new 上下左三邊包圍工具(this));
+		分派工具.add(new 右上下勾包圍工具(this));
 		分派工具.add(new 四面包圍工具(this));
 	}
 
@@ -85,11 +90,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void horizontalMerging(PieceMovableTypeTzu 物件活字)
 	{
-		水平拼合模組 模組=new 水平拼合模組(this);
-		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
+		水平拼合模組 模組 = new 水平拼合模組(this);
+		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具(模組);
 		貼合工具.執行(物件活字);
 
-		RectangularArea[] 調整結果=模組.取得調整後活字物件();
+		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();
 		物件活字.getPiece().reset();
 		物件活字.getPiece().add(調整結果[0]);
 		物件活字.getPiece().add(調整結果[1]);
@@ -104,11 +109,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void verticalMerging(PieceMovableTypeTzu 物件活字)
 	{
-		垂直拼合模組 模組=new 垂直拼合模組(this);
-		二元搜尋貼合工具 貼合工具=new 二元搜尋貼合工具(模組);
+		垂直拼合模組 模組 = new 垂直拼合模組(this);
+		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具(模組);
 		貼合工具.執行(物件活字);
 
-		RectangularArea[] 調整結果=模組.取得調整後活字物件();
+		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();
 		物件活字.getPiece().reset();
 		物件活字.getPiece().add(調整結果[0]);
 		物件活字.getPiece().add(調整結果[1]);
@@ -134,8 +139,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			{
 			case 2:// TODO
 			}
-			PieceMovableType out = (PieceMovableType) 物件活字
-					.getChildren()[0], in = (PieceMovableType) 物件活字
+			PieceMovableType out = (PieceMovableType) 物件活字.getChildren()[0], in = (PieceMovableType) 物件活字
 					.getChildren()[1];
 			物件活字.getPiece().reset();
 			物件活字.getPiece().add(out.getPiece());

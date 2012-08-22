@@ -7,7 +7,7 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * 用於右上的包圍部件。從右上方包住，像是「气」、「『或』的戈」和「『武』的右上角」等等。
+ * 用於右上的包圍部件。從右上方包住，像是「气」、「『可』的『丁』」、「『或』的戈」和「『武』的右上角」等等。
  * 
  * @author Ihc
  */
@@ -23,7 +23,7 @@ public class 右上包圍工具 extends 物件活字包圍工具
 	{
 		super(調整工具);
 		支援包圍部件.add("气");
-		// TODO　/*氣武或…*/
+		// TODO　/*氣可武或…*/
 	}
 
 	@Override

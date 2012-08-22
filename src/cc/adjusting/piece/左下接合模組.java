@@ -6,13 +6,13 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
-public class 左下模組 extends 二元搜尋貼合模組
+public class 左下接合模組 extends 二元搜尋貼合模組
 {
 	protected RectangularArea outsidePiece;
 	protected RectangularArea insidePiece;
 	protected RectangularArea rectangularArea;
 
-	public 左下模組(MergePieceAdjuster 調整工具)
+	public 左下接合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}

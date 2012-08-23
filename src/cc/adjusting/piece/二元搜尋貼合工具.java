@@ -1,20 +1,40 @@
 package cc.adjusting.piece;
 
-import java.awt.geom.AffineTransform;
-
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
+/**
+ * 利用二元搜尋來組合兩個活字，並且依據兩個活字之間筆劃的關係，調整兩活字的間距。
+ * 
+ * @author Ihc
+ */
 public class 二元搜尋貼合工具
 {
+	/** 要執行的二元搜尋貼合模組 */
 	private 二元搜尋貼合模組 模組;
 
-	public 二元搜尋貼合工具(二元搜尋貼合模組 模組)
+	/**
+	 * 建立二元搜尋貼合工具
+	 * 
+	 * @param 模組
+	 *            要執行的二元搜尋貼合模組
+	 * @throws IllegalArgumentException
+	 *             若模組為null，則丟出此例外
+	 */
+	public 二元搜尋貼合工具(二元搜尋貼合模組 模組) throws IllegalArgumentException
 	{
 		this.模組 = 模組;
+		if (模組 == null)
+			throw new IllegalArgumentException();
 	}
 
+	/**
+	 * 用初使化設定的模組，來產生調整後的各活字物件
+	 * 
+	 * @param 物件活字
+	 *            要調整的物件活字
+	 */
 	public void 執行(PieceMovableTypeTzu 物件活字)
 	{
 		RectangularArea[] 活字物件 = new RectangularArea[物件活字.getChildren().length];
@@ -25,16 +45,22 @@ public class 二元搜尋貼合工具
 		return;
 	}
 
+	/**
+	 * 用初使化設定的模組，來產生調整後的各活字物件
+	 * 
+	 * @param 活字物件
+	 *            要調整的活字物件
+	 */
 	public void 執行(RectangularArea[] 活字物件)
 	{
-		模組.初使化(活字物件);
+		模組.初始化(活字物件);
 
 		double mininumValue = 模組.下限初始值(), maxinumValue = 模組.上限初始值();
 		while (mininumValue + 模組.取得精確度() < maxinumValue)
 		{
 			double middleValue = 0.5 * (mininumValue + maxinumValue);
 			模組.變形處理(middleValue);
-			if (模組.搜尋判斷條件() ^ 模組.條件成立變大())
+			if (模組.活字是否太接近() ^ 模組.太接近時參數變大())
 				maxinumValue = middleValue;
 			else
 				mininumValue = middleValue;
@@ -56,9 +82,14 @@ public class 二元搜尋貼合工具
 		return;
 	}
 
+	/**
+	 * 判斷模組在縮放時，參數要增加還是要減少。
+	 * 
+	 * @return 若是參數和大小成正比就回傳1.0，若成反比回傳-1.0
+	 */
 	protected double 縮放參數()
 	{
-		if (模組.條件成立變大())
+		if (模組.太接近時參數變大())
 			return 1.0;
 		return -1.0;
 	}

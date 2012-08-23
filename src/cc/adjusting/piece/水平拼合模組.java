@@ -4,18 +4,31 @@ import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
 
+/**
+ * 適用於「⿱」垂直拼合部件，如「⿱將水」為「漿」，只要是垂直拼合，皆用此型態。先將兩活字高度調整相同，再進行合併。
+ * 
+ * @author Ihc
+ */
 public class 水平拼合模組 extends 平移拼合模組
 {
+	/** 左邊的物件活字 */
 	protected RectangularArea leftPiece;
+	/** 右邊的物件活字 */
 	protected RectangularArea rightPiece;
 
+	/**
+	 * 建立水平拼合模組
+	 * 
+	 * @param 調整工具
+	 *            使用此模組的調整工具，並使用其自身合併相關函式
+	 */
 	public 水平拼合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}
 
 	@Override
-	public void 初使化(RectangularArea[] rectangularAreas)
+	public void 初始化(RectangularArea[] rectangularAreas)
 	{
 		leftPiece = rectangularAreas[0];
 		rightPiece = rectangularAreas[1];
@@ -49,7 +62,7 @@ public class 水平拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public boolean 搜尋判斷條件()
+	public boolean 活字是否太接近()
 	{
 		return 調整工具.areIntersected(leftPiece, rightPiece);
 	}

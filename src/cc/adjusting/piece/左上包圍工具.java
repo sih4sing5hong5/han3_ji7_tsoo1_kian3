@@ -1,8 +1,5 @@
 package cc.adjusting.piece;
 
-import java.awt.geom.AffineTransform;
-
-import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 

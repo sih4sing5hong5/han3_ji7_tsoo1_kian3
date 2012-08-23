@@ -1,18 +1,23 @@
 package cc.adjusting.piece;
 
-import java.awt.geom.AffineTransform;
-
-import cc.moveable_type.rectangular_area.RectangularArea;
-
+/**
+ * 適用於靠移動合併的模組，若是兩活字是靠移動距離來當參數調整，就可適用此型態。
+ * 
+ * @author Ihc
+ */
 public abstract class 平移拼合模組 extends 二元搜尋貼合模組
 {
+	/**
+	 * 建立平移拼合模組
+	 * @param 調整工具 使用此模組的調整工具，並使用其自身合併相關函式
+	 */
 	public 平移拼合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}
 
 	@Override
-	public boolean 條件成立變大()
+	public boolean 太接近時參數變大()
 	{
 		return true;
 	}

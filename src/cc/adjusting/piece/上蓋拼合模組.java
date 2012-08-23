@@ -4,17 +4,29 @@ import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
 
+/**
+ * 適用於「⿴」包圍拼合部件，如「⿴冖几」為「冗」，只要是此類拼合，皆用此型態。先將兩活字寬度調整相同，再調依情況縮小下部寬度，進行合併。
+ * 
+ * @author Ihc
+ */
 public class 上蓋拼合模組 extends 垂直拼合模組
 {
+	/** 下面物件活字要縮小的比例 */
 	protected double insideShrinkRate;
 
+	/**
+	 * 建立上蓋拼合模組
+	 * 
+	 * @param 調整工具
+	 *            使用此模組的調整工具，並使用其自身合併相關函式
+	 */
 	public 上蓋拼合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}
 
 	@Override
-	public void 初使化(RectangularArea[] rectangularAreas)
+	public void 初始化(RectangularArea[] rectangularAreas)
 	{
 		upPiece = rectangularAreas[0];
 		downPiece = rectangularAreas[1];

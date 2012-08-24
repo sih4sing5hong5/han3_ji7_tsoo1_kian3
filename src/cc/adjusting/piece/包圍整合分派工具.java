@@ -30,7 +30,8 @@ public class 包圍整合分派工具
 	 * @return 是否有和之前加入的包圍部件有重覆
 	 */
 	public boolean add(物件活字包圍工具 包圍工具)
-	{//TODO 改成丟例外
+	{
+		// TODO 考慮改成丟例外
 		boolean 無重覆 = true;
 		int[] 支援包圍部件控制碼清單 = 包圍工具.取得支援包圍部件控制碼清單();
 		for (int i = 0; i < 支援包圍部件控制碼清單.length; ++i)

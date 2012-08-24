@@ -138,6 +138,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	protected double getStorkeWidthByCoefficient(
 			RectangularArea rectangularArea, double originBoldCoefficient)
 	{
+		//TODO 改成牛頓法可能比較好 
 		double miniWidth = 0.0, maxiWidth = (double) originBoldCoefficient;
 		while (miniWidth + getPrecision() < maxiWidth)
 		{

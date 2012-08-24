@@ -270,12 +270,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	/**
 	 * 產生一個相同圖形的正方體活字物件。
 	 * 
-	 * @param target
+	 * @param rectangularArea
 	 *            活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea getPieceWithSquareTerritory(RectangularArea target)
+	public RectangularArea getPieceWithSquareTerritory(RectangularArea rectangularArea)
 	{
+		RectangularArea target=new RectangularArea(rectangularArea);
 		target.setTerritory(target.getBounds2D());
 		double value = Math.min(target.getTerritory().getWidth(), target
 				.getTerritory().getHeight());

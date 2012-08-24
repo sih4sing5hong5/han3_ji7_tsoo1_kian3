@@ -12,7 +12,7 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 public class 二元搜尋貼合工具
 {
 	/** 要執行的二元搜尋貼合模組 */
-	private 二元搜尋貼合模組 模組;
+	protected 二元搜尋貼合模組 模組;
 
 	/**
 	 * 建立二元搜尋貼合工具
@@ -70,12 +70,18 @@ public class 二元搜尋貼合工具
 		模組.變形處理(mininumValue - 活字寬度 * 2.6 * 縮放參數());
 
 		double 活字相斥值 = 模組.活字相斥值();
-		if (活字相斥值 > 1.6)// TODO 人工參數
+		// TODO 人工參數
+		if (活字相斥值 > 1.6)
 			mininumValue += 活字寬度 * 3.0 * 縮放參數();
 		else if (活字相斥值 > 0.8)
 			mininumValue += 0.0;
 		else
 			mininumValue += -活字寬度 * 1.2 * 縮放參數();
+		
+		if (mininumValue < 模組.下限初始值())
+			mininumValue = 模組.下限初始值();
+		if (mininumValue > 模組.上限初始值())
+			mininumValue = 模組.上限初始值();
 
 		模組.變形處理(mininumValue);
 		模組.最後處理();

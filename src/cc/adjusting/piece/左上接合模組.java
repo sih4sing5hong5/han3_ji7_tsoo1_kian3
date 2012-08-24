@@ -29,10 +29,11 @@ public class 左上接合模組 extends 縮放接合模組
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.getBounds2D().getHeight());
 		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
-		temporaryPiece.moveBy(outsidePiece.getBounds2D().getWidth()
-				- temporaryPiece.getBounds2D().getWidth(), outsidePiece
-				.getBounds2D().getHeight()
-				- temporaryPiece.getBounds2D().getHeight());
+		//TODO
+		temporaryPiece.moveBy(outsidePiece.getBounds2D().getMaxX()
+				- temporaryPiece.getBounds2D().getMaxX(), outsidePiece
+				.getBounds2D().getMaxY()
+				- temporaryPiece.getBounds2D().getMaxY());
 		return;
 	}
 }

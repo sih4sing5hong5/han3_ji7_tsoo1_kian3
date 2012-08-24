@@ -33,6 +33,7 @@ public class RectangularArea extends Area
 	 * @param territory
 	 *            預計位置及大小
 	 */
+	@Deprecated
 	public RectangularArea(Rectangle2D territory)
 	{
 		super();

@@ -42,13 +42,13 @@ public class MergePieceSetter extends SimplePieceSetter
 	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
+		RectangularArea rectangularArea = new RectangularArea();
+		rectangularArea.setTerritory(tzuModelTerritory);
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				parent, chineseCharacterTzu, new RectangularArea(
-						tzuModelTerritory));
+				parent, chineseCharacterTzu, rectangularArea);
 
 		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
 		return pieceMovableTypeTzu;
 	}
-
 }

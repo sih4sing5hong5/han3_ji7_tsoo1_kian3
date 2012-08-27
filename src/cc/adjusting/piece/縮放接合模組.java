@@ -1,5 +1,7 @@
 package cc.adjusting.piece;
 
+import java.awt.geom.AffineTransform;
+
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
@@ -19,8 +21,8 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	/**
 	 * 建立縮放接合模組
 	 * 
-	 * @param 調整工具 使用此模組的調整工具
-	 *            ，並使用其自身合併相關函式
+	 * @param 調整工具
+	 *            使用此模組的調整工具 ，並使用其自身合併相關函式
 	 */
 	public 縮放接合模組(MergePieceAdjuster 調整工具)
 	{
@@ -31,7 +33,8 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	public void 初始化(RectangularArea[] rectangularAreas)
 	{
 		outsidePiece = rectangularAreas[0];
-		insidePiece = 調整工具.getPieceWithSquareTerritory(rectangularAreas[1]);
+		// insidePiece = 調整工具.getPieceWithSquareTerritory(rectangularAreas[1]);
+		insidePiece = (rectangularAreas[1]);
 		return;
 	}
 
@@ -39,6 +42,17 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	public double 上限初始值()
 	{
 		return insidePiece.getBounds2D().getHeight();
+	}
+
+	@Override
+	public void 變形處理(double middleValue)
+	{
+		temporaryPiece = new RectangularArea(insidePiece);
+		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
+				/ insidePiece.getBounds2D().getHeight());
+		temporaryPiece.transform(affineTransform);
+//		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
+		return;
 	}
 
 	@Override

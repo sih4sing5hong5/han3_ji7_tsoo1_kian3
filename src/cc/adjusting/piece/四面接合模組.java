@@ -22,15 +22,21 @@ public class 四面接合模組 extends 縮放接合模組
 		super(調整工具);
 	}
 
+//	@Override
+//	public void 初始化(RectangularArea[] rectangularAreas)
+//	{
+//		super.初始化(rectangularAreas);
+//		insidePiece.setTerritory(outsidePiece.getBounds2D());
+//		調整工具.getNewPieceByTerritory(insidePiece);
+//		return;
+//	}
+
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new RectangularArea(insidePiece);
-		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
-				/ insidePiece.getBounds2D().getHeight());
-		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
-		temporaryPiece.moveBy(outsidePiece.getBounds2D().getCenterX()
-				- temporaryPiece.getBounds2D().getCenterX(), outsidePiece
+		super.變形處理(middleValue);
+		temporaryPiece.moveBy(insidePiece.getBounds2D().getCenterX()
+				- temporaryPiece.getBounds2D().getCenterX(), insidePiece
 				.getBounds2D().getCenterY()
 				- temporaryPiece.getBounds2D().getCenterY());
 		return;

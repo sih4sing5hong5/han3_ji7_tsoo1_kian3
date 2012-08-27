@@ -9,6 +9,11 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class 二元搜尋間隔工具 extends 二元搜尋貼合工具
 {
+	public 二元搜尋間隔工具()
+	{
+		super();
+	}
+
 	/**
 	 * 建立二元搜尋間距工具
 	 * 

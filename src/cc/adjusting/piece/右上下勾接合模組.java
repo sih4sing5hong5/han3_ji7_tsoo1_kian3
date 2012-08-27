@@ -1,8 +1,5 @@
 package cc.adjusting.piece;
 
-import java.awt.geom.AffineTransform;
-
-import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
  * 適用於外部部件有右上二邊並且右下有往內勾的活字接合，如「⿴勹日」為「旬」。在接合時，都固定外部活字，並將內部活字固定在左下縮放。
@@ -26,10 +23,7 @@ public class 右上下勾接合模組 extends 縮放接合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new RectangularArea(insidePiece);
-		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
-				/ insidePiece.getBounds2D().getHeight());
-		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
+		super.變形處理(middleValue);
 		temporaryPiece.moveBy(outsidePiece.getBounds2D().getMinX()
 				- temporaryPiece.getBounds2D().getMinX(), outsidePiece
 				.getBounds2D().getMaxY()

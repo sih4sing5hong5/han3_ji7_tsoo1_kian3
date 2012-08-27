@@ -13,6 +13,11 @@ public class 二元搜尋貼合工具
 	/** 要執行的二元搜尋貼合模組 */
 	protected 二元搜尋貼合模組 模組;
 
+	public 二元搜尋貼合工具()
+	{
+		this.模組 = null;
+	}
+
 	/**
 	 * 建立二元搜尋貼合工具
 	 * 
@@ -93,5 +98,11 @@ public class 二元搜尋貼合工具
 		if (模組.太接近時參數變大())
 			return 1.0;
 		return -1.0;
+	}
+
+	public void 設定使用模組(二元搜尋貼合模組 模組)
+	{
+		this.模組 = 模組;
+		return;
 	}
 }

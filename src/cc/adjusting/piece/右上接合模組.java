@@ -25,10 +25,7 @@ public class 右上接合模組 extends 縮放接合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new RectangularArea(insidePiece);
-		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
-				/ insidePiece.getBounds2D().getHeight());
-		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
+		super.變形處理(middleValue);
 		temporaryPiece.moveBy(outsidePiece.getBounds2D().getMinX()
 				- temporaryPiece.getBounds2D().getMinX(), outsidePiece
 				.getBounds2D().getMaxY()

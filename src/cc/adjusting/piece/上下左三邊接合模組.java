@@ -29,8 +29,8 @@ public class 上下左三邊接合模組 extends 縮放接合模組
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.getBounds2D().getHeight());
 		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
-		temporaryPiece.moveBy(outsidePiece.getBounds2D().getWidth()
-				- temporaryPiece.getBounds2D().getWidth(), outsidePiece
+		temporaryPiece.moveBy(outsidePiece.getBounds2D().getMaxX()
+				- temporaryPiece.getBounds2D().getMaxX(), outsidePiece
 				.getBounds2D().getCenterY()
 				- temporaryPiece.getBounds2D().getCenterY());
 		return;

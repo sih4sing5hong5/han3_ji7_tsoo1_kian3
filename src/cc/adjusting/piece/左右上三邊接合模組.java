@@ -31,8 +31,8 @@ public class 左右上三邊接合模組 extends 縮放接合模組
 		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
 		temporaryPiece.moveBy(outsidePiece.getBounds2D().getCenterX()
 				- temporaryPiece.getBounds2D().getCenterX(), outsidePiece
-				.getBounds2D().getHeight()
-				- temporaryPiece.getBounds2D().getHeight());
+				.getBounds2D().getMaxY()
+				- temporaryPiece.getBounds2D().getMaxY());
 		return;
 	}
 }

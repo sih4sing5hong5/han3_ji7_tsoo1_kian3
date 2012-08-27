@@ -30,7 +30,9 @@ public class 左右下三邊接合模組 extends 縮放接合模組
 				/ insidePiece.getBounds2D().getHeight());
 		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
 		temporaryPiece.moveBy(outsidePiece.getBounds2D().getCenterX()
-				- temporaryPiece.getBounds2D().getCenterX(), 0.0);
+				- temporaryPiece.getBounds2D().getCenterX(), outsidePiece
+				.getBounds2D().getMinY()
+				- temporaryPiece.getBounds2D().getMinY());
 		return;
 	}
 }

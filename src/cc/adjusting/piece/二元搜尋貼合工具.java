@@ -1,6 +1,5 @@
 package cc.adjusting.piece;
 
-import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
@@ -37,11 +36,7 @@ public class 二元搜尋貼合工具
 	 */
 	public void 執行(PieceMovableTypeTzu 物件活字)
 	{
-		RectangularArea[] 活字物件 = new RectangularArea[物件活字.getChildren().length];
-		for (int i = 0; i < 物件活字.getChildren().length; ++i)
-			活字物件[i] = new RectangularArea(
-					((PieceMovableType) 物件活字.getChildren()[i]).getPiece());
-		執行(活字物件);
+		執行(物件活字.取得活字物件());
 		return;
 	}
 
@@ -77,7 +72,7 @@ public class 二元搜尋貼合工具
 			mininumValue += 0.0;
 		else
 			mininumValue += -活字寬度 * 1.2 * 縮放參數();
-		
+
 		if (mininumValue < 模組.下限初始值())
 			mininumValue = 模組.下限初始值();
 		if (mininumValue > 模組.上限初始值())

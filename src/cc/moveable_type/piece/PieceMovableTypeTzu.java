@@ -34,7 +34,7 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	 */
 	public PieceMovableTypeTzu(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterTzu chineseCharacterTzu,
-			 RectangularArea rectangularArea)
+			RectangularArea rectangularArea)
 	{
 		super(parent, chineseCharacterTzu);
 		this.rectangularArea = rectangularArea;
@@ -46,9 +46,17 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 		return rectangularArea;
 	}
 
-	// @Override
-	// public void setPiece(RectangularArea rectangularArea)
-	// {
-	// this.rectangularArea = rectangularArea;
-	// }
+	/**
+	 * 取得合體活字下各個元件的活字物件
+	 * 
+	 * @return 各個元件的活字物件
+	 */
+	public RectangularArea[] 取得活字物件()
+	{
+		RectangularArea[] 活字物件 = new RectangularArea[getChildren().length];
+		for (int i = 0; i < getChildren().length; ++i)
+			活字物件[i] = new RectangularArea(
+					((PieceMovableType) getChildren()[i]).getPiece());
+		return 活字物件;
+	}
 }

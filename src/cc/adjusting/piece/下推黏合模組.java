@@ -3,11 +3,16 @@ package cc.adjusting.piece;
 import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
-//改width height
+
+/**
+ * 讓第二個活字往下延伸的模組，碰到第一個活字或是邊界即停止。
+ * 
+ * @author Ihc
+ */
 public class 下推黏合模組 extends 平推黏合模組
 {
 	/**
-	 * 建立右推黏合模組
+	 * 建立下推黏合模組
 	 * 
 	 * @param 調整工具
 	 *            使用此模組的調整工具，並使用其自身合併相關函式

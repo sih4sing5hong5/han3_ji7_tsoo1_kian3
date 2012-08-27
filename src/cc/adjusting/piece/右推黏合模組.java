@@ -4,6 +4,11 @@ import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
 
+/**
+ * 讓第二個活字往右延伸的模組，碰到第一個活字或是邊界即停止。
+ * 
+ * @author Ihc
+ */
 public class 右推黏合模組 extends 平推黏合模組
 {
 	/**

@@ -114,6 +114,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 		return shapeInformation.getApproximativeRegion()
 				/ shapeInformation.getApproximativeCircumference();
 	}
+
 	/**
 	 * 計算物件活字粗細係數
 	 * 
@@ -138,7 +139,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	protected double getStorkeWidthByCoefficient(
 			RectangularArea rectangularArea, double originBoldCoefficient)
 	{
-		//TODO 改成牛頓法可能比較好 
+		// TODO 改成牛頓法可能比較好
 		double miniWidth = 0.0, maxiWidth = (double) originBoldCoefficient;
 		while (miniWidth + getPrecision() < maxiWidth)
 		{
@@ -181,31 +182,48 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 * @param affineTransform
 	 *            粗細係數
 	 */
-	protected void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
+	void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
 			AffineTransform affineTransform)
 	{
-		double originBoldCoefficient = computeBoldCoefficient(rectangularArea);
+		活字寬度資訊 舊活字寬度資訊 = 取得活字寬度資訊(rectangularArea);
+		// double originBoldCoefficient =
+		// computeBoldCoefficient(rectangularArea);
 		rectangularArea.transform(affineTransform);
-		double strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
-				originBoldCoefficient);
-		RectangularArea boldSurface = getBoldSurface(rectangularArea,
-				strokeWidth);
-		rectangularArea.add(boldSurface);
+		依寬度資訊調整活字(rectangularArea, 舊活字寬度資訊);
+		// double strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
+		// originBoldCoefficient);
+		// RectangularArea boldSurface = getBoldSurface(rectangularArea,
+		// strokeWidth);
+		// rectangularArea.add(boldSurface);
 		return;
 	}
 
-	//
-	// /**
-	// * 取得筆劃加寬物件
-	// *
-	// * @param width
-	// * 加寬的寬度
-	// * @return 筆劃加寬物件
-	// */
-	// public Stroke getStroke(double width)
-	// {
-	// return new BasicStroke(width);
-	// }
+	/**
+	 * 取得活字物件的活字寬度資訊
+	 * 
+	 * @param 活字物件
+	 *            欲取得資訊的活字物件
+	 * @return 活字寬度資訊
+	 */
+	活字寬度資訊 取得活字寬度資訊(RectangularArea 活字物件)
+	{
+		return new 活字寬度資訊(computeBoldCoefficient(活字物件));
+	}
+
+	/**
+	 * 依照寬度資訊，來調整活字物件
+	 * 
+	 * @param 活字物件
+	 *            要被調整的活字物偉
+	 * @param 寬度資訊
+	 *            依據的寬度資訊
+	 */
+	void 依寬度資訊調整活字(RectangularArea 活字物件, 活字寬度資訊 寬度資訊)
+	{
+		double strokeWidth = getStorkeWidthByCoefficient(活字物件, 寬度資訊.取得活字粗細係數());
+		RectangularArea boldSurface = getBoldSurface(活字物件, strokeWidth);
+		活字物件.add(boldSurface);
+	}
 
 	/**
 	 * 取得合併、調整的精細度

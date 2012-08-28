@@ -1,8 +1,5 @@
 package cc.adjusting.piece;
 
-import java.awt.geom.AffineTransform;
-
-import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
  * 適用於外部部件在左下的活字接合，如「⿴辶咼」為「過」。在接合時，都固定外部活字，並將內部活字固定在右上縮放。

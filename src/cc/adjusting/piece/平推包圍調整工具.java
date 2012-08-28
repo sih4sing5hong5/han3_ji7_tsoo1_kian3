@@ -4,16 +4,31 @@ import java.util.Vector;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
 
-public class 包圍調整工具
+/**
+ * 整合包圍所需平推的物件，傳入，會先用包圍模組大概調整內部活字，大概平推一次、精細平推一次，最後再用包圍模組再調整。
+ * 
+ * @author Ihc
+ */
+public class 平推包圍調整工具
 {
-	/* 使用此包圍工具的調整工具，並使用其自身合併相關函式 */
-	// protected MergePieceAdjuster 調整工具;
+	/** 主要使用的包圍模組 */
 	protected 縮放接合模組 包圍模組;
+	/** 主要使用的包圍工具 */
 	protected Vector<二元搜尋貼合工具> 包圍工具列;
+	/** 平推過程中要用到的二元調整工具 */
 	protected Vector<二元搜尋貼合工具> 平推工具列;
+	/** 平推過程中要用到的平推黏合模組 */
 	protected Vector<平推黏合模組> 平推模組列;
 
-	public 包圍調整工具(縮放接合模組 包圍模組, MergePieceAdjuster 調整工具)
+	/**
+	 * 建立平推包圍調整工具
+	 * 
+	 * @param 包圍模組
+	 *            主要使用的包圍模組
+	 * @param 調整工具
+	 *            使用此包圍工具的調整工具，並使用其自身合併相關函式
+	 */
+	public 平推包圍調整工具(縮放接合模組 包圍模組, MergePieceAdjuster 調整工具)
 	{
 		// this.調整工具 = 調整工具;
 		this.包圍模組 = 包圍模組;
@@ -31,6 +46,12 @@ public class 包圍調整工具
 		平推模組列.add(new 右推黏合模組(調整工具));
 	}
 
+	/**
+	 * 將活字物件的調整後，放在包圍模組中
+	 * 
+	 * @param 活字物件
+	 *            要調整的物件
+	 */
 	public void 組合(RectangularArea[] 活字物件)
 	{
 		包圍工具列.elementAt(0).執行(包圍模組, 活字物件);

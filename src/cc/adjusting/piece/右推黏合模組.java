@@ -48,7 +48,7 @@ public class 右推黏合模組 extends 平推黏合模組
 		temporaryPiece = new RectangularArea(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.getBounds2D().getWidth(), 1.0);
-		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
+		temporaryPiece.transform(affineTransform);
 		temporaryPiece.moveBy(insidePiece.getBounds2D().getMinX()
 				- temporaryPiece.getBounds2D().getMinX(), insidePiece
 				.getBounds2D().getMinY()

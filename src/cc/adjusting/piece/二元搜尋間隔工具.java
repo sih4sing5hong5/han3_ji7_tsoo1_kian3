@@ -9,26 +9,8 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class 二元搜尋間隔工具 extends 二元搜尋貼合工具
 {
-	public 二元搜尋間隔工具()
-	{
-		super();
-	}
-
-	/**
-	 * 建立二元搜尋間距工具
-	 * 
-	 * @param 模組
-	 *            要執行的二元搜尋間距工具
-	 * @throws IllegalArgumentException
-	 *             若模組為null，則丟出此例外
-	 */
-	public 二元搜尋間隔工具(二元搜尋貼合模組 模組) throws IllegalArgumentException
-	{
-		super(模組);
-	}
-
 	@Override
-	public void 執行(RectangularArea[] 活字物件)
+	public void 執行(二元搜尋貼合模組 模組, RectangularArea[] 活字物件)
 	{
 		模組.初始化(活字物件);
 
@@ -46,7 +28,7 @@ public class 二元搜尋間隔工具 extends 二元搜尋貼合工具
 		double 活字寬度 = 模組.活字寬度();
 
 		// TODO 人工參數
-		mininumValue += 活字寬度 * 4.0 * 縮放參數();
+		mininumValue += 活字寬度 * 4.0 * 縮放參數(模組);
 		if (mininumValue < 模組.下限初始值())
 			mininumValue = 模組.下限初始值();
 		if (mininumValue > 模組.上限初始值())

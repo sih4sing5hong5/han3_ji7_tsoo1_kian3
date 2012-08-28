@@ -91,8 +91,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	void horizontalMerging(PieceMovableTypeTzu 物件活字)
 	{
 		水平拼合模組 模組 = new 水平拼合模組(this);
-		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具(模組);
-		貼合工具.執行(物件活字);
+		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具();
+		貼合工具.執行(模組,物件活字.取得活字物件());
 
 		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();
 		物件活字.getPiece().reset();
@@ -110,8 +110,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	void verticalMerging(PieceMovableTypeTzu 物件活字)
 	{
 		垂直拼合模組 模組 = new 垂直拼合模組(this);
-		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具(模組);
-		貼合工具.執行(物件活字);
+		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具();
+		貼合工具.執行(模組,物件活字.取得活字物件());
 
 		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();
 		物件活字.getPiece().reset();

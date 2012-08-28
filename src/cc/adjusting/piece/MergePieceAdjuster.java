@@ -43,10 +43,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分派工具.add(new 左下包圍工具(this));
 		分派工具.add(new 左上包圍工具(this));
 		分派工具.add(new 右上包圍工具(this));
-		分派工具.add(new 左右上三邊包圍工具(this));
+		分派工具.add(new 左右上內勾包圍工具(this));
 		分派工具.add(new 左右下三邊包圍工具(this));
 		分派工具.add(new 上下左三邊包圍工具(this));
-		分派工具.add(new 右上下勾包圍工具(this));
+		分派工具.add(new 右上內勾包圍工具(this));
 		分派工具.add(new 四面包圍工具(this));
 	}
 

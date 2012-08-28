@@ -7,7 +7,7 @@ package cc.adjusting.piece;
  * @author Ihc
  */
 
-public class 右上下勾接合模組 extends 縮放接合模組
+public class 右上內勾接合模組 extends 縮放接合模組
 {
 	/**
 	 * 建立右上下勾接合模組
@@ -15,7 +15,7 @@ public class 右上下勾接合模組 extends 縮放接合模組
 	 * @param 調整工具
 	 *            使用此模組的調整工具，並使用其自身合併相關函式
 	 */
-	public 右上下勾接合模組(MergePieceAdjuster 調整工具)
+	public 右上內勾接合模組(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 	}

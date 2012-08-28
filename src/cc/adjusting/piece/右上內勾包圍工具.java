@@ -8,7 +8,7 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  * 
  * @author Ihc
  */
-public class 右上下勾包圍工具 extends 物件活字包圍工具
+public class 右上內勾包圍工具 extends 物件活字包圍工具
 {
 	/**
 	 * 建立上下左三邊包圍工具
@@ -16,7 +16,7 @@ public class 右上下勾包圍工具 extends 物件活字包圍工具
 	 * @param 調整工具
 	 *            使用此包圍工具的調整工具，並使用其自身合併相關函式
 	 */
-	public 右上下勾包圍工具(MergePieceAdjuster 調整工具)
+	public 右上內勾包圍工具(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
 		支援包圍部件.add("勹");

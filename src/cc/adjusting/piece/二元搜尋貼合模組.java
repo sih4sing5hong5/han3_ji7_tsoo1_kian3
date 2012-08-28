@@ -38,7 +38,7 @@ public abstract class 二元搜尋貼合模組
 	 */
 	public double 下限初始值()
 	{
-		return 0.0;
+		return 調整工具.getPrecision();
 	}
 
 	/**

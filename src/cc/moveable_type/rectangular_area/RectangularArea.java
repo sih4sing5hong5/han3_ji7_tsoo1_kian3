@@ -159,4 +159,20 @@ public class RectangularArea extends Area
 	{
 		return territory;
 	}
+
+	/**
+	 * 將物件重設，並將底下活字物件組合起來
+	 * 
+	 * @param 活字物件
+	 *            合體活字底下的活字物件
+	 */
+	public void 重設並組合活字(RectangularArea[] 活字物件)
+	{
+		reset();
+		for (RectangularArea 活字物件單元 : 活字物件)
+		{
+			add(活字物件單元);
+		}
+		return;
+	}
 }

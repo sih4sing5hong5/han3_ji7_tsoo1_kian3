@@ -11,6 +11,8 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class 平推包圍調整工具
 {
+	/** 使用此包圍工具的調整工具，並使用其自身合併相關函式 */
+	protected MergePieceAdjuster 調整工具;
 	/** 主要使用的包圍模組 */
 	protected 縮放接合模組 包圍模組;
 	/** 主要使用的包圍工具 */
@@ -21,16 +23,16 @@ public class 平推包圍調整工具
 	protected Vector<平推黏合模組> 平推模組列;
 
 	/**
-	 * 建立平推包圍調整工具
+	 * 建立平推包圍調整工具。
 	 * 
 	 * @param 包圍模組
 	 *            主要使用的包圍模組
 	 * @param 調整工具
 	 *            使用此包圍工具的調整工具，並使用其自身合併相關函式
 	 */
-	public 平推包圍調整工具(縮放接合模組 包圍模組, MergePieceAdjuster 調整工具)
+	public 平推包圍調整工具(MergePieceAdjuster 調整工具, 縮放接合模組 包圍模組)
 	{
-
+		this.調整工具 = 調整工具;
 		this.包圍模組 = 包圍模組;
 		包圍工具列 = new Vector<二元搜尋貼合工具>();
 		包圍工具列.add(new 二元搜尋間隔工具(4.0)); // TODO 人工參數
@@ -47,13 +49,15 @@ public class 平推包圍調整工具
 	}
 
 	/**
-	 * 將活字物件的調整後，放在包圍模組中
+	 * 將活字物件的調整後，放在包圍模組中。
 	 * 
 	 * @param 活字物件
 	 *            要調整的物件
+	 * @return 活字物件調整後結果
 	 */
-	public void 組合(RectangularArea[] 活字物件)
+	public RectangularArea[] 產生調整後活字(RectangularArea[] 活字物件)
 	{
+		活字寬度資訊 舊活字寬度資訊 = 調整工具.取得活字寬度資訊(活字物件[1]);
 		包圍工具列.elementAt(0).執行(包圍模組, 活字物件);
 		活字物件 = 包圍模組.取得調整後活字物件();
 		for (二元搜尋貼合工具 工具 : 平推工具列)
@@ -64,6 +68,7 @@ public class 平推包圍調整工具
 			}
 		包圍工具列.elementAt(1).執行(包圍模組, 活字物件);
 		活字物件 = 包圍模組.取得調整後活字物件();
-		return;
+		調整工具.依寬度資訊調整活字(活字物件[1], 舊活字寬度資訊);
+		return 活字物件;
 	}
 }

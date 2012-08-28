@@ -32,9 +32,7 @@ public class 上蓋包圍工具 extends 物件活字包圍工具
 		貼合工具.執行(模組, 物件活字.取得活字物件());
 
 		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();
-		物件活字.getPiece().reset();
-		物件活字.getPiece().add(調整結果[0]);
-		物件活字.getPiece().add(調整結果[1]);
+		物件活字.getPiece().重設並組合活字(調整結果);
 		return;
 	}
 }

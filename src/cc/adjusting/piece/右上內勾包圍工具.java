@@ -11,11 +11,11 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 public class 右上內勾包圍工具 extends 物件活字包圍工具
 {
 	/** 平推前先用的調整模組 */
-	右上內勾接合模組 模組;
+	protected 右上內勾接合模組 模組;
 	/** 平推後用的調整模組 */
-	四面後接合模組 後模組;
+	protected 四面後接合模組 後模組;
 	/** 要使用的平推工具 */
-	平推包圍調整工具 平推包圍調整工具;
+	protected 平推包圍調整工具 平推包圍調整工具;
 
 	/**
 	 * 建立上下左三邊包圍工具

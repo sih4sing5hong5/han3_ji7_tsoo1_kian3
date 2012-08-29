@@ -4,7 +4,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.PathIterator;
 
 /**
- * 路徑循訪公用型態。
+ * 路徑循訪公用型態。將<code>GeneralPath</code>的每個線段繞個一次。
  * 
  * @author Ihc
  */

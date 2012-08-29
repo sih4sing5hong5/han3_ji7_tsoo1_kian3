@@ -1,9 +1,21 @@
 package cc.moveable_type.rectangular_area;
 
+/**
+ * 把每個控制點拿出來看的路徑循訪反應動作介面，搭配上<code>控制點反應動作</code>就可以方便的依序得到每個控制點的位置。
+ * 
+ * @author Ihc
+ */
 public class 控制點循訪 implements PathAction
 {
+	/** 讀取每個控制點要做的反應 */
 	private 控制點反應動作 反應動作;
 
+	/**
+	 * 建立控制點循訪物件。
+	 * 
+	 * @param 反應動作
+	 *            讀取每個控制點要做的反應
+	 */
 	public 控制點循訪(控制點反應動作 反應動作)
 	{
 		this.反應動作 = 反應動作;

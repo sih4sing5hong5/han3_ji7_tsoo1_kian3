@@ -1,7 +1,7 @@
 package cc.moveable_type.rectangular_area;
 
 /**
- * 路徑循訪反應動作介面。
+ * 路徑循訪反應動作介面，配合<code>PathTravel</code>使用，設定當遇到各式的線段方程式，所要執行的動作。
  * 
  * @author Ihc
  */

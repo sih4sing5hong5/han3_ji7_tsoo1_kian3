@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Stroke;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.FontRenderContext;
@@ -54,9 +55,9 @@ public class AwtTestExample extends JPanel
 			+ "秋漿國變務森" + "⿰禾火⿱將水⿴囗或" + "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木"
 			+ "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田" + "⿱口⿰口口⿱夕夕，"
 			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴辶咼辶" + "⿴冖儿⿴冖几宀寶建⿴廴聿"
-			+ "⿴厂猒⿴广夏⿴疒丙⿴尸古⿴戶方⿴户方⿴户 ⿱户　⿰户　" + "⿴气亥⿴气乃⿴气亞" +
-					"⿴冂⿱一口⿴冂⿱儿口⿴門一⿴門日⿴門月⿴鬥月⿴鬥市"
-			+ "⿱⿴乃又皿盈孕⿴乃子⿱乃子" + "⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕" + "⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口";// */;
+			+ "⿴厂猒⿴广夏⿴疒丙⿴尸古⿴戶方⿴户方⿴户 ⿱户　⿰户　" + "⿴气亥⿴气乃⿴气亞"
+			+ "⿴冂⿱一口⿴冂⿱儿口⿴門一⿴門日⿴門月⿴鬥月⿴鬥市" + "⿱⿴乃又皿盈孕⿴乃子⿱乃子"
+			+ "⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕" + "⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口";// */;
 	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	/** 全字庫正楷體 */
@@ -103,7 +104,7 @@ public class AwtTestExample extends JPanel
 
 		System.out.println("調整中～～ 時間：" + System.currentTimeMillis());
 		MergePieceAdjuster adjuster = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(0), 1e-1);// TODO
+				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);// TODO
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);

@@ -43,9 +43,9 @@ public class AwtTestExample extends JPanel
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
 	/** 視窗寬度 */
-	static final int WIDTH = 1440;
+	protected static final int WIDTH = 1440;
 	/** 視窗高度 */
-	static final int HEIGHT = 1050;
+	protected static final int HEIGHT = 1050;
 	/** 字型大小 */
 	static final int TYPE_SIZE = 75;
 	/** 每行字數 */

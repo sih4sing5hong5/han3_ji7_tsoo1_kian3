@@ -1,4 +1,4 @@
-package cc.test.tool;
+package cc.tool.database;
 
 import java.io.File;
 

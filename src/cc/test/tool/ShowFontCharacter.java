@@ -17,6 +17,11 @@ import javax.swing.JFrame;
 import cc.adjusting.bolder.NullStroke;
 import cc.example.awt.AwtTestExample;
 
+/**
+ * 用來檢視字型裡有哪些字
+ * 
+ * @author Ihc
+ */
 public class ShowFontCharacter extends AwtTestExample
 {
 	/** 序列化編號 */
@@ -24,13 +29,9 @@ public class ShowFontCharacter extends AwtTestExample
 	/** 字型大小 */
 	static final int TYPE_SIZE = 40;
 
-	/**
-	 * @param args
-	 */
 	@Override
 	public void paint(Graphics g1)
 	{
-		// TODO Auto-generated method stub
 		try
 		{
 			Graphics2D graphics2D = (Graphics2D) g1;
@@ -85,13 +86,13 @@ public class ShowFontCharacter extends AwtTestExample
 				}
 			}
 			System.out.println("count=" + cnt);
-		} catch (FontFormatException e)
+		}
+		catch (FontFormatException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e)
+		}
+		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

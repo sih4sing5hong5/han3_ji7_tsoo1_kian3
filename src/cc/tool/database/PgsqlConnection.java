@@ -6,17 +6,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Pgsql連線物件。
+ * 
+ * @author Ihc
+ */
 public class PgsqlConnection
 {
+	/** 預設資料庫位置 */
 	static final String url = "jdbc:postgresql://localhost/IhcData?useUnicode=true&characterEncoding=utf-8";
-	private Connection con;
-	private Statement stmt;
+	/** 連線物件 */
+	private Connection connection;
+	/** 連線狀態 */
+	private Statement statement;
 
+	/** 自動連線到資料庫。 */
 	PgsqlConnection()
 	{
 		this(url, "Ihc", "983781");
 	}
 
+	/**
+	 * 連線到資料庫。
+	 * 
+	 * @param urls
+	 *            資料庫位置
+	 * @param account
+	 *            資料庫帳號
+	 * @param passwd
+	 *            資料庫密碼
+	 */
 	PgsqlConnection(String urls, String account, String passwd)
 	{
 		try
@@ -30,7 +49,7 @@ public class PgsqlConnection
 		}
 		try
 		{
-			con = DriverManager.getConnection(urls, account, passwd);
+			connection = DriverManager.getConnection(urls, account, passwd);
 		}
 		catch (SQLException ex)
 		{
@@ -40,11 +59,12 @@ public class PgsqlConnection
 		return;
 	}
 
+	/** 關閉連線。 */
 	void close()
 	{
 		try
 		{
-			con.close();
+			connection.close();
 		}
 		catch (SQLException ex)
 		{
@@ -54,19 +74,36 @@ public class PgsqlConnection
 		return;
 	}
 
+	/**
+	 * 查詢資料。
+	 * 
+	 * @param query
+	 *            向資料庫提出的要求
+	 * @return 查詢結果
+	 * @throws SQLException
+	 *             資料庫錯誤
+	 */
 	ResultSet executeQuery(String query) throws SQLException
 	{
-		stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery(query);
+		statement = connection.createStatement();
+		ResultSet rs = statement.executeQuery(query);
 		// stmt.close();
 		return rs;
 	}
 
+	/**
+	 * 更改資料庫。
+	 * 
+	 * @param query
+	 *            向資料庫提出的更改
+	 * @throws SQLException
+	 *             資料庫錯誤
+	 */
 	void executeUpdate(String query) throws SQLException
 	{
-		stmt = con.createStatement();
-		stmt.executeUpdate(query);
-		stmt.close();
+		statement = connection.createStatement();
+		statement.executeUpdate(query);
+		statement.close();
 		return;
 	}
 }

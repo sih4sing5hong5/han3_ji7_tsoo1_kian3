@@ -7,8 +7,6 @@ package cc.core;
  */
 public class ChineseCharacterFormatException extends Exception
 {
-	/**
-	 * 序列化編號
-	 */
+	/** 序列化編號 */
 	private static final long serialVersionUID = 8405277769269381767L;
 }

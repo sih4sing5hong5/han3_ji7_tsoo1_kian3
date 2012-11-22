@@ -1,14 +1,16 @@
 package cc.tool.database;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Vector;
 
-import cc.core.ChineseCharacterFormatException;
-
+/**
+ * 把構形資料庫轉譯到漢字組建資料庫的型態。
+ * 
+ * @author Ihc
+ */
 public class 構形資料庫轉至組建資料庫
 {
+	/** 中央研究院構字式所用的所有方便符號 */
 	static final int[] 方便符號控制碼;
 	static
 	{
@@ -16,7 +18,10 @@ public class 構形資料庫轉至組建資料庫
 	}
 
 	/**
+	 * 主函式。
+	 * 
 	 * @param args
+	 *            程式參數
 	 */
 	public static void main(String[] args)
 	{
@@ -27,7 +32,7 @@ public class 構形資料庫轉至組建資料庫
 		int 上傳筆數 = 0;
 		try
 		{
-			更新連線.executeUpdate("DELETE FROM \"漢字組建\".\"檢字表\"");
+//			更新連線.executeUpdate("DELETE FROM \"漢字組建\".\"檢字表\"");
 			String selectQuery = "SELECT \"編號\",\"Big5\",\"Unicode\",\"連接符號\",\"部件序\""
 					+ " FROM \"構形資料庫\".\"檢字表\" "
 					// + " WHERE \"連接符號\" = '5' "
@@ -77,7 +82,7 @@ public class 構形資料庫轉至組建資料庫
 
 					}
 				}
-				catch (IOException e)
+				catch (構字式格式錯誤例外 e)
 				{
 					System.err.println("發現錯誤！！！ " + rs.getString("編號") + " "
 							+ 部件序);
@@ -93,7 +98,18 @@ public class 構形資料庫轉至組建資料庫
 		System.out.println("上傳筆數=" + 上傳筆數);
 	}
 
-	private String 產生構字式(int[] 部件序控制碼, String 構字符號) throws IOException
+	/**
+	 * 將構字式的部件序，轉換成漢字組建的組字式。
+	 * 
+	 * @param 部件序控制碼
+	 *            部件序的控制碼陣列
+	 * @param 構字符號
+	 *            此構字式的構字符號，若無傳入<code>null</code>
+	 * @return 所求組字式
+	 * @throws 構字式格式錯誤例外
+	 *             構字式裡應只有一個部件，卻用到構字符號
+	 */
+	private String 產生構字式(int[] 部件序控制碼, String 構字符號) throws 構字式格式錯誤例外
 	{
 		int 註標 = 0;
 		int 部件數 = 0;
@@ -111,7 +127,12 @@ public class 構形資料庫轉至組建資料庫
 		while (註標 < 部件序控制碼.length)
 		{
 			if (部件數 > 1)
-				構字式.append(構字符號);
+			{
+				if (構字符號 == null)
+					throw new 構字式格式錯誤例外("明明是方便符號，部件序裡卻有兩個部件！！");
+				else
+					構字式.append(構字符號);
+			}
 			if (是否為方便符號(部件序控制碼[註標]))
 			{
 				構字式.append(展開方便符號(部件序控制碼[註標], Character.toChars(部件序控制碼[註標 + 1])));
@@ -127,6 +148,13 @@ public class 構形資料庫轉至組建資料庫
 		return 構字式.toString();
 	}
 
+	/**
+	 * 判斷一控制碼是否為構形資料庫中的方便符號
+	 * 
+	 * @param 控制碼
+	 *            欲判斷的字
+	 * @return 是否為構形資料庫中的方便符號
+	 */
 	public boolean 是否為方便符號(int 控制碼)
 	{
 		for (int i = 0; i < 方便符號控制碼.length; ++i)
@@ -137,7 +165,18 @@ public class 構形資料庫轉至組建資料庫
 		return false;
 	}
 
-	public StringBuilder 展開方便符號(int 控制碼, char[] 部件) throws IOException
+	/**
+	 * 把使用方便符號的構字式，展開成組字式
+	 * 
+	 * @param 控制碼
+	 *            方便符號的控制碼
+	 * @param 部件
+	 *            方便符號所複製的部件
+	 * @return 相對應的組字式
+	 * @throws 構字式格式錯誤例外
+	 *             若傳入的不是方便符號
+	 */
+	public StringBuilder 展開方便符號(int 控制碼, char[] 部件) throws 構字式格式錯誤例外
 	{
 		StringBuilder 構字式 = new StringBuilder();
 		int 方便符號編號 = 控制碼 - 方便符號控制碼[0];
@@ -202,7 +241,7 @@ public class 構形資料庫轉至組建資料庫
 			構字式.append(部件);
 			break;
 		default:
-			throw new IOException("");
+			throw new 構字式格式錯誤例外("傳入的不是方便符號！！");
 		}
 		return 構字式;
 	}

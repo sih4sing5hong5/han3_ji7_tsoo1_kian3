@@ -7,13 +7,34 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * 協助全字庫對照表資料輸入資料庫的模組。
+ * 
+ * @author Ihc
+ */
 public class 全字庫對照表輸入資料庫
 {
-	private String 目錄 ;
+	/** 檔案目錄 */
+	private String 目錄;
+	/** 所有檔案名 */
 	private String[] 全部檔案;
+	/** 資料庫中的表名 */
 	private String 資料表;
+	/** 全字庫所對應到的編碼欄位名 */
 	private String 欄位名;
 
+	/**
+	 * 初使化建構函式，設定各項參數
+	 * 
+	 * @param 目錄
+	 *            檔案目錄
+	 * @param 全部檔案
+	 *            所有檔案名
+	 * @param 資料表
+	 *            資料庫中的表名
+	 * @param 欄位名
+	 *            全字庫所對應到的編碼欄位名
+	 */
 	全字庫對照表輸入資料庫(String 目錄, String[] 全部檔案, String 資料表, String 欄位名)
 	{
 		this.目錄 = 目錄;
@@ -22,7 +43,8 @@ public class 全字庫對照表輸入資料庫
 		this.欄位名 = 欄位名;
 	}
 
-	void 更新()
+	/** 將資料上傳到資料庫 */
+	void 上傳()
 	{
 		int 上傳筆數 = 0;
 		System.out.println("開始嘍～～ 時間：" + System.currentTimeMillis());
@@ -37,13 +59,36 @@ public class 全字庫對照表輸入資料庫
 				String data = null;
 				while ((data = bufferedReader.readLine()) != null)
 				{
-					// System.out.println(data);
-					String[] array = data.split("	");
-					String insertQuery = "INSERT INTO \"全字庫\".\"" + 資料表 + "\" "
-							+ "(\"Cns11643\",\"" + 欄位名 + "\") " + " VALUES ('"
-							+ array[0] + array[1] + "','" + array[2] + "')";
-					更新連線.executeUpdate(insertQuery);
-					上傳筆數++;
+					if (欄位名.equals("Big5"))
+					{
+						StringBuilder stringBuilder = new StringBuilder();
+						for (int i = 0; i < data.length(); i++)
+							if (data.charAt(i) == '\t'
+									|| Character.isDigit(data.charAt(i))
+									|| data.charAt(i) >= 'A'
+									&& data.charAt(i) <= 'F'
+									|| data.charAt(i) >= 'a'
+									&& data.charAt(i) <= 'f')
+							{
+								stringBuilder.append(data.charAt(i));
+							}
+						data = stringBuilder.toString();
+					}
+					if (!data.equals(""))
+					{
+						String[] array = data.split("	");
+						if (array[0].length() > 1)
+						{
+							int 字面 = Integer.parseInt(array[0]);
+							array[0] = Integer.toHexString(字面);
+						}
+						String insertQuery = "INSERT INTO \"全字庫\".\"" + 資料表
+								+ "\" " + "(\"Cns11643\",\"" + 欄位名 + "\") "
+								+ " VALUES ('" + array[0] + array[1] + "','"
+								+ array[2] + "')";
+						更新連線.executeUpdate(insertQuery);
+						上傳筆數++;
+					}
 				}
 				bufferedReader.close();
 			}

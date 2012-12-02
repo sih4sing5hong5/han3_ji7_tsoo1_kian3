@@ -1,7 +1,7 @@
 package cc.tool.database;
 
 /**
- * 將大五碼（Big5）輸入至漢字組建資料庫的型態。
+ * 將大五碼（Big5）輸入至資料庫的型態。
  * 
  * @author Ihc
  */

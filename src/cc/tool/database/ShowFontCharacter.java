@@ -28,6 +28,8 @@ public class ShowFontCharacter extends AwtTestExample
 	private static final long serialVersionUID = 1L;
 	/** 字型大小 */
 	static final int TYPE_SIZE = 40;
+	/** 檔案位置 */
+	String 檔案 = "/home/Ihc/files/font/漢字構形資料庫/cdpeudc.tte";
 
 	@Override
 	public void paint(Graphics g1)
@@ -47,8 +49,7 @@ public class ShowFontCharacter extends AwtTestExample
 			graphics2D.setStroke(new NullStroke());
 			// graphics2D.draw(glyphv.getOutline());
 
-			Font font = Font.createFont(Font.TRUETYPE_FONT, new File(
-					"/home/ihc/桌面/cdpeudck.ttf"));
+			Font font = Font.createFont(Font.TRUETYPE_FONT, new File(檔案));
 			font = font.deriveFont(TYPE_SIZE * 1.0f);
 			// font=fontㄉ;
 			int cnt = 0;
@@ -72,7 +73,7 @@ public class ShowFontCharacter extends AwtTestExample
 					{
 						// System.out.println("gv="+gv.getNumGlyphs());
 						++cnt;
-						final int pro = 1, line = 25;
+						final int pro = 1, line = 24;
 						if (cnt % pro == 0)
 						{
 							graphics2D.draw(gv.getOutline());
@@ -80,7 +81,8 @@ public class ShowFontCharacter extends AwtTestExample
 							if (cnt % (line * pro) == 0)
 								graphics2D.translate(-TYPE_SIZE, TYPE_SIZE
 										* -line);
-							System.out.println("i=" + i);
+							System.out.println("i=" + i + " "
+									+ Integer.toHexString(i));
 						}
 					}
 				}

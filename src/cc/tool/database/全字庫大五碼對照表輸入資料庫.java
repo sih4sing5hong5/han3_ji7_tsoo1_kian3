@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class 全字庫大五碼對表輸入資料庫
+public class 全字庫大五碼對照表輸入資料庫
 {
 	static String 基本平面 = "CNS2UNICODE_Unicode BMP字面.txt";
 	static String 第二平面 = "CNS2UNICODE_Unicode第2字面.txt";

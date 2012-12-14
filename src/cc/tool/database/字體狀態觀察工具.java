@@ -22,7 +22,7 @@ import cc.example.awt.AwtTestExample;
  * 
  * @author Ihc
  */
-public class ShowFontCharacter extends AwtTestExample
+public class 字體狀態觀察工具 extends AwtTestExample
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
@@ -115,7 +115,7 @@ public class ShowFontCharacter extends AwtTestExample
 				System.exit(0);
 			}
 		});
-		f.setContentPane(new ShowFontCharacter());
+		f.setContentPane(new 字體狀態觀察工具());
 		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}

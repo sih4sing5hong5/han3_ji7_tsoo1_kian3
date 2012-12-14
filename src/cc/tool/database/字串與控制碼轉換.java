@@ -8,7 +8,7 @@ package cc.tool.database;
 public class 字串與控制碼轉換
 {
 	/**
-	 * 將字元型態轉換成整數控制碼
+	 * 將字串型態轉換成整數控制碼
 	 * 
 	 * @param 字串
 	 *            欲轉換的文字
@@ -34,5 +34,34 @@ public class 字串與控制碼轉換
 			註標++;
 		}
 		return 控制碼;
+	}
+
+	/**
+	 * 將整數控制碼陣列轉換成字串型態
+	 * 
+	 * @param 控制碼
+	 *            欲轉換的控制碼陣列
+	 * @return 轉換結果
+	 */
+	static public String 轉換成字串(int[] 控制碼)
+	{
+		StringBuilder 字串結果 = new StringBuilder();
+		for (int i = 0; i < 控制碼.length; ++i)
+		{
+			字串結果.append(Character.toChars(控制碼[i]));
+		}
+		return 字串結果.toString();
+	}
+
+	/**
+	 * 將整數控制碼轉換成字串型態
+	 * 
+	 * @param 控制碼
+	 *            欲轉換的控制碼
+	 * @return 轉換結果
+	 */
+	static public String 轉換成字串(int 控制碼)
+	{
+		return new String(Character.toChars(控制碼));
 	}
 }

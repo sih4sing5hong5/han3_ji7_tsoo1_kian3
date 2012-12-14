@@ -69,7 +69,7 @@ public class 構形資料庫轉至組建資料庫
 					case 3:
 					case 5:
 						String insertQuery = "INSERT INTO \"漢字組建\".\"檢字表\" "
-								+ "(\"Unicode\",\"Big5\",\"構形資料庫編號\",\"構字式\") "
+								+ "(\"Unicode\",\"Big5\",\"構形資料庫編號\",\"組字式\") "
 								+ " VALUES ('" + rs.getString("Unicode")
 								+ "','" + rs.getString("Big5") + "','"
 								+ rs.getString("編號") + "','"

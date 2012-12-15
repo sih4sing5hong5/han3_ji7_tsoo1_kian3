@@ -134,8 +134,9 @@ public class 漢字組建資料庫產生展開式
 						連線.executeUpdate(更新目標);
 						上傳筆數++;
 						String 目標控制碼 = 要處理的目標.getString("Unicode");
+						所求展開式=展開式.toString();
 						System.out.println("上傳筆數=" + 上傳筆數 + ' '
-								+ 展開式.toString() + ' ' + 目標控制碼 + ' '
+								+ 所求展開式 + ' ' + 目標控制碼 + ' '
 								+ 字串與控制碼轉換.轉換成字串(Integer.parseInt(目標控制碼, 16)));
 					}
 					else

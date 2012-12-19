@@ -14,13 +14,13 @@ import java.sql.Statement;
 public class PgsqlConnection
 {
 	/** 預設資料庫位置 */
-	static final String url = "jdbc:postgresql://localhost/IhcData?useUnicode=true&characterEncoding=utf-8";
+	static public final String url = "jdbc:postgresql://localhost/IhcData?useUnicode=true&characterEncoding=utf-8";
 	/** 連線物件 */
 	private Connection connection;
 	/** 連線狀態 */
 	private Statement statement;
 
-	/** 自動連線到資料庫。 */
+	/** 自動連線到資料庫，這个帳號有修改的權限。 */
 	PgsqlConnection()
 	{
 		this(url, "Ihc", "983781");
@@ -36,13 +36,12 @@ public class PgsqlConnection
 	 * @param passwd
 	 *            資料庫密碼
 	 */
-	PgsqlConnection(String urls, String account, String passwd)
+	public PgsqlConnection(String urls, String account, String passwd)
 	{
 		try
 		{
 			Class.forName("org.postgresql.Driver");
-		}
-		catch (java.lang.ClassNotFoundException e)
+		} catch (java.lang.ClassNotFoundException e)
 		{
 			System.err.print("ClassNotFoundException: ");
 			System.err.println(e.getMessage());
@@ -50,8 +49,7 @@ public class PgsqlConnection
 		try
 		{
 			connection = DriverManager.getConnection(urls, account, passwd);
-		}
-		catch (SQLException ex)
+		} catch (SQLException ex)
 		{
 			System.err.print("SQLException: ");
 			System.err.println(ex.getMessage());
@@ -60,13 +58,12 @@ public class PgsqlConnection
 	}
 
 	/** 關閉連線。 */
-	void close()
+	public void close()
 	{
 		try
 		{
 			connection.close();
-		}
-		catch (SQLException ex)
+		} catch (SQLException ex)
 		{
 			System.err.print("SQLException: ");
 			System.err.println(ex.getMessage());
@@ -83,7 +80,7 @@ public class PgsqlConnection
 	 * @throws SQLException
 	 *             資料庫錯誤
 	 */
-	ResultSet executeQuery(String query) throws SQLException
+	public ResultSet executeQuery(String query) throws SQLException
 	{
 		statement = connection.createStatement();
 		ResultSet rs = statement.executeQuery(query);
@@ -99,7 +96,7 @@ public class PgsqlConnection
 	 * @throws SQLException
 	 *             資料庫錯誤
 	 */
-	void executeUpdate(String query) throws SQLException
+	public void executeUpdate(String query) throws SQLException
 	{
 		statement = connection.createStatement();
 		statement.executeUpdate(query);

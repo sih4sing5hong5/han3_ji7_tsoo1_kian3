@@ -4,7 +4,6 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.Vector;
 
-
 /**
  * 用來分析漢字部件的工具。給一字串，分析出含所有漢字的部件結構。
  * 
@@ -49,7 +48,7 @@ public class ChineseCharacterUtility
 		Vector<ChineseCharacter> vector = new Vector<ChineseCharacter>();
 		try
 		{
-			while (iterator.current() != CharacterIterator.DONE)
+			while (!組合式是毋是結束矣())
 			{
 				vector.add(parseCharacter(null));
 			}
@@ -70,10 +69,11 @@ public class ChineseCharacterUtility
 	 * @throws ChineseCharacterFormatException
 	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
 	 */
+	@Deprecated
 	ChineseCharacter parseCharacter(ChineseCharacterTzu parent)
 			throws ChineseCharacterFormatException
 	{
-		if (iterator.current() == CharacterIterator.DONE)
+		if (組合式是毋是結束矣())
 			throw new ChineseCharacterFormatException();
 		int codePoint = 0;
 		if (Character.isHighSurrogate(iterator.current()))
@@ -105,5 +105,15 @@ public class ChineseCharacterUtility
 			chineseCharacter = new ChineseCharacterWen(parent, codePoint);
 		}
 		return chineseCharacter;
+	}
+
+	/**
+	 * 知影這馬閣有組合式愛分析無。
+	 * 
+	 * @return 閣有組合式愛分析無
+	 */
+	protected boolean 組合式是毋是結束矣()
+	{
+		return iterator.current() == CharacterIterator.DONE;
 	}
 }

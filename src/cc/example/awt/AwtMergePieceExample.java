@@ -20,8 +20,6 @@ import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
-import cc.core.漢字序列分析工具;
-import cc.core.資料庫連線展開式查詢;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
@@ -40,7 +38,7 @@ import cc.setting.piece.MergePieceSetter;
  * 
  * @author Ihc
  */
-public class AwtTestExample extends JPanel
+public class AwtMergePieceExample extends JPanel
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
@@ -59,7 +57,8 @@ public class AwtTestExample extends JPanel
 			+ "⿴辶⿴宀⿱珤⿰隹⿰貝招⿴辶咼辶" + "⿴冖儿⿴冖几宀寶建⿴廴聿"
 			+ "⿴厂猒⿴广夏⿴疒丙⿴尸古⿴戶方⿴户方⿴户 ⿱户　⿰户　" + "⿴气亥⿴气乃⿴气亞"
 			+ "⿴冂⿱一口⿴冂⿱儿口⿴門一⿴門日⿴門月⿴鬥月⿴鬥市" + "⿱⿴乃又皿盈孕⿴乃子⿱乃子"
-			+ "⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕" + "⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口" + "繞熱然煎焦烹煦無勳点狗狚";// */;
+			+ "⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕" + "⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口" +
+					"繞熱然煎焦烹煦無勳点狗狚";// */;
 	/** 全字庫正宋體 */
 	static final String 全字庫正宋體 = "全字庫正宋體";
 	/** 全字庫正楷體 */
@@ -87,8 +86,7 @@ public class AwtTestExample extends JPanel
 		graphics2D.setStroke(new NullStroke());
 
 		System.out.println("分析中～～ 時間：" + System.currentTimeMillis());
-		ChineseCharacterUtility ccUtility = new 漢字序列分析工具(word, new 資料庫連線展開式查詢());
-		// TODO 資料庫連線展開式查詢() 展開式免查詢()
+		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 
 		System.out.println("設定中～～ 時間：" + System.currentTimeMillis());
@@ -149,7 +147,7 @@ public class AwtTestExample extends JPanel
 				System.exit(0);
 			}
 		});
-		f.setContentPane(new AwtTestExample());
+		f.setContentPane(new AwtMergePieceExample());
 		f.setSize(WIDTH, HEIGHT);
 		f.setVisible(true);
 	}

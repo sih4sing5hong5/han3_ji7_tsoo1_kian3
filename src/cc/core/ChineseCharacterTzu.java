@@ -24,7 +24,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	private final ChineseCharacter[] children;
 
 	/**
-	 * 建立一個字部件
+	 * 建立一個字部件。
 	 * 
 	 * @param parent
 	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
@@ -37,20 +37,37 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 * @throws IllegalArgumentException
 	 *             如果<code>codePoint</code>不是部件組合符號
 	 */
+	@Deprecated
 	ChineseCharacterTzu(ChineseCharacterTzu parent, int codePoint,
 			StringCharacterIterator iterator)
 			throws ChineseCharacterFormatException, IllegalArgumentException
+	{
+		this(parent, codePoint);
+		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
+		for (int i = 0; i < children.length; ++i)
+		{
+			children[i] = utility.parseCharacter(this);
+		}
+	}
+
+	/**
+	 * 建立一个字部件。
+	 * 
+	 * @param parent
+	 *            上一層的部件結構。若上層是樹狀的樹根，傳入null
+	 * @param codePoint
+	 *            組合符號的Unicode編碼
+	 * @throws ChineseCharacterFormatException
+	 *             如果字串格式錯誤
+	 */
+	ChineseCharacterTzu(ChineseCharacterTzu parent, int codePoint)
+			throws ChineseCharacterFormatException
 	{
 		super(parent);
 		if (!ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
 			throw new IllegalArgumentException("這不是部件組合符號!!");
 		type = ChineseCharacterTzuCombinationType.toCombinationType(codePoint);
-		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
 		children = new ChineseCharacter[type.getNumberOfChildren()];
-		for (int i = 0; i < children.length; ++i)
-		{
-			children[i] = utility.parseCharacter(this);
-		}
 	}
 
 	@Override

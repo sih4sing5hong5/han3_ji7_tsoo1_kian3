@@ -15,6 +15,8 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 	protected int 陣列位置;
 	/** 查詢展開式的工具 */
 	展開式查詢工具 展開式查詢;
+	/** 用來看愛展開式愛展開無 */
+	private int 異寫字編號符號深度;
 
 	/**
 	 * 用字串佮查詢工具初使化物件。
@@ -53,19 +55,26 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 			throw new ChineseCharacterFormatException();
 		ChineseCharacter chineseCharacter = null;
 		if (ChineseCharacterTzuCombinationType.isCombinationType(目前控制碼()))
-		{// TODO 若是編碼符號愛設定勿愛展開
+		{
 			ChineseCharacterTzu chineseCharacterTzu = new ChineseCharacterTzu(
 					parent, 目前控制碼());
 			下一个控制碼();
+			// 若是編碼符號愛設定勿愛展開
+			if (chineseCharacterTzu.getType() == ChineseCharacterTzuCombinationType.異寫字編號符號)
+				異寫字編號符號深度++;
 			for (int i = 0; i < chineseCharacterTzu.getChildren().length; ++i)
 			{
 				chineseCharacterTzu.getChildren()[i] = parseCharacter(chineseCharacterTzu);
 			}
+			if (chineseCharacterTzu.getType() == ChineseCharacterTzuCombinationType.異寫字編號符號)
+				異寫字編號符號深度--;
 			chineseCharacter = chineseCharacterTzu;
 		}
 		else
 		{
-			String 展開式 = 展開式查詢.查詢展開式(目前控制碼());
+			String 展開式 = null;
+			if (異寫字編號符號深度 == 0)
+				展開式 = 展開式查詢.查詢展開式(目前控制碼());
 			if (展開式 == null)
 				chineseCharacter = new ChineseCharacterWen(parent, 目前控制碼());
 			else

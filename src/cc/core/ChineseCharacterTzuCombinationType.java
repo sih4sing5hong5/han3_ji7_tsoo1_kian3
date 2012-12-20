@@ -16,7 +16,9 @@ public enum ChineseCharacterTzuCombinationType
 	vertical, /**
 	 * 包含關係
 	 */
-	wrap;// ⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻
+	wrap, /** 儲存異寫字編號 */
+	異寫字編號符號, /** 專門處理注音符號 */
+	注音符號;// ⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻
 	public String toString()
 	{
 		switch (this)
@@ -27,6 +29,10 @@ public enum ChineseCharacterTzuCombinationType
 			return "⿱";
 		case wrap:
 			return "⿴";
+		case 異寫字編號符號:
+			return "⿻";
+		case 注音符號:
+			return "⿳";
 		}
 		return "";
 	}
@@ -43,6 +49,8 @@ public enum ChineseCharacterTzuCombinationType
 		case horizontal:
 		case vertical:
 		case wrap:
+		case 異寫字編號符號:
+		case 注音符號:
 			return 2;
 		}
 		return 0;

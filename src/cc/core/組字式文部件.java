@@ -35,4 +35,10 @@ public class 組字式文部件 extends ChineseCharacterWen implements 組字式
 		this.組字式 = 組字式;
 		return;
 	}
+
+	@Override
+	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
+	{
+		return 組字式建立工具.建立組字式(this);
+	}
 }

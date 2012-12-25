@@ -39,4 +39,10 @@ public class 組字式字部件 extends ChineseCharacterTzu implements 組字式
 		return;
 	}
 
+	@Override
+	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
+	{
+		return 組字式建立工具.建立組字式(this);
+	}
+
 }

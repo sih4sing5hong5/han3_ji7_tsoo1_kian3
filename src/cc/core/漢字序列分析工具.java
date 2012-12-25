@@ -56,8 +56,8 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 		ChineseCharacter chineseCharacter = null;
 		if (ChineseCharacterTzuCombinationType.isCombinationType(目前控制碼()))
 		{
-			ChineseCharacterTzu chineseCharacterTzu = new ChineseCharacterTzu(
-					parent, 目前控制碼());
+			ChineseCharacterTzu chineseCharacterTzu = new 組字式字部件(parent,
+					目前控制碼());
 			下一个控制碼();
 			// 若是編碼符號愛設定勿愛展開
 			if (chineseCharacterTzu.getType() == ChineseCharacterTzuCombinationType.異寫字編號符號)
@@ -76,7 +76,7 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 			if (異寫字編號符號深度 == 0)
 				展開式 = 展開式查詢.查詢展開式(目前控制碼());
 			if (展開式 == null)
-				chineseCharacter = new ChineseCharacterWen(parent, 目前控制碼());
+				chineseCharacter = new 組字式文部件(parent, 目前控制碼());
 			else
 			{
 				漢字序列分析工具 分析工具 = new 漢字序列分析工具(展開式, new 展開式免查詢());// 避免把異體字給展開

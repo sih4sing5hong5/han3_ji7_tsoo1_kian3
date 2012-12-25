@@ -5,7 +5,7 @@ package cc.core;
  * 
  * @author Ihc
  */
-public class 組字式正規化
+public class 組字式部件正規化
 {
 	/**
 	 * 正規化部件結構。

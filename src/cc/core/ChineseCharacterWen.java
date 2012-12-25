@@ -18,7 +18,7 @@ public class ChineseCharacterWen extends ChineseCharacter
 	private final int codePoint;
 
 	/**
-	 * 建立一個字部件
+	 * 建立一個文部件
 	 * 
 	 * @param parent
 	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null

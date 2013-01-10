@@ -22,26 +22,26 @@ public class 合併字體 implements 字體介面
 	{
 	}
 
-	public 合併字體(String[] 字體位置, int 字體選項, int 字體大小)
-	{
-		this(字體位置);
-		for (int i = 0; i < 字體集.length; ++i)
-			字體集[i] = 字體集[i].deriveFont(字體選項, 字體大小);
-	}
-
-	public 合併字體(String[] 字體位置, int 字體選項)
-	{
-		this(字體位置);
-		for (int i = 0; i < 字體集.length; ++i)
-			字體集[i] = 字體集[i].deriveFont(字體選項);
-	}
-
-	public 合併字體(String[] 字體位置, float 字體大小)
-	{
-		this(字體位置);
-		for (int i = 0; i < 字體集.length; ++i)
-			字體集[i] = 字體集[i].deriveFont(字體大小);
-	}
+//	public 合併字體(String[] 字體位置, int 字體選項, int 字體大小)
+//	{
+//		this(字體位置);
+//		for (int i = 0; i < 字體集.length; ++i)
+//			字體集[i] = 字體集[i].deriveFont(字體選項, 字體大小);
+//	}
+//
+//	public 合併字體(String[] 字體位置, int 字體選項)
+//	{
+//		this(字體位置);
+//		for (int i = 0; i < 字體集.length; ++i)
+//			字體集[i] = 字體集[i].deriveFont(字體選項);
+//	}
+//
+//	public 合併字體(String[] 字體位置, float 字體大小)
+//	{
+//		this(字體位置);
+//		for (int i = 0; i < 字體集.length; ++i)
+//			字體集[i] = 字體集[i].deriveFont(字體大小);
+//	}
 
 	public 合併字體(String[] 字體位置)
 	{
@@ -63,7 +63,8 @@ public class 合併字體 implements 字體介面
 		}
 	}
 
-	public 合併字體 調整字體參數(float 字體大小)
+	@Override
+	public 字體介面 調整字體大小(float 字體大小)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -73,8 +74,9 @@ public class 合併字體 implements 字體介面
 		}
 		return 調整結果;
 	}
-
-	public 合併字體 調整字體參數(int 字體選項)
+	
+	@Override
+	public 字體介面 調整字體選項(int 字體選項)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -85,7 +87,8 @@ public class 合併字體 implements 字體介面
 		return 調整結果;
 	}
 
-	public 合併字體 調整字體參數(int 字體選項, float 字體大小)
+	@Override
+	public 字體介面 調整字體參數(int 字體選項, float 字體大小)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];

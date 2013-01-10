@@ -4,6 +4,7 @@ import cc.tool.database.字串與控制碼轉換;
 
 /**
  * 遞迴建立組字式的工具。
+ * 
  * @author Ihc
  */
 public class 組字式部件組字式建立工具

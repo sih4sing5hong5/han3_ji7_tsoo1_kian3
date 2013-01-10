@@ -74,6 +74,26 @@ public enum ChineseCharacterTzuCombinationType
 	}
 
 	/**
+	 * 佇正規化的時陣，需要改做正爿結合，判斷這个字部件是毋是愛分析看覓。
+	 * 
+	 * @return 是毋是愛處理結合律的問題
+	 */
+	public boolean 有結合律無()
+	{
+		switch (this)
+		{
+		case horizontal:
+		case vertical:
+		case 異寫字編號符號:
+		case 注音符號:
+			return true;
+		case wrap:
+		default:
+			return false;
+		}
+	}
+
+	/**
 	 * 判斷是否為組合符號
 	 * 
 	 * @param codePoint

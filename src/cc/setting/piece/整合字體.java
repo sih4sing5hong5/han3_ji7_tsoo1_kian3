@@ -1,10 +1,9 @@
 package cc.setting.piece;
 
-import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 
-public class 整合字體 implements 字體介面
+public class 整合字體 extends 字體介面
 {
 	合併字體[] 合併字體集;
 
@@ -54,21 +53,9 @@ public class 整合字體 implements 字體介面
 		return 調整結果;
 	}
 
-	@Override
-	public boolean 是否可顯示該字型(int 控制碼)
-	{
-		return 是否可顯示該字型(控制碼, 0);
-	}
-
 	public boolean 是否可顯示該字型(int 控制碼, int 字體編號)
 	{
 		return 合併字體集[字體編號].是否可顯示該字型(控制碼);
-	}
-
-	@Override
-	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼)
-	{
-		return 取得該字型(渲染選項, 控制碼, 0);
 	}
 
 	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)

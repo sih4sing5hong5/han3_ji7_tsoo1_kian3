@@ -7,7 +7,7 @@ import java.awt.font.GlyphVector;
 import java.io.File;
 import java.io.IOException;
 
-public class 合併字體 implements 字體介面
+public class 合併字體 extends 字體介面
 {
 	private Font[] 字體集;
 
@@ -22,26 +22,26 @@ public class 合併字體 implements 字體介面
 	{
 	}
 
-//	public 合併字體(String[] 字體位置, int 字體選項, int 字體大小)
-//	{
-//		this(字體位置);
-//		for (int i = 0; i < 字體集.length; ++i)
-//			字體集[i] = 字體集[i].deriveFont(字體選項, 字體大小);
-//	}
-//
-//	public 合併字體(String[] 字體位置, int 字體選項)
-//	{
-//		this(字體位置);
-//		for (int i = 0; i < 字體集.length; ++i)
-//			字體集[i] = 字體集[i].deriveFont(字體選項);
-//	}
-//
-//	public 合併字體(String[] 字體位置, float 字體大小)
-//	{
-//		this(字體位置);
-//		for (int i = 0; i < 字體集.length; ++i)
-//			字體集[i] = 字體集[i].deriveFont(字體大小);
-//	}
+	// public 合併字體(String[] 字體位置, int 字體選項, int 字體大小)
+	// {
+	// this(字體位置);
+	// for (int i = 0; i < 字體集.length; ++i)
+	// 字體集[i] = 字體集[i].deriveFont(字體選項, 字體大小);
+	// }
+	//
+	// public 合併字體(String[] 字體位置, int 字體選項)
+	// {
+	// this(字體位置);
+	// for (int i = 0; i < 字體集.length; ++i)
+	// 字體集[i] = 字體集[i].deriveFont(字體選項);
+	// }
+	//
+	// public 合併字體(String[] 字體位置, float 字體大小)
+	// {
+	// this(字體位置);
+	// for (int i = 0; i < 字體集.length; ++i)
+	// 字體集[i] = 字體集[i].deriveFont(字體大小);
+	// }
 
 	public 合併字體(String[] 字體位置)
 	{
@@ -51,6 +51,8 @@ public class 合併字體 implements 字體介面
 			try
 			{
 				字體集[i] = Font.createFont(Font.TRUETYPE_FONT, new File(字體位置[i]));// TODO
+																				// font
+																				// type
 			}
 			catch (FontFormatException e)
 			{
@@ -74,7 +76,7 @@ public class 合併字體 implements 字體介面
 		}
 		return 調整結果;
 	}
-	
+
 	@Override
 	public 字體介面 調整字體選項(int 字體選項)
 	{
@@ -100,7 +102,7 @@ public class 合併字體 implements 字體介面
 	}
 
 	@Override
-	public boolean 是否可顯示該字型(int 控制碼)
+	public boolean 是否可顯示該字型(int 控制碼, int 字體編號)
 	{
 		for (Font 字體 : 字體集)
 		{
@@ -113,7 +115,7 @@ public class 合併字體 implements 字體介面
 	}
 
 	@Override
-	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼)
+	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
 	{
 		for (Font 字體 : 字體集)
 		{
@@ -124,4 +126,5 @@ public class 合併字體 implements 字體介面
 		}
 		return null;
 	}
+
 }

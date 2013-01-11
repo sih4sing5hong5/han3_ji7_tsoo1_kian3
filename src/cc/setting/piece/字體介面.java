@@ -3,8 +3,17 @@ package cc.setting.piece;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 
+/**
+ * 愛予設定工具揣字的介面。
+ * 
+ * @author Ihc
+ */
 public abstract class 字體介面
 {
+	// /** 活字字體的選項 */
+	// private int 字體選項;
+	// /** 活字的大小 */
+	// private int 字體大小;
 	public abstract 字體介面 調整字體大小(float 字體大小);
 
 	public abstract 字體介面 調整字體選項(int 字體選項);

@@ -28,6 +28,15 @@ public class 合併字體 extends 字體介面
 			"./字體/全字庫-101_11_28/TW-Sung-Ext-B-98_1.ttf",
 			"./字體/全字庫-101_11_28/TW-Sung-Plus-98_1.ttf",
 			"./字體/漢字構形資料庫-2_7/cdpeudc.tte", };
+	/** 楷體字體的物件 */
+	static private final 合併字體 楷體字體;
+	/** 宋體字體的物件 */
+	static private final 合併字體 宋體字體;
+	static
+	{
+		楷體字體 = new 合併字體(楷體字體位址表);
+		宋體字體 = new 合併字體(宋體字體位址表);
+	}
 
 	/** 予改變參數時的私有建構工具。 */
 	private 合併字體()
@@ -131,7 +140,7 @@ public class 合併字體 extends 字體介面
 	 */
 	static public 合併字體 提著楷體字體()
 	{
-		return new 合併字體(楷體字體位址表);
+		return 楷體字體;
 	}
 
 	/**
@@ -141,6 +150,6 @@ public class 合併字體 extends 字體介面
 	 */
 	static public 合併字體 提著宋體字體()
 	{
-		return new 合併字體(宋體字體位址表);
+		return 宋體字體;
 	}
 }

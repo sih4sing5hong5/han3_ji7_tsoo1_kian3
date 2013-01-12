@@ -14,7 +14,6 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
-import cc.setting.ChineseCharacterTypeSetter;
 
 /**
  * 物件活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
@@ -25,7 +24,7 @@ import cc.setting.ChineseCharacterTypeSetter;
  * 
  * @author Ihc
  */
-public class SimplePieceSetter implements ChineseCharacterTypeSetter
+public class SimplePieceSetter extends 物件活字基礎設定工具
 {
 	/** 活字字型的名稱 */
 	private String fontName;
@@ -37,12 +36,6 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	protected FontRenderContext fontRenderContext;
 	/** 活字的字體 */
 	protected Font font;
-	/** 合體字組合符號參考的規範字 */
-	protected final String tzuModelCharacter = "意";
-	/** 合體字組合符號參考的位置及大小 */
-	protected final Rectangle2D tzuModelTerritory;
-	/** 獨體字缺字的替代物件 */
-	protected final Area pieceForNoBuiltInWen;
 
 	/**
 	 * 建立物件活字設定工具
@@ -59,13 +52,14 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 	public SimplePieceSetter(String fontName, int fontStyle,
 			int fontResolution, FontRenderContext fontRenderContext)
 	{
+		super(null, null);
 		this.fontName = fontName;
 		this.fontStyle = fontStyle;
 		this.fontResolution = fontResolution;
 		this.fontRenderContext = fontRenderContext;
 		this.font = new Font(fontName, fontStyle, fontResolution);
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
-				this.tzuModelCharacter);
+				SimplePieceSetter.tzuModelCharacter);
 		this.tzuModelTerritory = glyphVector.getOutline().getBounds2D();
 		BasicStroke basicStroke = new BasicStroke();
 		this.pieceForNoBuiltInWen = new Area(
@@ -120,19 +114,6 @@ public class SimplePieceSetter implements ChineseCharacterTypeSetter
 			pieceMovableTypeTzu.getPiece().setTerritory(tzuModelTerritory);
 
 		return pieceMovableTypeTzu;
-	}
-
-	/**
-	 * MergePiece 字體缺字的替代方案
-	 * 
-	 * @param chineseCharacterWen
-	 *            所缺的字部件
-	 * @return 替代圖案或文字
-	 */
-	protected RectangularArea findWenForNoBuiltIn(
-			ChineseCharacterWen chineseCharacterWen)
-	{
-		return new RectangularArea(pieceForNoBuiltInWen);
 	}
 
 	/**

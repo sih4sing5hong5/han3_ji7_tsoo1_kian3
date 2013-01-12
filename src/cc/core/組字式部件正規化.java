@@ -39,7 +39,7 @@ public class 組字式部件正規化
 				}
 				else
 				{
-					System.out.println("有三个以上的部件組合符號！！");
+					System.out.println("有三个以上的部件組合符號！！");// TODO log
 				}
 			}
 			for (ChineseCharacter 子部件 : 字部件.getChildren())

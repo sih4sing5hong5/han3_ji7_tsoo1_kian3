@@ -110,11 +110,14 @@ public class 合併字體 extends 字體介面
 	@Override
 	public boolean 是否可顯示該字型(int 控制碼, int 字體編號)
 	{
-		for (Font 字體 : 字體集)
+		if (字體編號 == 0)
 		{
-			if (字體.canDisplay(控制碼))
+			for (Font 字體 : 字體集)
 			{
-				return true;
+				if (字體.canDisplay(控制碼))
+				{
+					return true;
+				}
 			}
 		}
 		return false;
@@ -123,11 +126,14 @@ public class 合併字體 extends 字體介面
 	@Override
 	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
 	{
-		for (Font 字體 : 字體集)
+		if (字體編號 == 0)
 		{
-			if (字體.canDisplay(控制碼))
+			for (Font 字體 : 字體集)
 			{
-				return 字體.createGlyphVector(渲染選項, Character.toChars(控制碼));
+				if (字體.canDisplay(控制碼))
+				{
+					return 字體.createGlyphVector(渲染選項, Character.toChars(控制碼));
+				}
 			}
 		}
 		return null;

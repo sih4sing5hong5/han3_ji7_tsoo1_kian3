@@ -111,12 +111,16 @@ public class 整合字體 extends 字體介面
 	@Override
 	public boolean 是否可顯示該字型(int 控制碼, int 字體編號)
 	{
+		if (字體編號 < 0 || 字體編號 >= 合併字體集.length)
+			return false;
 		return 合併字體集[字體編號].是否可顯示該字型(控制碼);
 	}
 
 	@Override
 	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
 	{
+		if (字體編號 < 0 || 字體編號 >= 合併字體集.length)
+			return null;
 		return 合併字體集[字體編號].取得該字型(渲染選項, 控制碼);
 	}
 

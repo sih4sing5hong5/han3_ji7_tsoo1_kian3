@@ -24,7 +24,9 @@ import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
-import cc.setting.piece.MergePieceSetter;
+import cc.setting.piece.字型參考設定工具;
+import cc.setting.piece.整合字體;
+import cc.setting.piece.用資料庫查展開式的通用字型編號;
 
 /**
  * 主要測試的範例。
@@ -62,6 +64,7 @@ public class AwtTestExample extends Awt測試樣板
 	@Override
 	public void paint(Graphics g1)
 	{
+//		word = "國⿴囗或";
 		System.out.println("初使化～～ 時間：" + System.currentTimeMillis());
 		Graphics2D graphics2D = (Graphics2D) g1;
 		graphics2D.setColor(Color.black);
@@ -90,10 +93,17 @@ public class AwtTestExample extends Awt測試樣板
 		}
 
 		System.out.println("設定中～～ 時間：" + System.currentTimeMillis());
-		ChineseCharacterTypeSetter setter = new MergePieceSetter(
-				測試字體,
-				測試屬性,
-				TYPE_SIZE,
+		// ChineseCharacterTypeSetter setter = new MergePieceSetter(
+		// 測試字體,
+		// 測試屬性,
+		// TYPE_SIZE,
+		// new FontRenderContext(new AffineTransform(),
+		// java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+		// java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+
+		ChineseCharacterTypeSetter setter = new 字型參考設定工具(
+				new 用資料庫查展開式的通用字型編號(),
+				整合字體.提著宋體字體().調整字體參數(測試屬性, TYPE_SIZE),
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
@@ -128,6 +138,12 @@ public class AwtTestExample extends Awt測試樣板
 		}
 		System.out.println("結束了～～ 時間：" + System.currentTimeMillis());
 		System.out.println();
+//		System.out.println(整合字體.提著楷體字體().調整字體參數(測試屬性, TYPE_SIZE)
+//				.有這个字型無(25110, 0));
+//		System.out.println("---------");
+//		通用字型號碼 字型號碼=new 通用字型號碼(25110, 0);
+//		System.out.println(整合字體.提著楷體字體().調整字體參數(測試屬性, TYPE_SIZE)
+//				.有這个字型無(字型號碼));
 		return;
 	}
 }

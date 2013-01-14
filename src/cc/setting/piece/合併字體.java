@@ -12,7 +12,7 @@ import java.io.IOException;
  * 
  * @author Ihc
  */
-public class 合併字體 extends 字體介面
+public class 合併字體 extends 通用字體
 {
 	/** 　字體的物件 */
 	private Font[] 字體集;
@@ -72,7 +72,7 @@ public class 合併字體 extends 字體介面
 	}
 
 	@Override
-	public 字體介面 調整字體大小(float 字體大小)
+	public 通用字體 調整字體大小(float 字體大小)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -84,7 +84,7 @@ public class 合併字體 extends 字體介面
 	}
 
 	@Override
-	public 字體介面 調整字體選項(int 字體選項)
+	public 通用字體 調整字體選項(int 字體選項)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -96,7 +96,7 @@ public class 合併字體 extends 字體介面
 	}
 
 	@Override
-	public 字體介面 調整字體參數(int 字體選項, float 字體大小)
+	public 通用字體 調整字體參數(int 字體選項, float 字體大小)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -108,7 +108,7 @@ public class 合併字體 extends 字體介面
 	}
 
 	@Override
-	public boolean 是否可顯示該字型(int 控制碼, int 字體編號)
+	public boolean 有這个字型無(int 控制碼, int 字體編號)
 	{
 		if (字體編號 == 0)
 		{
@@ -124,7 +124,7 @@ public class 合併字體 extends 字體介面
 	}
 
 	@Override
-	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
+	public GlyphVector 提這个字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
 	{
 		if (字體編號 == 0)
 		{

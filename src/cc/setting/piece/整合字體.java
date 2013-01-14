@@ -8,7 +8,7 @@ import java.awt.font.GlyphVector;
  * 
  * @author Ihc
  */
-public class 整合字體 extends 字體介面
+public class 整合字體 extends 通用字體
 {
 	/** 　所整合的字體物件 */
 	合併字體[] 合併字體集;
@@ -73,7 +73,7 @@ public class 整合字體 extends 字體介面
 	}
 
 	@Override
-	public 字體介面 調整字體大小(float 字體大小)
+	public 通用字體 調整字體大小(float 字體大小)
 	{
 		整合字體 調整結果 = new 整合字體();
 		調整結果.合併字體集 = new 合併字體[this.合併字體集.length];
@@ -85,7 +85,7 @@ public class 整合字體 extends 字體介面
 	}
 
 	@Override
-	public 字體介面 調整字體選項(int 字體選項)
+	public 通用字體 調整字體選項(int 字體選項)
 	{
 		整合字體 調整結果 = new 整合字體();
 		調整結果.合併字體集 = new 合併字體[this.合併字體集.length];
@@ -97,7 +97,7 @@ public class 整合字體 extends 字體介面
 	}
 
 	@Override
-	public 字體介面 調整字體參數(int 字體選項, float 字型大小)
+	public 通用字體 調整字體參數(int 字體選項, float 字型大小)
 	{
 		整合字體 調整結果 = new 整合字體();
 		調整結果.合併字體集 = new 合併字體[this.合併字體集.length];
@@ -109,19 +109,19 @@ public class 整合字體 extends 字體介面
 	}
 
 	@Override
-	public boolean 是否可顯示該字型(int 控制碼, int 字體編號)
+	public boolean 有這个字型無(int 控制碼, int 字體編號)
 	{
 		if (字體編號 < 0 || 字體編號 >= 合併字體集.length)
 			return false;
-		return 合併字體集[字體編號].是否可顯示該字型(控制碼);
+		return 合併字體集[字體編號].有這个字型無(控制碼);
 	}
 
 	@Override
-	public GlyphVector 取得該字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
+	public GlyphVector 提這个字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號)
 	{
 		if (字體編號 < 0 || 字體編號 >= 合併字體集.length)
 			return null;
-		return 合併字體集[字體編號].取得該字型(渲染選項, 控制碼);
+		return 合併字體集[字體編號].提這个字型(渲染選項, 控制碼);
 	}
 
 	/**

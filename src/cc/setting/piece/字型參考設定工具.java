@@ -1,7 +1,9 @@
 package cc.setting.piece;
 
+import java.awt.BasicStroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
+import java.awt.geom.Area;
 
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
@@ -14,18 +16,30 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.tool.database.字串與控制碼轉換;
 
 public class 字型參考設定工具 extends 物件活字基礎設定工具
 {
-	;
+	展開式查通用字型編號 查通用字型編號;
+	protected 通用字體 字體;
 	/** 活字的渲染屬性 */
 	protected FontRenderContext 字體渲染屬性;
-	protected 通用字體 字體;
+	
+	private final int 空空無物件=-7;
 
-	public 字型參考設定工具(通用字體 字體)
+	public 字型參考設定工具(展開式查通用字型編號 查通用字型編號, 通用字體 字體, FontRenderContext 字體渲染屬性)
 	{
 		super(null, null);
+		this.查通用字型編號 = 查通用字型編號;
 		this.字體 = 字體;
+		this.字體渲染屬性 = 字體渲染屬性;
+
+		int 標準字統一碼 = 字串與控制碼轉換.轉換成控制碼(物件活字基礎設定工具.tzuModelCharacter)[0];
+		GlyphVector 標準字字型 = 字體.提這个字型(字體渲染屬性, 標準字統一碼);
+		this.tzuModelTerritory = 標準字字型.getOutline().getBounds2D();
+		BasicStroke basicStroke = new BasicStroke();
+		this.pieceForNoBuiltInWen = new Area(
+				basicStroke.createStrokedShape(tzuModelTerritory));
 	}
 
 	@Override
@@ -60,16 +74,17 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		ChineseCharacter[] 主要結構 = 揣主要結構元件(chineseCharacterTzu);
 		int[] 頭前彼个位址 = new int[主要結構.length];// -1代表空空，遏袂處理。位址代表有彼个元件有考慮到。
 		for (int i = 0; i < 頭前彼个位址.length; i++)
-			頭前彼个位址[i] = -1;
-		PieceMovableType[] 部件組合 = new PieceMovableTypeTzu[主要結構.length];
+			頭前彼个位址[i] =空空無物件;
+		PieceMovableType[] 部件組合 = new PieceMovableType[主要結構.length];
 		/** 保證開始位址前的攏有揣到 */
 		for (int 開始位址 = 0; 開始位址 < 主要結構.length; 開始位址++)
 		{
 			/** [開始位址,結束位址) */
 			for (int 結束位址 = 開始位址 + 1; 結束位址 <= 主要結構.length; 結束位址++)
 			{
-				if (頭前彼个位址[結束位址] == -1)
+				if (頭前彼个位址[結束位址 - 1] == 空空無物件)
 				{
+					System.out.println("開始位址="+開始位址+" 結束位址="+結束位址);
 					/** 產生展開式 */
 					StringBuilder 結構展開式 = new StringBuilder();
 					for (int i = 開始位址; i < 結束位址; ++i)
@@ -78,25 +93,26 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 							結構展開式.append(chineseCharacterTzu.getChars());
 						結構展開式.append(((組字式部件) 主要結構[i]).提到組字式());
 					}
-					展開式查通用字型編號 查通用字型編號 = new 用資料庫查展開式的通用字型編號();
 					通用字型號碼 字型號碼 = 查通用字型編號.查通用字型編號(結構展開式.toString());
 					/** [開始位址,結束位址) 佇資料庫內底 */
 					if (字型號碼 != null)
+					{
+						System.out.println(字體.有這个字型無(字型號碼));
 						if (字體.有這个字型無(字型號碼))
 						{
 							頭前彼个位址[結束位址 - 1] = 開始位址 - 1;
-							// 部件組合[結束位址] ="資料庫抓來彼配字體" ;
-							部件組合[結束位址] = new PieceMovableTypeWen(null, null,
-									查物件活字(字型號碼));// TODO null敢袂有問題？
+							// 部件組合[結束位址-1] ="資料庫抓來彼配字體" ;
+							部件組合[結束位址 - 1] = new PieceMovableTypeWen(null,
+									null, 查物件活字(字型號碼));// TODO null敢袂有問題？
 						}
+					}
 				}
 
 			}
-			if (頭前彼个位址[開始位址] == -1)
+			if (頭前彼个位址[開始位址] == 空空無物件)
 			{
 				頭前彼个位址[開始位址] = 開始位址 - 1;
-				部件組合[開始位址] = (PieceMovableTypeTzu) 主要結構[開始位址].typeset(this,
-						null);
+				部件組合[開始位址] = (PieceMovableType) 主要結構[開始位址].typeset(this, null);
 			}
 		}
 		int 目前位址 = 部件組合.length - 1;
@@ -146,9 +162,13 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 				元件[陣列位置++] = 這馬字部件.getChildren()[1];
 				return 元件;
 			}
-			else
+			else if (這馬字部件.getType().有結合律無())
 			{
 				System.out.println("有三个以上的部件組合符號！！");// TODO log
+				return 這馬字部件.getChildren();
+			}
+			else
+			{
 				return 這馬字部件.getChildren();
 			}
 		}

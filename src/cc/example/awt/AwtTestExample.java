@@ -20,7 +20,7 @@ import cc.core.組字式部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線展開式查詢;
-import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -79,12 +79,12 @@ public class AwtTestExample extends Awt測試樣板
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 		for (ChineseCharacter 部件 : ccArray)
 		{
-//			System.out.println("XD");
+			// System.out.println("XD");
 			組字式部件 組字部件 = (組字式部件) 部件;
 			組字部件.建立組字式(組字式建立工具);
 			System.out.println(組字部件.提到組字式());
 			正規化工具.正規化(部件);
-//			System.out.println("XD1");
+			// System.out.println("XD1");
 			組字部件.建立組字式(組字式建立工具);
 			System.out.println(組字部件.提到組字式());
 		}
@@ -97,7 +97,7 @@ public class AwtTestExample extends Awt測試樣板
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
-		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
+		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));

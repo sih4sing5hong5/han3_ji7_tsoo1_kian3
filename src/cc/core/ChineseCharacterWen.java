@@ -1,7 +1,7 @@
 package cc.core;
 
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
@@ -32,7 +32,7 @@ public class ChineseCharacterWen extends ChineseCharacter
 	}
 
 	@Override
-	public ChineseCharacterMovableType typeset(
+	public 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
 			ChineseCharacterMovableTypeTzu parent)
 	{

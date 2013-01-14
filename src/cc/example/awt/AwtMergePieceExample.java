@@ -20,7 +20,7 @@ import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterUtility;
-import cc.moveable_type.ChineseCharacterMovableType;
+import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -97,7 +97,7 @@ public class AwtMergePieceExample extends JPanel
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
-		Vector<ChineseCharacterMovableType> ccmvArray = new Vector<ChineseCharacterMovableType>();
+		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));

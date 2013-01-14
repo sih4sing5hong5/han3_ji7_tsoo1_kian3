@@ -2,6 +2,8 @@ package cc.moveable_type.image;
 
 import java.awt.Point;
 
+import cc.moveable_type.漢字組建活字;
+
 /**
  * 圖片活字的介面。<code>ImageMoveableType</code>
  * 在列印時才讀取字體，處理時不考慮部件的差異，皆視為同樣大小，每個部件當做矩形，記錄預計長寬（<code>region</code>）及位置（
@@ -9,7 +11,7 @@ import java.awt.Point;
  * 
  * @author Ihc
  */
-public interface ImageMoveableType
+public interface ImageMoveableType extends 漢字組建活字
 {
 	/**
 	 * 取得預計長寬

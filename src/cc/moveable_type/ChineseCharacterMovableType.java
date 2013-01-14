@@ -12,7 +12,7 @@ import cc.printing.ChineseCharacterTypePrinter;
  * 
  * @author Ihc
  */
-public abstract class ChineseCharacterMovableType
+public abstract class ChineseCharacterMovableType implements 漢字組建活字
 {
 	/**
 	 * 產生活字的部件結構
@@ -31,28 +31,17 @@ public abstract class ChineseCharacterMovableType
 	 * @param chineseCharacter
 	 *            部件結構
 	 */
-	public ChineseCharacterMovableType(ChineseCharacterMovableTypeTzu parent,ChineseCharacter chineseCharacter)
+	public ChineseCharacterMovableType(ChineseCharacterMovableTypeTzu parent,
+			ChineseCharacter chineseCharacter)
 	{
 		this.chineseCharacter = chineseCharacter;
 		this.parent = parent;
 	}
 
-	/**
-	 * 調整活字排法。用<code>ChineseCharacterTypeAdjuster</code>
-	 * (活字調整工具)來調整ChineseCharacterMovableType(活字)。
-	 * 
-	 * @param adjuster
-	 *            欲採用的活字調整工具
-	 */
+	@Override
 	public abstract void adjust(ChineseCharacterTypeAdjuster adjuster);
 
-	/**
-	 * 列印活字。用<code>ChineseCharacterTypePrinter</code>
-	 * (活字列印工具)來列印ChineseCharacterMovableType(活字)。
-	 * 
-	 * @param printer
-	 *            欲採用的活字列印工具
-	 */
+	@Override
 	public abstract void print(ChineseCharacterTypePrinter printer);
 
 	/**

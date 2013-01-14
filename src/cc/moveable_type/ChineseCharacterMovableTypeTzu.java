@@ -16,7 +16,7 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	/**
 	 * 底下的各個活字
 	 */
-	protected ChineseCharacterMovableType[] children;
+	protected 漢字組建活字[] children;
 
 	/**
 	 * 以<code>ChineseCharacter</code>部件結構建立字活字結構
@@ -32,7 +32,7 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	{
 		super(parent, chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
-		this.children=new ChineseCharacterMovableType[childrenSize];
+		this.children = new ChineseCharacterMovableType[childrenSize];
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	 * 
 	 * @return 底下的各個部件
 	 */
-	public ChineseCharacterMovableType[] getChildren()
+	public 漢字組建活字[] getChildren()
 	{
 		return children;
 	}

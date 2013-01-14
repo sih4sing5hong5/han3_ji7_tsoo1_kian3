@@ -1,7 +1,7 @@
 package cc.core;
 
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
@@ -39,7 +39,7 @@ public abstract class ChineseCharacter
 	 *            此活字結構的上層活字
 	 * @return 產生出來的活字結構
 	 */
-	public abstract ChineseCharacterMovableType typeset(
+	public abstract 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
 			ChineseCharacterMovableTypeTzu parent);
 
@@ -52,12 +52,14 @@ public abstract class ChineseCharacter
 	{
 		return parent;
 	}
+
 	/**
 	 * 取得部件Unicode編碼
 	 * 
 	 * @return 部件Unicode編碼
 	 */
 	public abstract int getCodePoint();
+
 	/**
 	 * 取得部件的字元形態
 	 * 

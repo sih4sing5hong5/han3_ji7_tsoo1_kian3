@@ -2,8 +2,8 @@ package cc.setting;
 
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterWen;
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.漢字組建活字;
 
 /**
  * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
@@ -22,8 +22,7 @@ public interface ChineseCharacterTypeSetter
 	 *            要轉化的文（獨體）部件
 	 * @return 獨體活字
 	 */
-	public ChineseCharacterMovableType setWen(
-			ChineseCharacterMovableTypeTzu parent,
+	public 漢字組建活字 setWen(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterWen chineseCharacterWen);
 
 	/**
@@ -35,7 +34,6 @@ public interface ChineseCharacterTypeSetter
 	 *            要轉化的字（合體）部件
 	 * @return 合體活字
 	 */
-	public ChineseCharacterMovableType setTzu(
-			ChineseCharacterMovableTypeTzu parent,
+	public 漢字組建活字 setTzu(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterTzu chineseCharacterTzu);
 }

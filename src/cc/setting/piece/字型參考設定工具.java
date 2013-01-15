@@ -84,7 +84,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 			{
 				if (頭前彼个位址[結束位址 - 1] == 空空無物件)
 				{
-					System.out.println("開始位址="+開始位址+" 結束位址="+結束位址);
+//					System.out.println("開始位址="+開始位址+" 結束位址="+結束位址);
 					/** 產生展開式 */
 					StringBuilder 結構展開式 = new StringBuilder();
 					for (int i = 開始位址; i < 結束位址; ++i)
@@ -97,7 +97,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 					/** [開始位址,結束位址) 佇資料庫內底 */
 					if (字型號碼 != null)
 					{
-						System.out.println(字體.有這个字型無(字型號碼));
+//						System.out.println(字體.有這个字型無(字型號碼));
 						if (字體.有這个字型無(字型號碼))
 						{
 							頭前彼个位址[結束位址 - 1] = 開始位址 - 1;

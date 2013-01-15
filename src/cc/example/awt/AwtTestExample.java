@@ -85,11 +85,11 @@ public class AwtTestExample extends Awt測試樣板
 			// System.out.println("XD");
 			組字式部件 組字部件 = (組字式部件) 部件;
 			組字部件.建立組字式(組字式建立工具);
-			System.out.println(組字部件.提到組字式());
+//			System.out.println(組字部件.提到組字式());
 			正規化工具.正規化(部件);
 			// System.out.println("XD1");
 			組字部件.建立組字式(組字式建立工具);
-			System.out.println(組字部件.提到組字式());
+//			System.out.println(組字部件.提到組字式());
 		}
 
 		System.out.println("設定中～～ 時間：" + System.currentTimeMillis());
@@ -115,7 +115,7 @@ public class AwtTestExample extends Awt測試樣板
 
 		System.out.println("調整中～～ 時間：" + System.currentTimeMillis());
 		MergePieceAdjuster adjuster = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);// TODO
+				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);// TODO
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);

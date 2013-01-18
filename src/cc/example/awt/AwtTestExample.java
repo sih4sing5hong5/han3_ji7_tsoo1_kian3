@@ -64,7 +64,7 @@ public class AwtTestExample extends Awt測試樣板
 	@Override
 	public void paint(Graphics g1)
 	{
-//		word = "國⿴囗或";
+		word = "⿰因⿰⿴囗或";
 		System.out.println("初使化～～ 時間：" + System.currentTimeMillis());
 		Graphics2D graphics2D = (Graphics2D) g1;
 		graphics2D.setColor(Color.black);

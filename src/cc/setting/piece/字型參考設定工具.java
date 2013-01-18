@@ -18,15 +18,32 @@ import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.tool.database.字串與控制碼轉換;
 
+/**
+ * 判斷字型有字無字，決定愛設定佗一个字型來組合。
+ * 
+ * @author Ihc
+ */
 public class 字型參考設定工具 extends 物件活字基礎設定工具
 {
+	/** 用來查展開式的物件 */
 	展開式查通用字型編號 查通用字型編號;
+	/** 設定時愛用的字體 */
 	protected 通用字體 字體;
 	/** 活字的渲染屬性 */
 	protected FontRenderContext 字體渲染屬性;
-	
-	private final int 空空無物件=-7;
+	/** 佇鬥部件做伙揣現有的字型時，代表空空，遏袂處理的位址號碼 */
+	private final int 空空無物件 = -7;
 
+	/**
+	 * 準備設定工具。
+	 * 
+	 * @param 查通用字型編號
+	 *            用來查展開式的方法
+	 * @param 字體
+	 *            設定時愛用的字體
+	 * @param 字體渲染屬性
+	 *            活字的渲染屬性
+	 */
 	public 字型參考設定工具(展開式查通用字型編號 查通用字型編號, 通用字體 字體, FontRenderContext 字體渲染屬性)
 	{
 		super(null, null);
@@ -51,6 +68,13 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		return new PieceMovableTypeWen(parent, chineseCharacterWen, 物件活字);
 	}
 
+	/**
+	 * 依照字型號碼，設定新的活字物件。
+	 * 
+	 * @param 字型號碼
+	 *            愛設定的字型號碼資料
+	 * @return 依照字型號碼的活字物件
+	 */
 	private RectangularArea 查物件活字(通用字型號碼 字型號碼)
 	{
 		RectangularArea 物件活字 = null;
@@ -73,8 +97,9 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	{
 		ChineseCharacter[] 主要結構 = 揣主要結構元件(chineseCharacterTzu);
 		int[] 頭前彼个位址 = new int[主要結構.length];// -1代表空空，遏袂處理。位址代表有彼个元件有考慮到。
+											// TODO 處理解釋
 		for (int i = 0; i < 頭前彼个位址.length; i++)
-			頭前彼个位址[i] =空空無物件;
+			頭前彼个位址[i] = 空空無物件;
 		PieceMovableType[] 部件組合 = new PieceMovableType[主要結構.length];
 		/** 保證開始位址前的攏有揣到 */
 		for (int 開始位址 = 0; 開始位址 < 主要結構.length; 開始位址++)
@@ -84,7 +109,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 			{
 				if (頭前彼个位址[結束位址 - 1] == 空空無物件)
 				{
-//					System.out.println("開始位址="+開始位址+" 結束位址="+結束位址);
+					// System.out.println("開始位址="+開始位址+" 結束位址="+結束位址);
 					/** 產生展開式 */
 					StringBuilder 結構展開式 = new StringBuilder();
 					for (int i = 開始位址; i < 結束位址; ++i)
@@ -97,7 +122,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 					/** [開始位址,結束位址) 佇資料庫內底 */
 					if (字型號碼 != null)
 					{
-//						System.out.println(字體.有這个字型無(字型號碼));
+						// System.out.println(字體.有這个字型無(字型號碼));
 						if (字體.有這个字型無(字型號碼))
 						{
 							頭前彼个位址[結束位址 - 1] = 開始位址 - 1;
@@ -133,6 +158,13 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		return 目前元件;
 	}
 
+	/**
+	 * 共部件的樹狀結構上頂懸彼層有結合律的部件攏總揣出來。
+	 * 
+	 * @param 部件
+	 *            愛拆的樹狀結構
+	 * @return 上頂懸彼層有結合律的部件
+	 */
 	private ChineseCharacter[] 揣主要結構元件(ChineseCharacter 部件)
 	{
 		if (ChineseCharacterTzuCombinationType.isCombinationType(部件

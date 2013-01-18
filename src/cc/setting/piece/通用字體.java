@@ -93,6 +93,13 @@ public abstract class 通用字體
 	 */
 	public abstract GlyphVector 提這个字型(FontRenderContext 渲染選項, int 控制碼, int 字體編號);
 
+	/**
+	 * 看覓這个字體敢有字型號碼指定的字型向量。
+	 * 
+	 * @param 字型號碼
+	 *            字型的資料
+	 * @return 這个字體有字型號碼指定的字型向量無
+	 */
 	public boolean 有這个字型無(通用字型號碼 字型號碼)
 	{
 		if (字型號碼 == null)
@@ -104,8 +111,18 @@ public abstract class 通用字體
 		return false;
 	}
 
+	/**
+	 * 佇這个渲染選項，提出字型號碼指定的字型向量。
+	 * 
+	 * @param 渲染選項
+	 *            想欲愛的渲染參數
+	 * @param 字型號碼
+	 *            字型的資料
+	 * @return 這个字體的字型。若字體無這个字型，回傳<code>null</code>
+	 */
 	public GlyphVector 提這个字型(FontRenderContext 渲染選項, 通用字型號碼 字型號碼)
 	{
+		// System.out.println(字型號碼.提統一碼() + " " + 字型號碼.提構型資料庫字體號碼());
 		if (字型號碼 == null)
 			return null;
 		if (字型號碼.有構型資料庫字體號碼無() && 字型號碼.有統一碼無())

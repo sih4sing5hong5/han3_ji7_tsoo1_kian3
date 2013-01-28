@@ -38,7 +38,7 @@ public class 漢字組建資料庫產生展開式
 		上傳筆數 = 0;
 		try
 		{
-			// 更新連線.executeUpdate("DELETE FROM \"漢字組建\".\"檢字表\"");
+			// 更新連線.executeUpdate("UPDATE \"漢字組建\".\"檢字表\" SET \"展開式\" = null");
 			String selectAllQuery = "SELECT \"構形資料庫編號\""
 					+ " FROM \"漢字組建\".\"檢字表\" " + " ORDER BY \"構形資料庫編號\" ASC"
 			// + " LIMIT 100"
@@ -47,7 +47,7 @@ public class 漢字組建資料庫產生展開式
 			while (allDataNumber.next())
 			{
 				String 構形資料庫編號 = allDataNumber.getString("構形資料庫編號");
-				String 選擇目前欲處理之字 = "SELECT \"Unicode\",\"構形資料庫編號\",\"組字式\",\"展開式\" "
+				String 選擇目前欲處理之字 = "SELECT \"統一碼\",\"構形資料庫編號\",\"組字式\",\"展開式\" "
 						+ " FROM \"漢字組建\".\"檢字表\" WHERE \"構形資料庫編號\"='"
 						+ 構形資料庫編號 + "'";
 				取得該展開式(連線.executeQuery(選擇目前欲處理之字));
@@ -117,11 +117,11 @@ public class 漢字組建資料庫產生展開式
 						}
 						else
 						{
-							// TODO UNICODE有兩個的情況愛考慮，目前先選第一个
-							String 選取目標 = "SELECT \"Unicode\",\"構形資料庫編號\",\"組字式\",\"展開式\" "
-									+ " FROM \"漢字組建\".\"檢字表\" WHERE \"Unicode\"='"
+							// TODO 統一碼有兩個的情況愛考慮，目前先選第一个
+							String 選取目標 = "SELECT \"統一碼\",\"構形資料庫編號\",\"組字式\",\"展開式\" "
+									+ " FROM \"漢字組建\".\"檢字表\" WHERE \"統一碼\"='"
 									+ Integer.toHexString(組字式控制碼[i])
-									+ "' ORDER BY \"構形資料庫編號\" ASC";
+									+ "' ORDER BY \"構形資料庫編號\" ASC LIMIT 1";
 							展開式.append(取得該展開式(連線.executeQuery(選取目標), 組字式控制碼[i]));
 						}
 					}
@@ -133,7 +133,7 @@ public class 漢字組建資料庫產生展開式
 								+ "WHERE \"構形資料庫編號\"='" + 目標編號 + "'";
 						連線.executeUpdate(更新目標);
 						上傳筆數++;
-						String 目標控制碼 = 要處理的目標.getString("Unicode");
+						String 目標控制碼 = 要處理的目標.getString("統一碼");
 						所求展開式=展開式.toString();
 						System.out.println("上傳筆數=" + 上傳筆數 + ' '
 								+ 所求展開式 + ' ' + 目標控制碼 + ' '

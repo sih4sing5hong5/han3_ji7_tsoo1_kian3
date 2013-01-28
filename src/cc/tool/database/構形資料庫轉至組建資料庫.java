@@ -32,12 +32,13 @@ public class 構形資料庫轉至組建資料庫
 		int 上傳筆數 = 0;
 		try
 		{
-//			更新連線.executeUpdate("DELETE FROM \"漢字組建\".\"檢字表\"");
-			String selectQuery = "SELECT \"編號\",\"Big5\",\"Unicode\",\"連接符號\",\"部件序\""
+			// 更新連線.executeUpdate("DELETE FROM \"漢字組建\".\"檢字表\"");
+			String selectQuery = "SELECT \"編號\",\"字體\",\"字碼\",\"Unicode\",\"連接符號\",\"部件序\""
 					+ " FROM \"構形資料庫\".\"檢字表\" "
 					// + " WHERE \"連接符號\" = '5' "
-					+ " ORDER BY \"Unicode\" ASC, \"Big5\" ASC"
+					+ " ORDER BY \"編號\" ASC"
 			// + " LIMIT 100"
+			// 註解好用
 			;
 			ResultSet rs = 選取連線.executeQuery(selectQuery);
 			while (rs.next())
@@ -68,13 +69,28 @@ public class 構形資料庫轉至組建資料庫
 					case 2:
 					case 3:
 					case 5:
-						String insertQuery = "INSERT INTO \"漢字組建\".\"檢字表\" "
-								+ "(\"Unicode\",\"Big5\",\"構形資料庫編號\",\"組字式\") "
-								+ " VALUES ('" + rs.getString("Unicode")
-								+ "','" + rs.getString("Big5") + "','"
-								+ rs.getString("編號") + "','"
-								+ 轉移工具.產生構字式(部件序控制碼, 構字符號) + "')";
-						更新連線.executeUpdate(insertQuery);
+						String 字型號碼 = Integer.toHexString(字串與控制碼轉換.轉換成控制碼(rs
+								.getString("字碼"))[0]);
+						String 統一碼 = rs.getString("Unicode");
+						if (統一碼 != null)
+							統一碼 = 統一碼.toLowerCase();
+						資料庫命令字串 新增命令 = new 資料庫命令字串(
+								"INSERT INTO \"漢字組建\".\"檢字表\" "
+										+ "(\"統一碼\","
+										+ "\"構形資料庫編號\",\"構型資料庫字體號碼\",\"構型資料庫字型號碼\","
+										+ "\"組字式\") " + " VALUES (");
+						新增命令.加變數(統一碼);
+						新增命令.加命令(',');
+						新增命令.加變數(rs.getString("編號"));
+						新增命令.加命令(',');
+						新增命令.加變數(rs.getString("字體"));
+						新增命令.加命令(',');
+						新增命令.加變數(字型號碼);
+						新增命令.加命令(',');
+						新增命令.加變數(轉移工具.產生構字式(部件序控制碼, 構字符號));
+						新增命令.加命令(")");
+						// System.out.println(新增命令.toString());
+						更新連線.executeUpdate(新增命令.toString());
 						上傳筆數++;
 						break;
 					default:

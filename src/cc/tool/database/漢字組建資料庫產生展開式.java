@@ -133,11 +133,21 @@ public class 漢字組建資料庫產生展開式
 								+ "WHERE \"構形資料庫編號\"='" + 目標編號 + "'";
 						連線.executeUpdate(更新目標);
 						上傳筆數++;
+						所求展開式 = 展開式.toString();
 						String 目標控制碼 = 要處理的目標.getString("統一碼");
-						所求展開式=展開式.toString();
-						System.out.println("上傳筆數=" + 上傳筆數 + ' '
-								+ 所求展開式 + ' ' + 目標控制碼 + ' '
-								+ 字串與控制碼轉換.轉換成字串(Integer.parseInt(目標控制碼, 16)));
+						if (目標控制碼 == null)
+							System.out.println("上傳筆數=" + 上傳筆數 + ' ' + 所求展開式
+									+ ' ' + 目標控制碼);
+						else
+							System.out.println("上傳筆數="
+									+ 上傳筆數
+									+ ' '
+									+ 所求展開式
+									+ ' '
+									+ 目標控制碼
+									+ ' '
+									+ 字串與控制碼轉換.轉換成字串(Integer
+											.parseInt(目標控制碼, 16)));
 					}
 					else
 					// 應該袂入來

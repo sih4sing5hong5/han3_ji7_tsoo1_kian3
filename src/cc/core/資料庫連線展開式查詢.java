@@ -26,8 +26,8 @@ public class 資料庫連線展開式查詢 extends 展開式查詢工具
 	{
 		String 展開式 = null;
 		StringBuilder 查詢指令 = new StringBuilder(
-				"SELECT \"展開式\" FROM \"漢字組建\".\"檢字表\" WHERE \"Unicode\"='");
-		查詢指令.append(Integer.toHexString(統一碼控制碼).toUpperCase());
+				"SELECT \"展開式\" FROM \"漢字組建\".\"檢字表\" WHERE \"統一碼\"='");
+		查詢指令.append(Integer.toHexString(統一碼控制碼));
 		查詢指令.append('\'');
 		try
 		{

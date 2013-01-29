@@ -33,6 +33,7 @@ public class 資料庫命令字串
 		命令.append(字元資料);
 		if (字元資料 != null)
 			命令.append('\'');
+		命令.append(' ');
 		return this;
 	}
 

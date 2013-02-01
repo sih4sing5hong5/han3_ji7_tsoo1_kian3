@@ -22,6 +22,10 @@ public class 漢字組建資料庫產生展開式
 	PgsqlConnection 連線;
 	/** 攏總更新幾筆 */
 	int 上傳筆數;
+	/** 正規化工具 */
+	組字式部件正規化 部件正規化;
+	/** 建立組字式的工具 */
+	組字式部件組字式建立工具 組字式建立工具;
 
 	/**
 	 * 主函式。
@@ -41,10 +45,12 @@ public class 漢字組建資料庫產生展開式
 	{
 		System.out.println("開始嘍～～ 時間：" + System.currentTimeMillis());
 		連線 = new PgsqlConnection();
+		部件正規化 = new 組字式部件正規化();
+		組字式建立工具 = new 組字式部件組字式建立工具();
 		上傳筆數 = 0;
 		try
 		{
-			// 更新連線.executeUpdate("UPDATE \"漢字組建\".\"檢字表\" SET \"展開式\" = null");
+			// 連線.executeUpdate("UPDATE \"漢字組建\".\"檢字表\" SET \"展開式\" = null");
 			String selectAllQuery = "SELECT \"構形資料庫編號\""
 					+ " FROM \"漢字組建\".\"檢字表\" " + " ORDER BY \"構形資料庫編號\" ASC"
 			// + " LIMIT 100"
@@ -135,9 +141,7 @@ public class 漢字組建資料庫產生展開式
 						漢字序列分析工具 序列分析工具 = new 漢字序列分析工具(展開式.toString(),
 								new 展開式免查詢());
 						ChineseCharacter 部件 = 序列分析工具.parseText().firstElement();
-						組字式部件正規化 部件正規化 = new 組字式部件正規化();
 						部件正規化.正規化(部件);
-						組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 						組字式部件 組字部件 = (組字式部件) 部件;
 						組字部件.建立組字式(組字式建立工具);
 						所求展開式 = 組字部件.提到組字式();

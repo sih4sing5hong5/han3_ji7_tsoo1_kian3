@@ -3,7 +3,13 @@ package cc.tool.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzuCombinationType;
+import cc.core.展開式免查詢;
+import cc.core.漢字序列分析工具;
+import cc.core.組字式部件;
+import cc.core.組字式部件正規化;
+import cc.core.組字式部件組字式建立工具;
 
 /**
  * 由漢字組建資料庫產生展開式。
@@ -52,8 +58,7 @@ public class 漢字組建資料庫產生展開式
 						+ 構形資料庫編號 + "'";
 				取得該展開式(連線.executeQuery(選擇目前欲處理之字));
 			}
-		}
-		catch (SQLException e)
+		} catch (SQLException e)
 		{
 			System.err.println("巡訪時發現錯誤！！！ ");
 			e.printStackTrace();
@@ -91,15 +96,13 @@ public class 漢字組建資料庫產生展開式
 			if (!要處理的目標.next())// 無組字式
 			{
 				所求展開式 = new String(Character.toChars(控制碼));
-			}
-			else
+			} else
 			{
 				String 目標展開式 = 要處理的目標.getString("展開式");
 				if (目標展開式 != null)// 處理過矣
 				{
 					所求展開式 = 目標展開式;
-				}
-				else
+				} else
 				{
 					String 組字式 = 要處理的目標.getString("組字式");
 					if (組字式 == null)// 無應該出現的現象
@@ -114,26 +117,35 @@ public class 漢字組建資料庫產生展開式
 								.isCombinationType(組字式控制碼[i]))
 						{
 							展開式.append(Character.toChars(組字式控制碼[i]));
-						}
-						else
+						} else
 						{
 							// TODO 統一碼有兩個的情況愛考慮，目前先選第一个
 							String 選取目標 = "SELECT \"統一碼\",\"構形資料庫編號\",\"組字式\",\"展開式\" "
 									+ " FROM \"漢字組建\".\"檢字表\" WHERE \"統一碼\"='"
 									+ Integer.toHexString(組字式控制碼[i])
 									+ "' ORDER BY \"構形資料庫編號\" ASC LIMIT 1";
-							展開式.append(取得該展開式(連線.executeQuery(選取目標), 組字式控制碼[i]));
+							展開式
+									.append(取得該展開式(連線.executeQuery(選取目標),
+											組字式控制碼[i]));
 						}
 					}
 					String 目標編號 = 要處理的目標.getString("構形資料庫編號");
 					if (目標編號 != null)
 					{
+						漢字序列分析工具 序列分析工具 = new 漢字序列分析工具(展開式.toString(),
+								new 展開式免查詢());
+						ChineseCharacter 部件 = 序列分析工具.parseText().firstElement();
+						組字式部件正規化 部件正規化 = new 組字式部件正規化();
+						部件正規化.正規化(部件);
+						組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
+						組字式部件 組字部件 = (組字式部件) 部件;
+						組字部件.建立組字式(組字式建立工具);
+						所求展開式 = 組字部件.提到組字式();
 						String 更新目標 = "UPDATE \"漢字組建\".\"檢字表\" "
-								+ "SET \"展開式\"='" + 展開式.toString() + "' "
+								+ "SET \"展開式\"='" + 所求展開式 + "' "
 								+ "WHERE \"構形資料庫編號\"='" + 目標編號 + "'";
 						連線.executeUpdate(更新目標);
 						上傳筆數++;
-						所求展開式 = 展開式.toString();
 						String 目標控制碼 = 要處理的目標.getString("統一碼");
 						if (目標控制碼 == null)
 							System.out.println("上傳筆數=" + 上傳筆數 + ' ' + 所求展開式
@@ -148,29 +160,25 @@ public class 漢字組建資料庫產生展開式
 									+ ' '
 									+ 字串與控制碼轉換.轉換成字串(Integer
 											.parseInt(目標控制碼, 16)));
-					}
-					else
+					} else
 					// 應該袂入來
 					{
 						throw new RuntimeException("程式有問題！！");
 					}
 				}
 			}
-		}
-		catch (SQLException e)
+		} catch (SQLException e)
 		{
 			System.err.println("展開時發現錯誤！！！ ");
 			e.printStackTrace();
-		}
-		catch (RuntimeException e)
+		} catch (RuntimeException e)
 		{
 			e.printStackTrace();
 		}
 		try
 		{
 			要處理的目標.close();
-		}
-		catch (SQLException e)
+		} catch (SQLException e)
 		{
 			System.err.println("連線關掉時發現錯誤！！！ ");
 			e.printStackTrace();

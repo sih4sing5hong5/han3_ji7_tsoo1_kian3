@@ -1,8 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="javadoc">
-    <target name="javadoc">
-        <javadoc access="protected" author="true" classpath="." destdir="doc" doctitle="漢字組建" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="cc.core,cc.moveable_type.area,cc.example.awt,cc.printing.awt.piece,cc.moveable_type.rectangular_area,cc.setting.piece,cc.printing.awt.image,cc.adjusting.piece,cc.example.reference,cc.setting,cc.setting.image,cc.printing.awt.area,cc.setting.area,cc.moveable_type,cc.adjusting.image,cc.adjusting.area,cc.adjusting,cc.adjusting.bolder,cc.exception,cc.moveable_type.image,cc.printing,cc.moveable_type.piece" source="1.6" sourcepath="/home/Ihc/project/workspace/ChineseCharacter/src" splitindex="true" use="true" version="true">
-            <link href="http://java.sun.com/javase/6/docs/api/"/>
+<project default="javadoc" >
+
+    <target name="javadoc" >
+
+        <javadoc
+            access="protected"
+            author="true"
+            classpath="/usr/share/java/logback-classic.jar:../slf4j-api-1.7.2.jar:../slf4j-ext-1.7.2.jar:../cal10n-api-0.7.4.jar:/usr/share/java/logback-core.jar:/usr/share/java/postgresql-jdbc4.jar"
+            destdir="doc"
+            nodeprecated="false"
+            nodeprecatedlist="false"
+            noindex="false"
+            nonavbar="false"
+            notree="false"
+            packagenames="cc.moveable_type.rectangular_area,cc.printing.awt.area,cc.printing,cc.core,cc.程式記錄,cc.moveable_type.area,cc.moveable_type.image,cc.adjusting,cc.adjusting.image,cc.tool.database,cc.adjusting.piece,cc.setting.piece,cc.adjusting.bolder,cc.printing.awt.piece,cc.moveable_type.piece,cc.moveable_type,cc.example.reference,cc.printing.awt.image,cc.adjusting.area,cc.setting.area,cc.example.awt,cc.setting.image,cc.setting"
+            source="1.6"
+            sourcepath="src"
+            splitindex="true"
+            use="true"
+            version="true" >
+
+            <link href="http://java.sun.com/javase/6/docs/api/" />
+
+            <link href="http://cal10n.qos.ch/apidocs" />
+
+            <link href="http://logback.qos.ch/apidocs/" />
+
+            <link href="http://www.slf4j.org/apidocs/" />
+
+            <link href="http://jdbc.postgresql.org/documentation/publicapi/" />
         </javadoc>
     </target>
+
 </project>

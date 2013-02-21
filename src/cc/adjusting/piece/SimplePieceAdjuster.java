@@ -4,6 +4,8 @@ import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
+import org.slf4j.Logger;
+
 import cc.adjusting.ChineseCharacterTypeAdjuster;
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
@@ -13,6 +15,7 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.moveable_type.rectangular_area.ShapeInformation;
+import cc.程式記錄.漢字組建記錄工具包;
 
 /**
  * 區塊活字調整工具。調整<code>PieceMovableType</code>，因為把活字的資訊全部集中在同一個物件上（
@@ -25,13 +28,11 @@ import cc.moveable_type.rectangular_area.ShapeInformation;
  */
 public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 {
-	/**
-	 * 物件活字加寬工具
-	 */
+	/** 記錄程式狀況 */
+	protected Logger 記錄工具;
+	/** 物件活字加寬工具 */
 	private final ChineseCharacterTypeBolder chineseCharacterTypeBolder;
-	/**
-	 * 合併、調整的精細度
-	 */
+	/** 合併、調整的精細度 */
 	private final double precision;
 
 	/**
@@ -46,6 +47,8 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 			ChineseCharacterTypeBolder chineseCharacterTypeBolder,
 			double precision)
 	{
+		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
+		
 		this.chineseCharacterTypeBolder = chineseCharacterTypeBolder;
 		this.precision = precision;
 	}

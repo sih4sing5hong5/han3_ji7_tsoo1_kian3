@@ -11,6 +11,7 @@ import java.awt.geom.AffineTransform;
 import java.util.Vector;
 
 import org.slf4j.Logger;
+import org.slf4j.MarkerFactory;
 import org.slf4j.profiler.Profiler;
 
 import cc.adjusting.bolder.FunctinoalBasicBolder;
@@ -49,6 +50,8 @@ public class AwtTestExample extends Awt測試樣板
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
+	/** 記錄程式狀況 */
+	Logger 記錄工具;
 	/** 測試用字體 */
 	static final String 測試字體 = 全字庫正宋體;
 	/** 測試用屬性 */
@@ -69,12 +72,16 @@ public class AwtTestExample extends Awt測試樣板
 	@Override
 	public void paint(Graphics g1)
 	{
-		Logger 記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
+		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
 		Profiler 看時工具 = new Profiler(getName());
 		看時工具.setLogger(記錄工具);
-//		word = "⿰因⿰⿴囗或";
+		// word = "⿰因⿰⿴囗或";
 		看時工具.start("初使化");
-		記錄工具.debug("初使化～～ 時間：" + System.currentTimeMillis());
+		記錄工具.debug(MarkerFactory.getMarker("#@@"),
+				"初使化～～ 時間：" + System.currentTimeMillis());
+		記錄工具.debug(MarkerFactory.getMarker("@@"),
+				"初使化～～ 時間：" + System.currentTimeMillis());
+
 		Graphics2D graphics2D = (Graphics2D) g1;
 		graphics2D.setColor(Color.black);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

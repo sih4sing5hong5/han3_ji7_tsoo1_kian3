@@ -24,10 +24,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 {
 	/** 將水平或垂直兩部件拼合的工具 */
 	protected 二元搜尋貼合工具 貼合工具;
-	/** 左右兩部件拼合時的調整模組 */
-	protected 水平拼合模組 水平模組;
-	/** 上下兩部件拼合時的調整模組 */
-	protected 垂直拼合模組 垂直模組;
+	/** 左右兩部件拼合時的調整工具 */
+	protected 水平拼合工具 水平工具;
+	/** 上下兩部件拼合時的調整工具 */
+	protected 垂直拼合工具 垂直工具;
 	/** 處理包圍關係的活字時所使用的工具 */
 	protected 包圍整合分派工具 分派工具;
 
@@ -46,8 +46,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		super(chineseCharacterTypeBolder, precision);
 
 		貼合工具 = new 二元搜尋貼合工具();
-		水平模組 = new 水平拼合模組(this);
-		垂直模組 = new 垂直拼合模組(this);
+		水平工具 = new 水平拼合工具(this);
+		垂直工具 = new 垂直拼合工具(this);
 
 		分派工具 = new 包圍整合分派工具();
 		分派工具.add(new 上蓋包圍工具(this));
@@ -59,6 +59,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分派工具.add(new 上下左三邊包圍工具(this));
 		分派工具.add(new 右上內勾包圍工具(this));
 		分派工具.add(new 四面包圍工具(this));
+		分派工具.設定無支援暫時用包圍工具(水平工具);
 	}
 
 	@Override
@@ -101,10 +102,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void horizontalMerging(PieceMovableTypeTzu 物件活字)
 	{
-		貼合工具.執行(水平模組, 物件活字.取得活字物件());
-
-		RectangularArea[] 調整結果 = 水平模組.取得調整後活字物件();
-		物件活字.getPiece().重設並組合活字(調整結果);
+		水平工具.組合(物件活字);
 		return;
 	}
 
@@ -116,10 +114,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void verticalMerging(PieceMovableTypeTzu 物件活字)
 	{
-		貼合工具.執行(垂直模組, 物件活字.取得活字物件());
-
-		RectangularArea[] 調整結果 = 垂直模組.取得調整後活字物件();
-		物件活字.getPiece().重設並組合活字(調整結果);
+		垂直工具.組合(物件活字);
 		return;
 	}
 
@@ -140,10 +135,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 					.getChildren()[0];
 			switch (chineseCharacter.getCodePoint())
 			{
-			case 2:// TODO 看情況調水平或垂直
+			case 2:
 			}
 			// 預設先用水平
-			horizontalMerging(物件活字);
+			水平工具.組合(物件活字);
 		}
 		return;
 	}
@@ -207,7 +202,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected double nonsuitableToClose(RectangularArea first,
 			RectangularArea second, double boundaryLength)
 	{
-		// TODO
+		// TODO 愛加速
 		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
 				second);
 		RectangularArea rectangularArea = new RectangularArea(first);

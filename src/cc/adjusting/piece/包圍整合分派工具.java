@@ -2,9 +2,13 @@ package cc.adjusting.piece;
 
 import java.util.Hashtable;
 
+import org.slf4j.Logger;
+
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
+import cc.core.組字式部件;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
+import cc.程式記錄.漢字組建記錄工具包;
 
 /**
  * 整合所有包圍工具，讓增減工具方便又不用修改其他程式碼。
@@ -13,12 +17,20 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
  */
 public class 包圍整合分派工具
 {
+	/** 記錄程式狀況 */
+	Logger 記錄工具;
+
 	/** 記錄哪些包圍部件（Unicode編碼）對應到哪些包圍工具 */
 	private Hashtable<Integer, 物件活字包圍工具> 包圍部件工具表;
+
+	/** 若包圍部件無定義，愛用的工具 */
+	private 物件活字包圍工具 無支援暫時用包圍工具 = null;
 
 	/** 建立分派工具。 */
 	public 包圍整合分派工具()
 	{
+		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
+
 		包圍部件工具表 = new Hashtable<Integer, 物件活字包圍工具>();
 	}
 
@@ -31,21 +43,35 @@ public class 包圍整合分派工具
 	 */
 	public boolean add(物件活字包圍工具 包圍工具)
 	{
-		// TODO 考慮改成丟例外
 		boolean 無重覆 = true;
 		int[] 支援包圍部件控制碼清單 = 包圍工具.取得支援包圍部件控制碼清單();
-		for (int i = 0; i < 支援包圍部件控制碼清單.length; ++i)
+		記錄工具.debug("「{}」支援「{}」組合符號", 包圍工具.getClass().toString(), 支援包圍部件控制碼清單);
+		for (int 支援包圍部件控制碼 : 支援包圍部件控制碼清單)
 		{
-			if (包圍部件工具表.containsKey(支援包圍部件控制碼清單[i]))
+			if (包圍部件工具表.containsKey(支援包圍部件控制碼))
 			{
+				記錄工具.info("「{}」的「{}」組合符號佮儂仝款", 包圍工具.getClass().toString(),
+						支援包圍部件控制碼);
 				無重覆 = false;
 			}
 			else
 			{
-				包圍部件工具表.put(支援包圍部件控制碼清單[i], 包圍工具);
+				包圍部件工具表.put(支援包圍部件控制碼, 包圍工具);
 			}
 		}
 		return 無重覆;
+	}
+
+	/**
+	 * 設定一个無支援暫時用包圍工具，拄著無
+	 * 
+	 * @param 包圍工具
+	 *            無字欲用的工具
+	 */
+	public void 設定無支援暫時用包圍工具(物件活字包圍工具 包圍工具)
+	{
+		this.無支援暫時用包圍工具 = 包圍工具;
+		return;
 	}
 
 	/**
@@ -65,6 +91,16 @@ public class 包圍整合分派工具
 		if (包圍工具 != null)
 		{
 			包圍工具.組合(pieceMovableTypeTzu);
+			return true;
+		}
+		else if (無支援暫時用包圍工具 != null)
+		{
+			if (pieceMovableTypeTzu.getChineseCharacter() instanceof 組字式部件)
+				記錄工具.info("組合符號無支援「{}」組字式", ((組字式部件) pieceMovableTypeTzu
+						.getChineseCharacter()).提到組字式());
+			else
+				記錄工具.info("組合符號無支援「{}」部件", Character.toChars(外部活字控制碼));
+			無支援暫時用包圍工具.組合(pieceMovableTypeTzu);
 			return true;
 		}
 		return false;

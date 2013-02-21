@@ -7,7 +7,7 @@ import cc.tool.database.字串與控制碼轉換;
  * 
  * @author Ihc
  */
-abstract class 展開式查詢工具
+public abstract class 展開式查詢工具
 {
 	/**
 	 * 查詢其展開式，若無，回傳null。

@@ -15,11 +15,15 @@ public class 資料庫連線展開式查詢 extends 展開式查詢工具
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
 
-	/** 初使化物件 */
-	public 資料庫連線展開式查詢()
+	/**
+	 * 初使化物件
+	 * 
+	 * @param 連線
+	 *            佮資料庫的連線
+	 */
+	public 資料庫連線展開式查詢(PgsqlConnection 連線)
 	{
-		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
-																		// 換讀取權限
+		this.連線 = 連線;
 	}
 
 	public String 查詢展開式(int 統一碼控制碼)

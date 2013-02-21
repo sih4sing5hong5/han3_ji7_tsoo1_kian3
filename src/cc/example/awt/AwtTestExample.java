@@ -32,6 +32,7 @@ import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.用資料庫查展開式的通用字型編號;
+import cc.tool.database.PgsqlConnection;
 import cc.程式記錄.漢字組建記錄工具包;
 
 /**
@@ -51,7 +52,9 @@ public class AwtTestExample extends Awt測試樣板
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
 	/** 記錄程式狀況 */
-	Logger 記錄工具;
+	protected Logger 記錄工具;
+	/** 佮資料庫的連線 */
+	protected PgsqlConnection 連線;
 	/** 測試用字體 */
 	static final String 測試字體 = 全字庫正宋體;
 	/** 測試用屬性 */
@@ -72,10 +75,14 @@ public class AwtTestExample extends Awt測試樣板
 	@Override
 	public void paint(Graphics g1)
 	{
+		// 換讀取權限
 		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
 		Profiler 看時工具 = new Profiler(getName());
 		看時工具.setLogger(記錄工具);
+
 		// word = "⿰因⿰⿴囗或";
+		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
+																		// 換專門查的使用者
 		看時工具.start("初使化");
 		記錄工具.debug(MarkerFactory.getMarker("@@"),
 				"初使化～～ 時間：" + System.currentTimeMillis());
@@ -89,8 +96,8 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("分析中");
 		記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
-		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢();
-		// TODO 資料庫連線展開式查詢() 展開式免查詢()
+		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
+		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
 		ChineseCharacterUtility ccUtility = new 漢字序列分析工具(word, 查詢方式);
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 
@@ -109,7 +116,7 @@ public class AwtTestExample extends Awt測試樣板
 		看時工具.start("設定中");
 		記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
 		ChineseCharacterTypeSetter setter = new 字型參考設定工具(
-				new 用資料庫查展開式的通用字型編號(),
+				new 用資料庫查展開式的通用字型編號(連線),
 				整合字體.提著宋體字體().調整字體參數(測試屬性, TYPE_SIZE),
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,

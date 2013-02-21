@@ -16,11 +16,15 @@ public class 用資料庫查展開式的通用字型編號 implements 展開式�
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
 
-	/** 初使化物件 */
-	public 用資料庫查展開式的通用字型編號()
+	/**
+	 * 初使化物件
+	 * 
+	 * @param 連線
+	 *            佮資料庫的連線
+	 */
+	public 用資料庫查展開式的通用字型編號(PgsqlConnection 連線)
 	{
-		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
-																		// 換讀取權限
+		this.連線 = 連線;
 	}
 
 	@Override

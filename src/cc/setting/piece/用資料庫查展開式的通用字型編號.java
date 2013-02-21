@@ -50,8 +50,8 @@ public class 用資料庫查展開式的通用字型編號 implements 展開式�
 			if (字型結果 != null)
 				構型資料庫字型號碼 = Integer.parseInt(字型結果, 16);
 			查詢結果.close();
-			System.out.println("查＝" + 展開式 + " 提著＝" + 統一碼 + " " + 構型資料庫字體號碼
-					+ " " + 字型結果);
+			// System.out.println("查＝" + 展開式 + " 提著＝" + 統一碼 + " " + 構型資料庫字體號碼
+			// + " " + 字型結果);
 			return new 通用字型號碼(統一碼, 構型資料庫字體號碼, 構型資料庫字型號碼);
 		}
 		catch (SQLException e)

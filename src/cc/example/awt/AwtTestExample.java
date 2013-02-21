@@ -77,8 +77,6 @@ public class AwtTestExample extends Awt測試樣板
 		看時工具.setLogger(記錄工具);
 		// word = "⿰因⿰⿴囗或";
 		看時工具.start("初使化");
-		記錄工具.debug(MarkerFactory.getMarker("#@@"),
-				"初使化～～ 時間：" + System.currentTimeMillis());
 		記錄工具.debug(MarkerFactory.getMarker("@@"),
 				"初使化～～ 時間：" + System.currentTimeMillis());
 

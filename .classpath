@@ -32,5 +32,8 @@
 			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/usr/share/java/jetty.jar"/>
+	<classpathentry kind="lib" path="/usr/share/java/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="/usr/share/java/jetty-util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -81,6 +81,7 @@ public class AwtTestExample extends Awt測試樣板
 		看時工具.setLogger(記錄工具);
 
 		// word = "⿰因⿰⿴囗或";
+		word = "⿰⿱我愛⿱文莉";
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
 																		// 換專門查的使用者
 		看時工具.start("初使化");

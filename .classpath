@@ -17,17 +17,17 @@
 			<attribute name="javadoc_location" value="http://logback.qos.ch/apidocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/Ihc/研究計劃/意泉計劃/程式碼/cal10n-api-0.7.4.jar">
+	<classpathentry kind="lib" path="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1.jar" sourcepath="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="http://cal10n.qos.ch/apidocs"/>
+			<attribute name="javadoc_location" value="jar:platform:/resource/漢字組建/函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/Ihc/研究計劃/意泉計劃/程式碼/slf4j-api-1.7.2.jar">
+	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-api-1.7.5.jar" sourcepath="函式庫/slf4j-1.7.5/slf4j-api-1.7.5-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/Ihc/研究計劃/意泉計劃/程式碼/slf4j-ext-1.7.2.jar">
+	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5.jar" sourcepath="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
 		</attributes>

@@ -1,5 +1,6 @@
 package cc.連線服務;
 
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class HelloServlet extends HttpServlet
 	BufferedImage image;
 	BufferedImage pngiimage;
 	BufferedImage off_Image;
+	組字介面 aa ;
 
 	public HelloServlet() throws IOException
 	{
@@ -25,9 +27,7 @@ public class HelloServlet extends HttpServlet
 		File png = new File("/home/Ihc/tmpfs/P1160656-2.png");
 		image = ImageIO.read(jpg);
 		pngiimage = ImageIO.read(png);
-		off_Image = new BufferedImage(2000, 1900, BufferedImage.TYPE_INT_ARGB);
-		AwtTestExample aa = new AwtTestExample();
-		aa.paint(off_Image.getGraphics());
+		 aa = new 組字介面(Font.BOLD,200);
 	}
 
 	@Override
@@ -45,8 +45,12 @@ public class HelloServlet extends HttpServlet
 		else if (request.getParameter("a").equals("我愛文莉2"))
 			// response.getOutputStream().write(imageInBytes);
 			ImageIO.write(pngiimage, "png", response.getOutputStream());
-		else
+		else if (request.getParameter("a")!=null)
+		{
+			off_Image = new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+			aa.paint(off_Image.getGraphics(),request.getParameter("a"));
 			ImageIO.write(off_Image, "png", response.getOutputStream());
+		}
 		// response.getWriter().wr
 		//
 		// response.setContentType("text/html");

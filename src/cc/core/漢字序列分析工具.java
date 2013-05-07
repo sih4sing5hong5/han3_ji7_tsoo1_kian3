@@ -48,7 +48,7 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 	}
 
 	@Override
-	ChineseCharacter parseCharacter(ChineseCharacterTzu parent)
+	public ChineseCharacter parseCharacter(ChineseCharacterTzu parent)
 			throws ChineseCharacterFormatException
 	{
 		if (組合式是毋是結束矣())

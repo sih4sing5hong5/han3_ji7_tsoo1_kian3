@@ -6,6 +6,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ import cc.tool.database.PgsqlConnection;
 
 public class 組字服務 extends HttpServlet
 {
-	組字介面 組字工具;
+	組字介面 宋體組字工具;
 
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
@@ -53,37 +54,67 @@ public class 組字服務 extends HttpServlet
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
 				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);// TODO
 
-		組字工具 = new 組字介面(查詢方式, 正規化工具, 設定工具, 調整工具, 字型屬性, 字型大細);
+		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 設定工具, 調整工具, 字型屬性, 字型大細);
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException
 	{
-		if (request.getParameter("a") != null)
+		String 網址字串 = URLDecoder.decode(request.getRequestURI(), "UTF-8");
+		String[] 目錄 = 網址字串.split("/");
+		boolean 遏袂做 = true;
+		if (目錄.length == 3 && 目錄[1].equals("宋體"))
 		{
-			BufferedImage 字型圖片 = new BufferedImage(200, 200,
-					BufferedImage.TYPE_INT_ARGB);
-			組字工具.組字(字型圖片.getGraphics(), request.getParameter("a"));
-			ImageIO.write(字型圖片, "png", response.getOutputStream());
+			String[] 檔案 = 目錄[2].split("\\.");
+			if (檔案.length == 2)
+			{
+				String 檔名 = 檔案[0];
+				String 附檔名 = 檔案[1];
+				if (!附檔名.equals("jpg"))//TODO jpg有問題
+					附檔名 = "png";
+				System.err.println(附檔名);
+				BufferedImage 字型圖片 = new BufferedImage(200, 200,
+						BufferedImage.TYPE_INT_ARGB);
+				宋體組字工具.組字(字型圖片.getGraphics(), 檔名);
+				ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
+				遏袂做 = false;
+			}
 		}
-		else
+		// if (request.getParameter("a") != null)
+		// {
+		// }
+		if (遏袂做)
 		{
 			response.setContentType("text/html");
 			response.setStatus(HttpServletResponse.SC_OK);
 			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
-			// //
 			// response.getOutputStream().write(
 			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
 			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
-			// response.getWriter().println(request.getParameterMap());
-			// response.getWriter().println(request.getParameter("a"));
-			// System.out.println("SSSSSSSSSSss");
-			//
-			// (System.out).write(request.getParameter("a").getBytes());
-			// System.out.println("aaaaaa");
-			// //
-			// response.getOutputStream().write(request.getParameter("a").getBytes());
+			response.getWriter().println(目錄.length);
+			response.getWriter().println(目錄[1]);
+			// String result = URLDecoder.decode(request.getRequestURI(),
+			// "UTF-8");
+			// response.getWriter().println(result);
 		}
+	}
+
+	private String 八位元統一碼網址轉做字串(String 網址)
+	{
+		StringBuilder 新網址 = new StringBuilder();
+		for (int i = 0; i < 網址.length(); ++i)
+			if (網址.charAt(i) == '%')
+			{
+				if (i + 2 < 網址.length())
+				{
+					Integer.parseInt(網址.substring(i + 1, i + 3), 16);
+				}
+				else
+					return 網址;
+			}
+			else
+				網址.charAt(i);
+		return 網址;
 	}
 }

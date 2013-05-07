@@ -64,7 +64,7 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
-		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 普通字型屬性, 字型大細);
+		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 粗字型屬性, 字型大細);
 
 		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
 				.提著楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
@@ -75,12 +75,12 @@ public class 組字服務 extends HttpServlet
 		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 楷體設定工具, 調整工具, 普通字型屬性, 字型大細);
 
 		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
-				.提著宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+				.提著楷體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
-		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 粗楷設定工具, 調整工具, 普通字型屬性, 字型大細);
+		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 粗楷設定工具, 調整工具, 粗字型屬性, 字型大細);
 	}
 
 	@Override
@@ -97,15 +97,15 @@ public class 組字服務 extends HttpServlet
 			{
 				組字工具 = 宋體組字工具;
 			}
-			if (目錄[1].equals("粗宋"))
+			else if (目錄[1].equals("粗宋"))
 			{
 				組字工具 = 粗宋組字工具;
 			}
-			if (目錄[1].equals("楷體"))
+			else if (目錄[1].equals("楷體"))
 			{
 				組字工具 = 楷體組字工具;
 			}
-			if (目錄[1].equals("粗楷"))
+			else if (目錄[1].equals("粗楷"))
 			{
 				組字工具 = 粗楷組字工具;
 			}
@@ -118,10 +118,10 @@ public class 組字服務 extends HttpServlet
 					String 附檔名 = 檔案[1];
 					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
-					System.err.println(附檔名);
+//					System.err.println(附檔名);
 					BufferedImage 字型圖片 = new BufferedImage(200, 200,
 							BufferedImage.TYPE_INT_ARGB);
-					宋體組字工具.組字(字型圖片.getGraphics(), 檔名);
+					組字工具.組字(字型圖片.getGraphics(), 檔名);
 					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
 					遏袂做 = false;
 				}

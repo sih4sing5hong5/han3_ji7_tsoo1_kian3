@@ -21,13 +21,17 @@ import cc.core.組字式部件正規化;
 import cc.core.資料庫連線展開式查詢;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
+import cc.setting.piece.展開式查通用字型編號;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.用資料庫查展開式的通用字型編號;
 import cc.tool.database.PgsqlConnection;
 
 public class 組字服務 extends HttpServlet
 {
-	組字介面 宋體組字工具;
+	protected 組字介面 宋體組字工具;
+	protected 組字介面 粗宋組字工具;
+	protected 組字介面 楷體組字工具;
+	protected 組字介面 粗楷組字工具;
 
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
@@ -36,25 +40,47 @@ public class 組字服務 extends HttpServlet
 	{
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
 		// 換專門查的使用者，換讀取權限
-		int 字型屬性 = Font.BOLD;
+		int 粗字型屬性 = Font.BOLD;
+		int 普通字型屬性 = 0;
 		int 字型大細 = 200;
 
 		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
-
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();
-
-		ChineseCharacterTypeSetter 設定工具 = new 字型參考設定工具(
-				new 用資料庫查展開式的通用字型編號(連線),
-				整合字體.提著宋體字體().調整字體參數(字型屬性, 字型大細),
-				new FontRenderContext(new AffineTransform(),
-						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
-
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);// TODO
+				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);
+		展開式查通用字型編號 展開式查通用字型編號工具 = new 用資料庫查展開式的通用字型編號(連線);
 
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 設定工具, 調整工具, 字型屬性, 字型大細);
+		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
+				.提著宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+				new AffineTransform(),
+				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+
+		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 普通字型屬性, 字型大細);
+		ChineseCharacterTypeSetter 粗宋設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
+				.提著宋體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
+				new AffineTransform(),
+				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+
+		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 普通字型屬性, 字型大細);
+
+		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
+				.提著楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+				new AffineTransform(),
+				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+
+		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 楷體設定工具, 調整工具, 普通字型屬性, 字型大細);
+
+		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
+				.提著宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+				new AffineTransform(),
+				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+
+		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 粗楷設定工具, 調整工具, 普通字型屬性, 字型大細);
 	}
 
 	@Override
@@ -64,21 +90,41 @@ public class 組字服務 extends HttpServlet
 		String 網址字串 = URLDecoder.decode(request.getRequestURI(), "UTF-8");
 		String[] 目錄 = 網址字串.split("/");
 		boolean 遏袂做 = true;
-		if (目錄.length == 3 && 目錄[1].equals("宋體"))
+		if (目錄.length == 3)
 		{
-			String[] 檔案 = 目錄[2].split("\\.");
-			if (檔案.length == 2)
+			組字介面 組字工具 = null;
+			if (目錄[1].equals("宋體"))
 			{
-				String 檔名 = 檔案[0];
-				String 附檔名 = 檔案[1];
-				if (!附檔名.equals("jpg"))//TODO jpg有問題
+				組字工具 = 宋體組字工具;
+			}
+			if (目錄[1].equals("粗宋"))
+			{
+				組字工具 = 粗宋組字工具;
+			}
+			if (目錄[1].equals("楷體"))
+			{
+				組字工具 = 楷體組字工具;
+			}
+			if (目錄[1].equals("粗楷"))
+			{
+				組字工具 = 粗楷組字工具;
+			}
+			if (組字工具 != null)
+			{
+				String[] 檔案 = 目錄[2].split("\\.");
+				if (檔案.length == 2)
+				{
+					String 檔名 = 檔案[0];
+					String 附檔名 = 檔案[1];
+					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
-				System.err.println(附檔名);
-				BufferedImage 字型圖片 = new BufferedImage(200, 200,
-						BufferedImage.TYPE_INT_ARGB);
-				宋體組字工具.組字(字型圖片.getGraphics(), 檔名);
-				ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
-				遏袂做 = false;
+					System.err.println(附檔名);
+					BufferedImage 字型圖片 = new BufferedImage(200, 200,
+							BufferedImage.TYPE_INT_ARGB);
+					宋體組字工具.組字(字型圖片.getGraphics(), 檔名);
+					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
+					遏袂做 = false;
+				}
 			}
 		}
 		// if (request.getParameter("a") != null)
@@ -94,27 +140,13 @@ public class 組字服務 extends HttpServlet
 			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
 			response.getWriter().println(目錄.length);
 			response.getWriter().println(目錄[1]);
+			for (String a : ImageIO.getReaderFileSuffixes())
+			{
+				response.getWriter().println(a);
+			}
 			// String result = URLDecoder.decode(request.getRequestURI(),
 			// "UTF-8");
 			// response.getWriter().println(result);
 		}
-	}
-
-	private String 八位元統一碼網址轉做字串(String 網址)
-	{
-		StringBuilder 新網址 = new StringBuilder();
-		for (int i = 0; i < 網址.length(); ++i)
-			if (網址.charAt(i) == '%')
-			{
-				if (i + 2 < 網址.length())
-				{
-					Integer.parseInt(網址.substring(i + 1, i + 3), 16);
-				}
-				else
-					return 網址;
-			}
-			else
-				網址.charAt(i);
-		return 網址;
 	}
 }

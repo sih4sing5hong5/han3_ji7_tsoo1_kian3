@@ -42,8 +42,14 @@ public class 資料庫連線展開式查詢 extends 展開式查詢工具
 		}
 		catch (SQLException e)
 		{
+			//TODO 優化
 			// 直接予下跤回傳控制碼
 			e.printStackTrace();
+		}
+		catch (NullPointerException e)
+		{
+			//TODO 優化，若無連線時會入來
+			e.printStackTrace();			
 		}
 		return 展開式;
 	}

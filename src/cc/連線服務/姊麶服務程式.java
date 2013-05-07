@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.servlet.ServletHandler;
 
-public class JettyServer
+public class 姊麶服務程式
 {
 	// {
 	// public static void main(String[] args) throws Exception
@@ -42,7 +42,7 @@ public class JettyServer
 		Server server = new Server(8080);
 		ServletHandler handler = new ServletHandler();
 		server.setHandler(handler);
-		handler.addServletWithMapping(HelloServlet.class, "/*");
+		handler.addServletWithMapping(組字服務.class, "/*");
 		server.start();
 		server.join();
 	}

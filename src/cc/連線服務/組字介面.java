@@ -18,6 +18,7 @@ import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.ChineseCharacter;
+import cc.core.ChineseCharacterFormatException;
 import cc.core.ChineseCharacterUtility;
 import cc.core.展開式查詢工具;
 import cc.core.漢字序列分析工具;
@@ -51,104 +52,89 @@ public class 組字介面
 {
 	/** 記錄程式狀況 */
 	protected Logger 記錄工具;
-	/** 佮資料庫的連線 */
-	protected PgsqlConnection 連線;
 	/** 測試用字體 */
 	// static final String 測試字體 = 全字庫正宋體;
 	展開式查詢工具 查詢方式;
-	ChineseCharacterTypeSetter setter;
+
+	組字式部件正規化 正規化工具;
+	組字式部件組字式建立工具 組字式建立工具;
+	ChineseCharacterTypeSetter 設定工具;
+	MergePieceAdjuster 調整工具;
 	/** 測試用屬性 */
 	final int 字型屬性;
 	final int 字型大細;
 
-	public 組字介面(int 字型屬性, int 字型大細)
+	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, ChineseCharacterTypeSetter 設定工具,
+			MergePieceAdjuster 調整工具, int 字型屬性, int 字型大細)
 	{
-		this.連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
-		// 換專門查的使用者，換讀取權限
-		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
-
-		查詢方式 = new 資料庫連線展開式查詢(連線);
-		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
-
-		setter = new 字型參考設定工具(new 用資料庫查展開式的通用字型編號(連線), 整合字體.提著宋體字體().調整字體參數(
-				字型屬性, 字型大細), new FontRenderContext(new AffineTransform(),
-				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
-
+		this.查詢方式 = 查詢方式;
+		this.正規化工具 = 正規化工具;
+		this.設定工具 = 設定工具;
+		this.調整工具 = 調整工具;
 		this.字型屬性 = 字型屬性;
-		// 測試屬性 = Font.BOLD/* 0;// */;
 		this.字型大細 = 字型大細;
+		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
+		組字式建立工具 = new 組字式部件組字式建立工具();
 	}
 
-	public String getName()
+	public String 組字(Graphics g1, String word)
 	{
-		return "XD";
-	}
-
-	public void paint(Graphics g1, String word)
-	{
-		Profiler 看時工具 = new Profiler(getName());
+		if(word.length()>=100)
+			word=word.substring(0, 100);
+		Profiler 看時工具 = new Profiler("組字 " + word);
 		看時工具.setLogger(記錄工具);
 
 		看時工具.start("初使化");
-		記錄工具.debug(MarkerFactory.getMarker("@@"),
-				"初使化～～ 時間：" + System.currentTimeMillis());
+		// 記錄工具.debug(MarkerFactory.getMarker("@@"),
+		// "初使化～～ 時間：" + System.currentTimeMillis());
 
 		Graphics2D graphics2D = (Graphics2D) g1;
 		graphics2D.setColor(Color.black);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics2D.translate(0, 字型大細*0.85);
+		graphics2D.translate(0, 字型大細 * 0.85);
 		graphics2D.setStroke(new NullStroke());
 
 		看時工具.start("分析中");
-		記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
+		// 記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
 
-		ChineseCharacterUtility ccUtility = new 漢字序列分析工具(word, 查詢方式);
-		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
-
-		組字式部件正規化 正規化工具 = new 組字式部件正規化();
-		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
-		for (ChineseCharacter 部件 : ccArray)
+		漢字序列分析工具 序列分析工具 = new 漢字序列分析工具(word, 查詢方式);
+		ChineseCharacter 部件;
+		try
 		{
-			組字式部件 組字部件 = (組字式部件) 部件;
-			組字部件.建立組字式(組字式建立工具);
-			// 記錄工具.debug(組字部件.提到組字式());
-			正規化工具.正規化(部件);
-			組字部件.建立組字式(組字式建立工具);
-			// 記錄工具.debug(組字部件.提到組字式());
+			部件 = 序列分析工具.parseCharacter(null);
 		}
+		catch (ChineseCharacterFormatException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
+
+		組字式部件 組字部件 = (組字式部件) 部件;
+		// 組字部件.建立組字式(組字式建立工具);
+		// 記錄工具.debug(組字部件.提到組字式());
+		正規化工具.正規化(部件);
+		組字部件.建立組字式(組字式建立工具);
+		// 記錄工具.debug(組字部件.提到組字式());
 
 		看時工具.start("設定中");
-		記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
+		// 記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
 
-		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
-		for (int i = 0; i < ccArray.size(); ++i)
-		{
-			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
-		}
+		漢字組建活字 活字 = 部件.typeset(設定工具, null);
 
 		看時工具.start("調整中");
-		記錄工具.debug("調整中～～ 時間：" + System.currentTimeMillis());
-		MergePieceAdjuster adjuster = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);// TODO
-		for (int i = 0; i < ccArray.size(); ++i)
-		{
-			ccmvArray.elementAt(i).adjust(adjuster);
-		}
+		// 記錄工具.debug("調整中～～ 時間：" + System.currentTimeMillis());
+
+		活字.adjust(調整工具);
 
 		看時工具.start("列印中");
-		記錄工具.debug("列印中～～ 時間：" + System.currentTimeMillis());
-		AwtForSinglePiecePrinter printer = new AwtForSinglePiecePrinter(
-				graphics2D);
-		for (int i = 0; i < ccmvArray.size(); ++i)
-		{
-			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
-					.elementAt(i)));
-		}
-		記錄工具.debug("結束了～～ 時間：" + System.currentTimeMillis());
-		記錄工具.debug(" ");
+		// 記錄工具.debug("列印中～～ 時間：" + System.currentTimeMillis());
+		AwtForSinglePiecePrinter 列印工具 = new AwtForSinglePiecePrinter(graphics2D);
+
+		列印工具.printPiece(調整工具.format((PieceMovableType) 活字));
+
 		看時工具.stop().log();
-		return;
+		return 組字部件.提到組字式();
 	}
 }

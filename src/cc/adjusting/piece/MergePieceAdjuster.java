@@ -70,7 +70,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	@Override
-	public void adjustTzu(
+	synchronized public void adjustTzu(//TODO 愛改平行化，共synchronized提掉
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
@@ -225,7 +225,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		// TODO 人工參數
 		return (firstInformation.getApproximativeCircumference()
 				+ secondInformation.getApproximativeCircumference() - shapeInformation
-				.getApproximativeCircumference()) / boundaryLength;
+					.getApproximativeCircumference()) / boundaryLength;
 	}
 
 	/**

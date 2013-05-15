@@ -84,6 +84,8 @@ public class StaxMsToPg
 					break;
 				}
 			}
+			printStream.close();
+			bufferedReader.close();
 		}
 		catch (Exception e)
 		{

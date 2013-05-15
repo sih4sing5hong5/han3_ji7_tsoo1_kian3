@@ -7,17 +7,15 @@ package cc.core;
  */
 public enum ChineseCharacterTzuCombinationType
 {
-	/**
-	 * 左右水平合併
-	 */
-	horizontal, /**
-	 * 上下垂直合併
-	 */
-	vertical, /**
-	 * 包含關係
-	 */
-	wrap, /** 儲存異寫字編號 */
-	異寫字編號符號, /** 專門處理注音符號 */
+	/** 左右水平合併 */
+	horizontal,
+	/** 上下垂直合併 */
+	vertical,
+	/** 包含關係 */
+	wrap,
+	/** 儲存異寫字編號 */
+	異寫字編號符號,
+	/** 專門處理注音符號 */
 	注音符號;// ⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻
 	public String toString()
 	{

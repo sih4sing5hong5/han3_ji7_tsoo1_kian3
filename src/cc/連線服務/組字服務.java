@@ -99,7 +99,7 @@ public class 組字服務 extends HttpServlet
 			{
 				組字工具 = 宋體組字工具;
 			}
-			else if (目錄[1].equals("粗宋"))
+			else if (目錄[1].equals("宋體粗體"))
 			{
 				組字工具 = 粗宋組字工具;
 			}
@@ -107,7 +107,7 @@ public class 組字服務 extends HttpServlet
 			{
 				組字工具 = 楷體組字工具;
 			}
-			else if (目錄[1].equals("粗楷"))
+			else if (目錄[1].equals("楷體粗體"))
 			{
 				組字工具 = 粗楷組字工具;
 			}

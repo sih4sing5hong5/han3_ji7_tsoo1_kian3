@@ -92,7 +92,7 @@ public class 組字介面
 		graphics2D.setColor(Color.black);
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics2D.translate(0, 字型大細 * 0.85);
+		graphics2D.translate(0, 字型大細 * 0.83);
 		graphics2D.setStroke(new NullStroke());
 
 		看時工具.start("分析中");

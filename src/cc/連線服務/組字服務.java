@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
+import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
 import cc.core.組字式部件正規化;
-import cc.core.資料庫連線展開式查詢;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.展開式查通用字型編號;
 import cc.setting.piece.整合字體;
-import cc.setting.piece.用資料庫查展開式的通用字型編號;
+import cc.setting.piece.無愛查通用字型編號;
 import cc.tool.database.PgsqlConnection;
 
 public class 組字服務 extends HttpServlet
@@ -38,18 +38,20 @@ public class 組字服務 extends HttpServlet
 
 	public 組字服務() throws IOException
 	{
-		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
+		// 連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");//
+		// TODO
 		// 換專門查的使用者，換讀取權限
 		int 粗字型屬性 = Font.BOLD;
 		int 普通字型屬性 = 0;
 		int 字型大細 = 200;
 
-		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
+		展開式查詢工具 查詢方式 = new 展開式免查詢();
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);
-		展開式查通用字型編號 展開式查通用字型編號工具 = new 用資料庫查展開式的通用字型編號(連線);
+				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
+		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
+		// TODO 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
 
 		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
 				.提著宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
@@ -118,7 +120,7 @@ public class 組字服務 extends HttpServlet
 					String 附檔名 = 檔案[1];
 					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
-//					System.err.println(附檔名);
+					// System.err.println(附檔名);
 					BufferedImage 字型圖片 = new BufferedImage(200, 200,
 							BufferedImage.TYPE_INT_ARGB);
 					組字工具.組字(字型圖片.getGraphics(), 檔名);

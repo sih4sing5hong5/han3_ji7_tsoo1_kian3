@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,17 +25,29 @@ import cc.setting.piece.整合字體;
 import cc.setting.piece.無愛查通用字型編號;
 import cc.tool.database.PgsqlConnection;
 
+/**
+ * 佮愛規的服務佮提供的字體攏總整合起來。
+ * 
+ * @author Ihc
+ */
 public class 組字服務 extends HttpServlet
 {
+	/** 序列化編號 */
+	private static final long serialVersionUID = 1224634082415129183L;
+	/** 組宋體用的工具 */
 	protected 組字介面 宋體組字工具;
+	/** 組宋體粗體用的工具 */
 	protected 組字介面 粗宋組字工具;
+	/** 組楷體用的工具 */
 	protected 組字介面 楷體組字工具;
+	/** 組楷體粗體用的工具 */
 	protected 組字介面 粗楷組字工具;
 
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
 
-	public 組字服務() throws IOException
+	/** 建立一个組字的服務。 */
+	public 組字服務()
 	{
 		// 連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");//
 		// TODO
@@ -86,8 +97,14 @@ public class 組字服務 extends HttpServlet
 	}
 
 	@Override
+	/**
+	 * 會依照使用的目錄，決定用的字體佮檔案類型。
+	 * 用法：<code>/字體/組字式.檔案類型</code>
+	 * 這馬干焦提供：<code>宋體</code>、<code>宋體粗體</code>、<code>楷體</code>、<code>楷體粗體</code>
+	 * 檔案類型：<code>png</code>
+	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException
+			HttpServletResponse response) throws IOException
 	{
 		String 網址字串 = URLDecoder.decode(request.getRequestURI(), "UTF-8");
 		String[] 目錄 = 網址字串.split("/");
@@ -123,7 +140,7 @@ public class 組字服務 extends HttpServlet
 					// System.err.println(附檔名);
 					BufferedImage 字型圖片 = new BufferedImage(200, 200,
 							BufferedImage.TYPE_INT_ARGB);
-					組字工具.組字(字型圖片.getGraphics(), 檔名);
+					組字工具.組字(檔名, 字型圖片.getGraphics());
 					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
 					遏袂做 = false;
 				}
@@ -133,7 +150,8 @@ public class 組字服務 extends HttpServlet
 		// {
 		// }
 		if (遏袂做)
-		{
+		{// TODO　導向去別位 response.sendRedirect(網址字串);
+
 			response.setContentType("text/html");
 			response.setStatus(HttpServletResponse.SC_OK);
 			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");

@@ -10,11 +10,6 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class 右上包圍工具 extends 物件活字包圍工具
 {
-	/** 平推前後用的調整模組 */
-	protected 右上接合模組 模組;
-	/** 要使用的平推工具 */
-	protected 平推包圍調整工具 平推包圍調整工具;
-
 	/**
 	 * 建立右上包圍工具
 	 * 
@@ -26,13 +21,16 @@ public class 右上包圍工具 extends 物件活字包圍工具
 		super(調整工具);
 		支援包圍部件.add("气");
 		// TODO　/*氣可武或…*/
-		模組 = new 右上接合模組(調整工具);
-		平推包圍調整工具 = new 平推包圍調整工具(調整工具, 模組);
 	}
 
 	@Override
 	public void 組合(PieceMovableTypeTzu 物件活字)
 	{
+		/** 平推前後用的調整模組 */
+		右上接合模組 模組 = new 右上接合模組(調整工具);
+		/** 要使用的平推工具 */
+		平推包圍調整工具 平推包圍調整工具 = new 平推包圍調整工具(調整工具, 模組);
+
 		RectangularArea[] 調整結果 = 平推包圍調整工具.產生調整後活字(物件活字.取得活字物件());
 		物件活字.getPiece().重設並組合活字(調整結果);
 		return;

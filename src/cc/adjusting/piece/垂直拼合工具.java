@@ -10,11 +10,6 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class 垂直拼合工具 extends 物件活字包圍工具
 {
-	/** 面頂佮下跤佮做伙時的調整模組 */
-	protected 垂直拼合模組 模組;
-	/** 將上下兩部件拼合的工具 */
-	protected 二元搜尋貼合工具 貼合工具;
-
 	/**
 	 * 建立垂直拼合工具
 	 * 
@@ -24,13 +19,16 @@ public class 垂直拼合工具 extends 物件活字包圍工具
 	public 垂直拼合工具(MergePieceAdjuster 調整工具)
 	{
 		super(調整工具);
-		模組 = new 垂直拼合模組(調整工具);
-		貼合工具 = new 二元搜尋貼合工具();
 	}
 
 	@Override
 	public void 組合(PieceMovableTypeTzu 物件活字)
 	{
+		/** 面頂佮下跤佮做伙時的調整模組 */
+		垂直拼合模組 模組 = new 垂直拼合模組(調整工具);
+		/** 將上下兩部件拼合的工具 */
+		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具();
+
 		貼合工具.執行(模組, 物件活字.取得活字物件());
 
 		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();

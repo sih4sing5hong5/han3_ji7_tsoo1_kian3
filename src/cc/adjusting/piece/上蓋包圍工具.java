@@ -10,11 +10,6 @@ import cc.moveable_type.rectangular_area.RectangularArea;
  */
 public class 上蓋包圍工具 extends 物件活字包圍工具
 {
-	/** 上蓋和下部拼合時的調整模組 */
-	protected 上蓋拼合模組 模組;
-	/** 將上下兩部件拼合的工具 */
-	protected 二元搜尋貼合工具 貼合工具;
-
 	/**
 	 * 建立上蓋包圍工具
 	 * 
@@ -27,13 +22,16 @@ public class 上蓋包圍工具 extends 物件活字包圍工具
 		支援包圍部件.add("冖");
 		支援包圍部件.add("宀");
 		// 支援包圍部件.add("學");//TODO
-		模組 = new 上蓋拼合模組(調整工具);
-		貼合工具 = new 二元搜尋貼合工具();
 	}
 
 	@Override
 	public void 組合(PieceMovableTypeTzu 物件活字)
 	{
+		/** 上蓋和下部拼合時的調整模組 */
+		上蓋拼合模組 模組 = new 上蓋拼合模組(調整工具);
+		/** 將上下兩部件拼合的工具 */
+		二元搜尋貼合工具 貼合工具 = new 二元搜尋貼合工具();
+
 		貼合工具.執行(模組, 物件活字.取得活字物件());
 
 		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();

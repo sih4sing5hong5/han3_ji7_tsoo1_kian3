@@ -70,7 +70,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	@Override
-	synchronized public void adjustTzu(//TODO 愛改平行化，共synchronized提掉
+	public void adjustTzu(
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;

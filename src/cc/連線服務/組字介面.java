@@ -14,6 +14,8 @@ import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterFormatException;
 import cc.core.展開式查詢工具;
 import cc.core.漢字序列分析工具;
+import cc.core.異寫式代換工具;
+import cc.core.異寫式查詢工具;
 import cc.core.組字式部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
@@ -38,6 +40,8 @@ public class 組字介面
 	protected 組字式部件正規化 正規化工具;
 	/** 設定前先建立逐的部件，伊佮下跤的部件所代表的組字式 */
 	protected 組字式部件組字式建立工具 組字式建立工具;
+	/** 異寫式查詢的方法 */
+	protected 異寫式代換工具 異寫式代換;
 	/** 依據部件佮字體的性質，共部件提來產生活字 */
 	protected ChineseCharacterTypeSetter 設定工具;
 	/** 佮頭拄仔產生的活字，組合閣共調整 */
@@ -56,6 +60,10 @@ public class 組字介面
 	 *            看使用者提供的部件，是毋是愛先換做展開式抑是按怎
 	 * @param 正規化工具
 	 *            決定有需要正規化無佮按怎正規化的物件
+	 * @param 異寫式查詢
+	 *            異寫式查詢的方法
+	 * @param 編號陣列
+	 *            定義異寫編號數字
 	 * @param 設定工具
 	 *            依據部件佮字體的性質，共部件提來產生活字
 	 * @param 調整工具
@@ -65,10 +73,11 @@ public class 組字介面
 	 * @param 字型大細
 	 *            字體愛偌大
 	 */
-	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, ChineseCharacterTypeSetter 設定工具,
-			MergePieceAdjuster 調整工具, int 字型屬性, int 字型大細)
+	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
+			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具, int 字型屬性,
+			int 字型大細)
 	{
-		this(查詢方式, 正規化工具, 設定工具, 調整工具, 字型屬性, 字型大細, 20);
+		this(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 設定工具, 調整工具, 字型屬性, 字型大細, 20);
 	}
 
 	/**
@@ -78,6 +87,10 @@ public class 組字介面
 	 *            看使用者提供的部件，是毋是愛先換做展開式抑是按怎
 	 * @param 正規化工具
 	 *            決定有需要正規化無佮按怎正規化的物件
+	 * @param 異寫式查詢
+	 *            異寫式查詢的方法
+	 * @param 編號陣列
+	 *            定義異寫編號數字
 	 * @param 設定工具
 	 *            依據部件佮字體的性質，共部件提來產生活字
 	 * @param 調整工具
@@ -89,11 +102,13 @@ public class 組字介面
 	 * @param 組字式上大長度
 	 *            限制組字式長度，予儂無法度惡意攻擊
 	 */
-	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, ChineseCharacterTypeSetter 設定工具,
-			MergePieceAdjuster 調整工具, int 字型屬性, int 字型大細, int 組字式上大長度)
+	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
+			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具, int 字型屬性,
+			int 字型大細, int 組字式上大長度)
 	{
 		this.查詢方式 = 查詢方式;
 		this.正規化工具 = 正規化工具;
+		this.異寫式代換 = new 異寫式代換工具(編號陣列, 異寫式查詢);
 		this.設定工具 = 設定工具;
 		this.調整工具 = 調整工具;
 		this.字型屬性 = 字型屬性;
@@ -146,6 +161,7 @@ public class 組字介面
 		正規化工具.正規化(部件);
 		組字部件.建立組字式(組字式建立工具);
 		// 記錄工具.debug(組字部件.提到組字式());
+		部件 = 異寫式代換.代換(部件);
 
 		看時工具.start("設定中");
 		// 記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());

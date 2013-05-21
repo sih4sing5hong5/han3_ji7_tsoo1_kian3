@@ -17,13 +17,16 @@ import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
+import cc.core.異寫式查詢工具;
 import cc.core.組字式部件正規化;
+import cc.core.資料庫連線異寫式查詢;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.展開式查通用字型編號;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.無愛查通用字型編號;
 import cc.tool.database.PgsqlConnection;
+import cc.tool.database.字串與控制碼轉換;
 
 /**
  * 佮愛規的服務佮提供的字體攏總整合起來。
@@ -49,16 +52,18 @@ public class 組字服務 extends HttpServlet
 	/** 建立一个組字的服務。 */
 	public 組字服務()
 	{
-		// 連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");//
-		// TODO
-		// 換專門查的使用者，換讀取權限
+		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// 專利遏袂好進前袂使用著檢字表
+		// TODO 換專門查的使用者，換讀取權限
 		int 粗字型屬性 = Font.BOLD;
 		int 普通字型屬性 = 0;
 		int 字型大細 = 200;
+		/** 定義異寫編號數字 */
+		int[] 編號陣列 = 字串與控制碼轉換.轉換成控制碼("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥陰陽乾坤震巽坎離艮兌");
 
 		展開式查詢工具 查詢方式 = new 展開式免查詢();
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();
+		異寫式查詢工具 異寫式查詢 = new 資料庫連線異寫式查詢(連線);
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
 				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
 		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
@@ -70,14 +75,14 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 普通字型屬性, 字型大細);
+		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 宋體設定工具, 調整工具, 普通字型屬性, 字型大細);
 		ChineseCharacterTypeSetter 粗宋設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
 				.提著宋體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
-		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 粗字型屬性, 字型大細);
+		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 粗宋設定工具, 調整工具, 粗字型屬性, 字型大細);
 
 		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
 				.提著楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
@@ -85,7 +90,7 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
-		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 楷體設定工具, 調整工具, 普通字型屬性, 字型大細);
+		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 楷體設定工具, 調整工具, 普通字型屬性, 字型大細);
 
 		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
 				.提著楷體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
@@ -93,7 +98,7 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
-		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 粗楷設定工具, 調整工具, 粗字型屬性, 字型大細);
+		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 粗楷設定工具, 調整工具, 粗字型屬性, 字型大細);
 	}
 
 	@Override

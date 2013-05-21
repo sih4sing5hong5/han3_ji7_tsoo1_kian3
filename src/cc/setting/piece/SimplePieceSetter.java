@@ -108,6 +108,12 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		case wrap:
 			wrapSetting(pieceMovableTypeTzu);
 			break;
+		case 注音符號:// TODO 看情形才決定欲修改無，先用垂直的
+			horizontalSetting(pieceMovableTypeTzu);
+			break;
+		case 異寫字編號符號:
+			System.err.println("無事先共異寫字換掉");
+			break;
 		}
 
 		if (pieceMovableTypeTzu.getParent() == null)

@@ -148,7 +148,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		while (目前位址 >= 0)
 		{
 			PieceMovableTypeTzu 新元件 = new PieceMovableTypeTzu(null,
-					chineseCharacterTzu, rectangularArea);// TODO愛產生新的字部件無？
+					chineseCharacterTzu, rectangularArea);// TODO 愛產生新的字部件無？
 			新元件.getChildren()[1] = (ChineseCharacterMovableType) 目前元件;
 			新元件.getChildren()[0] = (ChineseCharacterMovableType) 部件組合[目前位址];
 			目前元件 = 新元件;

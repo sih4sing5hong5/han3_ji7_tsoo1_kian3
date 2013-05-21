@@ -112,7 +112,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 			horizontalSetting(pieceMovableTypeTzu);
 			break;
 		case 異寫字編號符號:
-			System.err.println("無事先共異寫字換掉");
+			System.out.println("無事先共異寫字換掉");
 			break;
 		}
 

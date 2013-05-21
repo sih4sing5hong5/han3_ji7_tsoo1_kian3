@@ -84,6 +84,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		case horizontal:
 			horizontalMerging(pieceMovableTypeTzu);
 			break;
+		case 異寫字編號符號:
+			System.out.println("無事先共異寫字換掉");
+		case 注音符號:
+			System.out.println("無支援，先用直的組");
 		case vertical:
 			verticalMerging(pieceMovableTypeTzu);
 			break;

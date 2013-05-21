@@ -53,6 +53,8 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 		imageMoveableTypeTzu.setRegion(new Point());
 		switch (chineseCharacterTzu.getType())
 		{
+		default:
+			System.out.println("無支援，先用橫的組");
 		case horizontal:
 			imageMoveableTypeTzu.getRegion().x = firstRegion.x + secondRegion.x;
 			imageMoveableTypeTzu.getRegion().y = Math.max(firstRegion.y,

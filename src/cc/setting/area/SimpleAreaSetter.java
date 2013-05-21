@@ -91,6 +91,8 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 
 		switch (chineseCharacterTzu.getType())
 		{
+		default:
+			System.out.println("無支援，先用橫的組");
 		case horizontal:
 			rectDouble.width = firstChild.getBound().getWidth()
 					+ secondChild.getBound().getWidth();

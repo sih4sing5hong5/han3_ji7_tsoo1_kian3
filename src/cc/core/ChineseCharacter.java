@@ -48,7 +48,7 @@ public abstract class ChineseCharacter
 	 * 
 	 * @return 上一層部件結構
 	 */
-	public ChineseCharacter getParent()
+	public ChineseCharacterTzu getParent()
 	{
 		return parent;
 	}

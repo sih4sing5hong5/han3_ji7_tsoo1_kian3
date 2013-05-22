@@ -44,7 +44,7 @@ import cc.程式記錄.漢字組建記錄工具包;
  * 
  * <pre>
  * 活字型態：<code>PieceMovableType</code>
- * 活字設定工具：<code>MergePieceSetter</code>
+ * 活字設定工具：<code>字型參考設定工具</code>
  * 活字調整工具：<code>MergePieceAdjuster</code>
  * 活字列印工具：<code>AwtForSinglePiecePrinter</code>
  * </pre>
@@ -87,7 +87,8 @@ public class AwtTestExample extends Awt測試樣板
 		看時工具.setLogger(記錄工具);
 
 		// word = "⿰因⿰⿴囗或";
-		word = "⿰⿱我愛⿱文莉⿰真的⿰真的⿰⿻真甲的⿰⿻真乙的";
+		word = "⿳⿳⿳˙ㄆㄨˊ⿳⿳⿳⿳ㄅㄧㄚ|ㆷ⿳⿳⿳⿳ㄅㄧㄚ㆐ㆷ⿰⿰⿱⿱⿱我薛丞宏愛⿱文莉⿰真的⿰真的⿰⿻真甲的⿰⿻真乙的"
+				+ "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ";
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
 																		// 換專門查的使用者
 		看時工具.start("初使化");

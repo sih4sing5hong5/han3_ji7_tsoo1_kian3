@@ -7,6 +7,7 @@ import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
+import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
@@ -74,26 +75,37 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
-		for (int i = 0; i < pieceMovableTypeTzu.getChildren().length; ++i)
-		{
-			pieceMovableTypeTzu.getChildren()[i].adjust(this);
-		}
 		switch (((ChineseCharacterTzu) pieceMovableTypeTzu
 				.getChineseCharacter()).getType())
 		{
 		case horizontal:
+			遞迴調整(pieceMovableTypeTzu);
 			horizontalMerging(pieceMovableTypeTzu);
 			break;
 		case 異寫字編號符號:
-			System.out.println("無事先共異寫字換掉");
-		case 注音符號:
-			System.out.println("無支援，先用直的組");
+			System.out.println("有問題！！！無事先共異寫字換掉!!!");
 		case vertical:
+			遞迴調整(pieceMovableTypeTzu);
 			verticalMerging(pieceMovableTypeTzu);
 			break;
 		case wrap:
+			遞迴調整(pieceMovableTypeTzu);
 			wrapMerging(pieceMovableTypeTzu);
 			break;
+		case 注音符號:// TODO 頭前運算無一定需要
+			組合注音(pieceMovableTypeTzu);
+			System.out.println("無支援，先用直的組");
+			// verticalMerging(pieceMovableTypeTzu);
+			break;
+		}
+		return;
+	}
+
+	private void 遞迴調整(PieceMovableTypeTzu 物件活字)
+	{
+		for (漢字組建活字 活字 : 物件活字.getChildren())
+		{
+			活字.adjust(this);
 		}
 		return;
 	}
@@ -144,6 +156,32 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			// 預設先用水平
 			水平工具.組合(物件活字);
 		}
+		return;
+	}
+
+	void 組合注音(PieceMovableTypeTzu 活字物件)
+	{
+		注音符號分類工具 分類工具 = new 注音符號分類工具();
+		注音符號分開工具 分開工具 = new 注音符號分開工具(分類工具);
+		注音符號分類 分類 = new 注音符號分類();
+		分開工具.分開(活字物件, 分類);
+		System.out.println(分類.聲韻號.size());
+		注音排齊模組 主要排齊模組 = new 注音排齊模組();
+		for (RectangularArea 活字 : 分類.輕聲)
+			主要排齊模組.加新的活字(活字);
+		for (RectangularArea 活字 : 分類.聲韻號)
+			主要排齊模組.加新的活字(活字);
+		注音排齊模組 邊仔排齊模組 = new 注音排齊模組();
+		for (RectangularArea 活字 : 分類.調號)
+			邊仔排齊模組.加新的活字(活字);
+		RectangularArea 主要活字 = 活字物件.getPiece();
+		主要活字.add(主要排齊模組.目前結果());
+		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
+		邊仔活字.moveBy(
+				主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX(),
+				主要排齊模組.上尾範圍().getMinY() - 邊仔排齊模組.上尾範圍().getCenterY());
+		主要活字.add(邊仔活字);
+		主要活字.moveToOrigin();
 		return;
 	}
 

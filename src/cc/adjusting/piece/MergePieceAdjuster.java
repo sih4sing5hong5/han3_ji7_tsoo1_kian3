@@ -5,6 +5,8 @@ import java.awt.geom.AffineTransform;
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
+import cc.core.ChineseCharacterTzuCombinationType;
+import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;
@@ -31,6 +33,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected 垂直拼合工具 垂直工具;
 	/** 處理包圍關係的活字時所使用的工具 */
 	protected 包圍整合分派工具 分派工具;
+	/** 參考教育部的國字注音比例參考圖 */
+	final double 教育部建議注音大細 = 0.3;
 
 	/**
 	 * 建立物件活字調整工具
@@ -177,10 +181,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		RectangularArea 主要活字 = 活字物件.getPiece();
 		主要活字.add(主要排齊模組.目前結果());
 		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
-		邊仔活字.moveBy(
-				主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX(),
-				主要排齊模組.對齊範圍().getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
-		//上尾範圍() 對齊範圍()
+		邊仔活字.moveBy(主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX()
+				+ 邊仔活字.getBounds2D().getWidth() * 0.2// TODO
+		, 主要排齊模組.對齊範圍().getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
+		// 上尾範圍() 對齊範圍()
 		主要活字.add(邊仔活字);
 		主要活字.moveToOrigin();
 		return;
@@ -275,34 +279,65 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 * 要給<code>AwtForSinglePiecePrinter</code>列印前必須把物件活字依預計位置及大小（
 	 * <code>getTerritory()</code>）產生一個新的物件。
 	 * 
-	 * @param pieceMovableType
-	 *            物件活字
+	 * @param 物件活字
+	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea format(PieceMovableType pieceMovableType)
+	public RectangularArea format(PieceMovableType 物件活字)
 	{
-		return getNewPieceByTerritory(new RectangularArea(
-				pieceMovableType.getPiece()));
+		if (物件活字 instanceof ChineseCharacterMovableTypeTzu)
+		{
+			ChineseCharacterMovableTypeTzu 活字 = (ChineseCharacterMovableTypeTzu) 物件活字;
+			if (活字.getChineseCharacter() != null
+					&& 活字.getChineseCharacter() instanceof ChineseCharacterTzu)
+			{
+				ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 活字
+						.getChineseCharacter();
+				if (字部件.getType() == ChineseCharacterTzuCombinationType.注音符號)
+					return 依目標懸度調整大細(new RectangularArea(物件活字.getPiece()));
+			}
+		}
+		return 依目標區域調整大細(new RectangularArea(物件活字.getPiece()));
 	}
 
 	/**
 	 * 把物件活字依預計位置及大小（<code>getTerritory()</code>）產生一個新的活字物件。
 	 * 
-	 * @param target
-	 *            活字物件
+	 * @param 活字物件
+	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea getNewPieceByTerritory(RectangularArea target)
+	public RectangularArea 依目標區域調整大細(RectangularArea 活字物件)
 	{
-		double widthCoefficient = target.getTerritory().getWidth()
-				/ target.getBounds2D().getWidth(), heightCoefficient = target
-				.getTerritory().getHeight() / target.getBounds2D().getHeight();
+		double widthCoefficient = 活字物件.getTerritory().getWidth()
+				/ 活字物件.getBounds2D().getWidth(), heightCoefficient = 活字物件
+				.getTerritory().getHeight() / 活字物件.getBounds2D().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
-		shrinkPieceByFixingStroke(target, shrinkTransform);
-		target.moveBy(target.getTerritory().getX(), target.getTerritory()
-				.getY());
-		return target;
+		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
+		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory().getY());
+		return 活字物件;
+	}
+
+	/**
+	 * 把物件活字依預計位置及懸度（<code>getTerritory()</code>）產生一個新的活字物件。
+	 * 
+	 * @param 活字物件
+	 *            愛調的活字物件
+	 * @return 格式過後的活字物件資訊
+	 */
+	public RectangularArea 依目標懸度調整大細(RectangularArea 活字物件)
+	{
+		double coefficient = 活字物件.getTerritory().getHeight()
+				/ 活字物件.getBounds2D().getHeight();
+		if (coefficient > 教育部建議注音大細)
+			coefficient = 教育部建議注音大細;
+		AffineTransform shrinkTransform = getAffineTransform(coefficient,
+				coefficient);
+		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
+		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory()
+				.getCenterY() - 活字物件.getBounds2D().getCenterY());
+		return 活字物件;
 	}
 
 	/**
@@ -320,6 +355,6 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		double value = Math.min(target.getTerritory().getWidth(), target
 				.getTerritory().getHeight());
 		target.setTerritoryDimension(value, value);
-		return getNewPieceByTerritory(target);
+		return 依目標區域調整大細(target);
 	}
 }

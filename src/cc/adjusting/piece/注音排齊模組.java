@@ -21,7 +21,6 @@ class 注音排齊模組 extends 注音排放模組
 				- 上尾活字.getBounds2D().getCenterY() + Math.max(頂一个活字大細, 活字大細));
 		if (會當提來對齊無())
 			對齊活字 = 上尾活字;
-		else System.out.println("@@@@@@@@@@@@@SSAA");
 	}
 
 	@Override

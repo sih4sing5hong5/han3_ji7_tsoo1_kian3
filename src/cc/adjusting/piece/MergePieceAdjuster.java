@@ -165,13 +165,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		注音符號分開工具 分開工具 = new 注音符號分開工具(分類工具);
 		注音符號分類 分類 = new 注音符號分類();
 		分開工具.分開(活字物件, 分類);
-		System.out.println(分類.聲韻號.size());
-		注音排齊模組 主要排齊模組 = new 注音排齊模組();
+		注音排放模組 主要排齊模組 = new 注音排齊模組();
+		// 注音排齊模組() 注音排密模組()
 		for (RectangularArea 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
 		for (RectangularArea 活字 : 分類.聲韻號)
 			主要排齊模組.加新的活字(活字);
-		注音排齊模組 邊仔排齊模組 = new 注音排齊模組();
+		注音排放模組 邊仔排齊模組 = new 注音排齊模組();
 		for (RectangularArea 活字 : 分類.調號)
 			邊仔排齊模組.加新的活字(活字);
 		RectangularArea 主要活字 = 活字物件.getPiece();
@@ -179,7 +179,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
 		邊仔活字.moveBy(
 				主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX(),
-				主要排齊模組.上尾範圍().getMinY() - 邊仔排齊模組.上尾範圍().getCenterY());
+				主要排齊模組.對齊範圍().getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
+		//上尾範圍() 對齊範圍()
 		主要活字.add(邊仔活字);
 		主要活字.moveToOrigin();
 		return;

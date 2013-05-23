@@ -4,6 +4,11 @@ import java.awt.geom.Rectangle2D;
 
 import cc.moveable_type.rectangular_area.RectangularArea;
 
+/**
+ * 組合注音模組。一直佮注音活字擲入來，會排做一排。注音之間會一格一格照位排。
+ * 
+ * @author Ihc
+ */
 class 注音排齊模組 extends 注音排放模組
 {
 	@Override
@@ -19,7 +24,7 @@ class 注音排齊模組 extends 注音排放模組
 		上尾活字.moveBy(累積活字.getBounds2D().getCenterX()
 				- 上尾活字.getBounds2D().getCenterX(), 頂一个中心懸度
 				- 上尾活字.getBounds2D().getCenterY() + Math.max(頂一个活字大細, 活字大細));
-		if (會當提來對齊無())
+		if (上尾活字會當提來對齊無())
 			對齊活字 = 上尾活字;
 	}
 

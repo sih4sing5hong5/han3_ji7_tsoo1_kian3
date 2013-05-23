@@ -6,15 +6,35 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 
+/**
+ * 用遞迴方式，照注音符號類別來分類的工具。
+ * 
+ * @author Ihc
+ */
 class 注音符號分開工具
 {
+	/** 決定啥物注音會當用，愛下佇佗，主要的參考 */
 	protected 注音符號分類工具 分類工具;
 
+	/**
+	 * 建立一个分開工具。
+	 * 
+	 * @param 分類工具
+	 *            參考的分類方法
+	 */
 	注音符號分開工具(注音符號分類工具 分類工具)
 	{
 		this.分類工具 = 分類工具;
 	}
 
+	/**
+	 * 照分類工具共活字下跤的注音分開，存入分類。
+	 * 
+	 * @param 活字
+	 *            目前愛處理的活字結構樹根
+	 * @param 分類
+	 *            分類狀況物件
+	 */
 	void 分開(PieceMovableType 活字, 注音符號分類 分類)
 	{
 		if (活字 instanceof PieceMovableTypeTzu)
@@ -40,9 +60,9 @@ class 注音符號分開工具
 					break;
 				}
 			case 聲韻號:
-				if (分類工具.是毋是聲韻號(控制碼))
+				if (分類工具.是毋是聲韻(控制碼))
 				{
-					分類.聲韻號.add(文活字.getPiece());
+					分類.聲韻.add(文活字.getPiece());
 					break;
 				}
 			case 調號:
@@ -53,11 +73,11 @@ class 注音符號分開工具
 				}
 			default:
 				System.out.println("使用者注音結構有問題");
-				// if (分類工具.是毋是聲韻號(控制碼))
-				// {
-				// 分類.聲韻號.add(文活字.getPiece());
-				// break;
-				// }
+				if (分類工具.是毋是聲韻(控制碼))
+				{
+					分類.聲韻.add(文活字.getPiece());
+					break;
+				}
 				分類.調號.add(文活字.getPiece());
 				break;
 			}

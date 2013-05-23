@@ -6,7 +6,6 @@ import cc.adjusting.bolder.ChineseCharacterTypeBolder;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
 import cc.core.ChineseCharacterTzuCombinationType;
-import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;
@@ -14,6 +13,7 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 import cc.moveable_type.rectangular_area.ShapeInformation;
+import cc.tool.database.字串與控制碼轉換;
 
 /**
  * 物件活字調整工具。把活字的資訊全部集中在同一個物件上（<code>Piece</code>， <code>RectangularArea</code>型態
@@ -33,6 +33,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected 垂直拼合工具 垂直工具;
 	/** 處理包圍關係的活字時所使用的工具 */
 	protected 包圍整合分派工具 分派工具;
+	/** 決定啥物注音會當用，愛下佇佗 */
+	protected 注音符號分類工具 分類工具;
 	/** 參考教育部的國字注音比例參考圖 */
 	final double 教育部建議注音大細 = 0.3;
 
@@ -65,6 +67,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分派工具.add(new 右上內勾包圍工具(this));
 		分派工具.add(new 四面包圍工具(this));
 		分派工具.設定無支援暫時用包圍工具(水平工具);
+
+		int[] 輕聲 = 字串與控制碼轉換.轉換成控制碼("˙");
+		int[] 聲韻 = 字串與控制碼轉換.轉換成控制碼("ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ" + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ"
+				+ "ㄧㄨㄩ" + "ㄪㄫㄬ" + "ㄭㄮ" + "ㆠㆡㆢㆣ" + "ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ");
+		int[] 調號 = 字串與控制碼轉換.轉換成控制碼("ˊˇˋ˙˪˫| ");
+		分類工具 = new 注音符號分類工具(輕聲, 聲韻, 調號);
 	}
 
 	@Override
@@ -96,15 +104,19 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			遞迴調整(pieceMovableTypeTzu);
 			wrapMerging(pieceMovableTypeTzu);
 			break;
-		case 注音符號:// TODO 頭前運算無一定需要
+		case 注音符號:
 			組合注音(pieceMovableTypeTzu);
-			System.out.println("無支援，先用直的組");
-			// verticalMerging(pieceMovableTypeTzu);
 			break;
 		}
 		return;
 	}
 
+	/**
+	 * 遞迴調整活字下跤的活字。
+	 * 
+	 * @param 物件活字
+	 *            愛調整的活字樹根
+	 */
 	private void 遞迴調整(PieceMovableTypeTzu 物件活字)
 	{
 		for (漢字組建活字 活字 : 物件活字.getChildren())
@@ -115,7 +127,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
-	 * 水平組合活字
+	 * 水平組合活字。
 	 * 
 	 * @param 物件活字
 	 *            要調整的合體活字
@@ -127,7 +139,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
-	 * 垂直組合活字
+	 * 垂直組合活字。
 	 * 
 	 * @param 物件活字
 	 *            要調整的合體活字
@@ -139,7 +151,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
-	 * 包圍組合活字
+	 * 包圍組合活字。
 	 * 
 	 * @param 物件活字
 	 *            要調整的合體活字
@@ -163,9 +175,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		return;
 	}
 
+	/**
+	 * 組合注音符號。先共注音分類，閣分兩排，兩排分別排好才閣組起來。
+	 * 
+	 * @param 活字物件
+	 *            愛組合的注音活字樹根
+	 */
 	void 組合注音(PieceMovableTypeTzu 活字物件)
 	{
-		注音符號分類工具 分類工具 = new 注音符號分類工具();
 		注音符號分開工具 分開工具 = new 注音符號分開工具(分類工具);
 		注音符號分類 分類 = new 注音符號分類();
 		分開工具.分開(活字物件, 分類);
@@ -173,7 +190,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		// 注音排齊模組() 注音排密模組()
 		for (RectangularArea 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
-		for (RectangularArea 活字 : 分類.聲韻號)
+		for (RectangularArea 活字 : 分類.聲韻)
 			主要排齊模組.加新的活字(活字);
 		注音排放模組 邊仔排齊模組 = new 注音排齊模組();
 		for (RectangularArea 活字 : 分類.調號)

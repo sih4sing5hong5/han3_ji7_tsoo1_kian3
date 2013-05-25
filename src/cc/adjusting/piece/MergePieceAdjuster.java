@@ -36,7 +36,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	/** 決定啥物注音會當用，愛下佇佗 */
 	protected 注音符號分類工具 分類工具;
 	/** 參考教育部的國字注音比例參考圖 */
-	final double 教育部建議注音大細 = 0.3;
+	final double 教育部建議注音大細 = 0.25;
 
 	/**
 	 * 建立物件活字調整工具
@@ -191,14 +191,23 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		// double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
 		for (RectangularArea 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
-		double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
+		double 聲韻面頂 = 主要排齊模組.上尾實際範圍().getMinY();
+		boolean 第一个 = true;
 		for (RectangularArea 活字 : 分類.聲韻)
+		{
 			主要排齊模組.加新的活字(活字);
-		double 聲韻下跤 = 主要排齊模組.對齊範圍().getMaxY();
+			if (第一个)
+			{
+				聲韻面頂 = 主要排齊模組.上尾實際範圍().getMinY();
+				第一个 = false;
+			}
+		}
+		double 聲韻下跤 = 主要排齊模組.上尾實際範圍().getMaxY();
 		注音排放模組 邊仔排齊模組 = new 注音排齊模組();
 		for (RectangularArea 活字 : 分類.調號)
 			邊仔排齊模組.加新的活字(活字);
 		RectangularArea 主要活字 = 活字物件.getPiece();
+		主要活字.reset();
 		主要活字.add(主要排齊模組.目前結果());
 		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
 		邊仔活字.moveBy(主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX()
@@ -314,8 +323,15 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 活字
 						.getChineseCharacter();
 				if (字部件.getType() == ChineseCharacterTzuCombinationType.注音符號)
-//					return new RectangularArea(物件活字.getPiece().getTerritory());
+				{
+					// BasicStroke basicStroke = new BasicStroke();
+					// RectangularArea a = new RectangularArea(
+					// basicStroke.createStrokedShape(物件活字.getPiece()
+					// .getTerritory()));
+					// a.add(依目標懸度調整大細(new RectangularArea(物件活字.getPiece())));
+					// return a;
 					return 依目標懸度調整大細(new RectangularArea(物件活字.getPiece()));
+				}
 			}
 		}
 		return 依目標區域調整大細(new RectangularArea(物件活字.getPiece()));
@@ -349,11 +365,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public RectangularArea 依目標懸度調整大細(RectangularArea 活字物件)
 	{
-		double coefficient = Math.max(-活字物件.getBounds2D().getMinY(), 活字物件
-				.getBounds2D().getMaxY())
-				* 2.0 / 活字物件.getTerritory().getHeight();
-		System.out.println(-活字物件.getBounds2D().getMinY()+" "+ 活字物件
-				.getBounds2D().getMaxY()+" "+活字物件.getTerritory().getHeight());
+		double coefficient = 活字物件.getTerritory().getHeight()
+				/ Math.max(-活字物件.getBounds2D().getMinY(), 活字物件.getBounds2D()
+						.getMaxY()) / 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(coefficient,
@@ -361,8 +375,6 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
 		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory().getY()
 				+ 活字物件.getTerritory().getHeight() / 2.0);
-//		System.out.println(活字物件.getTerritory().getY()
-//				+ 活字物件.getTerritory().getHeight() / 2.0);//TODO
 		return 活字物件;
 	}
 

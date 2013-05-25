@@ -71,7 +71,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		int[] 輕聲 = 字串與控制碼轉換.轉換成控制碼("˙");
 		int[] 聲韻 = 字串與控制碼轉換.轉換成控制碼("ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ" + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ"
 				+ "ㄧㄨㄩ" + "ㄪㄫㄬ" + "ㄭㄮ" + "ㆠㆡㆢㆣ" + "ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ");
-		int[] 調號 = 字串與控制碼轉換.轉換成控制碼("ˊˇˋ˙˪˫| ");
+		int[] 調號 = 字串與控制碼轉換.轉換成控制碼(" ˋ˪ˊ˫ˇ㆐^ㆴㆵㆶㆷ");
 		分類工具 = new 注音符號分類工具(輕聲, 聲韻, 調號);
 	}
 
@@ -188,10 +188,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分開工具.分開(活字物件, 分類);
 		注音排放模組 主要排齊模組 = new 注音排齊模組();
 		// 注音排齊模組() 注音排密模組()
+		// double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
 		for (RectangularArea 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
+		double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
 		for (RectangularArea 活字 : 分類.聲韻)
 			主要排齊模組.加新的活字(活字);
+		double 聲韻下跤 = 主要排齊模組.對齊範圍().getMaxY();
 		注音排放模組 邊仔排齊模組 = new 注音排齊模組();
 		for (RectangularArea 活字 : 分類.調號)
 			邊仔排齊模組.加新的活字(活字);
@@ -203,7 +206,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		, 主要排齊模組.對齊範圍().getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
 		// 上尾範圍() 對齊範圍()
 		主要活字.add(邊仔活字);
-		主要活字.moveToOrigin();
+		主要活字.moveBy(-主要活字.getBounds2D().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
 		return;
 	}
 
@@ -311,6 +314,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 活字
 						.getChineseCharacter();
 				if (字部件.getType() == ChineseCharacterTzuCombinationType.注音符號)
+//					return new RectangularArea(物件活字.getPiece().getTerritory());
 					return 依目標懸度調整大細(new RectangularArea(物件活字.getPiece()));
 			}
 		}
@@ -345,15 +349,20 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public RectangularArea 依目標懸度調整大細(RectangularArea 活字物件)
 	{
-		double coefficient = 活字物件.getTerritory().getHeight()
-				/ 活字物件.getBounds2D().getHeight();
+		double coefficient = Math.max(-活字物件.getBounds2D().getMinY(), 活字物件
+				.getBounds2D().getMaxY())
+				* 2.0 / 活字物件.getTerritory().getHeight();
+		System.out.println(-活字物件.getBounds2D().getMinY()+" "+ 活字物件
+				.getBounds2D().getMaxY()+" "+活字物件.getTerritory().getHeight());
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(coefficient,
 				coefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
-		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory()
-				.getCenterY() - 活字物件.getBounds2D().getCenterY());
+		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory().getY()
+				+ 活字物件.getTerritory().getHeight() / 2.0);
+//		System.out.println(活字物件.getTerritory().getY()
+//				+ 活字物件.getTerritory().getHeight() / 2.0);//TODO
 		return 活字物件;
 	}
 

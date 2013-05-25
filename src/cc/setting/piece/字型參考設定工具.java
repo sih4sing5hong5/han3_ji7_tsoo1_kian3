@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
@@ -53,10 +54,11 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 
 		int 標準字統一碼 = 字串與控制碼轉換.轉換成控制碼(物件活字基礎設定工具.tzuModelCharacter)[0];
 		GlyphVector 標準字字型 = 字體.提這个字型(字體渲染屬性, 標準字統一碼);
-		this.tzuModelTerritory = 標準字字型.getOutline().getBounds2D();
 		BasicStroke basicStroke = new BasicStroke();
+		Rectangle2D 標準字區域 = 標準字字型.getOutline().getBounds2D();
 		this.pieceForNoBuiltInWen = new Area(
-				basicStroke.createStrokedShape(tzuModelTerritory));
+				basicStroke.createStrokedShape(標準字區域));
+		this.tzuModelTerritory = this.pieceForNoBuiltInWen.getBounds2D();
 	}
 
 	@Override

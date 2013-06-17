@@ -27,15 +27,19 @@ public class 字體狀態觀察工具 extends AwtTestExample
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
 	/** 字型大小 */
-	static final int TYPE_SIZE = 40;
+	static final int TYPE_SIZE = 400;
 	/** 檔案位置 */
-	String 檔案 = "/home/Ihc/files/font/漢字構形資料庫/cdpeudc.tte";
+	String 檔案 = "/home/ihc/utf8/13.ttf";
 
 	@Override
 	public void paint(Graphics g1)
 	{
 		try
 		{
+//			System.out.println(Integer.toHexString(Character.codePointAt("",0)));
+//			System.out.println(Character.codePointAt("", 0));
+//			System.out.println(Integer.toHexString(Character.codePointAt("", 0)));
+//			System.out.println(Character.toChars(0x8503));
 			Graphics2D graphics2D = (Graphics2D) g1;
 			Font fontㄉ = new Font("Sans", 0, 200);
 			GlyphVector glyphv = fontㄉ.createGlyphVector(new FontRenderContext(
@@ -54,8 +58,16 @@ public class 字體狀態觀察工具 extends AwtTestExample
 			// font=fontㄉ;
 			int cnt = 0;
 			int which = 0;
-			for (int i = 0; i < 0xFFFFF; ++i)
+//			for (int i = 0; i < 0xFFFFF; ++i)
 			{
+				int i=0x8503;
+				i=0xf77d;
+				i=0x280e9;
+				i=0xf463;
+				i=0xea6f;
+				i=0xeec9;
+				System.out.println(Character.toChars(i));
+				System.out.println(font.canDisplay(i));
 				if (font.canDisplay(i))
 				{
 					// if(which==0)
@@ -69,12 +81,12 @@ public class 字體狀態觀察工具 extends AwtTestExample
 											java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT),
 									chars);
 					// System.out.println(gv.getOutline().getBounds2D().getWidth());
-					if (gv.getOutline().getBounds2D().getWidth() > 0.1)
+//					if (gv.getOutline().getBounds2D().getWidth() > 0.1)
 					{
 						// System.out.println("gv="+gv.getNumGlyphs());
 						++cnt;
 						final int pro = 1, line = 24;
-						if (cnt % pro == 0)
+//						if (cnt % pro == 0)
 						{
 							graphics2D.draw(gv.getOutline());
 							graphics2D.translate(0, TYPE_SIZE);

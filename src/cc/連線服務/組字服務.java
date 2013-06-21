@@ -164,7 +164,7 @@ public class 組字服務 extends HttpServlet
 			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
 			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
 			response.getWriter().println(目錄.length);
-			response.getWriter().println(目錄[1]);
+//			response.getWriter().println(目錄[1]);
 			for (String a : ImageIO.getReaderFileSuffixes())
 			{
 				response.getWriter().println(a);

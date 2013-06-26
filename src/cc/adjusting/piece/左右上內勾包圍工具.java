@@ -4,7 +4,7 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.RectangularArea;
 
 /**
- * 用於左右上的包圍部件。從左右上三邊包住，像是「冂」、「門」、「鬥」和「『夃』的乃」等等。
+ * 用於左右上的包圍部件。從左右上三邊包住，像是「冂」、「門」、「鬥」、「『咼』的外部」和「『夃』的乃」等等。
  * 
  * @author Ihc
  */
@@ -24,7 +24,7 @@ public class 左右上內勾包圍工具 extends 物件活字包圍工具
 		支援包圍部件.add("門");
 		支援包圍部件.add("鬥");
 		支援包圍部件.add("乃");
-		// TODO　/*冏間鬥盈…*/
+		// TODO　/*冏間鬥盈咼…*/
 	}
 
 	@Override

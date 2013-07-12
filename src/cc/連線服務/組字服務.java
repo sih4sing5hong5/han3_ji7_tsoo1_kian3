@@ -135,11 +135,14 @@ public class 組字服務 extends HttpServlet
 			}
 			if (組字工具 != null)
 			{
-				String[] 檔案 = 目錄[2].split("\\.");
-				if (檔案.length == 2)
+				int 位置 = -1;
+				for (int i = 0; i < 目錄[2].length(); ++i)
+					if (目錄[2].charAt(i) == '.')
+						位置 = i;
+				if (位置 != -1)
 				{
-					String 檔名 = 檔案[0];
-					String 附檔名 = 檔案[1];
+					String 檔名 = 目錄[2].substring(0, 位置);
+					String 附檔名 = 目錄[2].substring(位置 + 1);
 					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
 					// System.err.println(附檔名);
@@ -155,23 +158,25 @@ public class 組字服務 extends HttpServlet
 		// {
 		// }
 		if (遏袂做)
-		{// TODO　導向去別位 response.sendRedirect(網址字串);
-
-			response.setContentType("text/html");
-			response.setStatus(HttpServletResponse.SC_OK);
-			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
-			// response.getOutputStream().write(
-			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
-			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
-			response.getWriter().println(目錄.length);
-//			response.getWriter().println(目錄[1]);
-			for (String a : ImageIO.getReaderFileSuffixes())
-			{
-				response.getWriter().println(a);
-			}
-			// String result = URLDecoder.decode(request.getRequestURI(),
-			// "UTF-8");
-			// response.getWriter().println(result);
+		{
+			/*　導向去別位 response.sendRedirect(網址字串);*/
+			response.sendRedirect("http://xn--v0qr21b.xn--kpry57d");
+			
+//			response.setContentType("text/html");
+//			response.setStatus(HttpServletResponse.SC_OK);
+//			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
+//			// response.getOutputStream().write(
+//			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
+//			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
+//			response.getWriter().println(目錄.length);
+//			// response.getWriter().println(目錄[1]);
+//			for (String a : ImageIO.getReaderFileSuffixes())
+//			{
+//				response.getWriter().println(a);
+//			}
+//			// String result = URLDecoder.decode(request.getRequestURI(),
+//			// "UTF-8");
+//			// response.getWriter().println(result);
 		}
 	}
 }

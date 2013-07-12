@@ -37,6 +37,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected 注音符號分類工具 分類工具;
 	/** 參考教育部的國字注音比例參考圖 */
 	final double 教育部建議注音大細 = 0.36;// TODO
+	/** 注音內底逐个符號間隔寬度 */
+	final double 注音內底間隔寬度 = 0.5;// TODO
+	/** 注音因為傷細，上尾愛放較橫，較清楚 */
+	final double 注音譀橫 = 1.2;// TODO
+	/** 注音莫傷倚倒爿，徙規的寬度的比例 */
+	final double 注音徙正爿比例 = 0.05;// TODO
 
 	/**
 	 * 建立物件活字調整工具
@@ -186,7 +192,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		注音符號分開工具 分開工具 = new 注音符號分開工具(分類工具);
 		注音符號分類 分類 = new 注音符號分類();
 		分開工具.分開(活字物件, 分類);
-		注音排放模組 主要排齊模組 = new 注音排齊模組();
+		注音排放模組 主要排齊模組 = new 注音間隔模組(注音內底間隔寬度);
 		// 注音排齊模組() 注音排密模組()
 		// double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
 		for (RectangularArea 活字 : 分類.輕聲)
@@ -203,7 +209,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			}
 		}
 		double 聲韻下跤 = 主要排齊模組.上尾實際範圍().getMaxY();
-		注音排放模組 邊仔排齊模組 = new 注音排齊模組();
+		注音排放模組 邊仔排齊模組 = new 注音間隔模組(注音內底間隔寬度);
 		for (RectangularArea 活字 : 分類.調號)
 			邊仔排齊模組.加新的活字(活字);
 		RectangularArea 主要活字 = 活字物件.getPiece();
@@ -211,8 +217,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		主要活字.add(主要排齊模組.目前結果());
 		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
 		邊仔活字.moveBy(主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX()
-				+ 邊仔活字.getBounds2D().getWidth() * 0.4// TODO
-		, 主要排齊模組.對齊範圍().getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
+				+ 主要活字.getBounds2D().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍()
+				.getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
 		// 上尾範圍() 對齊範圍()
 		主要活字.add(邊仔活字);
 		主要活字.moveBy(-主要活字.getBounds2D().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
@@ -370,10 +376,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 						.getMaxY()) / 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
-		AffineTransform shrinkTransform = getAffineTransform(coefficient * 1.2,// TODO
-				coefficient);
+		AffineTransform shrinkTransform = getAffineTransform(
+				coefficient * 注音譀橫, coefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
-		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory().getY()
+		活字物件.moveBy(活字物件.getTerritory().getX() + 活字物件.getTerritory().getWidth()
+				* 注音徙正爿比例, 活字物件.getTerritory().getY()
 				+ 活字物件.getTerritory().getHeight() / 2.0);
 		return 活字物件;
 	}

@@ -14,8 +14,8 @@ import java.io.IOException;
  */
 public class 合併字體 extends 通用字體
 {
-	/** 　字體的物件 */
-	private Font[] 字體集;
+	/** 字體的物件 */
+	protected Font[] 字體集;
 	/** 楷體字體下的所在 */
 	static public final String[] 楷體字體位址表 = new String[] {
 			"./字體/全字庫-101_11_28/TW-Kai-98_1.ttf",
@@ -39,7 +39,7 @@ public class 合併字體 extends 通用字體
 	}
 
 	/** 予改變參數時的私有建構工具。 */
-	private 合併字體()
+	protected 合併字體()
 	{
 	}
 
@@ -72,7 +72,7 @@ public class 合併字體 extends 通用字體
 	}
 
 	@Override
-	public 通用字體 調整字體大小(float 字體大小)
+	public 合併字體 調整字體大小(float 字體大小)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -84,7 +84,7 @@ public class 合併字體 extends 通用字體
 	}
 
 	@Override
-	public 通用字體 調整字體選項(int 字體選項)
+	public 合併字體 調整字體選項(int 字體選項)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];
@@ -96,7 +96,7 @@ public class 合併字體 extends 通用字體
 	}
 
 	@Override
-	public 通用字體 調整字體參數(int 字體選項, float 字體大小)
+	public 合併字體 調整字體參數(int 字體選項, float 字體大小)
 	{
 		合併字體 調整結果 = new 合併字體();
 		調整結果.字體集 = new Font[this.字體集.length];

@@ -22,6 +22,7 @@ import cc.core.組字式部件正規化;
 import cc.core.資料庫連線異寫式查詢;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
+import cc.setting.piece.對照字體;
 import cc.setting.piece.展開式查通用字型編號;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.無愛查通用字型編號;
@@ -69,31 +70,31 @@ public class 組字服務 extends HttpServlet
 		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
 		// TODO 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
 
-		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
-				.提著宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體.提著吳守禮注音摻宋體字體()
+				.調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
 		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 宋體設定工具, 調整工具, 普通字型屬性, 字型大細);
-		ChineseCharacterTypeSetter 粗宋設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
-				.提著宋體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
+		ChineseCharacterTypeSetter 粗宋設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
+				.提著吳守禮注音摻宋體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
 		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 粗宋設定工具, 調整工具, 粗字型屬性, 字型大細);
 
-		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
-				.提著楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
+				.提著吳守禮注音摻楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 
 		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 楷體設定工具, 調整工具, 普通字型屬性, 字型大細);
 
-		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 整合字體
-				.提著楷體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
+		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
+				.提著吳守禮注音摻楷體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));

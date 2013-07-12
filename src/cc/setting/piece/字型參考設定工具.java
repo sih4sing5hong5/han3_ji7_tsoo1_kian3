@@ -55,7 +55,11 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		int 標準字統一碼 = 字串與控制碼轉換.轉換成控制碼(物件活字基礎設定工具.tzuModelCharacter)[0];
 		GlyphVector 標準字字型 = 字體.提這个字型(字體渲染屬性, 標準字統一碼);
 		BasicStroke basicStroke = new BasicStroke();
-		Rectangle2D 標準字區域 = 標準字字型.getOutline().getBounds2D();
+		Rectangle2D 標準字區域;
+		if (標準字字型 == null)
+			標準字區域 = new Rectangle2D.Double(0.03125,-0.78125,0.9375,0.921875);
+		else
+			標準字區域 = 標準字字型.getOutline().getBounds2D();
 		this.pieceForNoBuiltInWen = new Area(
 				basicStroke.createStrokedShape(標準字區域));
 		this.tzuModelTerritory = this.pieceForNoBuiltInWen.getBounds2D();

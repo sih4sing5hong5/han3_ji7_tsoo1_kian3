@@ -158,23 +158,25 @@ public class 組字服務 extends HttpServlet
 		// {
 		// }
 		if (遏袂做)
-		{// TODO　導向去別位 response.sendRedirect(網址字串);
-
-			response.setContentType("text/html");
-			response.setStatus(HttpServletResponse.SC_OK);
-			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
-			// response.getOutputStream().write(
-			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
-			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
-			response.getWriter().println(目錄.length);
-			// response.getWriter().println(目錄[1]);
-			for (String a : ImageIO.getReaderFileSuffixes())
-			{
-				response.getWriter().println(a);
-			}
-			// String result = URLDecoder.decode(request.getRequestURI(),
-			// "UTF-8");
-			// response.getWriter().println(result);
+		{
+			/*　導向去別位 response.sendRedirect(網址字串);*/
+			response.sendRedirect("http://xn--v0qr21b.xn--kpry57d");
+			
+//			response.setContentType("text/html");
+//			response.setStatus(HttpServletResponse.SC_OK);
+//			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
+//			// response.getOutputStream().write(
+//			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
+//			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
+//			response.getWriter().println(目錄.length);
+//			// response.getWriter().println(目錄[1]);
+//			for (String a : ImageIO.getReaderFileSuffixes())
+//			{
+//				response.getWriter().println(a);
+//			}
+//			// String result = URLDecoder.decode(request.getRequestURI(),
+//			// "UTF-8");
+//			// response.getWriter().println(result);
 		}
 	}
 }

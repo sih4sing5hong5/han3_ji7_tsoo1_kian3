@@ -36,7 +36,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	/** 決定啥物注音會當用，愛下佇佗 */
 	protected 注音符號分類工具 分類工具;
 	/** 參考教育部的國字注音比例參考圖 */
-	final double 教育部建議注音大細 = 0.25;
+	final double 教育部建議注音大細 = 0.36;// TODO
 
 	/**
 	 * 建立物件活字調整工具
@@ -211,7 +211,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		主要活字.add(主要排齊模組.目前結果());
 		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
 		邊仔活字.moveBy(主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX()
-				+ 邊仔活字.getBounds2D().getWidth() * 0.2// TODO
+				+ 邊仔活字.getBounds2D().getWidth() * 0.4// TODO
 		, 主要排齊模組.對齊範圍().getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
 		// 上尾範圍() 對齊範圍()
 		主要活字.add(邊仔活字);
@@ -370,7 +370,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 						.getMaxY()) / 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
-		AffineTransform shrinkTransform = getAffineTransform(coefficient,
+		AffineTransform shrinkTransform = getAffineTransform(coefficient * 1.2,// TODO
 				coefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
 		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory().getY()

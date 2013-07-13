@@ -24,7 +24,6 @@ import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.對照字體;
 import cc.setting.piece.展開式查通用字型編號;
-import cc.setting.piece.整合字體;
 import cc.setting.piece.無愛查通用字型編號;
 import cc.tool.database.PgsqlConnection;
 import cc.tool.database.字串與控制碼轉換;

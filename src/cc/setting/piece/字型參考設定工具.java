@@ -56,8 +56,9 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		GlyphVector 標準字字型 = 字體.提這个字型(字體渲染屬性, 標準字統一碼);
 		BasicStroke basicStroke = new BasicStroke();
 		Rectangle2D 標準字區域;
+		/** 　若無「意」，就用全字庫宋體的資料 */
 		if (標準字字型 == null)
-			標準字區域 = new Rectangle2D.Double(0.03125,-0.78125,0.9375,0.921875);
+			標準字區域 = new Rectangle2D.Double(0.03125, -0.78125, 0.9375, 0.921875);
 		else
 			標準字區域 = 標準字字型.getOutline().getBounds2D();
 		this.pieceForNoBuiltInWen = new Area(

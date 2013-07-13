@@ -19,6 +19,7 @@ public class 對照字體 extends 合併字體
 	static public final String[] 楷體字體位址表 = new String[] {
 			"./字體/吳守禮台語注音字型_101/WSL_TPS.ttf",
 			"./字體/全字庫-101_11_28/TW-Kai-98_1.ttf",
+			"./字體/全字庫-101_11_28/TW-Kai-98_1.ttf",
 			"./字體/全字庫-101_11_28/TW-Kai-Ext-B-98_1.ttf",
 			"./字體/全字庫-101_11_28/TW-Kai-Plus-98_1.ttf",
 			"./字體/漢字構形資料庫-2_7/cdpeudck.tte", };
@@ -26,11 +27,14 @@ public class 對照字體 extends 合併字體
 	static public final String[] 宋體字體位址表 = new String[] {
 			"./字體/吳守禮台語注音字型_101/WSL_TPS.ttf",
 			"./字體/全字庫-101_11_28/TW-Sung-98_1.ttf",
+			"./字體/全字庫-101_11_28/TW-Sung-98_1.ttf",
 			"./字體/全字庫-101_11_28/TW-Sung-Ext-B-98_1.ttf",
 			"./字體/全字庫-101_11_28/TW-Sung-Plus-98_1.ttf",
 			"./字體/漢字構形資料庫-2_7/cdpeudc.tte", };
 	/** 吳守禮注音字體，統一碼佮伊字體內部編碼的對照表 */
 	static protected final HashMap<Integer, Integer> 吳守禮注音字體對照表;
+	/** 因為入聲的符號傷細，所以用原本的注音符號，產生入聲編碼佮原本編碼的對照表。 親像「ㆴ」→「ㄅ」、「ㆵ」→「ㄉ」、「ㆶ」→「ㄍ」、「ㆷ」→「ㄏ」。 */
+	static protected final HashMap<Integer, Integer> 入聲注音字體對照表;
 	/** 楷體字體的物件 */
 	static private final 對照字體 吳守禮注音摻楷體字體;
 	/** 宋體字體的物件 */
@@ -38,9 +42,11 @@ public class 對照字體 extends 合併字體
 	static
 	{
 		吳守禮注音字體對照表 = 產生吳守禮注音字體對照表();
+		入聲注音字體對照表 = 產生入聲注音字體對照表();
 		// HashMap<Integer, Integer> 空對照表 = new HashMap<Integer, Integer>();
 		ArrayList<HashMap<Integer, Integer>> 注音字體對照表 = new ArrayList<HashMap<Integer, Integer>>();
 		注音字體對照表.add(吳守禮注音字體對照表);
+		注音字體對照表.add(入聲注音字體對照表);
 		注音字體對照表.add(null);
 		注音字體對照表.add(null);
 		注音字體對照表.add(null);
@@ -234,13 +240,32 @@ public class 對照字體 extends 合併字體
 		吳守禮注音字體對照表.put(0x31b1, 0xb02e);
 		吳守禮注音字體對照表.put(0x31b2, 0xb034);
 		吳守禮注音字體對照表.put(0x31b3, 0xb386);
-		吳守禮注音字體對照表.put(0x31b4, 0xb03f);
-		吳守禮注音字體對照表.put(0x31b5, 0xb041);
-		吳守禮注音字體對照表.put(0x31b6, 0xb043);
-		吳守禮注音字體對照表.put(0x31b7, 0xb045);
+//		吳守禮注音字體對照表.put(0x31b4, 0xb03f);
+//		吳守禮注音字體對照表.put(0x31b5, 0xb041);
+//		吳守禮注音字體對照表.put(0x31b6, 0xb043);
+//		吳守禮注音字體對照表.put(0x31b7, 0xb045);
 		吳守禮注音字體對照表.put(0x02ea, 0xb383);
 		吳守禮注音字體對照表.put(0x02eb, 0xb382);
 		吳守禮注音字體對照表.put(0x3190, 0xb384);
+		return 吳守禮注音字體對照表;
+	}
+
+	/**
+	 * 因為入聲的符號傷細，所以用原本的注音符號，產生入聲編碼佮原本編碼的對照表。 親像「ㆴ」→「ㄅ」、「ㆵ」→「ㄉ」、「ㆶ」→「ㄍ」、「ㆷ」→「ㄏ」。
+	 * 
+	 * @return 入聲編碼佮原本編碼的對照表
+	 */
+	static private HashMap<Integer, Integer> 產生入聲注音字體對照表()
+	{
+		HashMap<Integer, Integer> 吳守禮注音字體對照表 = new HashMap<Integer, Integer>();
+		/** ㆴ */
+		吳守禮注音字體對照表.put(0x31b4, 0x3105);
+		/** ㆵ */
+		吳守禮注音字體對照表.put(0x31b5, 0x3109);
+		/** ㆶ */
+		吳守禮注音字體對照表.put(0x31b6, 0x310d);
+		/** ㆷ */
+		吳守禮注音字體對照表.put(0x31b7, 0x310f);
 		return 吳守禮注音字體對照表;
 	}
 

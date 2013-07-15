@@ -1,7 +1,10 @@
 package cc.連線服務;
 
 import java.awt.Font;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Stroke;
+import java.awt.Transparency;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -46,17 +49,24 @@ public class 組字服務 extends HttpServlet
 	/** 組楷體粗體用的工具 */
 	protected 組字介面 粗楷組字工具;
 
+	/** 產生圖形傳予組字介面畫 */
+	GraphicsConfiguration 系統圖畫設定;
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
+
+	/** 組字出來的字型解析度 */
+	int 字型大細;
 
 	/** 建立一个組字的服務。 */
 	public 組字服務()
 	{
+		系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
+				.getDefaultScreenDevice().getDefaultConfiguration();
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// 專利遏袂好進前袂使用著檢字表
 		// TODO 換專門查的使用者，換讀取權限
 		int 粗字型屬性 = Font.BOLD;
 		int 普通字型屬性 = 0;
-		int 字型大細 = 200;
+		字型大細 = 200;
 		/** 定義異寫編號數字 */
 		int[] 編號陣列 = 字串與控制碼轉換.轉換成控制碼("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥陰陽乾坤震巽坎離艮兌");
 
@@ -69,8 +79,8 @@ public class 組字服務 extends HttpServlet
 		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
 		// TODO 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
 
-		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體.提著吳守禮注音摻宋體字體()
-				.調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
+				.提著吳守禮注音摻宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
@@ -146,8 +156,9 @@ public class 組字服務 extends HttpServlet
 					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
 					// System.err.println(附檔名);
-					BufferedImage 字型圖片 = new BufferedImage(200, 200,
-							BufferedImage.TYPE_INT_ARGB);
+					BufferedImage 字型圖片 = 系統圖畫設定.createCompatibleImage(200, 200,
+							Transparency.TRANSLUCENT);
+					// new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
 					組字工具.組字(檔名, 字型圖片.getGraphics());
 					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
 					遏袂做 = false;
@@ -159,24 +170,24 @@ public class 組字服務 extends HttpServlet
 		// }
 		if (遏袂做)
 		{
-			/*　導向去別位 response.sendRedirect(網址字串);*/
+			/* 　導向去別位 response.sendRedirect(網址字串); */
 			response.sendRedirect("http://xn--v0qr21b.xn--kpry57d");
-			
-//			response.setContentType("text/html");
-//			response.setStatus(HttpServletResponse.SC_OK);
-//			// // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
-//			// response.getOutputStream().write(
-//			// "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
-//			response.getWriter().println("<h1>Hello 我愛文莉</h1>");
-//			response.getWriter().println(目錄.length);
-//			// response.getWriter().println(目錄[1]);
-//			for (String a : ImageIO.getReaderFileSuffixes())
-//			{
-//				response.getWriter().println(a);
-//			}
-//			// String result = URLDecoder.decode(request.getRequestURI(),
-//			// "UTF-8");
-//			// response.getWriter().println(result);
+
+			// response.setContentType("text/html");
+			// response.setStatus(HttpServletResponse.SC_OK);
+			// // // response.getOutputStream().write("<h1>Hello 我愛文莉</h1>");
+			// // response.getOutputStream().write(
+			// // "<h1>Hello 我愛文莉</h1>".getBytes("utf-8"));
+			// response.getWriter().println("<h1>Hello 我愛文莉</h1>");
+			// response.getWriter().println(目錄.length);
+			// // response.getWriter().println(目錄[1]);
+			// for (String a : ImageIO.getReaderFileSuffixes())
+			// {
+			// response.getWriter().println(a);
+			// }
+			// // String result = URLDecoder.decode(request.getRequestURI(),
+			// // "UTF-8");
+			// // response.getWriter().println(result);
 		}
 	}
 }

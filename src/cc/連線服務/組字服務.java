@@ -36,8 +36,7 @@ import cc.tool.database.字串與控制碼轉換;
  * 
  * @author Ihc
  */
-public class 組字服務 extends HttpServlet
-{
+public class 組字服務 extends HttpServlet {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1224634082415129183L;
 	/** 組宋體用的工具 */
@@ -58,8 +57,7 @@ public class 組字服務 extends HttpServlet
 	int 字型大細;
 
 	/** 建立一个組字的服務。 */
-	public 組字服務()
-	{
+	public 組字服務() {
 		系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getDefaultScreenDevice().getDefaultConfiguration();
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// 專利遏袂好進前袂使用著檢字表
@@ -119,46 +117,35 @@ public class 組字服務 extends HttpServlet
 	 * 檔案類型：<code>png</code>
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException
-	{
+			HttpServletResponse response) throws IOException {
 		String 網址字串 = URLDecoder.decode(request.getRequestURI(), "UTF-8");
 		String[] 目錄 = 網址字串.split("/");
 		boolean 遏袂做 = true;
-		if (目錄.length == 3)
-		{
+		if (目錄.length == 3) {
 			組字介面 組字工具 = null;
-			if (目錄[1].equals("宋體"))
-			{
+			if (目錄[1].equals("宋體")) {
 				組字工具 = 宋體組字工具;
-			}
-			else if (目錄[1].equals("宋體粗體"))
-			{
+			} else if (目錄[1].equals("宋體粗體")) {
 				組字工具 = 粗宋組字工具;
-			}
-			else if (目錄[1].equals("楷體"))
-			{
+			} else if (目錄[1].equals("楷體")) {
 				組字工具 = 楷體組字工具;
-			}
-			else if (目錄[1].equals("楷體粗體"))
-			{
+			} else if (目錄[1].equals("楷體粗體")) {
 				組字工具 = 粗楷組字工具;
 			}
-			if (組字工具 != null)
-			{
+			if (組字工具 != null) {
 				int 位置 = -1;
 				for (int i = 0; i < 目錄[2].length(); ++i)
 					if (目錄[2].charAt(i) == '.')
 						位置 = i;
-				if (位置 != -1)
-				{
+				if (位置 != -1) {
 					String 檔名 = 目錄[2].substring(0, 位置);
 					String 附檔名 = 目錄[2].substring(位置 + 1);
 					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
 					// System.err.println(附檔名);
-					BufferedImage 字型圖片 = 系統圖畫設定.createCompatibleImage(200, 200,
-							Transparency.TRANSLUCENT);
-					// new BufferedImage(200, 200, BufferedImage.TYPE_INT_ARGB);
+					BufferedImage 字型圖片 = 系統圖畫設定.createCompatibleImage(字型大細,
+							字型大細, Transparency.TRANSLUCENT);
+					// new BufferedImage(字型大細, 字型大細, BufferedImage.TYPE_INT_ARGB);
 					組字工具.組字(檔名, 字型圖片.getGraphics());
 					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
 					遏袂做 = false;
@@ -168,8 +155,7 @@ public class 組字服務 extends HttpServlet
 		// if (request.getParameter("a") != null)
 		// {
 		// }
-		if (遏袂做)
-		{
+		if (遏袂做) {
 			/* 　導向去別位 response.sendRedirect(網址字串); */
 			response.sendRedirect("http://xn--v0qr21b.xn--kpry57d");
 

@@ -4,7 +4,7 @@ import java.awt.geom.GeneralPath;
 
 import cc.moveable_type.rectangular_area.PathTravel;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 import cc.moveable_type.rectangular_area.控制點循訪;
 
 /**
@@ -42,7 +42,7 @@ public class 右上內勾接合模組 extends 縮放接合模組
 	 * @param 外部活字
 	 *            接下來變形時所要用的外部活字
 	 */
-	public void 設定外部活字資訊(RectangularArea 外部活字)
+	public void 設定外部活字資訊(活字單元 外部活字)
 	{
 		尋找最低點 記錄 = new 尋找最低點();
 		PathTravel pathTravel = new PathTravel(new 控制點循訪(記錄));

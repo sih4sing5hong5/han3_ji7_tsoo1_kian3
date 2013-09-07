@@ -8,7 +8,8 @@ import java.awt.font.FontRenderContext;
 import cc.core.ChineseCharacterTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
@@ -42,7 +43,7 @@ public class MergePieceSetter extends SimplePieceSetter
 	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
-		RectangularArea rectangularArea = new RectangularArea();
+		活字單元 rectangularArea = new 平面幾何();
 		rectangularArea.setTerritory(tzuModelTerritory);
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
 				parent, chineseCharacterTzu, rectangularArea);

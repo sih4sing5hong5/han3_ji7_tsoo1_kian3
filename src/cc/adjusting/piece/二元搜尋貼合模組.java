@@ -1,6 +1,6 @@
 package cc.adjusting.piece;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 用利用二元搜尋來組合兩個活字的模組，定義相關的動作，二元搜尋的上下限，變形方式等等細節。
@@ -29,7 +29,7 @@ public abstract class 二元搜尋貼合模組
 	 * @param rectangularAreas
 	 *            要調整的物件活字
 	 */
-	public abstract void 初始化(RectangularArea[] rectangularAreas);
+	public abstract void 初始化(活字單元[] rectangularAreas);
 
 	/**
 	 * 取得二元搜尋的初始下限。
@@ -110,5 +110,5 @@ public abstract class 二元搜尋貼合模組
 	 * 
 	 * @return 調整後活字物件
 	 */
-	public abstract RectangularArea[] 取得調整後活字物件();
+	public abstract 活字單元[] 取得調整後活字物件();
 }

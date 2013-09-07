@@ -4,6 +4,7 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
+import java.security.InvalidParameterException;
 
 /**
  * 活字型態。把<code>AreaTool</code>和預設位置大小整合起來，使用時比較方便。把<code>Area</code>
@@ -12,7 +13,7 @@ import java.awt.geom.Rectangle2D;
  * 
  * @author Ihc
  */
-public class RectangularArea extends Area
+public class 平面幾何 extends Area implements 活字單元
 {
 	/**
 	 * 活字預計位置及大小
@@ -22,7 +23,7 @@ public class RectangularArea extends Area
 	/**
 	 * 建立一個空的活字。
 	 */
-	public RectangularArea()
+	public 平面幾何()
 	{
 		territory = new Rectangle2D.Double();
 	}
@@ -34,7 +35,7 @@ public class RectangularArea extends Area
 	 *            預計位置及大小
 	 */
 	@Deprecated
-	public RectangularArea(Rectangle2D territory)
+	public 平面幾何(Rectangle2D territory)
 	{
 		super();
 		setTerritory(territory);
@@ -46,7 +47,7 @@ public class RectangularArea extends Area
 	 * @param s
 	 *            字塊的形狀
 	 */
-	public RectangularArea(Shape s)
+	public 平面幾何(Shape s)
 	{
 		super(s);
 		setTerritory(getBounds2D());
@@ -58,7 +59,7 @@ public class RectangularArea extends Area
 	 * @param rectangularArea
 	 *            參考的活字
 	 */
-	public RectangularArea(RectangularArea rectangularArea)
+	public 平面幾何(平面幾何 rectangularArea)
 	{
 		super(rectangularArea);
 		setTerritory(rectangularArea.getTerritory());
@@ -72,8 +73,7 @@ public class RectangularArea extends Area
 	 * @param territory
 	 *            預計位置及大小
 	 */
-	public RectangularArea(RectangularArea rectangularArea,
-			Rectangle2D territory)
+	public 平面幾何(平面幾何 rectangularArea, Rectangle2D territory)
 	{
 		super(rectangularArea);
 		setTerritory(territory);
@@ -166,13 +166,40 @@ public class RectangularArea extends Area
 	 * @param 活字物件
 	 *            合體活字底下的活字物件
 	 */
-	public void 重設並組合活字(RectangularArea[] 活字物件)
+	public void 重設並組合活字(平面幾何[] 活字物件)
 	{
 		reset();
-		for (RectangularArea 活字物件單元 : 活字物件)
+		for (活字單元 活字物件單元 : 活字物件)
 		{
 			add(活字物件單元);
 		}
 		return;
+	}
+
+	@Override
+	public void 重設並組合活字(活字單元[] 活字物件)
+	{
+		if (活字物件 instanceof 平面幾何[])
+			重設並組合活字((平面幾何[]) 活字物件);
+		else
+			throw new InvalidParameterException();
+	}
+
+	@Override
+	public void add(活字單元 活字物件)
+	{
+		if (活字物件 instanceof 平面幾何)
+			add((Area) 活字物件);
+		else
+			throw new InvalidParameterException();
+	}
+
+	@Override
+	public void subtract(活字單元 活字物件)
+	{
+		if (活字物件 instanceof 平面幾何)
+			subtract((Area) 活字物件);
+		else
+			throw new InvalidParameterException();
 	}
 }

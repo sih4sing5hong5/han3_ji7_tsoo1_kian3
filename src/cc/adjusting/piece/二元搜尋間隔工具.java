@@ -1,6 +1,6 @@
 package cc.adjusting.piece;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 利用二元搜尋來組合兩個活字，最後拉開兩個活字兩個寬度，以利事後調整。
@@ -25,7 +25,7 @@ public class 二元搜尋間隔工具 extends 二元搜尋貼合工具
 	}
 
 	@Override
-	public void 執行(二元搜尋貼合模組 模組, RectangularArea[] 活字物件)
+	public void 執行(二元搜尋貼合模組 模組, 活字單元[] 活字物件)
 	{
 		模組.初始化(活字物件);
 

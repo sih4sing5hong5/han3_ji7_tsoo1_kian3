@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
 
 /**
  * 讓第二個活字往下延伸的模組，碰到第一個活字或是邊界即停止。
@@ -45,7 +45,7 @@ public class 下推黏合模組 extends 平推黏合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new RectangularArea(insidePiece);
+		temporaryPiece = new 平面幾何(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(1.0,
 				middleValue / insidePiece.getBounds2D().getHeight());
 		temporaryPiece.transform(affineTransform);

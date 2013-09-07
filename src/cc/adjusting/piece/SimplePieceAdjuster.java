@@ -13,7 +13,8 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 import cc.moveable_type.rectangular_area.ShapeInformation;
 import cc.程式記錄.漢字組建記錄工具包;
 
@@ -58,7 +59,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen)
 	{
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
-		RectangularArea rectangularArea = pieceMovableTypeWen.getPiece();
+		活字單元 rectangularArea = pieceMovableTypeWen.getPiece();
 		AffineTransform affineTransform = getAffineTransform(rectangularArea);
 		shrinkPieceByFixingStroke(rectangularArea, affineTransform);
 		return;
@@ -68,7 +69,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	public void adjustTzu(ChineseCharacterMovableTypeTzu tzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) tzu;
-		RectangularArea rectangularArea = pieceMovableTypeTzu.getPiece();
+		活字單元 rectangularArea = pieceMovableTypeTzu.getPiece();
 		AffineTransform affineTransform = getAffineTransform(rectangularArea);
 		rectangularArea.transform(affineTransform);
 		for (int i = 0; i < pieceMovableTypeTzu.getChildren().length; ++i)
@@ -93,7 +94,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            計算縮放的目標
 	 * @return 相對應的縮放矩陣
 	 */
-	protected AffineTransform getAffineTransform(RectangularArea rectangularArea)
+	protected AffineTransform getAffineTransform(活字單元 rectangularArea)
 	{
 		Rectangle2D territory = rectangularArea.getTerritory();
 		Rectangle2D bounds = rectangularArea.getBounds2D();
@@ -110,7 +111,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            物件活字
 	 * @return 粗細半徑
 	 */
-	protected double computePieceRadius(RectangularArea rectangularArea)
+	protected double computePieceRadius(活字單元 rectangularArea)
 	{
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea);
@@ -125,7 +126,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            物件活字
 	 * @return 粗細係數
 	 */
-	protected double computeBoldCoefficient(RectangularArea rectangularArea)
+	protected double computeBoldCoefficient(活字單元 rectangularArea)
 	{
 		return computePieceRadius(rectangularArea);
 	}
@@ -140,14 +141,14 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 * @return 筆劃加寬度
 	 */
 	protected double getStorkeWidthByCoefficient(
-			RectangularArea rectangularArea, double originBoldCoefficient)
+			活字單元 rectangularArea, double originBoldCoefficient)
 	{
 		// TODO 改成牛頓法可能比較好
 		double miniWidth = 0.0, maxiWidth = (double) originBoldCoefficient;
 		while (miniWidth + getPrecision() < maxiWidth)
 		{
 			double middleWidth = 0.5 * (miniWidth + maxiWidth);
-			RectangularArea boldSurface = getBoldSurface(rectangularArea,
+			活字單元 boldSurface = getBoldSurface(rectangularArea,
 					middleWidth);
 			boldSurface.add(rectangularArea);
 			double nowBoldCoefficient = computeBoldCoefficient(boldSurface);
@@ -168,11 +169,11 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            筆劃加寬度
 	 * @return 物件活字外框
 	 */
-	protected RectangularArea getBoldSurface(RectangularArea rectangularArea,
+	protected 活字單元 getBoldSurface(活字單元 rectangularArea,
 			double strokeWidth)
 	{
 		Stroke stroke = chineseCharacterTypeBolder.getStroke(strokeWidth);
-		return new RectangularArea(stroke.createStrokedShape(rectangularArea));
+		return new 平面幾何(stroke.createStrokedShape(rectangularArea));
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 * @param affineTransform
 	 *            粗細係數
 	 */
-	void shrinkPieceByFixingStroke(RectangularArea rectangularArea,
+	void shrinkPieceByFixingStroke(活字單元 rectangularArea,
 			AffineTransform affineTransform)
 	{
 		活字寬度資訊 舊活字寬度資訊 = 取得活字寬度資訊(rectangularArea);
@@ -208,7 +209,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            欲取得資訊的活字物件
 	 * @return 活字寬度資訊
 	 */
-	活字寬度資訊 取得活字寬度資訊(RectangularArea 活字物件)
+	活字寬度資訊 取得活字寬度資訊(活字單元 活字物件)
 	{
 		return new 活字寬度資訊(computeBoldCoefficient(活字物件));
 	}
@@ -221,10 +222,10 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 * @param 寬度資訊
 	 *            依據的寬度資訊
 	 */
-	void 依寬度資訊調整活字(RectangularArea 活字物件, 活字寬度資訊 寬度資訊)
+	void 依寬度資訊調整活字(活字單元 活字物件, 活字寬度資訊 寬度資訊)
 	{
 		double strokeWidth = getStorkeWidthByCoefficient(活字物件, 寬度資訊.取得活字粗細係數());
-		RectangularArea boldSurface = getBoldSurface(活字物件, strokeWidth);
+		活字單元 boldSurface = getBoldSurface(活字物件, strokeWidth);
 		活字物件.add(boldSurface);
 	}
 

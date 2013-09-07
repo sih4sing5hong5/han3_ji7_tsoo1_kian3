@@ -1,7 +1,7 @@
 package cc.adjusting.piece;
 
 import cc.moveable_type.piece.PieceMovableTypeTzu;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 用於上下左的包圍部件。從上下左三邊包住，像是「匚」和「⼖」等等。
@@ -34,7 +34,7 @@ public class 上下左三邊包圍工具 extends 物件活字包圍工具
 		/** 要使用的平推工具 */
 		平推包圍調整工具 平推包圍調整工具 = new 平推包圍調整工具(調整工具, 模組, 後模組);
 		
-		RectangularArea[] 調整結果 = 平推包圍調整工具.產生調整後活字(物件活字.取得活字物件());
+		活字單元[] 調整結果 = 平推包圍調整工具.產生調整後活字(物件活字.取得活字物件());
 		物件活字.getPiece().重設並組合活字(調整結果);
 		return;
 	}

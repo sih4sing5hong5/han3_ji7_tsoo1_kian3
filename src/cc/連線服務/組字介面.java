@@ -21,7 +21,7 @@ import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.程式記錄.漢字組建記錄工具包;
@@ -175,7 +175,7 @@ public class 組字介面
 		活字.adjust(調整工具);
 
 		看時工具.start("縮放中");
-		RectangularArea 上尾欲畫的圖=調整工具.format((PieceMovableType) 活字);
+		活字單元 上尾欲畫的圖=調整工具.format((PieceMovableType) 活字);
 		
 		看時工具.start("列印中");
 		// 記錄工具.debug("列印中～～ 時間：" + System.currentTimeMillis());

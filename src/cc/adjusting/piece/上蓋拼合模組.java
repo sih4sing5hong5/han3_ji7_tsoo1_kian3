@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 適用於「⿴」包圍拼合部件，如「⿴冖几」為「冗」，只要是此類拼合，皆用此型態。先將兩活字寬度調整相同，再調依情況縮小下部寬度，進行合併。
@@ -26,11 +26,11 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 	}
 
 	@Override
-	public void 初始化(RectangularArea[] rectangularAreas)
+	public void 初始化(活字單元[] rectangularAreas)
 	{
 		upPiece = rectangularAreas[0];
 		downPiece = rectangularAreas[1];
-		RectangularArea greaterPiece = null, smallerPiece = null;
+		活字單元 greaterPiece = null, smallerPiece = null;
 		if (upPiece.getBounds2D().getWidth() > downPiece.getBounds2D()
 				.getWidth())
 		{

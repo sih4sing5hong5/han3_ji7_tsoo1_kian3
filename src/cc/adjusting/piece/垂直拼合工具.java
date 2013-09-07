@@ -1,7 +1,7 @@
 package cc.adjusting.piece;
 
 import cc.moveable_type.piece.PieceMovableTypeTzu;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 用於上蓋的包圍部件。蓋住上方，左右二邊只包含上方一小部份，像是「冖」、「宀」和「『學』上半部」等等。
@@ -31,7 +31,7 @@ public class 垂直拼合工具 extends 物件活字包圍工具
 
 		貼合工具.執行(模組, 物件活字.取得活字物件());
 
-		RectangularArea[] 調整結果 = 模組.取得調整後活字物件();
+		活字單元[] 調整結果 = 模組.取得調整後活字物件();
 		物件活字.getPiece().重設並組合活字(調整結果);
 		return;
 	}

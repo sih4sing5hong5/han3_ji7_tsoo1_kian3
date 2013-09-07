@@ -2,7 +2,8 @@ package cc.adjusting.piece;
 
 import java.awt.geom.Rectangle2D;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 組合注音模組。一直佮注音活字擲入來，會排做一排。
@@ -12,18 +13,18 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 abstract class 注音排放模組
 {
 	/** 進前加的活字 */
-	protected RectangularArea 累積活字;
+	protected 活字單元 累積活字;
 	/** 上尾加的活字 */
-	protected RectangularArea 上尾活字;
+	protected 活字單元 上尾活字;
 	/** 用來予調整工具參考位置的活字 */
-	protected RectangularArea 對齊活字;
+	protected 活字單元 對齊活字;
 
 	/** 建立一个排注音的物件。 */
 	注音排放模組()
 	{
-		累積活字 = new RectangularArea();
-		上尾活字 = new RectangularArea();
-		對齊活字 = new RectangularArea();
+		累積活字 = new 平面幾何();
+		上尾活字 = new 平面幾何();
+		對齊活字 = new 平面幾何();
 	}
 
 	/**
@@ -32,16 +33,16 @@ abstract class 注音排放模組
 	 * @param 新活字
 	 *            欲新加的活字
 	 */
-	abstract void 加新的活字(RectangularArea 新活字);
+	abstract void 加新的活字(活字單元 新活字);
 
 	/**
 	 * 提這馬攏總組合起來的活字。
 	 * 
 	 * @return 攏總組合起來的活字
 	 */
-	RectangularArea 目前結果()
+	活字單元 目前結果()
 	{
-		RectangularArea 結果 = new RectangularArea(累積活字);
+		活字單元 結果 = new 平面幾何(累積活字);
 		結果.add(上尾活字);
 		return 結果;
 	}

@@ -11,7 +11,8 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 import cc.moveable_type.rectangular_area.ShapeInformation;
 import cc.tool.database.字串與控制碼轉換;
 
@@ -195,11 +196,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		注音排放模組 主要排齊模組 = new 注音間隔模組(注音內底間隔寬度);
 		// 注音排齊模組() 注音排密模組()
 		// double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
-		for (RectangularArea 活字 : 分類.輕聲)
+		for (活字單元 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
 		double 聲韻面頂 = 主要排齊模組.上尾實際範圍().getMinY();
 		boolean 第一个 = true;
-		for (RectangularArea 活字 : 分類.聲韻)
+		for (活字單元 活字 : 分類.聲韻)
 		{
 			主要排齊模組.加新的活字(活字);
 			if (第一个)
@@ -210,12 +211,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 		double 聲韻下跤 = 主要排齊模組.上尾實際範圍().getMaxY();
 		注音排放模組 邊仔排齊模組 = new 注音間隔模組(注音內底間隔寬度);
-		for (RectangularArea 活字 : 分類.調號)
+		for (活字單元 活字 : 分類.調號)
 			邊仔排齊模組.加新的活字(活字);
-		RectangularArea 主要活字 = 活字物件.getPiece();
+		活字單元 主要活字 = 活字物件.getPiece();
 		主要活字.reset();
 		主要活字.add(主要排齊模組.目前結果());
-		RectangularArea 邊仔活字 = 邊仔排齊模組.目前結果();
+		活字單元 邊仔活字 = 邊仔排齊模組.目前結果();
 		邊仔活字.moveBy(主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX()
 				+ 主要活字.getBounds2D().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍()
 				.getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
@@ -262,10 +263,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            第二個活字物件
 	 * @return 是否重疊
 	 */
-	protected boolean areIntersected(RectangularArea first,
-			RectangularArea second)
+	protected boolean areIntersected(活字單元 first,
+			活字單元 second)
 	{
-		RectangularArea rectangularArea = new RectangularArea(first);
+		活字單元 rectangularArea = new 平面幾何(first);
 		rectangularArea.subtract(second);
 		return !rectangularArea.equals(first);
 	}
@@ -281,13 +282,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            用來比較消失邊長的邊界長度
 	 * @return 適合接近的係數
 	 */
-	protected double nonsuitableToClose(RectangularArea first,
-			RectangularArea second, double boundaryLength)
+	protected double nonsuitableToClose(活字單元 first,
+			活字單元 second, double boundaryLength)
 	{
 		// TODO 愛加速
 		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
 				second);
-		RectangularArea rectangularArea = new RectangularArea(first);
+		活字單元 rectangularArea = new 平面幾何(first);
 		rectangularArea.add(second);
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea);
@@ -318,7 +319,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea format(PieceMovableType 物件活字)
+	public 活字單元 format(PieceMovableType 物件活字)
 	{
 		if (物件活字 instanceof ChineseCharacterMovableTypeTzu)
 		{
@@ -331,16 +332,16 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				if (字部件.getType() == ChineseCharacterTzuCombinationType.注音符號)
 				{
 					// BasicStroke basicStroke = new BasicStroke();
-					// RectangularArea a = new RectangularArea(
+					// RectangularArea a = new CopyOfRectangularArea(
 					// basicStroke.createStrokedShape(物件活字.getPiece()
 					// .getTerritory()));
-					// a.add(依目標懸度調整大細(new RectangularArea(物件活字.getPiece())));
+					// a.add(依目標懸度調整大細(new CopyOfRectangularArea(物件活字.getPiece())));
 					// return a;
-					return 依目標懸度調整大細(new RectangularArea(物件活字.getPiece()));
+					return 依目標懸度調整大細(new 平面幾何(物件活字.getPiece()));
 				}
 			}
 		}
-		return 依目標區域調整大細(new RectangularArea(物件活字.getPiece()));
+		return 依目標區域調整大細(new 平面幾何(物件活字.getPiece()));
 	}
 
 	/**
@@ -350,7 +351,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea 依目標區域調整大細(RectangularArea 活字物件)
+	public 活字單元 依目標區域調整大細(活字單元 活字物件)
 	{
 		double widthCoefficient = 活字物件.getTerritory().getWidth()
 				/ 活字物件.getBounds2D().getWidth(), heightCoefficient = 活字物件
@@ -369,7 +370,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea 依目標懸度調整大細(RectangularArea 活字物件)
+	public 活字單元 依目標懸度調整大細(活字單元 活字物件)
 	{
 		double coefficient = 活字物件.getTerritory().getHeight()
 				/ Math.max(-活字物件.getBounds2D().getMinY(), 活字物件.getBounds2D()
@@ -392,10 +393,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public RectangularArea getPieceWithSquareTerritory(
-			RectangularArea rectangularArea)
+	public 活字單元 getPieceWithSquareTerritory(
+			活字單元 rectangularArea)
 	{
-		RectangularArea target = new RectangularArea(rectangularArea);
+		活字單元 target = new 平面幾何(rectangularArea);
 		target.setTerritory(target.getBounds2D());
 		double value = Math.min(target.getTerritory().getWidth(), target
 				.getTerritory().getHeight());

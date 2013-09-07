@@ -6,7 +6,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.活字單元;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
@@ -56,7 +56,7 @@ public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 	 * @param rectangularArea
 	 *            活字物件
 	 */
-	public void printPiece(RectangularArea rectangularArea)
+	public void printPiece(活字單元 rectangularArea)
 	{
 		graphics2d.draw(rectangularArea);
 		return;

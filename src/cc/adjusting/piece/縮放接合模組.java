@@ -2,7 +2,8 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 適用於靠縮放合併的模組，若是兩活字是靠縮放比例來當參數調整，就可適用此型態。
@@ -12,11 +13,11 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 {
 	/** 外部的活字物件 */
-	protected RectangularArea outsidePiece;
+	protected 活字單元 outsidePiece;
 	/** 內部的活字物件 */
-	protected RectangularArea insidePiece;
+	protected 活字單元 insidePiece;
 	/** 暫存變化後的內部活字物件 */
-	protected RectangularArea temporaryPiece;
+	protected 活字單元 temporaryPiece;
 
 	/**
 	 * 建立縮放接合模組
@@ -30,7 +31,7 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	}
 
 	@Override
-	public void 初始化(RectangularArea[] rectangularAreas)
+	public void 初始化(活字單元[] rectangularAreas)
 	{
 		outsidePiece = rectangularAreas[0];
 		// insidePiece = 調整工具.getPieceWithSquareTerritory(rectangularAreas[1]);
@@ -47,7 +48,7 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new RectangularArea(insidePiece);
+		temporaryPiece = new 平面幾何(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.getBounds2D().getHeight());
 		temporaryPiece.transform(affineTransform);
@@ -93,9 +94,9 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	}
 
 	@Override
-	public RectangularArea[] 取得調整後活字物件()
+	public 活字單元[] 取得調整後活字物件()
 	{
-		RectangularArea[] rectangularAreas = new RectangularArea[2];
+		活字單元[] rectangularAreas = new 平面幾何[2];
 		rectangularAreas[0] = outsidePiece;
 		rectangularAreas[1] = insidePiece;
 		return rectangularAreas;

@@ -5,7 +5,8 @@ package cc.moveable_type.piece;
 
 import cc.core.ChineseCharacterTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 物件活字樹狀結構的上層節點。把活字的資訊全部集中在同一個物件上（<code>Piece</code>，
@@ -20,7 +21,7 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	/**
 	 * 物件活字
 	 */
-	private final RectangularArea rectangularArea;
+	private final 活字單元 rectangularArea;
 
 	/**
 	 * 建立字活字結構
@@ -34,14 +35,14 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	 */
 	public PieceMovableTypeTzu(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterTzu chineseCharacterTzu,
-			RectangularArea rectangularArea)
+			活字單元 rectangularArea)
 	{
 		super(parent, chineseCharacterTzu);
 		this.rectangularArea = rectangularArea;
 	}
 
 	@Override
-	public RectangularArea getPiece()
+	public 活字單元 getPiece()
 	{
 		return rectangularArea;
 	}
@@ -51,11 +52,11 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	 * 
 	 * @return 各個元件的活字物件
 	 */
-	public RectangularArea[] 取得活字物件()
+	public 活字單元[] 取得活字物件()
 	{
-		RectangularArea[] 活字物件 = new RectangularArea[getChildren().length];
+		活字單元[] 活字物件 = new 活字單元[getChildren().length];
 		for (int i = 0; i < getChildren().length; ++i)
-			活字物件[i] = new RectangularArea(
+			活字物件[i] = new 平面幾何(
 					((PieceMovableType) getChildren()[i]).getPiece());
 		return 活字物件;
 	}

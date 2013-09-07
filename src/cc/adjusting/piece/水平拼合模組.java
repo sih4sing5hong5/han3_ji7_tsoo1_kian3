@@ -2,7 +2,8 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 適用於「⿱」垂直拼合部件，如「⿱將水」為「漿」，只要是垂直拼合，皆用此型態。先將兩活字高度調整相同，再進行合併。
@@ -12,9 +13,9 @@ import cc.moveable_type.rectangular_area.RectangularArea;
 public class 水平拼合模組 extends 平移拼合模組
 {
 	/** 左邊的物件活字 */
-	protected RectangularArea leftPiece;
+	protected 活字單元 leftPiece;
 	/** 右邊的物件活字 */
-	protected RectangularArea rightPiece;
+	protected 活字單元 rightPiece;
 
 	/**
 	 * 建立水平拼合模組
@@ -28,11 +29,11 @@ public class 水平拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public void 初始化(RectangularArea[] rectangularAreas)
+	public void 初始化(活字單元[] rectangularAreas)
 	{
 		leftPiece = rectangularAreas[0];
 		rightPiece = rectangularAreas[1];
-		RectangularArea greaterPiece = null, smallerPiece = null;
+		活字單元 greaterPiece = null, smallerPiece = null;
 		if (leftPiece.getBounds2D().getHeight() > rightPiece.getBounds2D()
 				.getHeight())
 		{
@@ -94,9 +95,9 @@ public class 水平拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public RectangularArea[] 取得調整後活字物件()
+	public 活字單元[] 取得調整後活字物件()
 	{
-		RectangularArea[] rectangularAreas = new RectangularArea[2];
+		活字單元[] rectangularAreas = new 平面幾何[2];
 		rectangularAreas[0] = leftPiece;
 		rectangularAreas[1] = rightPiece;
 		return rectangularAreas;

@@ -13,7 +13,8 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
-import cc.moveable_type.rectangular_area.RectangularArea;
+import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.活字單元;
 
 /**
  * 物件活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
@@ -70,12 +71,13 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterWen chineseCharacterWen)
 	{
-		RectangularArea rectangularArea = null;
+		活字單元 rectangularArea = null;
 		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
 		{
 			GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
 					chineseCharacterWen.getChars());
-			rectangularArea = new RectangularArea(glyphVector.getOutline());
+			rectangularArea = new 平面幾何(
+					glyphVector.getOutline());
 		}
 		else
 		{
@@ -93,7 +95,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				parent, chineseCharacterTzu, new RectangularArea());
+				parent, chineseCharacterTzu, new 平面幾何());
 
 		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
@@ -162,7 +164,8 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 						secondChild.getPiece().getTerritory().getHeight());
 		pieceMovableTypeTzu.getPiece().setTerritoryDimension(rectDouble.width,
 				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().add(new Area(rectDouble));
+		pieceMovableTypeTzu.getPiece().add(
+				new 平面幾何(new Area(rectDouble)));
 		firstChild
 				.getPiece()
 				.getTerritory()
@@ -197,7 +200,8 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 				+ secondChild.getPiece().getTerritory().getHeight();
 		pieceMovableTypeTzu.getPiece().setTerritoryDimension(rectDouble.width,
 				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().add(new Area(rectDouble));
+		pieceMovableTypeTzu.getPiece().add(
+				new 平面幾何(new Area(rectDouble)));
 		firstChild
 				.getPiece()
 				.getTerritory()
@@ -229,7 +233,8 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		rectDouble.height = firstChild.getPiece().getTerritory().getHeight() * 2;
 		pieceMovableTypeTzu.getPiece().setTerritoryDimension(rectDouble.width,
 				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().add(new Area(rectDouble));
+		pieceMovableTypeTzu.getPiece().add(
+				new 平面幾何(new Area(rectDouble)));
 		firstChild.getPiece().getTerritory()
 				.setRect(0.0, 0.0, rectDouble.width, rectDouble.height);
 		secondChild

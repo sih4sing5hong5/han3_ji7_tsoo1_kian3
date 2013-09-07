@@ -43,7 +43,7 @@ abstract class 注音排放模組
 	活字單元 目前結果()
 	{
 		活字單元 結果 = new 平面幾何(累積活字);
-		結果.add(上尾活字);
+		結果.合併活字(上尾活字);
 		return 結果;
 	}
 
@@ -64,7 +64,7 @@ abstract class 注音排放模組
 	 */
 	Rectangle2D 上尾實際範圍()
 	{
-		return 上尾活字.getBounds2D();
+		return 上尾活字.字範圍();
 	}
 
 	/**
@@ -74,7 +74,7 @@ abstract class 注音排放模組
 	 */
 	Rectangle2D 對齊範圍()
 	{
-		return 對齊活字.getBounds2D();
+		return 對齊活字.字範圍();
 	}
 
 	/**
@@ -84,8 +84,8 @@ abstract class 注音排放模組
 	 */
 	protected boolean 上尾活字會當提來對齊無()
 	{
-		return 對齊活字.getBounds2D().getWidth() < 1e-8
-				|| 上尾活字.getBounds2D().getWidth() * 3.0 >= 上尾活字.getBounds2D()
+		return 對齊活字.字範圍().getWidth() < 1e-8
+				|| 上尾活字.字範圍().getWidth() * 3.0 >= 上尾活字.字範圍()
 						.getHeight();
 	}
 }

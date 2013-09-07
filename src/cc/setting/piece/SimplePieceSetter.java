@@ -83,7 +83,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		{
 			rectangularArea = findWenForNoBuiltIn(chineseCharacterWen);
 		}
-		rectangularArea.moveToOrigin();
+		rectangularArea.徙轉原點();
 
 		PieceMovableTypeWen pieceMovableTypeWen = new PieceMovableTypeWen(
 				parent, chineseCharacterWen, rectangularArea);
@@ -119,7 +119,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		}
 
 		if (pieceMovableTypeTzu.getParent() == null)
-			pieceMovableTypeTzu.getPiece().setTerritory(tzuModelTerritory);
+			pieceMovableTypeTzu.getPiece().設目標範圍(tzuModelTerritory);
 
 		return pieceMovableTypeTzu;
 	}
@@ -157,26 +157,26 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = firstChild.getPiece().getTerritory().getWidth()
-				+ secondChild.getPiece().getTerritory().getWidth();
+		rectDouble.width = firstChild.getPiece().目標範圍().getWidth()
+				+ secondChild.getPiece().目標範圍().getWidth();
 		rectDouble.height = Math
-				.max(firstChild.getPiece().getTerritory().getHeight(),
-						secondChild.getPiece().getTerritory().getHeight());
-		pieceMovableTypeTzu.getPiece().setTerritoryDimension(rectDouble.width,
+				.max(firstChild.getPiece().目標範圍().getHeight(),
+						secondChild.getPiece().目標範圍().getHeight());
+		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
 				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().add(
+		pieceMovableTypeTzu.getPiece().合併活字(
 				new 平面幾何(new Area(rectDouble)));
 		firstChild
 				.getPiece()
-				.getTerritory()
+				.目標範圍()
 				.setRect(0.0, 0.0,
-						firstChild.getPiece().getTerritory().getWidth(),
+						firstChild.getPiece().目標範圍().getWidth(),
 						rectDouble.height);
 		secondChild
 				.getPiece()
-				.getTerritory()
-				.setRect(firstChild.getPiece().getTerritory().getWidth(), 0.0,
-						secondChild.getPiece().getTerritory().getWidth(),
+				.目標範圍()
+				.setRect(firstChild.getPiece().目標範圍().getWidth(), 0.0,
+						secondChild.getPiece().目標範圍().getWidth(),
 						rectDouble.height);
 		return;
 
@@ -194,25 +194,25 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = Math.max(firstChild.getPiece().getTerritory()
-				.getWidth(), secondChild.getPiece().getTerritory().getWidth());
-		rectDouble.height = firstChild.getPiece().getTerritory().getHeight()
-				+ secondChild.getPiece().getTerritory().getHeight();
-		pieceMovableTypeTzu.getPiece().setTerritoryDimension(rectDouble.width,
+		rectDouble.width = Math.max(firstChild.getPiece().目標範圍()
+				.getWidth(), secondChild.getPiece().目標範圍().getWidth());
+		rectDouble.height = firstChild.getPiece().目標範圍().getHeight()
+				+ secondChild.getPiece().目標範圍().getHeight();
+		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
 				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().add(
+		pieceMovableTypeTzu.getPiece().合併活字(
 				new 平面幾何(new Area(rectDouble)));
 		firstChild
 				.getPiece()
-				.getTerritory()
+				.目標範圍()
 				.setRect(0.0, 0.0, rectDouble.width,
-						firstChild.getPiece().getTerritory().getHeight());
+						firstChild.getPiece().目標範圍().getHeight());
 		secondChild
 				.getPiece()
-				.getTerritory()
-				.setRect(0.0, firstChild.getPiece().getTerritory().getHeight(),
+				.目標範圍()
+				.setRect(0.0, firstChild.getPiece().目標範圍().getHeight(),
 						rectDouble.width,
-						secondChild.getPiece().getTerritory().getHeight());
+						secondChild.getPiece().目標範圍().getHeight());
 		return;
 	}
 
@@ -229,24 +229,24 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = firstChild.getPiece().getTerritory().getWidth() * 2;
-		rectDouble.height = firstChild.getPiece().getTerritory().getHeight() * 2;
-		pieceMovableTypeTzu.getPiece().setTerritoryDimension(rectDouble.width,
+		rectDouble.width = firstChild.getPiece().目標範圍().getWidth() * 2;
+		rectDouble.height = firstChild.getPiece().目標範圍().getHeight() * 2;
+		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
 				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().add(
+		pieceMovableTypeTzu.getPiece().合併活字(
 				new 平面幾何(new Area(rectDouble)));
-		firstChild.getPiece().getTerritory()
+		firstChild.getPiece().目標範圍()
 				.setRect(0.0, 0.0, rectDouble.width, rectDouble.height);
 		secondChild
 				.getPiece()
-				.getTerritory()
+				.目標範圍()
 				.setRect(
-						(firstChild.getPiece().getTerritory().getWidth() - secondChild
-								.getPiece().getTerritory().getWidth()) / 2,
-						(firstChild.getPiece().getTerritory().getHeight() - secondChild
-								.getPiece().getTerritory().getHeight()) / 2,
-						secondChild.getPiece().getTerritory().getWidth(),
-						secondChild.getPiece().getTerritory().getHeight());
+						(firstChild.getPiece().目標範圍().getWidth() - secondChild
+								.getPiece().目標範圍().getWidth()) / 2,
+						(firstChild.getPiece().目標範圍().getHeight() - secondChild
+								.getPiece().目標範圍().getHeight()) / 2,
+						secondChild.getPiece().目標範圍().getWidth(),
+						secondChild.getPiece().目標範圍().getHeight());
 		return;
 	}
 

@@ -42,7 +42,7 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	@Override
 	public double 上限初始值()
 	{
-		return insidePiece.getBounds2D().getHeight();
+		return insidePiece.字範圍().getHeight();
 	}
 
 	@Override
@@ -50,8 +50,8 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	{
 		temporaryPiece = new 平面幾何(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
-				/ insidePiece.getBounds2D().getHeight());
-		temporaryPiece.transform(affineTransform);
+				/ insidePiece.字範圍().getHeight());
+		temporaryPiece.縮放(affineTransform);
 //		調整工具.shrinkPieceByFixingStroke(temporaryPiece, affineTransform);
 		return;
 	}
@@ -83,8 +83,8 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	@Override
 	public double 接觸邊長()
 	{
-		return temporaryPiece.getBounds2D().getWidth()
-				+ temporaryPiece.getBounds2D().getHeight();
+		return temporaryPiece.字範圍().getWidth()
+				+ temporaryPiece.字範圍().getHeight();
 	}
 
 	@Override

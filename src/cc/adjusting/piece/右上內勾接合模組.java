@@ -57,9 +57,9 @@ public class 右上內勾接合模組 extends 縮放接合模組
 	public void 變形處理(double middleValue)
 	{
 		super.變形處理(middleValue);
-		temporaryPiece.moveBy(縮放基準點.getX()
-				- temporaryPiece.getBounds2D().getMinX(), 縮放基準點.getY()
-				- temporaryPiece.getBounds2D().getMaxY());
+		temporaryPiece.徙(縮放基準點.getX()
+				- temporaryPiece.字範圍().getMinX(), 縮放基準點.getY()
+				- temporaryPiece.字範圍().getMaxY());
 		return;
 	}
 }

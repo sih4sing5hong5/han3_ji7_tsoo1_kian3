@@ -31,7 +31,7 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 		upPiece = rectangularAreas[0];
 		downPiece = rectangularAreas[1];
 		活字單元 greaterPiece = null, smallerPiece = null;
-		if (upPiece.getBounds2D().getWidth() > downPiece.getBounds2D()
+		if (upPiece.字範圍().getWidth() > downPiece.字範圍()
 				.getWidth())
 		{
 			greaterPiece = upPiece;
@@ -42,8 +42,8 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 			greaterPiece = downPiece;
 			smallerPiece = upPiece;
 		}
-		double value = smallerPiece.getBounds2D().getWidth()
-				/ greaterPiece.getBounds2D().getWidth();
+		double value = smallerPiece.字範圍().getWidth()
+				/ greaterPiece.字範圍().getWidth();
 		if (value > 0.0)
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(value,
@@ -62,8 +62,8 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		downPiece.moveToOrigin();
-		downPiece.moveBy(downPiece.getBounds2D().getWidth()
+		downPiece.徙轉原點();
+		downPiece.徙(downPiece.字範圍().getWidth()
 				* (1.0 - insideShrinkRate) / insideShrinkRate * 0.5,
 				middleValue);
 		return;

@@ -25,21 +25,21 @@ public class 上推黏合模組 extends 平推黏合模組
 	@Override
 	public double 下限初始值()
 	{
-		return insidePiece.getBounds2D().getHeight();
+		return insidePiece.字範圍().getHeight();
 	}
 
 	@Override
 	public double 上限初始值()
 	{
-		return outsidePiece.getBounds2D().getHeight();
+		return outsidePiece.字範圍().getHeight();
 	}
 
 	@Override
 	public boolean 活字是否太接近()
 	{
 		return super.活字是否太接近()
-				|| outsidePiece.getBounds2D().getMinY() > temporaryPiece
-						.getBounds2D().getMinY();
+				|| outsidePiece.字範圍().getMinY() > temporaryPiece
+						.字範圍().getMinY();
 	}
 
 	@Override
@@ -47,12 +47,12 @@ public class 上推黏合模組 extends 平推黏合模組
 	{
 		temporaryPiece = new 平面幾何(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(1.0,
-				middleValue / insidePiece.getBounds2D().getHeight());
-		temporaryPiece.transform(affineTransform);
-		temporaryPiece.moveBy(insidePiece.getBounds2D().getMaxX()
-				- temporaryPiece.getBounds2D().getMaxX(), insidePiece
-				.getBounds2D().getMaxY()
-				- temporaryPiece.getBounds2D().getMaxY());
+				middleValue / insidePiece.字範圍().getHeight());
+		temporaryPiece.縮放(affineTransform);
+		temporaryPiece.徙(insidePiece.字範圍().getMaxX()
+				- temporaryPiece.字範圍().getMaxX(), insidePiece
+				.字範圍().getMaxY()
+				- temporaryPiece.字範圍().getMaxY());
 		return;
 	}
 }

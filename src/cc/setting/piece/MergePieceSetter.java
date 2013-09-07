@@ -44,7 +44,7 @@ public class MergePieceSetter extends SimplePieceSetter
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		活字單元 rectangularArea = new 平面幾何();
-		rectangularArea.setTerritory(tzuModelTerritory);
+		rectangularArea.設目標範圍(tzuModelTerritory);
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
 				parent, chineseCharacterTzu, rectangularArea);
 

@@ -1,9 +1,7 @@
 package cc.moveable_type.rectangular_area;
 
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
 /**
@@ -16,48 +14,26 @@ import java.awt.geom.Rectangle2D;
 public interface 活字單元 extends Shape
 {
 	/**
-	 * 把活字座標移回原點
+	 * 取得活字預計位置及大小
+	 * 
+	 * @return 活字預計位置及大小
 	 */
-	public void moveToOrigin();
-
-	// {
-	// Rectangle2D rectangle2d = this.getBounds2D();
-	// moveBy(-rectangle2d.getX(), -rectangle2d.getY());
-	// return;
-	// }
+	public Rectangle2D.Double 目標範圍();
 
 	/**
-	 * 把活字座標移動指定距離
+	 * 取得活字圖形實際位置及大小
 	 * 
-	 * @param x
-	 *            要移動的水平距離
-	 * @param y
-	 *            要移動的垂直距離
+	 * @return 活字圖形實際位置及大小
 	 */
-
-	public void moveBy(double x, double y);
-
-	// {
-	// AffineTransform affineTransform = new AffineTransform();
-	// affineTransform.setTransform(1, 0, 0, 1, x, y);
-	// this.transform(affineTransform);
-	// return;
-	// }
+	public Rectangle2D 字範圍();
 
 	/**
 	 * 設定活字預計位置及大小
 	 * 
-	 * @param territory
+	 * @param 目標
 	 *            預計位置及大小
 	 */
-
-	public void setTerritory(Rectangle2D territory);
-
-	// {
-	// this.territory = new Rectangle2D.Double(territory.getX(),
-	// territory.getY(), territory.getWidth(), territory.getHeight());
-	// return;
-	// }
+	public void 設目標範圍(Rectangle2D 目標);
 
 	/**
 	 * 設定活字預計位置
@@ -67,13 +43,7 @@ public interface 活字單元 extends Shape
 	 * @param y
 	 *            垂直位置
 	 */
-
-	public void setTerritoryPosition(double x, double y);
-
-	// {
-	// territory.setRect(x, y, territory.getWidth(), territory.getHeight());
-	// return;
-	// }
+	public void 設目標範圍所在(double x, double y);
 
 	/**
 	 * 設定活字預計大小
@@ -83,24 +53,10 @@ public interface 活字單元 extends Shape
 	 * @param height
 	 *            高度
 	 */
+	public void 設目標範圍大細(double width, double height);
 
-	public void setTerritoryDimension(double width, double height);
-
-	// {
-	// territory.setRect(territory.getX(), territory.getY(), width, height);
-	// return;
-	// }
-
-	/**
-	 * 取得活字預計位置及大小
-	 * 
-	 * @return 圖形預計位置及大小
-	 */
-	public Rectangle2D.Double getTerritory();
-
-	// {
-	// return territory;
-	// }
+	/** 共活字的圖形清掉 */
+	public void 圖形重設();
 
 	/**
 	 * 將物件重設，並將底下活字物件組合起來
@@ -110,20 +66,24 @@ public interface 活字單元 extends Shape
 	 */
 	public void 重設並組合活字(活字單元[] 活字物件);
 
-	// {
-	// reset();
-	// for (RectangularArea 活字物件單元 : 活字物件)
-	// {
-	// add(活字物件單元);
-	// }
-	// return;
-	// }
-	public Rectangle2D getBounds2D();
+	/**
+	 * 把活字座標移動指定距離
+	 * 
+	 * @param x
+	 *            要移動的水平距離
+	 * @param y
+	 *            要移動的垂直距離
+	 */
+	public void 徙(double x, double y);
 
-	public Rectangle getBounds();
+	/**
+	 * 把活字的座標移回原點
+	 */
+	public void 徙轉原點();
 
-	public void transform(AffineTransform t);
-	public void add(活字單元 rhs);
-	public void reset();
-	public void subtract(活字單元 rhs);
+	public void 縮放(AffineTransform 縮放矩陣);
+
+	public void 合併活字(活字單元 活字物件);
+
+	public void 減去活字(活字單元 活字物件);
 }

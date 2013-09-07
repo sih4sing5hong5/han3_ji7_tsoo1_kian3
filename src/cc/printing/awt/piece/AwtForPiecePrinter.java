@@ -37,11 +37,11 @@ public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen)
 	{
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
-		graphics2d.translate(pieceMovableTypeWen.getPiece().getTerritory()
-				.getX(), pieceMovableTypeWen.getPiece().getTerritory().getY());
+		graphics2d.translate(pieceMovableTypeWen.getPiece().目標範圍()
+				.getX(), pieceMovableTypeWen.getPiece().目標範圍().getY());
 		graphics2d.draw(pieceMovableTypeWen.getPiece());
-		graphics2d.translate(-pieceMovableTypeWen.getPiece().getTerritory()
-				.getX(), -pieceMovableTypeWen.getPiece().getTerritory().getY());
+		graphics2d.translate(-pieceMovableTypeWen.getPiece().目標範圍()
+				.getX(), -pieceMovableTypeWen.getPiece().目標範圍().getY());
 		return;
 	}
 
@@ -50,14 +50,14 @@ public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
-		graphics2d.translate(pieceMovableTypeTzu.getPiece().getTerritory()
-				.getX(), pieceMovableTypeTzu.getPiece().getTerritory().getY());
+		graphics2d.translate(pieceMovableTypeTzu.getPiece().目標範圍()
+				.getX(), pieceMovableTypeTzu.getPiece().目標範圍().getY());
 		for (int i = 0; i < pieceMovableTypeTzu.getChildren().length; ++i)
 		{
 			pieceMovableTypeTzu.getChildren()[i].print(this);
 		}
-		graphics2d.translate(-pieceMovableTypeTzu.getPiece().getTerritory()
-				.getX(), -pieceMovableTypeTzu.getPiece().getTerritory().getY());
+		graphics2d.translate(-pieceMovableTypeTzu.getPiece().目標範圍()
+				.getX(), -pieceMovableTypeTzu.getPiece().目標範圍().getY());
 		return;
 	}
 }

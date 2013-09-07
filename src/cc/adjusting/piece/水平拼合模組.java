@@ -34,7 +34,7 @@ public class 水平拼合模組 extends 平移拼合模組
 		leftPiece = rectangularAreas[0];
 		rightPiece = rectangularAreas[1];
 		活字單元 greaterPiece = null, smallerPiece = null;
-		if (leftPiece.getBounds2D().getHeight() > rightPiece.getBounds2D()
+		if (leftPiece.字範圍().getHeight() > rightPiece.字範圍()
 				.getHeight())
 		{
 			greaterPiece = leftPiece;
@@ -45,8 +45,8 @@ public class 水平拼合模組 extends 平移拼合模組
 			greaterPiece = rightPiece;
 			smallerPiece = leftPiece;
 		}
-		double value = smallerPiece.getBounds2D().getHeight()
-				/ greaterPiece.getBounds2D().getHeight();
+		double value = smallerPiece.字範圍().getHeight()
+				/ greaterPiece.字範圍().getHeight();
 		if (value > 0.0)
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(1.0,
@@ -59,7 +59,7 @@ public class 水平拼合模組 extends 平移拼合模組
 	@Override
 	public double 上限初始值()
 	{
-		return leftPiece.getBounds2D().getWidth();
+		return leftPiece.字範圍().getWidth();
 	}
 
 	@Override
@@ -71,8 +71,8 @@ public class 水平拼合模組 extends 平移拼合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		rightPiece.moveToOrigin();
-		rightPiece.moveBy(middleValue, 0);
+		rightPiece.徙轉原點();
+		rightPiece.徙(middleValue, 0);
 		return;
 	}
 
@@ -85,7 +85,7 @@ public class 水平拼合模組 extends 平移拼合模組
 	@Override
 	public double 接觸邊長()
 	{
-		return rightPiece.getBounds2D().getHeight();
+		return rightPiece.字範圍().getHeight();
 	}
 
 	@Override

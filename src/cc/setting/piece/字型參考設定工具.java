@@ -95,7 +95,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		{
 			物件活字 = findWenForNoBuiltIn(null);
 		}
-		物件活字.moveToOrigin();// TODO 伊佮這个資訊攏提掉，交予排版系統去處理，但是會有一字問題。
+		物件活字.徙轉原點();// TODO 伊佮這个資訊攏提掉，交予排版系統去處理，但是會有一字問題。
 		return 物件活字;
 	}
 
@@ -152,7 +152,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		PieceMovableType 目前元件 = 部件組合[目前位址];
 		目前位址 = 頭前彼个位址[目前位址];
 		活字單元 rectangularArea = new 平面幾何();
-		rectangularArea.setTerritory(tzuModelTerritory);// TODO 有必要無？會當公家用無？
+		rectangularArea.設目標範圍(tzuModelTerritory);// TODO 有必要無？會當公家用無？
 		while (目前位址 >= 0)
 		{
 			PieceMovableTypeTzu 新元件 = new PieceMovableTypeTzu(null,

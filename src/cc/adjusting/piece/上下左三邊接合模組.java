@@ -23,10 +23,10 @@ public class 上下左三邊接合模組 extends 縮放接合模組
 	public void 變形處理(double middleValue)
 	{
 		super.變形處理(middleValue);
-		temporaryPiece.moveBy(outsidePiece.getBounds2D().getMaxX()
-				- temporaryPiece.getBounds2D().getMaxX(), outsidePiece
-				.getBounds2D().getCenterY()
-				- temporaryPiece.getBounds2D().getCenterY());
+		temporaryPiece.徙(outsidePiece.字範圍().getMaxX()
+				- temporaryPiece.字範圍().getMaxX(), outsidePiece
+				.字範圍().getCenterY()
+				- temporaryPiece.字範圍().getCenterY());
 		return;
 	}
 }

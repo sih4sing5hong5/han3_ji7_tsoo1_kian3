@@ -214,15 +214,15 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		for (活字單元 活字 : 分類.調號)
 			邊仔排齊模組.加新的活字(活字);
 		活字單元 主要活字 = 活字物件.getPiece();
-		主要活字.reset();
-		主要活字.add(主要排齊模組.目前結果());
+		主要活字.圖形重設();
+		主要活字.合併活字(主要排齊模組.目前結果());
 		活字單元 邊仔活字 = 邊仔排齊模組.目前結果();
-		邊仔活字.moveBy(主要活字.getBounds2D().getMaxX() - 邊仔活字.getBounds2D().getMinX()
-				+ 主要活字.getBounds2D().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍()
+		邊仔活字.徙(主要活字.字範圍().getMaxX() - 邊仔活字.字範圍().getMinX()
+				+ 主要活字.字範圍().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍()
 				.getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
 		// 上尾範圍() 對齊範圍()
-		主要活字.add(邊仔活字);
-		主要活字.moveBy(-主要活字.getBounds2D().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
+		主要活字.合併活字(邊仔活字);
+		主要活字.徙(-主要活字.字範圍().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
 		return;
 	}
 
@@ -267,7 +267,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			活字單元 second)
 	{
 		活字單元 rectangularArea = new 平面幾何(first);
-		rectangularArea.subtract(second);
+		rectangularArea.減去活字(second);
 		return !rectangularArea.equals(first);
 	}
 
@@ -289,7 +289,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
 				second);
 		活字單元 rectangularArea = new 平面幾何(first);
-		rectangularArea.add(second);
+		rectangularArea.合併活字(second);
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea);
 		// System.out
@@ -353,13 +353,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public 活字單元 依目標區域調整大細(活字單元 活字物件)
 	{
-		double widthCoefficient = 活字物件.getTerritory().getWidth()
-				/ 活字物件.getBounds2D().getWidth(), heightCoefficient = 活字物件
-				.getTerritory().getHeight() / 活字物件.getBounds2D().getHeight();
+		double widthCoefficient = 活字物件.目標範圍().getWidth()
+				/ 活字物件.字範圍().getWidth(), heightCoefficient = 活字物件
+				.目標範圍().getHeight() / 活字物件.字範圍().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
-		活字物件.moveBy(活字物件.getTerritory().getX(), 活字物件.getTerritory().getY());
+		活字物件.徙(活字物件.目標範圍().getX(), 活字物件.目標範圍().getY());
 		return 活字物件;
 	}
 
@@ -372,17 +372,17 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public 活字單元 依目標懸度調整大細(活字單元 活字物件)
 	{
-		double coefficient = 活字物件.getTerritory().getHeight()
-				/ Math.max(-活字物件.getBounds2D().getMinY(), 活字物件.getBounds2D()
+		double coefficient = 活字物件.目標範圍().getHeight()
+				/ Math.max(-活字物件.字範圍().getMinY(), 活字物件.字範圍()
 						.getMaxY()) / 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(
 				coefficient * 注音譀橫, coefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
-		活字物件.moveBy(活字物件.getTerritory().getX() + 活字物件.getTerritory().getWidth()
-				* 注音徙正爿比例, 活字物件.getTerritory().getY()
-				+ 活字物件.getTerritory().getHeight() / 2.0);
+		活字物件.徙(活字物件.目標範圍().getX() + 活字物件.目標範圍().getWidth()
+				* 注音徙正爿比例, 活字物件.目標範圍().getY()
+				+ 活字物件.目標範圍().getHeight() / 2.0);
 		return 活字物件;
 	}
 
@@ -397,10 +397,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			活字單元 rectangularArea)
 	{
 		活字單元 target = new 平面幾何(rectangularArea);
-		target.setTerritory(target.getBounds2D());
-		double value = Math.min(target.getTerritory().getWidth(), target
-				.getTerritory().getHeight());
-		target.setTerritoryDimension(value, value);
+		target.設目標範圍(target.字範圍());
+		double value = Math.min(target.目標範圍().getWidth(), target
+				.目標範圍().getHeight());
+		target.設目標範圍大細(value, value);
 		return 依目標區域調整大細(target);
 	}
 }

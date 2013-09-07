@@ -22,10 +22,10 @@ public class 四面後接合模組 extends 縮放接合模組
 	public void 變形處理(double middleValue)
 	{
 		super.變形處理(middleValue);
-		temporaryPiece.moveBy(insidePiece.getBounds2D().getCenterX()
-				- temporaryPiece.getBounds2D().getCenterX(), insidePiece
-				.getBounds2D().getCenterY()
-				- temporaryPiece.getBounds2D().getCenterY());
+		temporaryPiece.徙(insidePiece.字範圍().getCenterX()
+				- temporaryPiece.字範圍().getCenterX(), insidePiece
+				.字範圍().getCenterY()
+				- temporaryPiece.字範圍().getCenterY());
 		return;
 	}
 }

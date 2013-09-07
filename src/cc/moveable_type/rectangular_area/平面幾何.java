@@ -18,27 +18,27 @@ public class 平面幾何 extends Area implements 活字單元
 	/**
 	 * 活字預計位置及大小
 	 */
-	private Rectangle2D.Double territory;
+	private Rectangle2D.Double 目標;
 
 	/**
 	 * 建立一個空的活字。
 	 */
 	public 平面幾何()
 	{
-		territory = new Rectangle2D.Double();
+		目標 = new Rectangle2D.Double();
 	}
 
 	/**
 	 * 建立一個空的活字，並用<code>Rectangle2D</code>指定活字預計位置及大小
 	 * 
-	 * @param territory
+	 * @param 目標
 	 *            預計位置及大小
 	 */
 	@Deprecated
-	public 平面幾何(Rectangle2D territory)
+	public 平面幾何(Rectangle2D 目標)
 	{
 		super();
-		setTerritory(territory);
+		設目標範圍(目標);
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class 平面幾何 extends Area implements 活字單元
 	public 平面幾何(Shape s)
 	{
 		super(s);
-		setTerritory(getBounds2D());
+		設目標範圍(字範圍());
 	}
 
 	/**
@@ -62,9 +62,15 @@ public class 平面幾何 extends Area implements 活字單元
 	public 平面幾何(平面幾何 rectangularArea)
 	{
 		super(rectangularArea);
-		setTerritory(rectangularArea.getTerritory());
+		設目標範圍(rectangularArea.目標範圍());
 	}
 
+	/**
+	 * 建立一個和<code>活字單元</code>相同的活字。
+	 * 
+	 * @param rectangularArea
+	 *            參考的活字，假設物件型態是<code>平面幾何</code>
+	 */
 	public 平面幾何(活字單元 rectangularArea)
 	{
 		this((平面幾何) rectangularArea);
@@ -75,53 +81,42 @@ public class 平面幾何 extends Area implements 活字單元
 	 * 
 	 * @param rectangularArea
 	 *            參考的活字
-	 * @param territory
+	 * @param 目標
 	 *            預計位置及大小
 	 */
-	public 平面幾何(平面幾何 rectangularArea, Rectangle2D territory)
+	public 平面幾何(平面幾何 rectangularArea, Rectangle2D 目標)
 	{
 		super(rectangularArea);
-		setTerritory(territory);
+		設目標範圍(目標);
 	}
 
 	/**
-	 * 把活字座標移回原點
-	 */
-	public void moveToOrigin()
-	{
-		Rectangle2D rectangle2d = this.getBounds2D();
-		moveBy(-rectangle2d.getX(), -rectangle2d.getY());
-		return;
-	}
-
-	/**
-	 * 把活字座標移動指定距離
+	 * 取得活字預計位置及大小
 	 * 
-	 * @param x
-	 *            要移動的水平距離
-	 * @param y
-	 *            要移動的垂直距離
+	 * @return 圖形預計位置及大小
 	 */
-
-	public void moveBy(double x, double y)
+	@Override
+	public Rectangle2D.Double 目標範圍()
 	{
-		AffineTransform affineTransform = new AffineTransform();
-		affineTransform.setTransform(1, 0, 0, 1, x, y);
-		this.transform(affineTransform);
-		return;
+		return 目標;
+	}
+
+	public Rectangle2D 字範圍()
+	{
+		return super.getBounds2D();
 	}
 
 	/**
 	 * 設定活字預計位置及大小
 	 * 
-	 * @param territory
+	 * @param 目標
 	 *            預計位置及大小
 	 */
-
-	public void setTerritory(Rectangle2D territory)
+	@Override
+	public void 設目標範圍(Rectangle2D 目標)
 	{
-		this.territory = new Rectangle2D.Double(territory.getX(),
-				territory.getY(), territory.getWidth(), territory.getHeight());
+		this.目標 = new Rectangle2D.Double(目標.getX(), 目標.getY(), 目標.getWidth(),
+				目標.getHeight());
 		return;
 	}
 
@@ -133,10 +128,10 @@ public class 平面幾何 extends Area implements 活字單元
 	 * @param y
 	 *            垂直位置
 	 */
-
-	public void setTerritoryPosition(double x, double y)
+	@Override
+	public void 設目標範圍所在(double x, double y)
 	{
-		territory.setRect(x, y, territory.getWidth(), territory.getHeight());
+		目標.setRect(x, y, 目標.getWidth(), 目標.getHeight());
 		return;
 	}
 
@@ -148,36 +143,16 @@ public class 平面幾何 extends Area implements 活字單元
 	 * @param height
 	 *            高度
 	 */
-
-	public void setTerritoryDimension(double width, double height)
+	@Override
+	public void 設目標範圍大細(double width, double height)
 	{
-		territory.setRect(territory.getX(), territory.getY(), width, height);
+		目標.setRect(目標.getX(), 目標.getY(), width, height);
 		return;
 	}
 
-	/**
-	 * 取得活字預計位置及大小
-	 * 
-	 * @return 圖形預計位置及大小
-	 */
-	public Rectangle2D.Double getTerritory()
+	public void 圖形重設()
 	{
-		return territory;
-	}
-
-	/**
-	 * 將物件重設，並將底下活字物件組合起來
-	 * 
-	 * @param 活字物件
-	 *            合體活字底下的活字物件
-	 */
-	public void 重設並組合活字(平面幾何[] 活字物件)
-	{
-		reset();
-		for (活字單元 活字物件單元 : 活字物件)
-		{
-			add(活字物件單元);
-		}
+		super.reset();
 		return;
 	}
 
@@ -190,8 +165,58 @@ public class 平面幾何 extends Area implements 活字單元
 			throw new InvalidParameterException();
 	}
 
+	/**
+	 * 將物件重設，並將底下活字物件組合起來
+	 * 
+	 * @param 活字物件
+	 *            合體活字底下的活字物件
+	 */
+	public void 重設並組合活字(平面幾何[] 活字物件)
+	{
+		圖形重設();
+		for (活字單元 活字物件單元 : 活字物件)
+		{
+			合併活字(活字物件單元);
+		}
+		return;
+	}
+
+	/**
+	 * 把活字座標移動指定距離
+	 * 
+	 * @param x
+	 *            要移動的水平距離
+	 * @param y
+	 *            要移動的垂直距離
+	 */
 	@Override
-	public void add(活字單元 活字物件)
+	public void 徙(double x, double y)
+	{
+		AffineTransform affineTransform = new AffineTransform();
+		affineTransform.setTransform(1, 0, 0, 1, x, y);
+		this.縮放(affineTransform);
+		return;
+	}
+
+	/**
+	 * 把活字座標移回原點
+	 */
+	@Override
+	public void 徙轉原點()
+	{
+		Rectangle2D rectangle2d = this.字範圍();
+		徙(-rectangle2d.getX(), -rectangle2d.getY());
+		return;
+	}
+
+	public void 縮放(AffineTransform 縮放矩陣)
+	{
+		super.transform(縮放矩陣);
+		return;
+	}
+
+	@Override
+	public void 合併活字(活字單元 活字物件)
 	{
 		if (活字物件 instanceof 平面幾何)
 			add((Area) 活字物件);
@@ -200,7 +225,7 @@ public class 平面幾何 extends Area implements 活字單元
 	}
 
 	@Override
-	public void subtract(活字單元 活字物件)
+	public void 減去活字(活字單元 活字物件)
 	{
 		if (活字物件 instanceof 平面幾何)
 			subtract((Area) 活字物件);

@@ -29,16 +29,16 @@ class 注音間隔模組 extends 注音排齊模組
 	@Override
 	void 加新的活字(活字單元 新活字)
 	{
-		double 頂一个中心懸度 = 上尾活字.getBounds2D().getCenterY();
-		double 頂一个活字大細 = Math.max(上尾活字.getBounds2D().getWidth(), 上尾活字
-				.getBounds2D().getHeight());
-		累積活字.add(上尾活字);
+		double 頂一个中心懸度 = 上尾活字.字範圍().getCenterY();
+		double 頂一个活字大細 = Math.max(上尾活字.字範圍().getWidth(), 上尾活字
+				.字範圍().getHeight());
+		累積活字.合併活字(上尾活字);
 		上尾活字 = 新活字;
-		double 活字大細 = Math.max(上尾活字.getBounds2D().getWidth(), 上尾活字
-				.getBounds2D().getHeight());
-		上尾活字.moveBy(累積活字.getBounds2D().getCenterX()
-				- 上尾活字.getBounds2D().getCenterX(), 頂一个中心懸度
-				- 上尾活字.getBounds2D().getCenterY() + Math.max(頂一个活字大細, 活字大細)
+		double 活字大細 = Math.max(上尾活字.字範圍().getWidth(), 上尾活字
+				.字範圍().getHeight());
+		上尾活字.徙(累積活字.字範圍().getCenterX()
+				- 上尾活字.字範圍().getCenterX(), 頂一个中心懸度
+				- 上尾活字.字範圍().getCenterY() + Math.max(頂一个活字大細, 活字大細)
 				* 間隔寬度);// TODO 人工參數
 		if (上尾活字會當提來對齊無())
 			對齊活字 = 上尾活字;

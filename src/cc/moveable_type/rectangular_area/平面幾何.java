@@ -65,6 +65,11 @@ public class 平面幾何 extends Area implements 活字單元
 		setTerritory(rectangularArea.getTerritory());
 	}
 
+	public 平面幾何(活字單元 rectangularArea)
+	{
+		this((平面幾何) rectangularArea);
+	}
+
 	/**
 	 * 用<code>Shape</code>建立一個相同形狀的活字， 並用<code>Rectangle2D</code>指定目標位置及大小。
 	 * 

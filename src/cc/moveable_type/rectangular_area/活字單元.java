@@ -85,5 +85,6 @@ public interface 活字單元 extends Shape
 
 	public void 合併活字(活字單元 活字物件);
 
+	@Deprecated
 	public void 減去活字(活字單元 活字物件);
 }

@@ -17,13 +17,13 @@ abstract public class Awt測試樣板 extends JPanel
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
 	/** 視窗寬度 */
-	protected static final int WIDTH = 1440;
+	protected static final int WIDTH = 1300;
 	/** 視窗高度 */
-	protected static final int HEIGHT = 1050;
+	protected static final int HEIGHT = 700;
 	/** 字型大小 */
 	static final int TYPE_SIZE = 75;
 	/** 每行字數 */
-	static final int LINE_SIZE = 12;
+	static final int LINE_SIZE = 8;
 	/** 測試漢字 */
 	static String word = /* "    ⿰禾火秋⿰⿰火牙阝"; */"一百二十三尺" + "秋漿國變務森" + "⿰禾火⿱將水⿴囗或"
 			+ "⿱⿰⿰糹言糹攵⿰矛⿱攵力⿱木⿰木木" + "⿱立⿱日十⿱⿱立日十章輻⿰車⿱一⿱口田⿰⿱十⿱田十⿱一⿱口田"

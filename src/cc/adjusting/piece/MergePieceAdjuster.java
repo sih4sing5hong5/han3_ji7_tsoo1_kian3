@@ -266,9 +266,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected boolean areIntersected(活字單元 first,
 			活字單元 second)
 	{
-		活字單元 rectangularArea = new 平面幾何(first);
+		平面幾何 rectangularArea = new 平面幾何(first);
+		平面幾何 rectangularArea2 = new 平面幾何(first);
 		rectangularArea.減去活字(second);
-		return !rectangularArea.equals(first);
+//		return true;
+//		return false;
+		return !rectangularArea.equals(rectangularArea2);
 	}
 
 	/**

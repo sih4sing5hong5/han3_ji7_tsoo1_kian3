@@ -32,6 +32,7 @@ import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
+import cc.setting.piece.MergePieceSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.用資料庫查展開式的通用字型編號;
@@ -87,14 +88,15 @@ public class AwtTestExample extends Awt測試樣板
 		看時工具.setLogger(記錄工具);
 
 		// word = "⿰因⿰⿴囗或";
-//		word = "⿳⿳⿳˙ㄆㄨˊ⿳⿳ㄅㄧㄚ⿳⿳⿳ㄅㄧㄚˋ⿳⿳⿳ㄅㄧㄚ˪⿳⿳⿳ㄅㄧㄚㆷ⿳⿳⿳ㄅㄧㄚˊ⿳⿳⿳ㄅㄧㄚ˫⿳⿳⿳⿳ㄅㄧㄚ㆐ㆷ⿳⿳⿳⿳ㄅㄧㄚㆷ㆐⿳⿳⿳˙ㄅㄧㄚ⿳⿳⿳ㄅㄧㄚ^"
-//				+ "⿳⿳⿳˙ㄆㄨˊ⿳ㆠㄧ⿳⿳ㆠㄧˋ⿳⿳ㆠㄧ˪⿳⿳ㆠㄧㆷ⿳⿳ㆠㄧˊ⿳⿳ㆠㄧ˫⿳⿳⿳ㆠㄧ㆐ㆷ⿳⿳⿳ㆠㄧㆷ㆐⿳⿳˙ㆠㄧ⿳⿳ㆠㄧ^"
-//				+ "⿳⿳⿳˙ㄆㄨˊ⿳⿳⿳˙ㄆㄨˊㆬ⿳ㆬ ⿳ㆬˋ⿳ㆬ˪⿳ㆬㆷ⿳ㆬˊ⿳ㆬ˫⿳⿳ㆬ㆐ㆷ⿳⿳ㆬㆷ㆐⿳˙ㆬ⿳ㆬ^"
-//				+ "⿰⿰⿱⿱⿱我薛丞宏愛⿱文莉⿰真的⿰真的⿰⿻真甲的⿰⿻真乙的"
-//				+ "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ "
-//				+ "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
-//				+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐";
-//		word="⿴辶咼";
+		// word =
+		// "⿳⿳⿳˙ㄆㄨˊ⿳⿳ㄅㄧㄚ⿳⿳⿳ㄅㄧㄚˋ⿳⿳⿳ㄅㄧㄚ˪⿳⿳⿳ㄅㄧㄚㆷ⿳⿳⿳ㄅㄧㄚˊ⿳⿳⿳ㄅㄧㄚ˫⿳⿳⿳⿳ㄅㄧㄚ㆐ㆷ⿳⿳⿳⿳ㄅㄧㄚㆷ㆐⿳⿳⿳˙ㄅㄧㄚ⿳⿳⿳ㄅㄧㄚ^"
+		// + "⿳⿳⿳˙ㄆㄨˊ⿳ㆠㄧ⿳⿳ㆠㄧˋ⿳⿳ㆠㄧ˪⿳⿳ㆠㄧㆷ⿳⿳ㆠㄧˊ⿳⿳ㆠㄧ˫⿳⿳⿳ㆠㄧ㆐ㆷ⿳⿳⿳ㆠㄧㆷ㆐⿳⿳˙ㆠㄧ⿳⿳ㆠㄧ^"
+		// + "⿳⿳⿳˙ㄆㄨˊ⿳⿳⿳˙ㄆㄨˊㆬ⿳ㆬ ⿳ㆬˋ⿳ㆬ˪⿳ㆬㆷ⿳ㆬˊ⿳ㆬ˫⿳⿳ㆬ㆐ㆷ⿳⿳ㆬㆷ㆐⿳˙ㆬ⿳ㆬ^"
+		// + "⿰⿰⿱⿱⿱我薛丞宏愛⿱文莉⿰真的⿰真的⿰⿻真甲的⿰⿻真乙的"
+		// + "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ "
+		// + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
+		// + "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐";
+//		word = "一百百";
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
 																		// 換專門查的使用者
 		看時工具.start("初使化");
@@ -119,6 +121,8 @@ public class AwtTestExample extends Awt測試樣板
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 		for (ChineseCharacter 部件 : ccArray)
 		{
+			System.out.println(word);
+			System.out.println(Character.toChars(部件.getCodePoint()));
 			組字式部件 組字部件 = (組字式部件) 部件;
 			組字部件.建立組字式(組字式建立工具);
 			// 記錄工具.debug(組字部件.提到組字式());
@@ -142,6 +146,13 @@ public class AwtTestExample extends Awt測試樣板
 				new FontRenderContext(new AffineTransform(),
 						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+//		setter = new MergePieceSetter(
+//				全字庫正宋體,
+//				測試屬性,
+//				TYPE_SIZE,
+//				new FontRenderContext(new AffineTransform(),
+//						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+//						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{

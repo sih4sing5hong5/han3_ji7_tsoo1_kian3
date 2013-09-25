@@ -363,6 +363,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
+//		//TODO
+//		活字物件.縮放(shrinkTransform);
+//		活字物件.徙轉原點();
 		活字物件.徙(活字物件.目標範圍().getX(), 活字物件.目標範圍().getY());
 		return 活字物件;
 	}

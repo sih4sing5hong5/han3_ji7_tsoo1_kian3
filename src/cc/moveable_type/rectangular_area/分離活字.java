@@ -175,6 +175,8 @@ public class 分離活字 implements 活字單元
 	@Override
 	public void 畫佇(Graphics2D 布)
 	{
+		System.out.println(字範圍());
+		System.out.println(目標範圍());
 		for (平面幾何 幾何 : 字)
 			布.draw(幾何);
 		return;

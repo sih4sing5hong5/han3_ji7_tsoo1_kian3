@@ -39,7 +39,7 @@ public class AwtForPiecePrinter implements ChineseCharacterTypePrinter
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
 		graphics2d.translate(pieceMovableTypeWen.getPiece().目標範圍()
 				.getX(), pieceMovableTypeWen.getPiece().目標範圍().getY());
-		graphics2d.draw(pieceMovableTypeWen.getPiece());
+		pieceMovableTypeWen.getPiece().畫佇(graphics2d);
 		graphics2d.translate(-pieceMovableTypeWen.getPiece().目標範圍()
 				.getX(), -pieceMovableTypeWen.getPiece().目標範圍().getY());
 		return;

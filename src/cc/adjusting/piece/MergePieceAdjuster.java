@@ -218,8 +218,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		主要活字.合併活字(主要排齊模組.目前結果());
 		活字單元 邊仔活字 = 邊仔排齊模組.目前結果();
 		邊仔活字.徙(主要活字.字範圍().getMaxX() - 邊仔活字.字範圍().getMinX()
-				+ 主要活字.字範圍().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍()
-				.getMinY() - 邊仔排齊模組.對齊範圍().getCenterY());
+				+ 主要活字.字範圍().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍().getMinY()
+				- 邊仔排齊模組.對齊範圍().getCenterY());
 		// 上尾範圍() 對齊範圍()
 		主要活字.合併活字(邊仔活字);
 		主要活字.徙(-主要活字.字範圍().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
@@ -263,14 +263,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            第二個活字物件
 	 * @return 是否重疊
 	 */
-	protected boolean areIntersected(活字單元 first,
-			活字單元 second)
+	protected boolean areIntersected(活字單元 first, 活字單元 second)
 	{
 		平面幾何 rectangularArea = new 平面幾何(first);
 		平面幾何 rectangularArea2 = new 平面幾何(first);
 		rectangularArea.減去活字(second);
-//		return true;
-//		return false;
+		// return true;
+		// return false;
 		return !rectangularArea.equals(rectangularArea2);
 	}
 
@@ -285,16 +284,16 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            用來比較消失邊長的邊界長度
 	 * @return 適合接近的係數
 	 */
-	protected double nonsuitableToClose(活字單元 first,
-			活字單元 second, double boundaryLength)
+	protected double nonsuitableToClose(活字單元 first, 活字單元 second,
+			double boundaryLength)
 	{
 		// TODO 愛加速
-		ShapeInformation firstInformation = new ShapeInformation(first), secondInformation = new ShapeInformation(
-				second);
+		ShapeInformation firstInformation = new ShapeInformation(first.目前的字體()), secondInformation = new ShapeInformation(
+				second.目前的字體());
 		活字單元 rectangularArea = new 平面幾何(first);
 		rectangularArea.合併活字(second);
 		ShapeInformation shapeInformation = new ShapeInformation(
-				rectangularArea);
+				rectangularArea.目前的字體());
 		// System.out
 		// .println("s="
 		// + shapeInformation.getApproximativeCircumference()
@@ -338,7 +337,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 					// RectangularArea a = new CopyOfRectangularArea(
 					// basicStroke.createStrokedShape(物件活字.getPiece()
 					// .getTerritory()));
-					// a.add(依目標懸度調整大細(new CopyOfRectangularArea(物件活字.getPiece())));
+					// a.add(依目標懸度調整大細(new
+					// CopyOfRectangularArea(物件活字.getPiece())));
 					// return a;
 					return 依目標懸度調整大細(new 平面幾何(物件活字.getPiece()));
 				}
@@ -357,8 +357,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	public 活字單元 依目標區域調整大細(活字單元 活字物件)
 	{
 		double widthCoefficient = 活字物件.目標範圍().getWidth()
-				/ 活字物件.字範圍().getWidth(), heightCoefficient = 活字物件
-				.目標範圍().getHeight() / 活字物件.字範圍().getHeight();
+				/ 活字物件.字範圍().getWidth(), heightCoefficient = 活字物件.目標範圍()
+				.getHeight() / 活字物件.字範圍().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
@@ -376,16 +376,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	public 活字單元 依目標懸度調整大細(活字單元 活字物件)
 	{
 		double coefficient = 活字物件.目標範圍().getHeight()
-				/ Math.max(-活字物件.字範圍().getMinY(), 活字物件.字範圍()
-						.getMaxY()) / 2.0;
+				/ Math.max(-活字物件.字範圍().getMinY(), 活字物件.字範圍().getMaxY()) / 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(
 				coefficient * 注音譀橫, coefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
-		活字物件.徙(活字物件.目標範圍().getX() + 活字物件.目標範圍().getWidth()
-				* 注音徙正爿比例, 活字物件.目標範圍().getY()
-				+ 活字物件.目標範圍().getHeight() / 2.0);
+		活字物件.徙(活字物件.目標範圍().getX() + 活字物件.目標範圍().getWidth() * 注音徙正爿比例, 活字物件
+				.目標範圍().getY() + 活字物件.目標範圍().getHeight() / 2.0);
 		return 活字物件;
 	}
 
@@ -396,13 +394,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public 活字單元 getPieceWithSquareTerritory(
-			活字單元 rectangularArea)
+	public 活字單元 getPieceWithSquareTerritory(活字單元 rectangularArea)
 	{
 		活字單元 target = new 平面幾何(rectangularArea);
 		target.設目標範圍(target.字範圍());
-		double value = Math.min(target.目標範圍().getWidth(), target
-				.目標範圍().getHeight());
+		double value = Math.min(target.目標範圍().getWidth(), target.目標範圍()
+				.getHeight());
 		target.設目標範圍大細(value, value);
 		return 依目標區域調整大細(target);
 	}

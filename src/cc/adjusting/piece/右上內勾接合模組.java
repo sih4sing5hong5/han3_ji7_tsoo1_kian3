@@ -44,10 +44,7 @@ public class 右上內勾接合模組 extends 縮放接合模組
 	 */
 	public void 設定外部活字資訊(活字單元 外部活字)
 	{
-		尋找最低點 記錄 = new 尋找最低點();
-		PathTravel pathTravel = new PathTravel(new 控制點循訪(記錄));
-		pathTravel.travelOn(new GeneralPath(外部活字));
-		縮放基準點 = 記錄.取得最低點();
+		縮放基準點 = 外部活字.揣上低的點();
 		double 外部活字半徑 = 調整工具.computePieceRadius(外部活字);
 		縮放基準點.subLocation(0, 外部活字半徑 * 縮放點離最低點的半徑倍率);
 		return;

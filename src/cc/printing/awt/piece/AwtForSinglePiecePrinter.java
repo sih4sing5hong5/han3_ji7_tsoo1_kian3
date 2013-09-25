@@ -37,7 +37,7 @@ public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen)
 	{
 		PieceMovableTypeWen pieceMovableTypeWen = (PieceMovableTypeWen) chineseCharacterMovableTypeWen;
-		graphics2d.draw(pieceMovableTypeWen.getPiece());
+		pieceMovableTypeWen.getPiece().畫佇(graphics2d);
 		return;
 	}
 
@@ -46,7 +46,7 @@ public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
-		graphics2d.draw(pieceMovableTypeTzu.getPiece());
+		pieceMovableTypeTzu.getPiece().畫佇(graphics2d);
 		return;
 	}
 
@@ -58,7 +58,7 @@ public class AwtForSinglePiecePrinter implements ChineseCharacterTypePrinter
 	 */
 	public void printPiece(活字單元 rectangularArea)
 	{
-		graphics2d.draw(rectangularArea);
+		rectangularArea.畫佇(graphics2d);
 		return;
 	}
 }

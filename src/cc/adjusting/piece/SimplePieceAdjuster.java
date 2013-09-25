@@ -114,7 +114,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	protected double computePieceRadius(活字單元 rectangularArea)
 	{
 		ShapeInformation shapeInformation = new ShapeInformation(
-				rectangularArea);
+				rectangularArea.目前的字體());
 		return shapeInformation.getApproximativeRegion()
 				/ shapeInformation.getApproximativeCircumference();
 	}
@@ -173,7 +173,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 			double strokeWidth)
 	{
 		Stroke stroke = chineseCharacterTypeBolder.getStroke(strokeWidth);
-		return new 平面幾何(stroke.createStrokedShape(rectangularArea));
+		return new 平面幾何(stroke.createStrokedShape(rectangularArea.目前的字體()));
 	}
 
 	/**

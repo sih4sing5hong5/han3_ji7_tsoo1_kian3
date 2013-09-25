@@ -1,10 +1,15 @@
 package cc.moveable_type.rectangular_area;
 
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 import java.security.InvalidParameterException;
+
+import cc.adjusting.piece.尋找最低點;
 
 /**
  * 活字型態。把<code>AreaTool</code>和預設位置大小整合起來，使用時比較方便。把<code>Area</code>
@@ -101,9 +106,11 @@ public class 平面幾何 extends Area implements 活字單元
 		return 目標;
 	}
 
-	public Rectangle2D 字範圍()
+	public Rectangle2D.Double 字範圍()
 	{
-		return super.getBounds2D();
+		Rectangle.Double 範圍 = new Rectangle.Double();
+		範圍.setRect(super.getBounds2D());
+		return 範圍;
 	}
 
 	/**
@@ -231,5 +238,25 @@ public class 平面幾何 extends Area implements 活字單元
 			subtract((Area) 活字物件);
 		else
 			throw new InvalidParameterException();
+	}
+
+	@Override
+	public void 畫佇(Graphics2D 布)
+	{
+		布.draw(this);
+		return;
+	}
+	@Override
+	public Point2DWithVector 揣上低的點()
+	{
+		尋找最低點 記錄 = new 尋找最低點();
+		PathTravel pathTravel = new PathTravel(new 控制點循訪(記錄));
+		pathTravel.travelOn(new GeneralPath(this));
+		return 記錄.取得最低點();
+	}
+	@Override
+	public 平面幾何 目前的字體()
+	{
+		return this;
 	}
 }

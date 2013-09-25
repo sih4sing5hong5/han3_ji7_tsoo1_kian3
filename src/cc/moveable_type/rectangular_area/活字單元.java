@@ -1,8 +1,12 @@
 package cc.moveable_type.rectangular_area;
 
+import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
+
+import cc.adjusting.piece.尋找最低點;
 
 /**
  * 活字型態。把<code>AreaTool</code>和預設位置大小整合起來，使用時比較方便。把<code>Area</code>
@@ -11,7 +15,7 @@ import java.awt.geom.Rectangle2D;
  * 
  * @author Ihc
  */
-public interface 活字單元 extends Shape
+public interface 活字單元// extends Shape
 {
 	/**
 	 * 取得活字預計位置及大小
@@ -25,7 +29,7 @@ public interface 活字單元 extends Shape
 	 * 
 	 * @return 活字圖形實際位置及大小
 	 */
-	public Rectangle2D 字範圍();
+	public Rectangle2D.Double 字範圍();
 
 	/**
 	 * 設定活字預計位置及大小
@@ -87,4 +91,11 @@ public interface 活字單元 extends Shape
 
 	@Deprecated
 	public void 減去活字(活字單元 活字物件);
+	
+	public void 畫佇(Graphics2D 布);
+
+	public Point2DWithVector 揣上低的點();
+	
+	@Deprecated
+	public 平面幾何 目前的字體();
 }

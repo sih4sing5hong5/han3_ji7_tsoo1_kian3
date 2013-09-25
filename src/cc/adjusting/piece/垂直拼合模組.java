@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.活字單元;
 
 /**
@@ -97,7 +97,7 @@ public class 垂直拼合模組 extends 平移拼合模組
 	@Override
 	public 活字單元[] 取得調整後活字物件()
 	{
-		活字單元[] rectangularAreas = new 平面幾何[2];
+		活字單元[] rectangularAreas = new 分離活字[2];
 		rectangularAreas[0] = upPiece;
 		rectangularAreas[1] = downPiece;
 		return rectangularAreas;

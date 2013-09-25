@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.Rectangle2D;
 
-import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.活字單元;
 
 /**
@@ -22,9 +22,9 @@ abstract class 注音排放模組
 	/** 建立一个排注音的物件。 */
 	注音排放模組()
 	{
-		累積活字 = new 平面幾何();
-		上尾活字 = new 平面幾何();
-		對齊活字 = new 平面幾何();
+		累積活字 = new 分離活字();
+		上尾活字 = new 分離活字();
+		對齊活字 = new 分離活字();
 	}
 
 	/**
@@ -42,7 +42,7 @@ abstract class 注音排放模組
 	 */
 	活字單元 目前結果()
 	{
-		活字單元 結果 = new 平面幾何(累積活字);
+		活字單元 結果 = new 分離活字(累積活字);
 		結果.合併活字(上尾活字);
 		return 結果;
 	}

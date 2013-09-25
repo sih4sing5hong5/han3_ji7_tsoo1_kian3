@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.活字單元;
 
 /**
@@ -48,7 +48,7 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new 平面幾何(insidePiece);
+		temporaryPiece = new 分離活字(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.字範圍().getHeight());
 		temporaryPiece.縮放(affineTransform);
@@ -96,7 +96,7 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	@Override
 	public 活字單元[] 取得調整後活字物件()
 	{
-		活字單元[] rectangularAreas = new 平面幾何[2];
+		活字單元[] rectangularAreas = new 分離活字[2];
 		rectangularAreas[0] = outsidePiece;
 		rectangularAreas[1] = insidePiece;
 		return rectangularAreas;

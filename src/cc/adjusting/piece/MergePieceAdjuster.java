@@ -11,6 +11,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.活字單元;
 import cc.moveable_type.rectangular_area.ShapeInformation;
@@ -265,9 +266,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	protected boolean areIntersected(活字單元 first, 活字單元 second)
 	{
-		平面幾何 rectangularArea = new 平面幾何(first);
-		平面幾何 rectangularArea2 = new 平面幾何(first);
-		rectangularArea.減去活字(second);
+		平面幾何 rectangularArea = first.目前的字體();
+		平面幾何 rectangularArea2 = new 平面幾何(rectangularArea);
+		rectangularArea.減去活字(second.目前的字體());
 		// return true;
 		// return false;
 		return !rectangularArea.equals(rectangularArea2);
@@ -340,11 +341,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 					// a.add(依目標懸度調整大細(new
 					// CopyOfRectangularArea(物件活字.getPiece())));
 					// return a;
-					return 依目標懸度調整大細(new 平面幾何(物件活字.getPiece()));
+					return 依目標懸度調整大細(new 分離活字(物件活字.getPiece()));
 				}
 			}
 		}
-		return 依目標區域調整大細(new 平面幾何(物件活字.getPiece()));
+		return 依目標區域調整大細(new 分離活字(物件活字.getPiece()));
 	}
 
 	/**
@@ -396,7 +397,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public 活字單元 getPieceWithSquareTerritory(活字單元 rectangularArea)
 	{
-		活字單元 target = new 平面幾何(rectangularArea);
+		活字單元 target = new 分離活字(rectangularArea);
 		target.設目標範圍(target.字範圍());
 		double value = Math.min(target.目標範圍().getWidth(), target.目標範圍()
 				.getHeight());

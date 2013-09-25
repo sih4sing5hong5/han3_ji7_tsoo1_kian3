@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.平面幾何;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 讓第二個活字往右延伸的模組，碰到第一個活字或是邊界即停止。
@@ -45,7 +45,7 @@ public class 右推黏合模組 extends 平推黏合模組
 	@Override
 	public void 變形處理(double middleValue)
 	{
-		temporaryPiece = new 平面幾何(insidePiece);
+		temporaryPiece = new 分離活字(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(middleValue
 				/ insidePiece.字範圍().getWidth(), 1.0);
 		temporaryPiece.縮放(affineTransform);

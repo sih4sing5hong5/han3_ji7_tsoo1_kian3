@@ -22,6 +22,8 @@ public class 分離活字 implements 活字單元
 	{
 		字 = new Vector<平面幾何>();
 		原本字體 = new Vector<平面幾何>();
+		這馬 = new Rectangle.Double();
+		目標 = new Rectangle.Double();
 	}
 
 	public 分離活字(平面幾何 幾何)
@@ -29,10 +31,13 @@ public class 分離活字 implements 活字單元
 		this();
 		字.add(幾何);
 		原本字體.add(幾何);
-		這馬 = new Rectangle.Double();
 		字範圍();
 	}
 
+	public 分離活字(活字單元 活字)
+	{
+		this((分離活字)活字);
+	}
 	public 分離活字(分離活字 活字)
 	{
 		字 = new Vector<平面幾何>(活字.字);

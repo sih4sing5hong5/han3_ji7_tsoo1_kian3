@@ -5,6 +5,7 @@ package cc.moveable_type.piece;
 
 import cc.core.ChineseCharacterTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.活字單元;
 
@@ -56,7 +57,7 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	{
 		活字單元[] 活字物件 = new 活字單元[getChildren().length];
 		for (int i = 0; i < getChildren().length; ++i)
-			活字物件[i] = new 平面幾何(
+			活字物件[i] = new 分離活字((分離活字)
 					((PieceMovableType) getChildren()[i]).getPiece());
 		return 活字物件;
 	}

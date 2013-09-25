@@ -16,6 +16,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.活字單元;
 import cc.tool.database.字串與控制碼轉換;
@@ -71,8 +72,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterWen chineseCharacterWen)
 	{
-		活字單元 物件活字 = 查物件活字(new 通用字型號碼(
-				chineseCharacterWen.getCodePoint()));
+		活字單元 物件活字 = 查物件活字(new 通用字型號碼(chineseCharacterWen.getCodePoint()));
 		return new PieceMovableTypeWen(parent, chineseCharacterWen, 物件活字);
 	}
 
@@ -89,7 +89,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		if (字體.有這个字型無(字型號碼))
 		{
 			GlyphVector glyphVector = 字體.提這个字型(字體渲染屬性, 字型號碼);
-			物件活字 = new 平面幾何(glyphVector.getOutline());
+			物件活字 = new 分離活字(new 平面幾何(glyphVector.getOutline()));
 		}
 		else
 		{
@@ -151,8 +151,9 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		int 目前位址 = 部件組合.length - 1;
 		PieceMovableType 目前元件 = 部件組合[目前位址];
 		目前位址 = 頭前彼个位址[目前位址];
-		活字單元 rectangularArea = new 平面幾何();
+		活字單元 rectangularArea = new 分離活字(new 平面幾何());
 		rectangularArea.設目標範圍(tzuModelTerritory);// TODO 有必要無？會當公家用無？
+		rectangularArea.設字範圍(tzuModelTerritory);// TODO 有必要無？會當公家用無？
 		while (目前位址 >= 0)
 		{
 			PieceMovableTypeTzu 新元件 = new PieceMovableTypeTzu(null,

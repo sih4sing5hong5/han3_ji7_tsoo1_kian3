@@ -1,6 +1,7 @@
 package cc.moveable_type.rectangular_area;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.security.InvalidParameterException;
@@ -17,6 +18,31 @@ public class 分離活字 implements 活字單元
 	/** 目標範圍，上尾印的時陣愛看印偌大 */
 	private Rectangle2D.Double 目標;
 
+	public 分離活字()
+	{
+		字 = new Vector<平面幾何>();
+		原本字體 = new Vector<平面幾何>();
+	}
+
+	public 分離活字(平面幾何 幾何)
+	{
+		this();
+		字.add(幾何);
+		原本字體.add(幾何);
+		這馬 = new Rectangle.Double();
+		字範圍();
+	}
+
+	public 分離活字(分離活字 活字)
+	{
+		字 = new Vector<平面幾何>(活字.字);
+		原本字體 = new Vector<平面幾何>(活字.原本字體);
+		這馬 = new Rectangle.Double();
+		這馬.setRect(活字.這馬);
+		目標 = new Rectangle.Double();
+		目標.setRect(活字.目標);
+	}
+
 	@Override
 	public Rectangle2D.Double 目標範圍()
 	{
@@ -29,6 +55,16 @@ public class 分離活字 implements 活字單元
 		for (平面幾何 平面 : 字)
 			這馬.setRect(這馬.createUnion(平面.getBounds2D()));
 		return 這馬;
+	}
+
+	@Override
+	public void 設字範圍(Rectangle2D 目標)
+	{
+		// TODO Auto-generated method stub
+		這馬 = new Rectangle.Double();
+		這馬.setRect(目標);
+		字範圍();
+		return;
 	}
 
 	@Override

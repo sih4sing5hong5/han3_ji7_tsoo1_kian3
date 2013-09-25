@@ -13,9 +13,10 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
+import cc.moveable_type.rectangular_area.ShapeInformation;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.活字單元;
-import cc.moveable_type.rectangular_area.ShapeInformation;
 import cc.程式記錄.漢字組建記錄工具包;
 
 /**
@@ -49,7 +50,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 			double precision)
 	{
 		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
-		
+
 		this.chineseCharacterTypeBolder = chineseCharacterTypeBolder;
 		this.precision = precision;
 	}
@@ -140,16 +141,15 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            粗細係數
 	 * @return 筆劃加寬度
 	 */
-	protected double getStorkeWidthByCoefficient(
-			活字單元 rectangularArea, double originBoldCoefficient)
+	protected double getStorkeWidthByCoefficient(活字單元 rectangularArea,
+			double originBoldCoefficient)
 	{
 		// TODO 改成牛頓法可能比較好
 		double miniWidth = 0.0, maxiWidth = (double) originBoldCoefficient;
 		while (miniWidth + getPrecision() < maxiWidth)
 		{
 			double middleWidth = 0.5 * (miniWidth + maxiWidth);
-			活字單元 boldSurface = getBoldSurface(rectangularArea,
-					middleWidth);
+			活字單元 boldSurface = getBoldSurface(rectangularArea, middleWidth);
 			boldSurface.合併活字(rectangularArea);
 			double nowBoldCoefficient = computeBoldCoefficient(boldSurface);
 			if (nowBoldCoefficient < originBoldCoefficient)
@@ -169,11 +169,11 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 *            筆劃加寬度
 	 * @return 物件活字外框
 	 */
-	protected 活字單元 getBoldSurface(活字單元 rectangularArea,
-			double strokeWidth)
+	protected 活字單元 getBoldSurface(活字單元 rectangularArea, double strokeWidth)
 	{
 		Stroke stroke = chineseCharacterTypeBolder.getStroke(strokeWidth);
-		return new 平面幾何(stroke.createStrokedShape(rectangularArea.目前的字體()));
+		return new 分離活字(new 平面幾何(stroke.createStrokedShape(rectangularArea
+				.目前的字體())));
 	}
 
 	/**

@@ -18,7 +18,7 @@ import cc.adjusting.piece.尋找最低點;
  * 
  * @author Ihc
  */
-public class 平面幾何 extends Area implements 活字單元
+public class 平面幾何 extends Area // implements 活字單元
 {
 	/**
 	 * 活字預計位置及大小
@@ -100,7 +100,7 @@ public class 平面幾何 extends Area implements 活字單元
 	 * 
 	 * @return 圖形預計位置及大小
 	 */
-	@Override
+
 	public Rectangle2D.Double 目標範圍()
 	{
 		return 目標;
@@ -119,7 +119,7 @@ public class 平面幾何 extends Area implements 活字單元
 	 * @param 目標
 	 *            預計位置及大小
 	 */
-	@Override
+
 	public void 設目標範圍(Rectangle2D 目標)
 	{
 		this.目標 = new Rectangle2D.Double(目標.getX(), 目標.getY(), 目標.getWidth(),
@@ -135,7 +135,7 @@ public class 平面幾何 extends Area implements 活字單元
 	 * @param y
 	 *            垂直位置
 	 */
-	@Override
+
 	public void 設目標範圍所在(double x, double y)
 	{
 		目標.setRect(x, y, 目標.getWidth(), 目標.getHeight());
@@ -150,7 +150,7 @@ public class 平面幾何 extends Area implements 活字單元
 	 * @param height
 	 *            高度
 	 */
-	@Override
+
 	public void 設目標範圍大細(double width, double height)
 	{
 		目標.setRect(目標.getX(), 目標.getY(), width, height);
@@ -163,7 +163,6 @@ public class 平面幾何 extends Area implements 活字單元
 		return;
 	}
 
-	@Override
 	public void 重設並組合活字(活字單元[] 活字物件)
 	{
 		if (活字物件 instanceof 平面幾何[])
@@ -181,7 +180,7 @@ public class 平面幾何 extends Area implements 活字單元
 	public void 重設並組合活字(平面幾何[] 活字物件)
 	{
 		圖形重設();
-		for (活字單元 活字物件單元 : 活字物件)
+		for (平面幾何 活字物件單元 : 活字物件)
 		{
 			合併活字(活字物件單元);
 		}
@@ -196,7 +195,7 @@ public class 平面幾何 extends Area implements 活字單元
 	 * @param y
 	 *            要移動的垂直距離
 	 */
-	@Override
+
 	public void 徙(double x, double y)
 	{
 		AffineTransform affineTransform = new AffineTransform();
@@ -208,7 +207,7 @@ public class 平面幾何 extends Area implements 活字單元
 	/**
 	 * 把活字座標移回原點
 	 */
-	@Override
+
 	public void 徙轉原點()
 	{
 		Rectangle2D rectangle2d = this.字範圍();
@@ -222,7 +221,6 @@ public class 平面幾何 extends Area implements 活字單元
 		return;
 	}
 
-	@Override
 	public void 合併活字(活字單元 活字物件)
 	{
 		if (活字物件 instanceof 平面幾何)
@@ -231,7 +229,11 @@ public class 平面幾何 extends Area implements 活字單元
 			throw new InvalidParameterException();
 	}
 
-	@Override
+	public void 合併活字(平面幾何 活字物件)
+	{
+		add(活字物件);
+	}
+
 	public void 減去活字(活字單元 活字物件)
 	{
 		if (活字物件 instanceof 平面幾何)
@@ -240,13 +242,17 @@ public class 平面幾何 extends Area implements 活字單元
 			throw new InvalidParameterException();
 	}
 
-	@Override
+	public void 減去活字(平面幾何 活字物件)
+	{
+		subtract(活字物件);
+	}
+
 	public void 畫佇(Graphics2D 布)
 	{
 		布.draw(this);
 		return;
 	}
-	@Override
+
 	public Point2DWithVector 揣上低的點()
 	{
 		尋找最低點 記錄 = new 尋找最低點();
@@ -254,7 +260,7 @@ public class 平面幾何 extends Area implements 活字單元
 		pathTravel.travelOn(new GeneralPath(this));
 		return 記錄.取得最低點();
 	}
-	@Override
+
 	public 平面幾何 目前的字體()
 	{
 		return this;

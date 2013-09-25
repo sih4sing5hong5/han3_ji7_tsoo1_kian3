@@ -290,7 +290,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		// TODO 愛加速
 		ShapeInformation firstInformation = new ShapeInformation(first.目前的字體()), secondInformation = new ShapeInformation(
 				second.目前的字體());
-		活字單元 rectangularArea = new 平面幾何(first);
+		活字單元 rectangularArea = new 分離活字(first);
 		rectangularArea.合併活字(second);
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea.目前的字體());

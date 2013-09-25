@@ -13,6 +13,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.活字單元;
 
@@ -76,8 +77,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		{
 			GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
 					chineseCharacterWen.getChars());
-			rectangularArea = new 平面幾何(
-					glyphVector.getOutline());
+			rectangularArea = new 分離活字(new 平面幾何(glyphVector.getOutline()));
 		}
 		else
 		{
@@ -95,7 +95,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				parent, chineseCharacterTzu, new 平面幾何());
+				parent, chineseCharacterTzu, new 分離活字(new 平面幾何()));
 
 		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
@@ -159,18 +159,16 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
 		rectDouble.width = firstChild.getPiece().目標範圍().getWidth()
 				+ secondChild.getPiece().目標範圍().getWidth();
-		rectDouble.height = Math
-				.max(firstChild.getPiece().目標範圍().getHeight(),
-						secondChild.getPiece().目標範圍().getHeight());
+		rectDouble.height = Math.max(firstChild.getPiece().目標範圍().getHeight(),
+				secondChild.getPiece().目標範圍().getHeight());
 		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
 				rectDouble.height);
 		pieceMovableTypeTzu.getPiece().合併活字(
-				new 平面幾何(new Area(rectDouble)));
+				new 分離活字(new 平面幾何(new Area(rectDouble))));
 		firstChild
 				.getPiece()
 				.目標範圍()
-				.setRect(0.0, 0.0,
-						firstChild.getPiece().目標範圍().getWidth(),
+				.setRect(0.0, 0.0, firstChild.getPiece().目標範圍().getWidth(),
 						rectDouble.height);
 		secondChild
 				.getPiece()
@@ -194,14 +192,14 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
 				.getChildren()[1];
 		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = Math.max(firstChild.getPiece().目標範圍()
-				.getWidth(), secondChild.getPiece().目標範圍().getWidth());
+		rectDouble.width = Math.max(firstChild.getPiece().目標範圍().getWidth(),
+				secondChild.getPiece().目標範圍().getWidth());
 		rectDouble.height = firstChild.getPiece().目標範圍().getHeight()
 				+ secondChild.getPiece().目標範圍().getHeight();
 		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
 				rectDouble.height);
 		pieceMovableTypeTzu.getPiece().合併活字(
-				new 平面幾何(new Area(rectDouble)));
+				new 分離活字(new 平面幾何(new Area(rectDouble))));
 		firstChild
 				.getPiece()
 				.目標範圍()
@@ -234,7 +232,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
 				rectDouble.height);
 		pieceMovableTypeTzu.getPiece().合併活字(
-				new 平面幾何(new Area(rectDouble)));
+				new 分離活字(new 平面幾何(new Area(rectDouble))));
 		firstChild.getPiece().目標範圍()
 				.setRect(0.0, 0.0, rectDouble.width, rectDouble.height);
 		secondChild

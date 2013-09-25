@@ -357,15 +357,18 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	public 活字單元 依目標區域調整大細(活字單元 活字物件)
 	{
+		System.out.println(活字物件.字範圍());
+		System.out.println(活字物件.目標範圍());
+//		((分離活字) 活字物件).切掉字範圍();
 		double widthCoefficient = 活字物件.目標範圍().getWidth()
 				/ 活字物件.字範圍().getWidth(), heightCoefficient = 活字物件.目標範圍()
 				.getHeight() / 活字物件.字範圍().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
-//		//TODO
-//		活字物件.縮放(shrinkTransform);
-//		活字物件.徙轉原點();
+		// //TODO
+		// 活字物件.縮放(shrinkTransform);
+		// 活字物件.徙轉原點();
 		活字物件.徙(活字物件.目標範圍().getX(), 活字物件.目標範圍().getY());
 		return 活字物件;
 	}

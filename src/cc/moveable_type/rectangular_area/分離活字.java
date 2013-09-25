@@ -36,8 +36,9 @@ public class 分離活字 implements 活字單元
 
 	public 分離活字(活字單元 活字)
 	{
-		this((分離活字)活字);
+		this((分離活字) 活字);
 	}
+
 	public 分離活字(分離活字 活字)
 	{
 		字 = new Vector<平面幾何>(活字.字);
@@ -62,12 +63,39 @@ public class 分離活字 implements 活字單元
 		return 這馬;
 	}
 
+	public void 切掉字範圍()
+	{
+		Rectangle2D.Double 新位置 = 字範圍();
+		if (新位置.getHeight() > 目標.getHeight())
+		{
+			// 這馬.height=目標.height;
+			這馬.setRect(這馬.getX(), 這馬.getY()
+					+ (新位置.getHeight() - 目標.getHeight()) / 2.0, 這馬.getWidth(),
+					目標.getHeight());
+		}
+		if (新位置.getWidth() > 目標.getWidth())
+		{
+			// 這馬.height=目標.height;
+			這馬.setRect(這馬.getX() + (新位置.getWidth() - 目標.getWidth()) / 2.0,
+					這馬.getY(), 目標.getWidth(), 這馬.getHeight());
+		}
+	}
+
 	@Override
 	public void 設字範圍(Rectangle2D 目標)
 	{
 		// TODO Auto-generated method stub
 		這馬 = new Rectangle.Double();
 		這馬.setRect(目標);
+		字範圍();
+		return;
+	}
+
+	@Override
+	public void 重設字範圍()
+	{
+		// TODO Auto-generated method stub
+		這馬 = new Rectangle.Double();
 		字範圍();
 		return;
 	}
@@ -112,6 +140,7 @@ public class 分離活字 implements 活字單元
 			else
 				throw new InvalidParameterException();
 		}
+		切掉字範圍();
 	}
 
 	@Override
@@ -175,8 +204,6 @@ public class 分離活字 implements 活字單元
 	@Override
 	public void 畫佇(Graphics2D 布)
 	{
-		System.out.println(字範圍());
-		System.out.println(目標範圍());
 		for (平面幾何 幾何 : 字)
 			布.draw(幾何);
 		return;

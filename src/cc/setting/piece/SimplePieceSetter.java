@@ -78,7 +78,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 			GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
 					chineseCharacterWen.getChars());
 			rectangularArea = new 分離活字(new 平面幾何(glyphVector.getOutline()));
-//			rectangularArea.設字範圍(tzuModelTerritory);
+			rectangularArea.設字範圍(tzuModelTerritory);
 			rectangularArea.設目標範圍(rectangularArea.字範圍());
 		}
 		else

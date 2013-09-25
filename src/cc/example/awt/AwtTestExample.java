@@ -96,7 +96,7 @@ public class AwtTestExample extends Awt測試樣板
 		// + "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ "
 		// + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
 		// + "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐";
-//		word = "一百百";
+//		word = "意意意意意意意意意意意⿰矛⿱攵力⿱攵力";
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
 																		// 換專門查的使用者
 		看時工具.start("初使化");
@@ -121,8 +121,6 @@ public class AwtTestExample extends Awt測試樣板
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 		for (ChineseCharacter 部件 : ccArray)
 		{
-			System.out.println(word);
-			System.out.println(Character.toChars(部件.getCodePoint()));
 			組字式部件 組字部件 = (組字式部件) 部件;
 			組字部件.建立組字式(組字式建立工具);
 			// 記錄工具.debug(組字部件.提到組字式());
@@ -178,6 +176,8 @@ public class AwtTestExample extends Awt測試樣板
 			// 以後printer沒用處或專門負責排版？
 			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
 					.elementAt(i)));
+//			printer.printPiece(((PieceMovableType) ccmvArray
+//					.elementAt(i)).getPiece());
 			/** 徙較下跤一寡 */
 			graphics2D.translate(0, TYPE_SIZE);
 			/** 換一逝 */

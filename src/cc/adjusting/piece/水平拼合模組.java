@@ -53,6 +53,10 @@ public class 水平拼合模組 extends 平移拼合模組
 					value);
 			調整工具.shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
 		}
+		
+		//TODO
+		leftPiece.徙轉原點();
+		rightPiece.徙轉原點();
 		return;
 	}
 

@@ -90,7 +90,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		{
 			GlyphVector glyphVector = 字體.提這个字型(字體渲染屬性, 字型號碼);
 			物件活字 = new 分離活字(new 平面幾何(glyphVector.getOutline()));
-//			物件活字.設字範圍(tzuModelTerritory);
+			物件活字.設字範圍(tzuModelTerritory);
 			物件活字.設目標範圍(物件活字.字範圍());
 		}
 		else

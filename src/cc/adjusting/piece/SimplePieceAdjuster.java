@@ -189,6 +189,7 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	void shrinkPieceByFixingStroke(活字單元 rectangularArea,
 			AffineTransform affineTransform)
 	{
+		//TODO
 		活字寬度資訊 舊活字寬度資訊 = 取得活字寬度資訊(rectangularArea);
 		// double originBoldCoefficient =
 		// computeBoldCoefficient(rectangularArea);
@@ -224,9 +225,10 @@ public class SimplePieceAdjuster implements ChineseCharacterTypeAdjuster
 	 */
 	void 依寬度資訊調整活字(活字單元 活字物件, 活字寬度資訊 寬度資訊)
 	{
-		double strokeWidth = getStorkeWidthByCoefficient(活字物件, 寬度資訊.取得活字粗細係數());
-		活字單元 boldSurface = getBoldSurface(活字物件, strokeWidth);
-		活字物件.合併活字(boldSurface);
+		//TODO
+//		double strokeWidth = getStorkeWidthByCoefficient(活字物件, 寬度資訊.取得活字粗細係數());
+//		活字單元 boldSurface = getBoldSurface(活字物件, strokeWidth);
+//		活字物件.合併活字(boldSurface);
 	}
 
 	/**

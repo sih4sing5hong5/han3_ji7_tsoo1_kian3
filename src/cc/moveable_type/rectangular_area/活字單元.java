@@ -1,12 +1,8 @@
 package cc.moveable_type.rectangular_area;
 
 import java.awt.Graphics2D;
-import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
-
-import cc.adjusting.piece.尋找最低點;
 
 /**
  * 活字型態。把<code>AreaTool</code>和預設位置大小整合起來，使用時比較方便。把<code>Area</code>

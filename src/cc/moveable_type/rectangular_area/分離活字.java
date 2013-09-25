@@ -2,13 +2,9 @@ package cc.moveable_type.rectangular_area;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Double;
 import java.security.InvalidParameterException;
 import java.util.Vector;
-
-import cc.adjusting.piece.尋找最低點;
 
 public class 分離活字 implements 活字單元
 {
@@ -30,6 +26,8 @@ public class 分離活字 implements 活字單元
 	@Override
 	public Rectangle2D.Double 字範圍()
 	{
+		for (平面幾何 平面 : 字)
+			這馬.setRect(這馬.createUnion(平面.getBounds2D()));
 		return 這馬;
 	}
 
@@ -78,6 +76,7 @@ public class 分離活字 implements 活字單元
 	@Override
 	public void 徙(double x, double y)
 	{
+		這馬.setRect(這馬.getX() + x, 這馬.getY() + y, 這馬.getWidth(), 這馬.getHeight());
 		for (平面幾何 幾何 : 字)
 		{
 			幾何.徙(x, y);
@@ -88,8 +87,9 @@ public class 分離活字 implements 活字單元
 	@Override
 	public void 徙轉原點()
 	{
-		// TODO Auto-generated method stub
-
+		Rectangle2D.Double 位移範圍 = 字範圍();
+		徙(-位移範圍.getX(), -位移範圍.getY());
+		return;
 	}
 
 	@Override
@@ -151,10 +151,11 @@ public class 分離活字 implements 活字單元
 		}
 		return 上低的點;
 	}
+
 	@Override
 	public 平面幾何 目前的字體()
 	{
-		平面幾何 字體結果=new 平面幾何();
+		平面幾何 字體結果 = new 平面幾何();
 		for (平面幾何 幾何 : 字)
 			字體結果.合併活字(幾何);
 		return 字體結果;

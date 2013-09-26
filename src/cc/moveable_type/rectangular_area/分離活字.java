@@ -63,13 +63,19 @@ public class 分離活字 implements 活字單元
 		return 圖形;
 	}
 
+//	@Override
+//	public Rectangle2D.Double 字範圍()
+//	{
+//		這馬.setRect(這馬.createUnion(圖形範圍()));
+//		return 這馬;
+//	}
 	@Override
 	public Rectangle2D.Double 字範圍()
 	{
-		這馬.setRect(這馬.createUnion(圖形範圍()));
+		for (平面幾何 平面 : 字)
+			這馬.setRect(這馬.createUnion(平面.getBounds2D()));
 		return 這馬;
 	}
-
 	public void 切掉字範圍()
 	{
 		Rectangle2D.Double 新位置 = 字範圍();
@@ -80,13 +86,13 @@ public class 分離活字 implements 活字單元
 			if (新位置.getHeight() > 目標.getHeight())
 			{
 				這馬.setRect(這馬.getX(),
-						這馬.getY(),
-						//圖形位置.getCenterY()-目標.getHeight()/2.0,
+						//這馬.getY(),
+						圖形位置.getCenterY()-目標.getHeight()/2.0,
 						這馬.getWidth(), 目標.getHeight());
 			}
 			if (新位置.getWidth() > 目標.getWidth())
 			{
-				這馬.setRect(這馬.getX(),圖形位置.getCenterX()-目標.getWidth()/2.0,
+				這馬.setRect(圖形位置.getCenterX()-目標.getWidth()/2.0,
 						這馬.getY(), 目標.getWidth(), 這馬.getHeight());
 			}
 //			新位置 = 字範圍();
@@ -194,6 +200,7 @@ public class 分離活字 implements 活字單元
 	{
 		字.addAll(活字物件.字);
 		原本字體.addAll(活字物件.原本字體);
+		這馬.setRect(這馬.createUnion(活字物件.這馬));
 		return;
 	}
 

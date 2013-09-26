@@ -57,7 +57,7 @@ public class 分離活字 implements 活字單元
 
 	private Rectangle2D.Double 圖形範圍()
 	{
-		if(字.isEmpty())
+		if (字.isEmpty())
 			return null;
 		Rectangle2D.Double 圖形 = new Rectangle2D.Double();
 		圖形.setRect(字.firstElement().getBounds2D());
@@ -82,26 +82,29 @@ public class 分離活字 implements 活字單元
 
 	public void 切掉字範圍()
 	{
-		System.out.println("切掉字範圍");
-		System.out.println(字範圍());
-		System.out.println(目標範圍());
-		System.out.println(圖形範圍());
+		// System.out.println("切掉字範圍");
+		// System.out.println(字範圍());
+		// System.out.println(目標範圍());
+		// System.out.println(圖形範圍());
 		Rectangle2D.Double 新位置 = 字範圍();
 		Rectangle2D.Double 圖形位置 = 圖形範圍();
-		if (新位置.getHeight() > 目標.getHeight())
+		if (圖形位置 != null)
 		{
-			這馬.setRect(這馬.getX(),
-					// 這馬.getY(),
-					圖形位置.getCenterY() - 目標.getHeight() / 2.0, 這馬.getWidth(),
-					目標.getHeight());
-		}
-		if (新位置.getWidth() > 目標.getWidth())
-		{
-			這馬.setRect(圖形位置.getCenterX() - 目標.getWidth() / 2.0, 這馬.getY(),
-					目標.getWidth(), 這馬.getHeight());
+			if (新位置.getHeight() > 目標.getHeight())
+			{
+				這馬.setRect(這馬.getX(),
+						// 這馬.getY(),
+						圖形位置.getCenterY() - 目標.getHeight() / 2.0,
+						這馬.getWidth(), 目標.getHeight());
+			}
+			if (新位置.getWidth() > 目標.getWidth())
+			{
+				這馬.setRect(圖形位置.getCenterX() - 目標.getWidth() / 2.0, 這馬.getY(),
+						目標.getWidth(), 這馬.getHeight());
+			}
 		}
 		字範圍();
-		System.out.println(字範圍());
+		// System.out.println(字範圍());
 	}
 
 	@Override
@@ -165,6 +168,7 @@ public class 分離活字 implements 活字單元
 				throw new InvalidParameterException();
 		}
 		切掉字範圍();
+		徙轉原點();
 	}
 
 	@Override

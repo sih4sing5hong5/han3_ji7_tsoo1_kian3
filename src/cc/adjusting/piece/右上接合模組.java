@@ -23,10 +23,10 @@ public class 右上接合模組 extends 縮放接合模組
 	public void 變形處理(double middleValue)
 	{
 		super.變形處理(middleValue);
-		temporaryPiece.徙(outsidePiece.字範圍().getMinX()
-				- temporaryPiece.字範圍().getMinX(), outsidePiece
-				.字範圍().getMaxY()
-				- temporaryPiece.字範圍().getMaxY());
+		temporaryPiece.徙(outsidePiece.這馬字範圍().getMinX()
+				- temporaryPiece.這馬字範圍().getMinX(), outsidePiece
+				.這馬字範圍().getMaxY()
+				- temporaryPiece.這馬字範圍().getMaxY());
 		return;
 	}
 }

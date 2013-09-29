@@ -10,7 +10,7 @@ import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
@@ -44,7 +44,7 @@ public class MergePieceSetter extends SimplePieceSetter
 	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
 			ChineseCharacterTzu chineseCharacterTzu)
 	{
-		活字單元 rectangularArea = new 分離活字();
+		分離活字 rectangularArea = new 分離活字();
 		rectangularArea.設字範圍(tzuModelTerritory);
 		rectangularArea.設目標範圍(tzuModelTerritory);
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(

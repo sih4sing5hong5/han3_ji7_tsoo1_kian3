@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.util.Vector;
 
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 整合包圍所需平推的物件，傳入，會先用包圍模組大概調整內部活字，大概平推一次、精細平推一次，最後再用包圍模組再調整。
@@ -115,7 +115,7 @@ public class 平推包圍調整工具
 	 *            要調整的物件
 	 * @return 活字物件調整後結果
 	 */
-	public 活字單元[] 產生調整後活字(活字單元[] 活字物件)
+	public 分離活字[] 產生調整後活字(分離活字[] 活字物件)
 	{
 		活字寬度資訊 舊活字寬度資訊 = 調整工具.取得活字寬度資訊(活字物件[1]);
 		包圍工具列.elementAt(0).執行(包圍模組列.elementAt(0), 活字物件);

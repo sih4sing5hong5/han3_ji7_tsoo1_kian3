@@ -2,7 +2,7 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 適用於「⿴」包圍拼合部件，如「⿴冖几」為「冗」，只要是此類拼合，皆用此型態。先將兩活字寬度調整相同，再調依情況縮小下部寬度，進行合併。
@@ -26,12 +26,12 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 	}
 
 	@Override
-	public void 初始化(活字單元[] rectangularAreas)
+	public void 初始化(分離活字[] rectangularAreas)
 	{
 		upPiece = rectangularAreas[0];
 		downPiece = rectangularAreas[1];
-		活字單元 greaterPiece = null, smallerPiece = null;
-		if (upPiece.字範圍().getWidth() > downPiece.字範圍()
+		分離活字 greaterPiece = null, smallerPiece = null;
+		if (upPiece.這馬字範圍().getWidth() > downPiece.這馬字範圍()
 				.getWidth())
 		{
 			greaterPiece = upPiece;
@@ -42,8 +42,8 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 			greaterPiece = downPiece;
 			smallerPiece = upPiece;
 		}
-		double value = smallerPiece.字範圍().getWidth()
-				/ greaterPiece.字範圍().getWidth();
+		double value = smallerPiece.這馬字範圍().getWidth()
+				/ greaterPiece.這馬字範圍().getWidth();
 		if (value > 0.0)
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(value,
@@ -63,7 +63,7 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 	public void 變形處理(double middleValue)
 	{
 		downPiece.徙轉原點();
-		downPiece.徙(downPiece.字範圍().getWidth()
+		downPiece.徙(downPiece.這馬字範圍().getWidth()
 				* (1.0 - insideShrinkRate) / insideShrinkRate * 0.5,
 				middleValue);
 		return;

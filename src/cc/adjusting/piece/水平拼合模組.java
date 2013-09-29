@@ -3,7 +3,7 @@ package cc.adjusting.piece;
 import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.分離活字;
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 適用於「⿱」垂直拼合部件，如「⿱將水」為「漿」，只要是垂直拼合，皆用此型態。先將兩活字高度調整相同，再進行合併。
@@ -13,9 +13,9 @@ import cc.moveable_type.rectangular_area.活字單元;
 public class 水平拼合模組 extends 平移拼合模組
 {
 	/** 左邊的物件活字 */
-	protected 活字單元 leftPiece;
+	protected 分離活字 leftPiece;
 	/** 右邊的物件活字 */
-	protected 活字單元 rightPiece;
+	protected 分離活字 rightPiece;
 
 	/**
 	 * 建立水平拼合模組
@@ -29,12 +29,12 @@ public class 水平拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public void 初始化(活字單元[] rectangularAreas)
+	public void 初始化(分離活字[] rectangularAreas)
 	{
 		leftPiece = rectangularAreas[0];
 		rightPiece = rectangularAreas[1];
-		活字單元 greaterPiece = null, smallerPiece = null;
-		if (leftPiece.字範圍().getHeight() > rightPiece.字範圍().getHeight())
+		分離活字 greaterPiece = null, smallerPiece = null;
+		if (leftPiece.這馬字範圍().getHeight() > rightPiece.這馬字範圍().getHeight())
 		{
 			greaterPiece = leftPiece;
 			smallerPiece = rightPiece;
@@ -44,8 +44,8 @@ public class 水平拼合模組 extends 平移拼合模組
 			greaterPiece = rightPiece;
 			smallerPiece = leftPiece;
 		}
-		double value = smallerPiece.字範圍().getHeight()
-				/ greaterPiece.字範圍().getHeight();
+		double value = smallerPiece.這馬字範圍().getHeight()
+				/ greaterPiece.這馬字範圍().getHeight();
 		if (value > 0.0)
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(1.0,
@@ -62,7 +62,7 @@ public class 水平拼合模組 extends 平移拼合模組
 	@Override
 	public double 上限初始值()
 	{
-		return leftPiece.字範圍().getWidth();
+		return leftPiece.這馬字範圍().getWidth();
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class 水平拼合模組 extends 平移拼合模組
 	@Override
 	public double 接觸邊長()
 	{
-		return rightPiece.字範圍().getHeight();
+		return rightPiece.這馬字範圍().getHeight();
 	}
 
 	@Override
@@ -104,9 +104,9 @@ public class 水平拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public 活字單元[] 取得調整後活字物件()
+	public 分離活字[] 取得調整後活字物件()
 	{
-		活字單元[] rectangularAreas = new 分離活字[2];
+		分離活字[] rectangularAreas = new 分離活字[2];
 		rectangularAreas[0] = leftPiece;
 		rectangularAreas[1] = rightPiece;
 		return rectangularAreas;

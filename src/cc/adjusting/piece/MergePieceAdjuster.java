@@ -14,7 +14,7 @@ import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.ShapeInformation;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.tool.database.字串與控制碼轉換;
 
 /**
@@ -197,11 +197,11 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		注音排放模組 主要排齊模組 = new 注音排密模組();
 		// 注音排齊模組(注音內底間隔寬度) 注音排密模組()
 		// double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
-		for (活字單元 活字 : 分類.輕聲)
+		for (分離活字 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
 		double 聲韻面頂 = 主要排齊模組.上尾實際範圍().getMinY();
 		boolean 第一个 = true;
-		for (活字單元 活字 : 分類.聲韻)
+		for (分離活字 活字 : 分類.聲韻)
 		{
 			主要排齊模組.加新的活字(活字);
 			if (第一个)
@@ -212,21 +212,21 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		}
 		double 聲韻下跤 = 主要排齊模組.上尾實際範圍().getMaxY();
 		注音排放模組 邊仔排齊模組 = new 注音排密模組();
-		for (活字單元 活字 : 分類.調號)
+		for (分離活字 活字 : 分類.調號)
 		{
 			活字.這馬字範圍照圖形範圍();
 			邊仔排齊模組.加新的活字(活字);
 		}
-		活字單元 主要活字 = 活字物件.getPiece();
+		分離活字 主要活字 = 活字物件.getPiece();
 		主要活字.圖形重設();
 		主要活字.合併活字(主要排齊模組.目前結果());
-		活字單元 邊仔活字 = 邊仔排齊模組.目前結果();
-		邊仔活字.徙(主要活字.字範圍().getMaxX() - 邊仔活字.字範圍().getMinX()
-				+ 主要活字.字範圍().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍().getMinY()
+		分離活字 邊仔活字 = 邊仔排齊模組.目前結果();
+		邊仔活字.徙(主要活字.這馬字範圍().getMaxX() - 邊仔活字.這馬字範圍().getMinX()
+				+ 主要活字.這馬字範圍().getWidth() * 注音內底間隔寬度, 主要排齊模組.對齊範圍().getMinY()
 				- 邊仔排齊模組.對齊範圍().getCenterY());
 		// 上尾範圍() 對齊範圍()
 		主要活字.合併活字(邊仔活字);
-		主要活字.徙(-主要活字.字範圍().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
+		主要活字.徙(-主要活字.這馬字範圍().getMinX(), -(聲韻面頂 + 聲韻下跤) / 2.0);
 		return;
 	}
 
@@ -267,7 +267,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            第二個活字物件
 	 * @return 是否重疊
 	 */
-	protected boolean areIntersected(活字單元 first, 活字單元 second)
+	protected boolean areIntersected(分離活字 first, 分離活字 second)
 	{
 		平面幾何 rectangularArea = first.目前的字體();
 		平面幾何 rectangularArea2 = new 平面幾何(rectangularArea);
@@ -288,13 +288,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            用來比較消失邊長的邊界長度
 	 * @return 適合接近的係數
 	 */
-	protected double nonsuitableToClose(活字單元 first, 活字單元 second,
+	protected double nonsuitableToClose(分離活字 first, 分離活字 second,
 			double boundaryLength)
 	{
 		// TODO 愛加速
 		ShapeInformation firstInformation = new ShapeInformation(first.目前的字體()), secondInformation = new ShapeInformation(
 				second.目前的字體());
-		活字單元 rectangularArea = new 分離活字(first);
+		分離活字 rectangularArea = new 分離活字(first);
 		rectangularArea.合併活字(second);
 		ShapeInformation shapeInformation = new ShapeInformation(
 				rectangularArea.目前的字體());
@@ -325,7 +325,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public 活字單元 format(PieceMovableType 物件活字)
+	public 分離活字 format(PieceMovableType 物件活字)
 	{
 		if (物件活字 instanceof ChineseCharacterMovableTypeTzu)
 		{
@@ -358,14 +358,14 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public 活字單元 依目標區域調整大細(活字單元 活字物件)
+	public 分離活字 依目標區域調整大細(分離活字 活字物件)
 	{
-		System.out.println(活字物件.字範圍());
+		System.out.println(活字物件.這馬字範圍());
 		System.out.println(活字物件.目標範圍());
 		// ((分離活字) 活字物件).切掉字範圍();
 		double widthCoefficient = 活字物件.目標範圍().getWidth()
-				/ 活字物件.字範圍().getWidth(), heightCoefficient = 活字物件.目標範圍()
-				.getHeight() / 活字物件.字範圍().getHeight();
+				/ 活字物件.這馬字範圍().getWidth(), heightCoefficient = 活字物件.目標範圍()
+				.getHeight() / 活字物件.這馬字範圍().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
@@ -383,10 +383,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            愛調的活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public 活字單元 依目標懸度調整大細(活字單元 活字物件)
+	public 分離活字 依目標懸度調整大細(分離活字 活字物件)
 	{
 		double coefficient = 活字物件.目標範圍().getHeight()
-				/ Math.max(-活字物件.字範圍().getMinY(), 活字物件.字範圍().getMaxY()) / 2.0;
+				/ Math.max(-活字物件.這馬字範圍().getMinY(), 活字物件.這馬字範圍().getMaxY()) / 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(
@@ -411,10 +411,10 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 *            活字物件
 	 * @return 格式過後的活字物件資訊
 	 */
-	public 活字單元 getPieceWithSquareTerritory(活字單元 rectangularArea)
+	public 分離活字 getPieceWithSquareTerritory(分離活字 rectangularArea)
 	{
-		活字單元 target = new 分離活字(rectangularArea);
-		target.設目標範圍(target.字範圍());
+		分離活字 target = new 分離活字(rectangularArea);
+		target.設目標範圍(target.這馬字範圍());
 		double value = Math.min(target.目標範圍().getWidth(), target.目標範圍()
 				.getHeight());
 		target.設目標範圍大細(value, value);

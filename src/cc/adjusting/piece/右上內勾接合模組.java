@@ -4,7 +4,7 @@ import java.awt.geom.GeneralPath;
 
 import cc.moveable_type.rectangular_area.PathTravel;
 import cc.moveable_type.rectangular_area.Point2DWithVector;
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.控制點循訪;
 
 /**
@@ -42,7 +42,7 @@ public class 右上內勾接合模組 extends 縮放接合模組
 	 * @param 外部活字
 	 *            接下來變形時所要用的外部活字
 	 */
-	public void 設定外部活字資訊(活字單元 外部活字)
+	public void 設定外部活字資訊(分離活字 外部活字)
 	{
 		縮放基準點 = 外部活字.揣上低的點();
 		double 外部活字半徑 = 調整工具.computePieceRadius(外部活字);
@@ -55,8 +55,8 @@ public class 右上內勾接合模組 extends 縮放接合模組
 	{
 		super.變形處理(middleValue);
 		temporaryPiece.徙(縮放基準點.getX()
-				- temporaryPiece.字範圍().getMinX(), 縮放基準點.getY()
-				- temporaryPiece.字範圍().getMaxY());
+				- temporaryPiece.這馬字範圍().getMinX(), 縮放基準點.getY()
+				- temporaryPiece.這馬字範圍().getMaxY());
 		return;
 	}
 }

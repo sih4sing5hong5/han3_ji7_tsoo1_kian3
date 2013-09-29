@@ -8,7 +8,7 @@ import java.awt.geom.Rectangle2D;
 import java.security.InvalidParameterException;
 import java.util.Vector;
 
-public class 分離活字 implements 活字單元
+public class 分離活字
 {
 	/** 目前字體大細，所在 */
 	private Vector<平面幾何> 字;
@@ -32,12 +32,7 @@ public class 分離活字 implements 活字單元
 		this();
 		字.add(幾何);
 		原本字體.add(幾何);
-		字範圍();
-	}
-
-	public 分離活字(活字單元 活字)
-	{
-		this((分離活字) 活字);
+		這馬字範圍();
 	}
 
 	public 分離活字(分離活字 活字)
@@ -50,12 +45,6 @@ public class 分離活字 implements 活字單元
 		這馬.setRect(活字.這馬);
 		目標 = new Rectangle.Double();
 		目標.setRect(活字.目標);
-	}
-
-	@Override
-	public Rectangle2D.Double 目標範圍()
-	{
-		return 目標;
 	}
 
 	private Rectangle2D.Double 圖形範圍()
@@ -75,8 +64,8 @@ public class 分離活字 implements 活字單元
 	// 這馬.setRect(這馬.createUnion(圖形範圍()));
 	// return 這馬;
 	// }
-	@Override
-	public Rectangle2D.Double 字範圍()
+
+	public Rectangle2D.Double 這馬字範圍()
 	{
 		for (平面幾何 平面 : 字)
 			這馬.setRect(這馬.createUnion(平面.getBounds2D()));
@@ -95,7 +84,7 @@ public class 分離活字 implements 活字單元
 		// System.out.println(字範圍());
 		// System.out.println(目標範圍());
 		// System.out.println(圖形範圍());
-		Rectangle2D.Double 新位置 = 字範圍();
+		Rectangle2D.Double 新位置 = 這馬字範圍();
 		Rectangle2D.Double 圖形位置 = 圖形範圍();
 		if (圖形位置 != null)
 		{
@@ -112,48 +101,80 @@ public class 分離活字 implements 活字單元
 						目標.getWidth(), 這馬.getHeight());
 			}
 		}
-		字範圍();
+		這馬字範圍();
 		// System.out.println(字範圍());
 	}
 
-	@Override
 	public void 設字範圍(Rectangle2D 目標)
 	{
 		// TODO Auto-generated method stub
 		這馬 = new Rectangle.Double();
 		這馬.setRect(目標);
-		字範圍();
+		這馬字範圍();
 		return;
 	}
 
-	@Override
 	public void 重設字範圍()
 	{
 		// TODO Auto-generated method stub
 		這馬 = new Rectangle.Double();
-		字範圍();
+		這馬字範圍();
 		return;
 	}
 
-	@Override
+	/**
+	 * 取得活字預計位置及大小
+	 * 
+	 * @return 活字預計位置及大小
+	 */
+
+	public Rectangle2D.Double 目標範圍()
+	{
+		return 目標;
+	}
+
+	/**
+	 * 設定活字預計位置及大小
+	 * 
+	 * @param 目標
+	 *            預計位置及大小
+	 */
+
 	public void 設目標範圍(Rectangle2D 目標)
 	{
 		this.目標.setRect(目標);
 	}
 
-	@Override
+	/**
+	 * 設定活字預計位置
+	 * 
+	 * @param x
+	 *            水平位置
+	 * @param y
+	 *            垂直位置
+	 */
+
 	public void 設目標範圍所在(double x, double y)
 	{
 		this.目標.setRect(x, y, this.目標.getWidth(), this.目標.getHeight());
 	}
 
-	@Override
+	/**
+	 * 設定活字預計大小
+	 * 
+	 * @param width
+	 *            寬度
+	 * @param height
+	 *            高度
+	 */
+
 	public void 設目標範圍大細(double width, double height)
 	{
 		this.目標.setRect(this.目標.getX(), this.目標.getY(), width, height);
 	}
 
-	@Override
+	/** 共活字的圖形清掉 */
+
 	public void 圖形重設()
 	{
 		字.clear();
@@ -165,11 +186,17 @@ public class 分離活字 implements 活字單元
 		return;
 	}
 
-	@Override
-	public void 重設並組合活字(活字單元[] 活字物件)
+	/**
+	 * 將物件重設，並將底下活字物件組合起來
+	 * 
+	 * @param 活字物件
+	 *            合體活字底下的活字物件
+	 */
+
+	public void 重設並組合活字(分離活字[] 活字物件)
 	{
 		圖形重設();
-		for (活字單元 活字 : 活字物件)
+		for (分離活字 活字 : 活字物件)
 		{
 			if (活字 instanceof 分離活字)
 				合併活字((分離活字) 活字);
@@ -180,7 +207,15 @@ public class 分離活字 implements 活字單元
 		徙轉原點();
 	}
 
-	@Override
+	/**
+	 * 把活字座標移動指定距離
+	 * 
+	 * @param x
+	 *            要移動的水平距離
+	 * @param y
+	 *            要移動的垂直距離
+	 */
+
 	public void 徙(double x, double y)
 	{
 		這馬.setRect(這馬.getX() + x, 這馬.getY() + y, 這馬.getWidth(), 這馬.getHeight());
@@ -191,15 +226,17 @@ public class 分離活字 implements 活字單元
 		return;
 	}
 
-	@Override
+	/**
+	 * 把活字的座標移回原點
+	 */
+
 	public void 徙轉原點()
 	{
-		Rectangle2D.Double 位移範圍 = 字範圍();
+		Rectangle2D.Double 位移範圍 = 這馬字範圍();
 		徙(-位移範圍.getX(), -位移範圍.getY());
 		return;
 	}
 
-	@Override
 	public void 縮放(AffineTransform 縮放矩陣)
 	{
 		for (平面幾何 幾何 : 字)
@@ -215,26 +252,15 @@ public class 分離活字 implements 活字單元
 		return;
 	}
 
-	@Override
-	public void 合併活字(活字單元 活字物件)
-	{
-		合併活字((分離活字) 活字物件);
-	}
-
 	public void 合併活字(分離活字 活字物件)
 	{
 		字.addAll(活字物件.字);
 		原本字體.addAll(活字物件.原本字體);
-		這馬.setRect(這馬.createUnion(活字物件.字範圍()));
+		這馬.setRect(這馬.createUnion(活字物件.這馬字範圍()));
 		return;
 	}
 
-	@Override
-	public void 減去活字(活字單元 活字物件)
-	{
-		減去活字((分離活字) 活字物件);
-	}
-
+	@Deprecated
 	public void 減去活字(分離活字 活字物件)
 	{
 		for (平面幾何 幾何 : 字)
@@ -245,7 +271,6 @@ public class 分離活字 implements 活字單元
 		return;
 	}
 
-	@Override
 	public void 畫佇(Graphics2D 布)
 	{
 		for (平面幾何 幾何 : 字)
@@ -253,7 +278,6 @@ public class 分離活字 implements 活字單元
 		return;
 	}
 
-	@Override
 	public Point2DWithVector 揣上低的點()
 	{
 		Point2DWithVector 上低的點 = null;
@@ -266,7 +290,7 @@ public class 分離活字 implements 活字單元
 		return 上低的點;
 	}
 
-	@Override
+	@Deprecated
 	public 平面幾何 目前的字體()
 	{
 		平面幾何 字體結果 = new 平面幾何();

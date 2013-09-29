@@ -3,7 +3,7 @@ package cc.adjusting.piece;
 import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.分離活字;
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 適用於「⿱」垂直拼合部件，如「⿱將水」為「漿」，只要是垂直拼合，皆用此型態。先將兩活字寬度調整相同，再進行合併。
@@ -13,9 +13,9 @@ import cc.moveable_type.rectangular_area.活字單元;
 public class 垂直拼合模組 extends 平移拼合模組
 {
 	/** 上面的物件活字 */
-	protected 活字單元 upPiece;
+	protected 分離活字 upPiece;
 	/** 下面的物件活字 */
-	protected 活字單元 downPiece;
+	protected 分離活字 downPiece;
 
 	/**
 	 * 建立垂直拼合模組
@@ -29,12 +29,12 @@ public class 垂直拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public void 初始化(活字單元[] rectangularAreas)
+	public void 初始化(分離活字[] rectangularAreas)
 	{
 		upPiece = rectangularAreas[0];
 		downPiece = rectangularAreas[1];
-		活字單元 greaterPiece = null, smallerPiece = null;
-		if (upPiece.字範圍().getWidth() > downPiece.字範圍()
+		分離活字 greaterPiece = null, smallerPiece = null;
+		if (upPiece.這馬字範圍().getWidth() > downPiece.這馬字範圍()
 				.getWidth())
 		{
 			greaterPiece = upPiece;
@@ -45,8 +45,8 @@ public class 垂直拼合模組 extends 平移拼合模組
 			greaterPiece = downPiece;
 			smallerPiece = upPiece;
 		}
-		double value = smallerPiece.字範圍().getWidth()
-				/ greaterPiece.字範圍().getWidth();
+		double value = smallerPiece.這馬字範圍().getWidth()
+				/ greaterPiece.這馬字範圍().getWidth();
 		if (value > 0.0)
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(value,
@@ -59,7 +59,7 @@ public class 垂直拼合模組 extends 平移拼合模組
 	@Override
 	public double 上限初始值()
 	{
-		return upPiece.字範圍().getHeight();
+		return upPiece.這馬字範圍().getHeight();
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class 垂直拼合模組 extends 平移拼合模組
 	@Override
 	public double 接觸邊長()
 	{
-		return downPiece.字範圍().getWidth();
+		return downPiece.這馬字範圍().getWidth();
 	}
 
 	@Override
@@ -101,9 +101,9 @@ public class 垂直拼合模組 extends 平移拼合模組
 	}
 
 	@Override
-	public 活字單元[] 取得調整後活字物件()
+	public 分離活字[] 取得調整後活字物件()
 	{
-		活字單元[] rectangularAreas = new 分離活字[2];
+		分離活字[] rectangularAreas = new 分離活字[2];
 		rectangularAreas[0] = upPiece;
 		rectangularAreas[1] = downPiece;
 		return rectangularAreas;

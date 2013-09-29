@@ -71,17 +71,6 @@ public class 平面幾何 extends Area // implements 活字單元
 	}
 
 	/**
-	 * 建立一個和<code>活字單元</code>相同的活字。
-	 * 
-	 * @param rectangularArea
-	 *            參考的活字，假設物件型態是<code>平面幾何</code>
-	 */
-	public 平面幾何(活字單元 rectangularArea)
-	{
-		this((平面幾何) rectangularArea);
-	}
-
-	/**
 	 * 用<code>Shape</code>建立一個相同形狀的活字， 並用<code>Rectangle2D</code>指定目標位置及大小。
 	 * 
 	 * @param rectangularArea
@@ -163,14 +152,6 @@ public class 平面幾何 extends Area // implements 活字單元
 		return;
 	}
 
-	public void 重設並組合活字(活字單元[] 活字物件)
-	{
-		if (活字物件 instanceof 平面幾何[])
-			重設並組合活字((平面幾何[]) 活字物件);
-		else
-			throw new InvalidParameterException();
-	}
-
 	/**
 	 * 將物件重設，並將底下活字物件組合起來
 	 * 
@@ -221,25 +202,9 @@ public class 平面幾何 extends Area // implements 活字單元
 		return;
 	}
 
-	public void 合併活字(活字單元 活字物件)
-	{
-		if (活字物件 instanceof 平面幾何)
-			add((Area) 活字物件);
-		else
-			throw new InvalidParameterException();
-	}
-
 	public void 合併活字(平面幾何 活字物件)
 	{
 		add(活字物件);
-	}
-
-	public void 減去活字(活字單元 活字物件)
-	{
-		if (活字物件 instanceof 平面幾何)
-			subtract((Area) 活字物件);
-		else
-			throw new InvalidParameterException();
 	}
 
 	public void 減去活字(平面幾何 活字物件)

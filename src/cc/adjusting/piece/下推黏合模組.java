@@ -25,21 +25,21 @@ public class 下推黏合模組 extends 平推黏合模組
 	@Override
 	public double 下限初始值()
 	{
-		return insidePiece.字範圍().getHeight();
+		return insidePiece.這馬字範圍().getHeight();
 	}
 
 	@Override
 	public double 上限初始值()
 	{
-		return outsidePiece.字範圍().getHeight();
+		return outsidePiece.這馬字範圍().getHeight();
 	}
 
 	@Override
 	public boolean 活字是否太接近()
 	{
 		return super.活字是否太接近()
-				|| outsidePiece.字範圍().getMaxY() < temporaryPiece
-						.字範圍().getMaxY();
+				|| outsidePiece.這馬字範圍().getMaxY() < temporaryPiece
+						.這馬字範圍().getMaxY();
 	}
 
 	@Override
@@ -47,12 +47,12 @@ public class 下推黏合模組 extends 平推黏合模組
 	{
 		temporaryPiece = new 分離活字(insidePiece);
 		AffineTransform affineTransform = 調整工具.getAffineTransform(1.0,
-				middleValue / insidePiece.字範圍().getHeight());
+				middleValue / insidePiece.這馬字範圍().getHeight());
 		temporaryPiece.縮放(affineTransform);
-		temporaryPiece.徙(insidePiece.字範圍().getMinX()
-				- temporaryPiece.字範圍().getMinX(), insidePiece
-				.字範圍().getMinY()
-				- temporaryPiece.字範圍().getMinY());
+		temporaryPiece.徙(insidePiece.這馬字範圍().getMinX()
+				- temporaryPiece.這馬字範圍().getMinX(), insidePiece
+				.這馬字範圍().getMinY()
+				- temporaryPiece.這馬字範圍().getMinY());
 		return;
 	}
 }

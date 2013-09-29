@@ -1,7 +1,7 @@
 package cc.adjusting.piece;
 
 import cc.moveable_type.piece.PieceMovableTypeTzu;
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 用於左右上的包圍部件。從左右上三邊包住，像是「冂」、「門」、「鬥」、「『咼』的外部」和「『夃』的乃」等等。
@@ -37,7 +37,7 @@ public class 左右上內勾包圍工具 extends 物件活字包圍工具
 		/** 要使用的平推工具 */
 		平推包圍調整工具 平推包圍調整工具 = new 平推包圍調整工具(調整工具, 模組, 後模組, false);
 
-		活字單元[] 調整結果 = 平推包圍調整工具.產生調整後活字(物件活字.取得活字物件());
+		分離活字[] 調整結果 = 平推包圍調整工具.產生調整後活字(物件活字.取得活字物件());
 		物件活字.getPiece().重設並組合活字(調整結果);
 		return;
 	}

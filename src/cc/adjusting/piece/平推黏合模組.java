@@ -1,6 +1,6 @@
 package cc.adjusting.piece;
 
-import cc.moveable_type.rectangular_area.活字單元;
+import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 適用於靠平推合併的模組，若是內部活字是靠拉長一個方向的長度來當參數調整，就可適用此型態。
@@ -21,7 +21,7 @@ public abstract class 平推黏合模組 extends 縮放接合模組
 	}
 
 	@Override
-	public void 初始化(活字單元[] rectangularAreas)
+	public void 初始化(分離活字[] rectangularAreas)
 	{
 		outsidePiece = rectangularAreas[0];
 		insidePiece = rectangularAreas[1];

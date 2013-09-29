@@ -79,7 +79,13 @@ public class 垂直拼合模組 extends 平移拼合模組
 	@Override
 	public double 活字寬度()
 	{
-		return 調整工具.computePieceRadius(downPiece);
+		double 下跤闊度 = 調整工具.computePieceRadius(downPiece);
+		if (!Double.isNaN(下跤闊度))
+			return 下跤闊度;
+		double 頂懸闊度 = 調整工具.computePieceRadius(upPiece);
+		if (!Double.isNaN(頂懸闊度))
+			return 頂懸闊度;
+		return 0.0;
 	}
 
 	@Override

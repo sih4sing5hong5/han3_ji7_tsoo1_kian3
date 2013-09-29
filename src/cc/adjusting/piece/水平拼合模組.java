@@ -34,8 +34,7 @@ public class 水平拼合模組 extends 平移拼合模組
 		leftPiece = rectangularAreas[0];
 		rightPiece = rectangularAreas[1];
 		活字單元 greaterPiece = null, smallerPiece = null;
-		if (leftPiece.字範圍().getHeight() > rightPiece.字範圍()
-				.getHeight())
+		if (leftPiece.字範圍().getHeight() > rightPiece.字範圍().getHeight())
 		{
 			greaterPiece = leftPiece;
 			smallerPiece = rightPiece;
@@ -53,8 +52,8 @@ public class 水平拼合模組 extends 平移拼合模組
 					value);
 			調整工具.shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
 		}
-		
-		//TODO
+
+		// TODO
 		leftPiece.徙轉原點();
 		rightPiece.徙轉原點();
 		return;
@@ -83,7 +82,13 @@ public class 水平拼合模組 extends 平移拼合模組
 	@Override
 	public double 活字寬度()
 	{
-		return 調整工具.computePieceRadius(rightPiece);
+		double 正爿闊度 = 調整工具.computePieceRadius(rightPiece);
+		if (!Double.isNaN(正爿闊度))
+			return 正爿闊度;
+		double 倒爿闊度 = 調整工具.computePieceRadius(leftPiece);
+		if (!Double.isNaN(倒爿闊度))
+			return 倒爿闊度;
+		return 0.0;
 	}
 
 	@Override

@@ -11,10 +11,10 @@ import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
+import cc.moveable_type.rectangular_area.ShapeInformation;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.活字單元;
-import cc.moveable_type.rectangular_area.ShapeInformation;
 import cc.tool.database.字串與控制碼轉換;
 
 /**
@@ -40,7 +40,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	/** 參考教育部的國字注音比例參考圖 */
 	final double 教育部建議注音大細 = 0.36;// TODO
 	/** 注音內底逐个符號間隔寬度 */
-	final double 注音內底間隔寬度 = 0.5;// TODO
+	final double 注音內底間隔寬度 = 0.3;// TODO
 	/** 注音因為傷細，上尾愛放較橫，較清楚 */
 	final double 注音譀橫 = 1.2;// TODO
 	/** 注音莫傷倚倒爿，徙規的寬度的比例 */
@@ -194,8 +194,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		注音符號分開工具 分開工具 = new 注音符號分開工具(分類工具);
 		注音符號分類 分類 = new 注音符號分類();
 		分開工具.分開(活字物件, 分類);
-		注音排放模組 主要排齊模組 = new 注音間隔模組(注音內底間隔寬度);
-		// 注音排齊模組() 注音排密模組()
+		注音排放模組 主要排齊模組 = new 注音排密模組();
+		// 注音排齊模組(注音內底間隔寬度) 注音排密模組()
 		// double 聲韻面頂 = 主要排齊模組.對齊範圍().getMaxY();
 		for (活字單元 活字 : 分類.輕聲)
 			主要排齊模組.加新的活字(活字);
@@ -211,9 +211,12 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			}
 		}
 		double 聲韻下跤 = 主要排齊模組.上尾實際範圍().getMaxY();
-		注音排放模組 邊仔排齊模組 = new 注音間隔模組(注音內底間隔寬度);
+		注音排放模組 邊仔排齊模組 = new 注音排密模組();
 		for (活字單元 活字 : 分類.調號)
+		{
+			活字.這馬字範圍照圖形範圍();
 			邊仔排齊模組.加新的活字(活字);
+		}
 		活字單元 主要活字 = 活字物件.getPiece();
 		主要活字.圖形重設();
 		主要活字.合併活字(主要排齊模組.目前結果());
@@ -368,7 +371,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
 		// //TODO
 		// 活字物件.縮放(shrinkTransform);
-//		活字物件.徙轉原點();
+		// 活字物件.徙轉原點();
 		活字物件.徙(活字物件.目標範圍().getX(), 活字物件.目標範圍().getY());
 		return 活字物件;
 	}
@@ -393,6 +396,13 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				.目標範圍().getY() + 活字物件.目標範圍().getHeight() / 2.0);
 		return 活字物件;
 	}
+
+//	public 活字單元 依目標調整中心(活字單元 活字物件)
+//	{
+//		活字物件.徙(活字物件.目標範圍().getCenterX()- 活字物件.字範圍().getCenterX(), 活字物件.目標範圍()
+//				.getCenterY() - 活字物件.字範圍().getCenterY() );
+//		return 活字物件;
+//	}
 
 	/**
 	 * 產生一個相同圖形的正方體活字物件。

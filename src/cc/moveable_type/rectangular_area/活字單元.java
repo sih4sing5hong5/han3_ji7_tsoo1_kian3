@@ -27,6 +27,7 @@ public interface 活字單元// extends Shape
 //	 */
 //	private Rectangle2D.Double 圖形範圍();
 
+	public void 這馬字範圍照圖形範圍();
 	public Rectangle2D.Double 字範圍();
 
 	public void 設字範圍(Rectangle2D 目標);

@@ -83,6 +83,12 @@ public class 分離活字 implements 活字單元
 		return 這馬;
 	}
 
+	public void 這馬字範圍照圖形範圍()
+	{
+		這馬.setRect(圖形範圍());
+		return;
+	}
+
 	public void 切掉字範圍()
 	{
 		// System.out.println("切掉字範圍");

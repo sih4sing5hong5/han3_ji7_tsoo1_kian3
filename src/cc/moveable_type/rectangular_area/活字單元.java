@@ -20,16 +20,19 @@ public interface 活字單元// extends Shape
 	 */
 	public Rectangle2D.Double 目標範圍();
 
-	/**
-	 * 取得活字圖形實際位置及大小
-	 * 
-	 * @return 活字圖形實際位置及大小
-	 */
+//	/**
+//	 * 取得活字圖形實際位置及大小
+//	 * 
+//	 * @return 活字圖形實際位置及大小
+//	 */
+//	private Rectangle2D.Double 圖形範圍();
+
 	public Rectangle2D.Double 字範圍();
 
 	public void 設字範圍(Rectangle2D 目標);
 
 	public void 重設字範圍();
+
 	/**
 	 * 設定活字預計位置及大小
 	 * 
@@ -90,11 +93,11 @@ public interface 活字單元// extends Shape
 
 	@Deprecated
 	public void 減去活字(活字單元 活字物件);
-	
+
 	public void 畫佇(Graphics2D 布);
 
 	public Point2DWithVector 揣上低的點();
-	
+
 	@Deprecated
 	public 平面幾何 目前的字體();
 }

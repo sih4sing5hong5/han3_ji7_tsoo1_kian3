@@ -3,6 +3,7 @@ package cc.moveable_type.rectangular_area;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.security.InvalidParameterException;
 import java.util.Vector;
@@ -41,7 +42,9 @@ public class 分離活字 implements 活字單元
 
 	public 分離活字(分離活字 活字)
 	{
-		字 = new Vector<平面幾何>(活字.字);
+		字 = new Vector<平面幾何>();
+		for (平面幾何 活字的字 : 活字.字)
+			字.add(new 平面幾何(活字的字));
 		原本字體 = new Vector<平面幾何>(活字.原本字體);
 		這馬 = new Rectangle.Double();
 		這馬.setRect(活字.這馬);
@@ -196,7 +199,13 @@ public class 分離活字 implements 活字單元
 		for (平面幾何 幾何 : 字)
 		{
 			幾何.縮放(縮放矩陣);
-		}
+		}// TODO 字範圍
+			// Point2D.Double 角 = new Point2D.Double(這馬.getX(), 這馬.getY());
+		// 縮放矩陣.transform(角, 角);
+		// Point2D.Double 闊 = new Point2D.Double(這馬.getWidth(), 這馬.getHeight());
+		// 縮放矩陣.transform(闊, 闊);
+		// 這馬.setRect(角.getX(), 角.getY(), 闊.getX(), 闊.getY());
+		這馬.setRect(縮放矩陣.createTransformedShape(這馬).getBounds2D());
 		return;
 	}
 

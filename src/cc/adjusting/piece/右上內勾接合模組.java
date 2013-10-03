@@ -45,7 +45,7 @@ public class 右上內勾接合模組 extends 縮放接合模組
 	public void 設定外部活字資訊(分離活字 外部活字)
 	{
 		縮放基準點 = 外部活字.揣上低的點();
-		double 外部活字半徑 = 調整工具.computePieceRadius(外部活字);
+		double 外部活字半徑 = 活字寬度();
 		縮放基準點.subLocation(0, 外部活字半徑 * 縮放點離最低點的半徑倍率);
 		return;
 	}

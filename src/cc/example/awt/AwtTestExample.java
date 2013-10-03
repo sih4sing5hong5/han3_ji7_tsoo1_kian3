@@ -160,8 +160,8 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("調整中");
 		記錄工具.debug("調整中～～ 時間：" + System.currentTimeMillis());
-		MergePieceAdjuster adjuster = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(new Stroke[] {}, 0), 1e-1);// TODO
+		MergePieceAdjuster adjuster = new MergePieceAdjuster( 1e-1);
+		// TODO		new FunctinoalBasicBolder(new Stroke[] {}, 0),
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);
@@ -175,10 +175,10 @@ public class AwtTestExample extends Awt測試樣板
 		{
 			// ccmvArray.elementAt(i).print(printer); //TODO
 			// 以後printer沒用處或專門負責排版？
-			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
-					.elementAt(i)));
-//			printer.printPiece(((PieceMovableType) ccmvArray
-//					.elementAt(i)).getPiece());
+//			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
+//					.elementAt(i)));
+			printer.printPiece(((PieceMovableType) ccmvArray
+					.elementAt(i)).getPiece());
 			/** 徙較下跤一寡 */
 			graphics2D.translate(0, TYPE_SIZE);
 			/** 換一逝 */

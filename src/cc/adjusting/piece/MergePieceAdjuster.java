@@ -37,29 +37,20 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected 包圍整合分派工具 分派工具;
 	/** 決定啥物注音會當用，愛下佇佗 */
 	protected 注音符號分類工具 分類工具;
-	/** 參考教育部的國字注音比例參考圖 */
-	final double 教育部建議注音大細 = 0.36;// TODO
 	/** 注音內底逐个符號間隔寬度 */
 	final double 注音內底間隔寬度 = 0.3;// TODO
-	/** 注音因為傷細，上尾愛放較橫，較清楚 */
-	final double 注音譀橫 = 1.2;// TODO
-	/** 注音莫傷倚倒爿，徙規的寬度的比例 */
-	final double 注音徙正爿比例 = 0.05;// TODO
+	protected final double 活字平均闊度;
 
 	/**
 	 * 建立物件活字調整工具
 	 * 
 	 * @param chineseCharacterTypeBolder
 	 *            物件活字加寬工具
-	 * @param precision
+	 * @param precisions
 	 *            合併、調整的精細度
 	 */
-	public MergePieceAdjuster(
-			ChineseCharacterTypeBolder chineseCharacterTypeBolder,
-			double precision)
+	public MergePieceAdjuster(double 活字平均闊度)
 	{
-		super(chineseCharacterTypeBolder, precision);
-
 		貼合工具 = new 二元搜尋貼合工具();
 		水平工具 = new 水平拼合工具(this);
 		垂直工具 = new 垂直拼合工具(this);
@@ -81,6 +72,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				+ "ㄧㄨㄩ" + "ㄪㄫㄬ" + "ㄭㄮ" + "ㆠㆡㆢㆣ" + "ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ");
 		int[] 調號 = 字串與控制碼轉換.轉換成控制碼(" ˋ˪ˊ˫ˇ㆐^ㆴㆵㆶㆷ");
 		分類工具 = new 注音符號分類工具(輕聲, 聲韻, 調號);
+
+		this.活字平均闊度 = 活字平均闊度;
 	}
 
 	@Override
@@ -231,34 +224,6 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
-	 * 給縮放值，取得相對應的縮放矩陣
-	 * 
-	 * @param scaler
-	 *            縮放值
-	 * @return 縮放矩陣
-	 */
-	protected AffineTransform getAffineTransform(double scaler)
-	{
-		return getAffineTransform(scaler, scaler);
-	}
-
-	/**
-	 * 給水平、垂直縮放值，取得相對應的縮放矩陣
-	 * 
-	 * @param scalerX
-	 *            水平縮放值
-	 * @param scalerY
-	 *            垂直縮放值
-	 * @return 縮放矩陣
-	 */
-	protected AffineTransform getAffineTransform(double scalerX, double scalerY)
-	{
-		AffineTransform affineTransform = new AffineTransform();
-		affineTransform.setToScale(scalerX, scalerY);
-		return affineTransform;
-	}
-
-	/**
 	 * 判斷二個物件活字是否重疊。用在調整部件間的距離，<code>Area</code>內建的減去實作。
 	 * 
 	 * @param first
@@ -317,6 +282,58 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 					.getApproximativeCircumference()) / boundaryLength;
 	}
 
+	// public 活字單元 依目標調整中心(活字單元 活字物件)
+	// {
+	// 活字物件.徙(活字物件.目標範圍().getCenterX()- 活字物件.字範圍().getCenterX(), 活字物件.目標範圍()
+	// .getCenterY() - 活字物件.字範圍().getCenterY() );
+	// return 活字物件;
+	// }
+	double getPrecision()
+	{// TODO
+		return 0.0;
+	}
+
+	/**
+	 * 給縮放值，取得相對應的縮放矩陣
+	 * 
+	 * @param scaler
+	 *            縮放值
+	 * @return 縮放矩陣
+	 */
+	protected AffineTransform getAffineTransform(double scaler)
+	{
+		return getAffineTransform(scaler, scaler);
+	}
+
+	/**
+	 * 給水平、垂直縮放值，取得相對應的縮放矩陣
+	 * 
+	 * @param scalerX
+	 *            水平縮放值
+	 * @param scalerY
+	 *            垂直縮放值
+	 * @return 縮放矩陣
+	 */
+	protected AffineTransform getAffineTransform(double scalerX, double scalerY)
+	{
+		AffineTransform affineTransform = new AffineTransform();
+		affineTransform.setToScale(scalerX, scalerY);
+		return affineTransform;
+	}
+
+	double 平均闊度()
+	{
+		return 活字平均闊度;
+	}
+/////////////////////////////
+
+	/** 參考教育部的國字注音比例參考圖 */
+	final double 教育部建議注音大細 = 0.36;// TODO
+	/** 注音因為傷細，上尾愛放較橫，較清楚 */
+	final double 注音譀橫 = 1.2;// TODO
+	/** 注音莫傷倚倒爿，徙規的寬度的比例 */
+	final double 注音徙正爿比例 = 0.05;// TODO
+
 	/**
 	 * 要給<code>AwtForSinglePiecePrinter</code>列印前必須把物件活字依預計位置及大小（
 	 * <code>getTerritory()</code>）產生一個新的物件。
@@ -368,7 +385,6 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 				.getHeight() / 活字物件.這馬字範圍().getHeight();
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
-		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
 		// //TODO
 		// 活字物件.縮放(shrinkTransform);
 		// 活字物件.徙轉原點();
@@ -386,23 +402,16 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	public 分離活字 依目標懸度調整大細(分離活字 活字物件)
 	{
 		double coefficient = 活字物件.目標範圍().getHeight()
-				/ Math.max(-活字物件.這馬字範圍().getMinY(), 活字物件.這馬字範圍().getMaxY()) / 2.0;
+				/ Math.max(-活字物件.這馬字範圍().getMinY(), 活字物件.這馬字範圍().getMaxY())
+				/ 2.0;
 		if (coefficient > 教育部建議注音大細)
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(
 				coefficient * 注音譀橫, coefficient);
-		shrinkPieceByFixingStroke(活字物件, shrinkTransform);
 		活字物件.徙(活字物件.目標範圍().getX() + 活字物件.目標範圍().getWidth() * 注音徙正爿比例, 活字物件
 				.目標範圍().getY() + 活字物件.目標範圍().getHeight() / 2.0);
 		return 活字物件;
 	}
-
-//	public 活字單元 依目標調整中心(活字單元 活字物件)
-//	{
-//		活字物件.徙(活字物件.目標範圍().getCenterX()- 活字物件.字範圍().getCenterX(), 活字物件.目標範圍()
-//				.getCenterY() - 活字物件.字範圍().getCenterY() );
-//		return 活字物件;
-//	}
 
 	/**
 	 * 產生一個相同圖形的正方體活字物件。

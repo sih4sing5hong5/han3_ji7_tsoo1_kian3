@@ -50,7 +50,8 @@ public class 水平拼合模組 extends 平移拼合模組
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(1.0,
 					value);
-			調整工具.shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+//			調整工具.shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+			greaterPiece.縮放(shrinkTransform);
 		}
 
 		// TODO
@@ -79,17 +80,6 @@ public class 水平拼合模組 extends 平移拼合模組
 		return;
 	}
 
-	@Override
-	public double 活字寬度()
-	{
-		double 正爿闊度 = 調整工具.computePieceRadius(rightPiece);
-		if (!Double.isNaN(正爿闊度))
-			return 正爿闊度;
-		double 倒爿闊度 = 調整工具.computePieceRadius(leftPiece);
-		if (!Double.isNaN(倒爿闊度))
-			return 倒爿闊度;
-		return 0.0;
-	}
 
 	@Override
 	public double 接觸邊長()

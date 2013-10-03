@@ -84,9 +84,11 @@ public abstract class 二元搜尋貼合模組
 	/**
 	 * 取得目前活字的寬度
 	 * 
-	 * @return 目前活字的寬度
 	 */
-	public abstract double 活字寬度();
+	public double 活字寬度()
+	{
+		return 調整工具.平均闊度();
+	}
 
 	/**
 	 * 兩活字接觸的邊界長度，用來判斷是否不適合太接近，計算相斥值。

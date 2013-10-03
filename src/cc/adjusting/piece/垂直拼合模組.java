@@ -3,7 +3,6 @@ package cc.adjusting.piece;
 import java.awt.geom.AffineTransform;
 
 import cc.moveable_type.rectangular_area.分離活字;
-import cc.moveable_type.rectangular_area.分離活字;
 
 /**
  * 適用於「⿱」垂直拼合部件，如「⿱將水」為「漿」，只要是垂直拼合，皆用此型態。先將兩活字寬度調整相同，再進行合併。
@@ -51,7 +50,7 @@ public class 垂直拼合模組 extends 平移拼合模組
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(value,
 					1.0);
-			調整工具.shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+			greaterPiece.縮放(shrinkTransform);
 		}
 		return;
 	}
@@ -74,18 +73,6 @@ public class 垂直拼合模組 extends 平移拼合模組
 		downPiece.徙轉原點();
 		downPiece.徙(0, middleValue);
 		return;
-	}
-
-	@Override
-	public double 活字寬度()
-	{
-		double 下跤闊度 = 調整工具.computePieceRadius(downPiece);
-		if (!Double.isNaN(下跤闊度))
-			return 下跤闊度;
-		double 頂懸闊度 = 調整工具.computePieceRadius(upPiece);
-		if (!Double.isNaN(頂懸闊度))
-			return 頂懸闊度;
-		return 0.0;
 	}
 
 	@Override

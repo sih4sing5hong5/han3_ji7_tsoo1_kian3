@@ -48,13 +48,13 @@ public class 上蓋拼合模組 extends 垂直拼合模組
 		{
 			AffineTransform shrinkTransform = 調整工具.getAffineTransform(value,
 					1.0);
-			調整工具.shrinkPieceByFixingStroke(greaterPiece, shrinkTransform);
+			greaterPiece.縮放(shrinkTransform);
 		}
 
 		insideShrinkRate = 1.0; // TODO 要依上部寬度決定
 		AffineTransform insideShrinkTransform = 調整工具.getAffineTransform(
 				insideShrinkRate, 1.0);
-		調整工具.shrinkPieceByFixingStroke(downPiece, insideShrinkTransform);
+		downPiece.縮放(insideShrinkTransform);
 
 		return;
 	}

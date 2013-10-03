@@ -1,4 +1,4 @@
-package cc.adjusting.piece;
+package cc.moveable_type.rectangular_area;
 
 /**
  * 儲存活字寬度相關資訊，方便固定寬度等處理。

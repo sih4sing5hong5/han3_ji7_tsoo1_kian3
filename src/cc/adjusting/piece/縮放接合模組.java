@@ -75,12 +75,6 @@ public abstract class 縮放接合模組 extends 二元搜尋貼合模組
 	}
 
 	@Override
-	public double 活字寬度()
-	{
-		return 調整工具.computePieceRadius(outsidePiece);
-	}
-
-	@Override
 	public double 接觸邊長()
 	{
 		return temporaryPiece.這馬字範圍().getWidth()

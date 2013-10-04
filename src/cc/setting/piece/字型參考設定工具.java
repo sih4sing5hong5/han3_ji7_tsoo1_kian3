@@ -17,8 +17,8 @@ import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.分離活字;
+import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.moveable_type.rectangular_area.平面幾何;
-import cc.moveable_type.rectangular_area.分離活字;
 import cc.tool.database.字串與控制碼轉換;
 
 /**
@@ -36,6 +36,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	protected FontRenderContext 字體渲染屬性;
 	/** 佇鬥部件做伙揣現有的字型時，代表空空，遏袂處理的位址號碼 */
 	private final int 空空無物件 = -7;
+	protected final double 活字平均闊度;
 
 	/**
 	 * 準備設定工具。
@@ -47,7 +48,8 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	 * @param 字體渲染屬性
 	 *            活字的渲染屬性
 	 */
-	public 字型參考設定工具(展開式查通用字型編號 查通用字型編號, 通用字體 字體, FontRenderContext 字體渲染屬性)
+	public 字型參考設定工具(展開式查通用字型編號 查通用字型編號, 通用字體 字體, FontRenderContext 字體渲染屬性,
+			分離活字加粗 活字加粗)
 	{
 		super(null, null);
 		this.查通用字型編號 = 查通用字型編號;
@@ -60,9 +62,16 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		Rectangle2D 標準字區域;
 		/** 　若無「意」，就用全字庫宋體的資料 */
 		if (標準字字型 == null)
+		{
+			this.活字平均闊度 = 2.348851561664724;
 			標準字區域 = new Rectangle2D.Double(0.03125, -0.78125, 0.9375, 0.921875);
+		}
 		else
+		{
+			this.活字平均闊度 = 活字加粗.computeBoldCoefficient(new 平面幾何(標準字字型
+					.getOutline()));
 			標準字區域 = 標準字字型.getOutline().getBounds2D();
+		}
 		this.pieceForNoBuiltInWen = new Area(
 				basicStroke.createStrokedShape(標準字區域));
 		this.tzuModelTerritory = this.pieceForNoBuiltInWen.getBounds2D();
@@ -219,5 +228,10 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		{
 			return new ChineseCharacter[] { 部件 };
 		}
+	}
+
+	public double 平均闊度()
+	{
+		return 活字平均闊度;
 	}
 }

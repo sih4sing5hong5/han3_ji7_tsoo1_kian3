@@ -30,9 +30,8 @@ import cc.core.資料庫連線展開式查詢;
 import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
+import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
-import cc.setting.ChineseCharacterTypeSetter;
-import cc.setting.piece.MergePieceSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.用資料庫查展開式的通用字型編號;
@@ -96,8 +95,8 @@ public class AwtTestExample extends Awt測試樣板
 		// + "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ "
 		// + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
 		// + "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐";
-//		word = "意意意意意意意意意⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹";
-//		word = "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
+		// word = "意意意意意意意意意⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹";
+		// word = "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
 		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
 																		// 換專門查的使用者
 		看時工具.start("初使化");
@@ -139,19 +138,20 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("設定中");
 		記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
-		ChineseCharacterTypeSetter setter = new 字型參考設定工具(
-				new 用資料庫查展開式的通用字型編號(連線),
-				整合字體.提著宋體字體().調整字體參數(測試屬性, TYPE_SIZE),
-				new FontRenderContext(new AffineTransform(),
-						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
-//		setter = new MergePieceSetter(
-//				全字庫正宋體,
-//				測試屬性,
-//				TYPE_SIZE,
-//				new FontRenderContext(new AffineTransform(),
-//						java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-//						java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
+		分離活字加粗 活字加粗 = new 分離活字加粗(new FunctinoalBasicBolder(new Stroke[] {}, 0),
+				1e-1);
+		字型參考設定工具 setter = new 字型參考設定工具(new 用資料庫查展開式的通用字型編號(連線), 整合字體.提著宋體字體()
+				.調整字體參數(測試屬性, TYPE_SIZE), new FontRenderContext(
+				new AffineTransform(),
+				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
+		// setter = new MergePieceSetter(
+		// 全字庫正宋體,
+		// 測試屬性,
+		// TYPE_SIZE,
+		// new FontRenderContext(new AffineTransform(),
+		// java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+		// java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
 		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
@@ -160,8 +160,9 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("調整中");
 		記錄工具.debug("調整中～～ 時間：" + System.currentTimeMillis());
-		MergePieceAdjuster adjuster = new MergePieceAdjuster( 1e-1,3.1);
-		// TODO		new FunctinoalBasicBolder(new Stroke[] {}, 0),
+		MergePieceAdjuster adjuster = new MergePieceAdjuster(
+				活字加粗.getPrecision(), setter.平均闊度());
+		// TODO new FunctinoalBasicBolder(new Stroke[] {}, 0),
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.elementAt(i).adjust(adjuster);
@@ -177,8 +178,8 @@ public class AwtTestExample extends Awt測試樣板
 			// 以後printer沒用處或專門負責排版？
 			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
 					.elementAt(i)));
-//			printer.printPiece(((PieceMovableType) ccmvArray
-//					.elementAt(i)).getPiece());
+			// printer.printPiece(((PieceMovableType) ccmvArray
+			// .elementAt(i)).getPiece());
 			/** 徙較下跤一寡 */
 			graphics2D.translate(0, TYPE_SIZE);
 			/** 換一逝 */

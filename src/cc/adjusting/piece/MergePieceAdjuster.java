@@ -50,7 +50,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 * @param precisions
 	 *            合併、調整的精細度
 	 */
-	public MergePieceAdjuster(double 精確度,double 活字平均闊度)
+	public MergePieceAdjuster(double 精確度, double 活字平均闊度)
 	{
 		貼合工具 = new 二元搜尋貼合工具();
 		水平工具 = new 水平拼合工具(this);
@@ -75,7 +75,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分類工具 = new 注音符號分類工具(輕聲, 聲韻, 調號);
 
 		this.活字平均闊度 = 活字平均闊度;
-		this.precision=精確度;
+		this.precision = 精確度;
 	}
 
 	@Override
@@ -318,7 +318,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	// .getCenterY() - 活字物件.字範圍().getCenterY() );
 	// return 活字物件;
 	// }
-	double getPrecision()
+	public double getPrecision()
 	{// TODO
 		return precision;
 	}
@@ -327,7 +327,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	{
 		return 活字平均闊度;
 	}
-/////////////////////////////
+
+	// ///////////////////////////
 
 	/** 參考教育部的國字注音比例參考圖 */
 	final double 教育部建議注音大細 = 0.36;// TODO
@@ -388,8 +389,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		// //TODO
-		 活字物件.縮放(shrinkTransform);
-		 活字物件.徙轉原點();
+		活字物件.縮放(shrinkTransform);
+		活字物件.徙轉原點();
 		活字物件.徙(活字物件.目標範圍().getX(), 活字物件.目標範圍().getY());
 		return 活字物件;
 	}
@@ -410,7 +411,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(
 				coefficient * 注音譀橫, coefficient);
-		 活字物件.縮放(shrinkTransform);
+		活字物件.縮放(shrinkTransform);
 		活字物件.徙(活字物件.目標範圍().getX() + 活字物件.目標範圍().getWidth() * 注音徙正爿比例, 活字物件
 				.目標範圍().getY() + 活字物件.目標範圍().getHeight() / 2.0);
 		return 活字物件;

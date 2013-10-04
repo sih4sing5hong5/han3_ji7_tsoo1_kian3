@@ -41,7 +41,7 @@ public class 分離活字加粗
 	 *            物件活字
 	 * @return 粗細係數
 	 */
-	protected double computeBoldCoefficient(平面幾何 rectangularArea)
+	public double computeBoldCoefficient(平面幾何 rectangularArea)
 	{
 		return computePieceRadius(rectangularArea);
 	}

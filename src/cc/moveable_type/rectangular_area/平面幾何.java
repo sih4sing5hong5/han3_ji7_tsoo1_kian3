@@ -225,9 +225,4 @@ public class 平面幾何 extends Area // implements 活字單元
 		pathTravel.travelOn(new GeneralPath(this));
 		return 記錄.取得最低點();
 	}
-
-	public 平面幾何 目前的字體()
-	{
-		return this;
-	}
 }

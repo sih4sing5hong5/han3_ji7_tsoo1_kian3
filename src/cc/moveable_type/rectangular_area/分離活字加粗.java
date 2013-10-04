@@ -2,14 +2,8 @@ package cc.moveable_type.rectangular_area;
 
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
-import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterTzuCombinationType;
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.piece.PieceMovableType;
-import cc.程式記錄.漢字組建記錄工具包;
 
 public class 分離活字加粗
 {
@@ -32,10 +26,10 @@ public class 分離活字加粗
 	 *            物件活字
 	 * @return 粗細半徑
 	 */
-	protected double computePieceRadius(分離活字 rectangularArea)
+	protected double computePieceRadius(平面幾何 rectangularArea)
 	{
 		ShapeInformation shapeInformation = new ShapeInformation(
-				rectangularArea.目前的字體());
+				rectangularArea);
 		return shapeInformation.getApproximativeRegion()
 				/ shapeInformation.getApproximativeCircumference();
 	}
@@ -47,7 +41,7 @@ public class 分離活字加粗
 	 *            物件活字
 	 * @return 粗細係數
 	 */
-	protected double computeBoldCoefficient(分離活字 rectangularArea)
+	protected double computeBoldCoefficient(平面幾何 rectangularArea)
 	{
 		return computePieceRadius(rectangularArea);
 	}
@@ -61,7 +55,7 @@ public class 分離活字加粗
 	 *            粗細係數
 	 * @return 筆劃加寬度
 	 */
-	protected double getStorkeWidthByCoefficient(分離活字 rectangularArea,
+	protected double getStorkeWidthByCoefficient(平面幾何 rectangularArea,
 			double originBoldCoefficient)
 	{
 		// TODO 改成牛頓法可能比較好
@@ -69,7 +63,7 @@ public class 分離活字加粗
 		while (miniWidth + getPrecision() < maxiWidth)
 		{
 			double middleWidth = 0.5 * (miniWidth + maxiWidth);
-			分離活字 boldSurface = getBoldSurface(rectangularArea, middleWidth);
+			平面幾何 boldSurface = getBoldSurface(rectangularArea, middleWidth);
 			boldSurface.合併活字(rectangularArea);
 			double nowBoldCoefficient = computeBoldCoefficient(boldSurface);
 			if (nowBoldCoefficient < originBoldCoefficient)
@@ -89,11 +83,10 @@ public class 分離活字加粗
 	 *            筆劃加寬度
 	 * @return 物件活字外框
 	 */
-	protected 分離活字 getBoldSurface(分離活字 rectangularArea, double strokeWidth)
+	protected 平面幾何 getBoldSurface(平面幾何 rectangularArea, double strokeWidth)
 	{
 		Stroke stroke = chineseCharacterTypeBolder.getStroke(strokeWidth);
-		return new 分離活字(new 平面幾何(stroke.createStrokedShape(rectangularArea
-				.目前的字體())));
+		return new 平面幾何(stroke.createStrokedShape(rectangularArea));
 	}
 
 	/**
@@ -110,16 +103,16 @@ public class 分離活字加粗
 			AffineTransform affineTransform)
 	{
 		// TODO
-		活字寬度資訊 舊活字寬度資訊 = 取得活字寬度資訊(rectangularArea);
-		// double originBoldCoefficient =
-		// computeBoldCoefficient(rectangularArea);
-		rectangularArea.縮放(affineTransform);
-		依寬度資訊調整活字(rectangularArea, 舊活字寬度資訊);
-		// double strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
-		// originBoldCoefficient);
-		// RectangularArea boldSurface = getBoldSurface(rectangularArea,
-		// strokeWidth);
-		// rectangularArea.add(boldSurface);
+//		活字寬度資訊 舊活字寬度資訊 = 取得活字寬度資訊(rectangularArea);
+//		// double originBoldCoefficient =
+//		// computeBoldCoefficient(rectangularArea);
+//		rectangularArea.縮放(affineTransform);
+//		依寬度資訊調整活字(rectangularArea, 舊活字寬度資訊);
+//		// double strokeWidth = getStorkeWidthByCoefficient(rectangularArea,
+//		// originBoldCoefficient);
+//		// RectangularArea boldSurface = getBoldSurface(rectangularArea,
+//		// strokeWidth);
+//		// rectangularArea.add(boldSurface);
 		return;
 	}
 
@@ -130,7 +123,7 @@ public class 分離活字加粗
 	 *            欲取得資訊的活字物件
 	 * @return 活字寬度資訊
 	 */
-	活字寬度資訊 取得活字寬度資訊(分離活字 活字物件)
+	活字寬度資訊 取得活字寬度資訊(平面幾何 活字物件)
 	{
 		return new 活字寬度資訊(computeBoldCoefficient(活字物件));
 	}
@@ -161,5 +154,5 @@ public class 分離活字加粗
 	{
 		return precision;
 	}
-	
+
 }

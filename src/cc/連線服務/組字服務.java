@@ -73,7 +73,8 @@ public class 組字服務 extends HttpServlet {
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();
 		異寫式查詢工具 異寫式查詢 = new 資料庫連線異寫式查詢(連線);
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
-				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
+				//new FunctinoalBasicBolder(new Stroke[] {}, 01),
+				1e-1,5);
 		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
 		// TODO 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
 

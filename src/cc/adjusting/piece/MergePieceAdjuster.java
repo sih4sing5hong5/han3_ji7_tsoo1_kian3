@@ -40,6 +40,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	/** 注音內底逐个符號間隔寬度 */
 	final double 注音內底間隔寬度 = 0.3;// TODO
 	protected final double 活字平均闊度;
+	protected final double precision;
 
 	/**
 	 * 建立物件活字調整工具
@@ -49,7 +50,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 * @param precisions
 	 *            合併、調整的精細度
 	 */
-	public MergePieceAdjuster(double 活字平均闊度)
+	public MergePieceAdjuster(double 精確度,double 活字平均闊度)
 	{
 		貼合工具 = new 二元搜尋貼合工具();
 		水平工具 = new 水平拼合工具(this);
@@ -74,6 +75,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		分類工具 = new 注音符號分類工具(輕聲, 聲韻, 調號);
 
 		this.活字平均闊度 = 活字平均闊度;
+		this.precision=精確度;
 	}
 
 	@Override
@@ -224,6 +226,34 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	}
 
 	/**
+	 * 給縮放值，取得相對應的縮放矩陣
+	 * 
+	 * @param scaler
+	 *            縮放值
+	 * @return 縮放矩陣
+	 */
+	protected AffineTransform getAffineTransform(double scaler)
+	{
+		return getAffineTransform(scaler, scaler);
+	}
+
+	/**
+	 * 給水平、垂直縮放值，取得相對應的縮放矩陣
+	 * 
+	 * @param scalerX
+	 *            水平縮放值
+	 * @param scalerY
+	 *            垂直縮放值
+	 * @return 縮放矩陣
+	 */
+	protected AffineTransform getAffineTransform(double scalerX, double scalerY)
+	{
+		AffineTransform affineTransform = new AffineTransform();
+		affineTransform.setToScale(scalerX, scalerY);
+		return affineTransform;
+	}
+
+	/**
 	 * 判斷二個物件活字是否重疊。用在調整部件間的距離，<code>Area</code>內建的減去實作。
 	 * 
 	 * @param first
@@ -290,35 +320,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	// }
 	double getPrecision()
 	{// TODO
-		return 0.0;
-	}
-
-	/**
-	 * 給縮放值，取得相對應的縮放矩陣
-	 * 
-	 * @param scaler
-	 *            縮放值
-	 * @return 縮放矩陣
-	 */
-	protected AffineTransform getAffineTransform(double scaler)
-	{
-		return getAffineTransform(scaler, scaler);
-	}
-
-	/**
-	 * 給水平、垂直縮放值，取得相對應的縮放矩陣
-	 * 
-	 * @param scalerX
-	 *            水平縮放值
-	 * @param scalerY
-	 *            垂直縮放值
-	 * @return 縮放矩陣
-	 */
-	protected AffineTransform getAffineTransform(double scalerX, double scalerY)
-	{
-		AffineTransform affineTransform = new AffineTransform();
-		affineTransform.setToScale(scalerX, scalerY);
-		return affineTransform;
+		return precision;
 	}
 
 	double 平均闊度()
@@ -386,8 +388,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		AffineTransform shrinkTransform = getAffineTransform(widthCoefficient,
 				heightCoefficient);
 		// //TODO
-		// 活字物件.縮放(shrinkTransform);
-		// 活字物件.徙轉原點();
+		 活字物件.縮放(shrinkTransform);
+		 活字物件.徙轉原點();
 		活字物件.徙(活字物件.目標範圍().getX(), 活字物件.目標範圍().getY());
 		return 活字物件;
 	}
@@ -408,6 +410,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			coefficient = 教育部建議注音大細;
 		AffineTransform shrinkTransform = getAffineTransform(
 				coefficient * 注音譀橫, coefficient);
+		 活字物件.縮放(shrinkTransform);
 		活字物件.徙(活字物件.目標範圍().getX() + 活字物件.目標範圍().getWidth() * 注音徙正爿比例, 活字物件
 				.目標範圍().getY() + 活字物件.目標範圍().getHeight() / 2.0);
 		return 活字物件;

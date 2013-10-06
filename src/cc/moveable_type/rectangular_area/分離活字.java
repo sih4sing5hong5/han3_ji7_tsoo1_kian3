@@ -182,6 +182,7 @@ public class 分離活字
 	public void 圖形重設()
 	{
 		字.clear();
+		原本字體.clear();
 		這馬.setRect(0, 0, 0, 0);
 		// for (平面幾何 平面 : 字)
 		// {

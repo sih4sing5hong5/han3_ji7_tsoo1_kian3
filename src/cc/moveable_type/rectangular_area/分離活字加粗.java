@@ -57,15 +57,13 @@ public class 分離活字加粗
 	 * @return 筆劃加寬度
 	 */
 	protected 平面幾何 依寬度資訊產生外殼(平面幾何 活字物件, 活字寬度資訊 寬度資訊)
-	// protected double getStorkeWidthByCoefficient(平面幾何 rectangularArea,
-	// double originBoldCoefficient)
 	{
 		double 原來闊度系數 = 寬度資訊.取得活字粗細係數();
 		活字寬度資訊 這馬闊度資訊 = 取得活字寬度資訊(活字物件);
 		double 這馬闊度係數 = 這馬闊度資訊.取得活字粗細係數();
 		// TODO 改成牛頓法可能比較好
 		平面幾何 新殼 = new 平面幾何();
-		double miniWidth = 0.0, maxiWidth = 原來闊度系數;
+		double miniWidth = 0.0, maxiWidth = 原來闊度系數 / 2.0;// TODO 奇怪參數
 		while (miniWidth + getPrecision() < maxiWidth)
 		{
 			double middleWidth = 0.5 * (miniWidth + maxiWidth);

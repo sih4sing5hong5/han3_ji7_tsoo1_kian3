@@ -30,6 +30,7 @@ import cc.core.資料庫連線展開式查詢;
 import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
+import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.piece.字型參考設定工具;
@@ -138,8 +139,8 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("設定中");
 		記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
-		分離活字加粗 活字加粗 = new 分離活字加粗(new FunctinoalBasicBolder(new Stroke[] {}, 0),
-				1e-1);
+		分離活字加粗 活字加粗 = new 分離活字加粗(
+				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
 		字型參考設定工具 setter = new 字型參考設定工具(new 用資料庫查展開式的通用字型編號(連線), 整合字體.提著宋體字體()
 				.調整字體參數(測試屬性, TYPE_SIZE), new FontRenderContext(
 				new AffineTransform(),
@@ -168,6 +169,20 @@ public class AwtTestExample extends Awt測試樣板
 			ccmvArray.elementAt(i).adjust(adjuster);
 		}
 
+		看時工具.start("四角中");
+		記錄工具.debug("四角中～～ 時間：" + System.currentTimeMillis());
+		Vector<分離活字> 活字陣列 = new Vector<分離活字>();
+
+		for (int i = 0; i < ccmvArray.size(); ++i)
+		{
+			活字陣列.add(adjuster.format((PieceMovableType) ccmvArray.elementAt(i)));
+		}
+		看時工具.start("加粗中");
+		記錄工具.debug("加粗中～～ 時間：" + System.currentTimeMillis());
+		for (分離活字 活字 : 活字陣列)
+		{
+			活字加粗.加粗(活字);
+		}
 		看時工具.start("列印中");
 		記錄工具.debug("列印中～～ 時間：" + System.currentTimeMillis());
 		AwtForSinglePiecePrinter printer = new AwtForSinglePiecePrinter(
@@ -176,8 +191,7 @@ public class AwtTestExample extends Awt測試樣板
 		{
 			// ccmvArray.elementAt(i).print(printer); //TODO
 			// 以後printer沒用處或專門負責排版？
-			printer.printPiece(adjuster.format((PieceMovableType) ccmvArray
-					.elementAt(i)));
+			printer.printPiece(活字陣列.elementAt(i));
 			// printer.printPiece(((PieceMovableType) ccmvArray
 			// .elementAt(i)).getPiece());
 			/** 徙較下跤一寡 */

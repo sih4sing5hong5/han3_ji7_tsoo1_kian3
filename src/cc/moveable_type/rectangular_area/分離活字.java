@@ -14,6 +14,8 @@ public class 分離活字
 	private Vector<平面幾何> 字;
 	/** 為著保留字體闊，若維護矩陣顛倒愛去顧平移 */
 	private Vector<平面幾何> 原本字體;
+	/** 加粗莫合併的外殼 */
+	private Vector<平面幾何> 字外殼;
 	/** 這馬的範圍，是為著閃避「一字問題」 */
 	private Rectangle2D.Double 這馬;
 	/** 目標範圍，上尾印的時陣愛看印偌大 */
@@ -23,6 +25,7 @@ public class 分離活字
 	{
 		字 = new Vector<平面幾何>();
 		原本字體 = new Vector<平面幾何>();
+		字外殼 = null;
 		這馬 = new Rectangle.Double();
 		目標 = new Rectangle.Double();
 	}
@@ -41,6 +44,7 @@ public class 分離活字
 		for (平面幾何 活字的字 : 活字.字)
 			字.add(new 平面幾何(活字的字));
 		原本字體 = new Vector<平面幾何>(活字.原本字體);
+		字外殼 = null;
 		這馬 = new Rectangle.Double();
 		這馬.setRect(活字.這馬);
 		目標 = new Rectangle.Double();
@@ -275,6 +279,9 @@ public class 分離活字
 	{
 		for (平面幾何 幾何 : 字)
 			布.draw(幾何);
+		if (字外殼 != null)
+			for (平面幾何 幾何 : 字外殼)
+				布.draw(幾何);
 		return;
 	}
 
@@ -297,5 +304,21 @@ public class 分離活字
 		for (平面幾何 幾何 : 字)
 			字體結果.合併活字(幾何);
 		return 字體結果;
+	}
+
+	Vector<平面幾何> 提著字()
+	{
+		return 字;
+	}
+
+	Vector<平面幾何> 提著原本字體()
+	{
+		return 原本字體;
+	}
+
+	void 設字外殼(Vector<平面幾何> 字外殼)
+	{
+		this.字外殼 = 字外殼;
+		return;
 	}
 }

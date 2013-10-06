@@ -22,6 +22,7 @@ import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.rectangular_area.分離活字;
+import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.程式記錄.漢字組建記錄工具包;
@@ -47,6 +48,7 @@ public class 組字介面
 	protected ChineseCharacterTypeSetter 設定工具;
 	/** 佮頭拄仔產生的活字，組合閣共調整 */
 	protected MergePieceAdjuster 調整工具;
+	protected 分離活字加粗 活字加粗;
 	/** 主要是控制字體是毋是粗體 */
 	protected final int 字型屬性;
 	/** 字體愛偌大 */
@@ -75,10 +77,10 @@ public class 組字介面
 	 *            字體愛偌大
 	 */
 	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
-			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具, int 字型屬性,
-			int 字型大細)
+			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
+			分離活字加粗 活字加粗, int 字型屬性, int 字型大細)
 	{
-		this(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 設定工具, 調整工具, 字型屬性, 字型大細, 20);
+		this(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 設定工具, 調整工具, 活字加粗, 字型屬性, 字型大細, 20);
 	}
 
 	/**
@@ -104,14 +106,15 @@ public class 組字介面
 	 *            限制組字式長度，予儂無法度惡意攻擊
 	 */
 	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
-			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具, int 字型屬性,
-			int 字型大細, int 組字式上大長度)
+			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
+			分離活字加粗 活字加粗, int 字型屬性, int 字型大細, int 組字式上大長度)
 	{
 		this.查詢方式 = 查詢方式;
 		this.正規化工具 = 正規化工具;
 		this.異寫式代換 = new 異寫式代換工具(編號陣列, 異寫式查詢);
 		this.設定工具 = 設定工具;
 		this.調整工具 = 調整工具;
+		this.活字加粗 = 活字加粗;
 		this.字型屬性 = 字型屬性;
 		this.字型大細 = 字型大細;
 		this.組字式上大長度 = 組字式上大長度;
@@ -174,9 +177,12 @@ public class 組字介面
 
 		活字.adjust(調整工具);
 
-		看時工具.start("縮放中");
-		分離活字 上尾欲畫的圖=調整工具.format((PieceMovableType) 活字);
-		
+		看時工具.start("四角中");
+		分離活字 上尾欲畫的圖 = 調整工具.format((PieceMovableType) 活字);
+
+		看時工具.start("加粗中");
+		活字加粗.加粗(上尾欲畫的圖);
+
 		看時工具.start("列印中");
 		// 記錄工具.debug("列印中～～ 時間：" + System.currentTimeMillis());
 		Graphics2D 字型圖版 = (Graphics2D) 欲畫的所在;

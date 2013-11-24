@@ -63,7 +63,7 @@ public class 組字服務 extends HttpServlet
 	{
 		系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
 				.getDefaultScreenDevice().getDefaultConfiguration();
-		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// 專利遏袂好進前袂使用著檢字表
+		連線 = new PgsqlConnection();
 		// TODO 換專門查的使用者，換讀取權限
 		int 粗字型屬性 = Font.BOLD;
 		int 普通字型屬性 = 0;

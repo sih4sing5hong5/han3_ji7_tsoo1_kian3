@@ -14,16 +14,16 @@ import java.sql.Statement;
 public class PgsqlConnection
 {
 	/** 預設資料庫位置 */
-	static public final String url = "jdbc:postgresql://localhost/IhcData?useUnicode=true&characterEncoding=utf-8";
+	static public final String url = "jdbc:postgresql://localhost/漢字組建?useUnicode=true&characterEncoding=utf-8";
 	/** 連線物件 */
 	private Connection connection;
 	/** 連線狀態 */
 	private Statement statement;
 
-	/** 自動連線到資料庫，這个帳號有修改的權限。 */
-	PgsqlConnection()
+	/** 自動連線到資料庫，資料庫設定唯讀，這个帳號就無修改的權限。 */
+	public PgsqlConnection()
 	{
-		this(url, "Ihc", "983781");
+		this(url, "漢字組建", "ChineseCharacter");
 	}
 
 	/**

@@ -41,7 +41,7 @@ public class 產生組字式工具
 	public static void main(String[] args)
 	{
 		BufferedReader 輸入 = new BufferedReader(new InputStreamReader(System.in));
-		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");
+		連線 = new PgsqlConnection();
 		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
 

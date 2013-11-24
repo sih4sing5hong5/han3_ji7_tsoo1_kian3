@@ -98,8 +98,7 @@ public class AwtTestExample extends Awt測試樣板
 		// + "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐";
 		// word = "意意意意意意意意意⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹";
 		// word = "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
-		連線 = new PgsqlConnection(PgsqlConnection.url, "Ihc", "983781");// TODO
-																		// 換專門查的使用者
+		連線 = new PgsqlConnection();
 		看時工具.start("初使化");
 		記錄工具.debug(MarkerFactory.getMarker("@@"),
 				"初使化～～ 時間：" + System.currentTimeMillis());

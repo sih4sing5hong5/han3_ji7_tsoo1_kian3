@@ -18,17 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
-import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
 import cc.core.異寫式查詢工具;
 import cc.core.組字式部件正規化;
+import cc.core.資料庫連線展開式查詢;
 import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.對照字體;
 import cc.setting.piece.展開式查通用字型編號;
-import cc.setting.piece.無愛查通用字型編號;
+import cc.setting.piece.用資料庫查展開式的通用字型編號;
 import cc.tool.database.PgsqlConnection;
 import cc.tool.database.字串與控制碼轉換;
 
@@ -71,14 +71,14 @@ public class 組字服務 extends HttpServlet
 		/** 定義異寫編號數字 */
 		int[] 編號陣列 = 字串與控制碼轉換.轉換成控制碼("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥陰陽乾坤震巽坎離艮兌");
 
-		展開式查詢工具 查詢方式 = new 展開式免查詢();
+		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();
 		異寫式查詢工具 異寫式查詢 = new 資料庫連線異寫式查詢(連線);
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
 		// new FunctinoalBasicBolder(new Stroke[] {}, 01),
 				1e-1, 5);
-		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
+		展開式查通用字型編號 展開式查通用字型編號工具 = new 用資料庫查展開式的通用字型編號(連線);
 		// TODO 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
 		分離活字加粗 活字加粗 = new 分離活字加粗(
 				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);

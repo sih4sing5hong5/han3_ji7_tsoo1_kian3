@@ -20,7 +20,13 @@ public class PgsqlConnection
 	/** 連線狀態 */
 	private Statement statement;
 
-	/** 自動連線到資料庫，資料庫設定唯讀，這个帳號就無修改的權限。 */
+	/**
+	 * 自動連線到資料庫，資料庫設定唯讀，這个帳號就無修改的權限。
+	 * 
+	 * <pre>
+	 * ALTER DATABASE "漢字組建" set default_transaction_read_only=on;
+	 * </pre>
+	 */
 	public PgsqlConnection()
 	{
 		this(url, "漢字組建", "ChineseCharacter");
@@ -41,7 +47,8 @@ public class PgsqlConnection
 		try
 		{
 			Class.forName("org.postgresql.Driver");
-		} catch (java.lang.ClassNotFoundException e)
+		}
+		catch (java.lang.ClassNotFoundException e)
 		{
 			System.err.print("ClassNotFoundException: ");
 			System.err.println(e.getMessage());
@@ -49,7 +56,8 @@ public class PgsqlConnection
 		try
 		{
 			connection = DriverManager.getConnection(urls, account, passwd);
-		} catch (SQLException ex)
+		}
+		catch (SQLException ex)
 		{
 			System.err.print("SQLException: ");
 			System.err.println(ex.getMessage());
@@ -63,7 +71,8 @@ public class PgsqlConnection
 		try
 		{
 			connection.close();
-		} catch (SQLException ex)
+		}
+		catch (SQLException ex)
 		{
 			System.err.print("SQLException: ");
 			System.err.println(ex.getMessage());

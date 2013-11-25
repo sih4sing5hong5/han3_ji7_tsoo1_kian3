@@ -2,21 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="/usr/share/java/postgresql-jdbc4.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://jdbc.postgresql.org/documentation/publicapi/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/java/logback-classic.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://logback.qos.ch/apidocs/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/java/logback-core.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://logback.qos.ch/apidocs/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1.jar" sourcepath="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/漢字組建/函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-javadoc.jar!/"/>
@@ -32,8 +17,13 @@
 			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/java/jetty.jar"/>
-	<classpathentry kind="lib" path="/usr/share/java/servlet-api-2.5.jar"/>
-	<classpathentry kind="lib" path="/usr/share/java/jetty-util.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-6.1.24/jetty-6.1.24.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-6.1.24/jetty-util-6.1.24.jar"/>
+	<classpathentry kind="lib" path="函式庫/logback-1.0.0/logback-classic-1.0.0.jar"/>
+	<classpathentry kind="lib" path="函式庫/logback-1.0.0/logback-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="函式庫/postgresql-jdbc4/postgresql-jdbc4-9.1.jar"/>
+	<classpathentry kind="lib" path="函式庫/servlet-api/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-api-1.7.5-sources.jar"/>
+	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

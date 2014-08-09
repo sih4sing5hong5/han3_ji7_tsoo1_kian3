@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/lib/jvm/java-6-openjdk-amd64/bin/java -Dfile.encoding=UTF-8 -classpath ./bin:./函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1.jar:./函式庫/slf4j-1.7.5/slf4j-api-1.7.5.jar:./函式庫/slf4j-1.7.5/slf4j-ext-1.7.5.jar:./函式庫/jetty-6.1.24/jetty-6.1.24.jar:./函式庫/jetty-6.1.24/jetty-util-6.1.24.jar:./函式庫/logback-1.0.0/logback-classic-1.0.0.jar:./函式庫/logback-1.0.0/logback-core-1.0.0.jar:./函式庫/postgresql-jdbc4/postgresql-jdbc4-9.1.jar:./函式庫/servlet-api/servlet-api-2.5.jar:./函式庫/slf4j-1.7.5/slf4j-api-1.7.5-sources.jar:./函式庫/slf4j-1.7.5/slf4j-ext-1.7.5-sources.jar cc.連線服務.姊麶服務程式

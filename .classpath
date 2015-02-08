@@ -17,13 +17,16 @@
 			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="函式庫/jetty-6.1.24/jetty-6.1.24.jar"/>
-	<classpathentry kind="lib" path="函式庫/jetty-6.1.24/jetty-util-6.1.24.jar"/>
 	<classpathentry kind="lib" path="函式庫/logback-1.0.0/logback-classic-1.0.0.jar"/>
 	<classpathentry kind="lib" path="函式庫/logback-1.0.0/logback-core-1.0.0.jar"/>
 	<classpathentry kind="lib" path="函式庫/postgresql-jdbc4/postgresql-jdbc4-9.1.jar"/>
-	<classpathentry kind="lib" path="函式庫/servlet-api/servlet-api-2.5.jar"/>
 	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-api-1.7.5-sources.jar"/>
 	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5-sources.jar"/>
+	<classpathentry kind="lib" path="函式庫/servlet-api/servlet-api-3.1.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-server-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-http-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-io-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-servlet-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-util-9.2.7.v20150116.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

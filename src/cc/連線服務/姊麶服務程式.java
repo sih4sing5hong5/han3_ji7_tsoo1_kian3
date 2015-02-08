@@ -28,10 +28,8 @@
  ******************************************************************************/
 package cc.連線服務;
 
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.nio.SelectChannelConnector;
-import org.mortbay.jetty.servlet.ServletHandler;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletHandler;
 
 /**
  * 利用Jetty來做主機端，提供服務予儂組字。
@@ -51,11 +49,7 @@ public class 姊麶服務程式
 	 */
 	public static void main(String[] 參數)
 	{
-		Server server = new Server();
-		Connector connector = new SelectChannelConnector();
-		connector.setHost("localhost");
-		connector.setPort(連接埠);
-		server.addConnector(connector);
+		Server server = new Server(8080);
 
 		ServletHandler handler = new ServletHandler();
 		server.setHandler(handler);

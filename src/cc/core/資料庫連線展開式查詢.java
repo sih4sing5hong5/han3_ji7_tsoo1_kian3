@@ -76,8 +76,7 @@ public class 資料庫連線展開式查詢 extends 展開式查詢工具
 		}
 		catch (NullPointerException e)
 		{
-			//TODO 優化，若無連線時會入來
-			e.printStackTrace();			
+			// 無連線當作查無			
 		}
 		return 展開式;
 	}

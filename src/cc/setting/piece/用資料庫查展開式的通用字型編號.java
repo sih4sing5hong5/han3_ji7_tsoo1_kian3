@@ -90,6 +90,10 @@ public class 用資料庫查展開式的通用字型編號 implements 展開式�
 		{
 			e.printStackTrace();
 		}
+		catch (NullPointerException e)
+		{
+			// 無連線當作查無
+		}
 		return null;
 	}
 }

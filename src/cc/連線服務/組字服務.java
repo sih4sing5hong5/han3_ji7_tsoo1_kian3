@@ -29,10 +29,7 @@
 package cc.連線服務;
 
 import java.awt.Font;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
 import java.awt.Stroke;
-import java.awt.Transparency;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -78,8 +75,8 @@ public class 組字服務 extends HttpServlet
 	/** 組楷體粗體用的工具 */
 	protected 組字介面 粗楷組字工具;
 
-	/** 產生圖形傳予組字介面畫 */
-	GraphicsConfiguration 系統圖畫設定;
+	/** 產生圖形傳予組字介面畫。毋過無X11、圖形介面就袂使用 */
+//	GraphicsConfiguration 系統圖畫設定;
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
 
@@ -89,8 +86,9 @@ public class 組字服務 extends HttpServlet
 	/** 建立一个組字的服務。 */
 	public 組字服務()
 	{
-		系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
-				.getDefaultScreenDevice().getDefaultConfiguration();
+//		系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
+//				.getDefaultScreenDevice().getDefaultConfiguration();
+		
 		連線 = new PgsqlConnection();
 		// TODO 換專門查的使用者，換讀取權限
 		int 粗字型屬性 = Font.BOLD;
@@ -191,10 +189,10 @@ public class 組字服務 extends HttpServlet
 					// if (!附檔名.equals("jpg"))//TODO jpg有問題
 					附檔名 = "png";
 					// System.err.println(附檔名);
-					BufferedImage 字型圖片 = 系統圖畫設定.createCompatibleImage(字型大細,
-							字型大細, Transparency.TRANSLUCENT);
-					// new BufferedImage(字型大細, 字型大細,
-					// BufferedImage.TYPE_INT_ARGB);
+					BufferedImage 字型圖片 =
+					// 系統圖畫設定.createCompatibleImage(字型大細,
+					// 字型大細, Transparency.TRANSLUCENT);
+							new BufferedImage(字型大細, 字型大細, BufferedImage.TYPE_INT_ARGB);
 					組字工具.組字(檔名, 字型圖片.getGraphics());
 					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
 					遏袂做 = false;

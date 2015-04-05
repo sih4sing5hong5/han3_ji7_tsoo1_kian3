@@ -34,12 +34,18 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.URLDecoder;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.batik.dom.GenericDOMImplementation;
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
 
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
@@ -62,8 +68,7 @@ import cc.tool.database.字串與控制碼轉換;
  * 
  * @author Ihc
  */
-public class 組字服務 extends HttpServlet
-{
+public class 組字服務 extends HttpServlet {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1224634082415129183L;
 	/** 組宋體用的工具 */
@@ -76,7 +81,7 @@ public class 組字服務 extends HttpServlet
 	protected 組字介面 粗楷組字工具;
 
 	/** 產生圖形傳予組字介面畫。毋過無X11、圖形介面就袂使用 */
-//	GraphicsConfiguration 系統圖畫設定;
+	// GraphicsConfiguration 系統圖畫設定;
 	/** 佮資料庫的連線 */
 	protected PgsqlConnection 連線;
 
@@ -84,11 +89,10 @@ public class 組字服務 extends HttpServlet
 	int 字型大細;
 
 	/** 建立一个組字的服務。 */
-	public 組字服務()
-	{
-//		系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
-//				.getDefaultScreenDevice().getDefaultConfiguration();
-		
+	public 組字服務() {
+		// 系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
+		// .getDefaultScreenDevice().getDefaultConfiguration();
+
 		連線 = new PgsqlConnection();
 		// TODO 換專門查的使用者，換讀取權限
 		int 粗字型屬性 = Font.BOLD;
@@ -152,58 +156,69 @@ public class 組字服務 extends HttpServlet
 	 * 檔案類型：<code>png</code>
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException
-	{
+			HttpServletResponse response) throws IOException {
 		String 網址字串 = URLDecoder.decode(request.getRequestURI(), "UTF-8");
 		String[] 目錄 = 網址字串.split("/");
 		boolean 遏袂做 = true;
-		if (目錄.length == 3)
-		{
+		if (目錄.length == 3) {
 			組字介面 組字工具 = null;
-			if (目錄[1].equals("宋體"))
-			{
+			if (目錄[1].equals("宋體")) {
 				組字工具 = 宋體組字工具;
-			}
-			else if (目錄[1].equals("宋體粗體"))
-			{
+			} else if (目錄[1].equals("宋體粗體")) {
 				組字工具 = 粗宋組字工具;
-			}
-			else if (目錄[1].equals("楷體"))
-			{
+			} else if (目錄[1].equals("楷體")) {
 				組字工具 = 楷體組字工具;
-			}
-			else if (目錄[1].equals("楷體粗體"))
-			{
+			} else if (目錄[1].equals("楷體粗體")) {
 				組字工具 = 粗楷組字工具;
 			}
-			if (組字工具 != null)
-			{
+			if (組字工具 != null) {
 				int 位置 = -1;
 				for (int i = 0; i < 目錄[2].length(); ++i)
 					if (目錄[2].charAt(i) == '.')
 						位置 = i;
-				if (位置 != -1)
-				{
+				if (位置 != -1) {
 					String 檔名 = 目錄[2].substring(0, 位置);
 					String 附檔名 = 目錄[2].substring(位置 + 1);
-					// if (!附檔名.equals("jpg"))//TODO jpg有問題
-					附檔名 = "png";
-					// System.err.println(附檔名);
-					BufferedImage 字型圖片 =
-					// 系統圖畫設定.createCompatibleImage(字型大細,
-					// 字型大細, Transparency.TRANSLUCENT);
-							new BufferedImage(字型大細, 字型大細, BufferedImage.TYPE_INT_ARGB);
-					組字工具.組字(檔名, 字型圖片.getGraphics());
-					ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
-					遏袂做 = false;
+					if (!附檔名.equals("svg"))// TODO 只支援png、svg，其他先用png
+						附檔名 = "png";
+					if (附檔名.equals("png")) {
+						// System.err.println(附檔名);
+						BufferedImage 字型圖片 =
+						// 系統圖畫設定.createCompatibleImage(字型大細,
+						// 字型大細, Transparency.TRANSLUCENT);
+						new BufferedImage(字型大細, 字型大細,
+								BufferedImage.TYPE_INT_ARGB);
+						組字工具.組字(檔名, 字型圖片.getGraphics());
+						ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
+						遏袂做 = false;
+					} else // svg
+					{
+						DOMImplementation domImpl = GenericDOMImplementation
+								.getDOMImplementation();
+
+						// Create an instance of org.w3c.dom.Document.
+						String svgNS = "http://www.w3.org/2000/svg";
+						Document document = domImpl.createDocument(svgNS,
+								"svg", null);
+
+						boolean useCSS = true; // we want to use CSS style
+												// attributes
+						// Create an instance of the SVG Generator.
+						SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+						組字工具.組字(檔名, svgGenerator);
+						OutputStreamWriter svgOutput = new java.io.OutputStreamWriter(
+								response.getOutputStream(), "UTF-8");
+						svgGenerator.stream(svgOutput, useCSS);
+
+						遏袂做 = false;
+					}
 				}
 			}
 		}
 		// if (request.getParameter("a") != null)
 		// {
 		// }
-		if (遏袂做)
-		{
+		if (遏袂做) {
 			/* 　導向去別位 response.sendRedirect(網址字串); */
 			response.sendRedirect("http://xn--v0qr21b.xn--kpry57d");
 

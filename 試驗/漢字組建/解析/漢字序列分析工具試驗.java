@@ -1,7 +1,6 @@
 package 漢字組建.解析;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.util.Vector;
 
@@ -103,13 +102,38 @@ public class 漢字序列分析工具試驗
 	@Test
 	public void 第一字無完整組字式字數()
 	{
-		fail("還沒做");
+		String 組字式 = "⿰";
+		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
+		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		assertEquals(1, 部件樹陣列.size());
+	}
+
+	@Test
+	public void 第一字無完整組字式部件()
+	{
+		String 組字式 = "⿰";
+		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
+		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		assertEquals(null, 部件樹陣列.get(0));
 	}
 
 	@Test
 	public void 第二字無完整組字式字數()
 	{
-		fail("還沒做");
+		String 組字式 = "意⿰";
+		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
+		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		assertEquals(2, 部件樹陣列.size());
+	}
+
+	@Test
+	public void 第二字無完整組字式部件()
+	{
+		String 組字式 = "意⿰";
+		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
+		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		檢查意部件(部件樹陣列.get(0));
+		assertEquals(null, 部件樹陣列.get(1));
 	}
 
 	private void 檢查意部件(ChineseCharacter 部件)

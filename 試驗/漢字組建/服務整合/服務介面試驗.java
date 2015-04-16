@@ -91,9 +91,9 @@ public class 服務介面試驗
 			+ "⿴凵乂⿴凵⿰幺⿰丨幺⿴凵⿰豕⿰丨豕"
 			+ "⿴勹日⿰⿴弓土畺⿴匚甲⿴⼖⿱口⿰口口⿰懸一⿱闊一⿰懸丨⿱闊丨"
 			+ "⿰彳⿱羊羊⿱羊⿰羊羊⿱⿰羊羊⿰羊羊⿰⿱羊羊⿱羊羊⿰羊⿰羊羊⿰⿰羊羊羊⿰丨丨丨"
-			+ "⿳⿳⿳˙ㄆㄨˊ⿳⿳ㄅㄧㄚ⿳⿳⿳ㄅㄧㄚˋ⿳⿳⿳ㄅㄧㄚ˪⿳⿳⿳ㄅㄧㄚㆷ⿳⿳⿳ㄅㄧㄚˊ⿳⿳⿳ㄅㄧㄚ˫⿳⿳⿳⿳ㄅㄧㄚ㆐ㆷ⿳⿳⿳⿳ㄅㄧㄚㆷ㆐⿳⿳⿳˙ㄅㄧㄚ⿳⿳⿳ㄅㄧㄚ^"
-			+ "⿳⿳⿳˙ㄆㄨˊ⿳ㆠㄧ⿳⿳ㆠㄧˋ⿳⿳ㆠㄧ˪⿳⿳ㆠㄧㆷ⿳⿳ㆠㄧˊ⿳⿳ㆠㄧ˫⿳⿳⿳ㆠㄧ㆐ㆷ⿳⿳⿳ㆠㄧㆷ㆐⿳⿳˙ㆠㄧ⿳⿳ㆠㄧ^"
-			+ "⿳⿳⿳˙ㄆㄨˊ⿳⿳⿳˙ㄆㄨˊㆬ⿳ㆬ ⿳ㆬˋ⿳ㆬ˪⿳ㆬㆷ⿳ㆬˊ⿳ㆬ˫⿳⿳ㆬ㆐ㆷ⿳⿳ㆬㆷ㆐⿳˙ㆬ⿳ㆬ^"
+			+ "⿿⿿⿿˙ㄆㄨˊ⿿⿿ㄅㄧㄚ⿿⿿⿿ㄅㄧㄚˋ⿿⿿⿿ㄅㄧㄚ˪⿿⿿⿿ㄅㄧㄚㆷ⿿⿿⿿ㄅㄧㄚˊ⿿⿿⿿ㄅㄧㄚ˫⿿⿿⿿⿿ㄅㄧㄚ㆐ㆷ⿿⿿⿿⿿ㄅㄧㄚㆷ㆐⿿⿿⿿˙ㄅㄧㄚ⿿⿿⿿ㄅㄧㄚ^"
+			+ "⿿⿿⿿˙ㄆㄨˊ⿿ㆠㄧ⿿⿿ㆠㄧˋ⿿⿿ㆠㄧ˪⿿⿿ㆠㄧㆷ⿿⿿ㆠㄧˊ⿿⿿ㆠㄧ˫⿿⿿⿿ㆠㄧ㆐ㆷ⿿⿿⿿ㆠㄧㆷ㆐⿿⿿˙ㆠㄧ⿿⿿ㆠㄧ^"
+			+ "⿿⿿⿿˙ㄆㄨˊ⿿⿿⿿˙ㄆㄨˊㆬ⿿ㆬ ⿿ㆬˋ⿿ㆬ˪⿿ㆬㆷ⿿ㆬˊ⿿ㆬ˫⿿⿿ㆬ㆐ㆷ⿿⿿ㆬㆷ㆐⿿˙ㆬ⿿ㆬ^"
 			+ "⿰因⿰⿴囗或" + "⿰⿰⿱⿱⿱我薛丞宏愛⿱文莉⿰真的⿰真的⿰⿻真甲的⿰⿻真乙的"
 			+ "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ " + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
 			+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐"
@@ -101,9 +101,8 @@ public class 服務介面試驗
 	static String 圖片存放路徑 = "組字圖片";
 
 	@Test
-	public void test()
+	public void test() throws IOException
 	{
-
 		ChineseCharacterUtility ccUtility = new 漢字序列分析工具(全部組字式, new 展開式免查詢());
 		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
 
@@ -127,23 +126,17 @@ public class 服務介面試驗
 			// {
 			// e.printStackTrace();
 			// }
-			try
+			ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
+			ImageIO.write(字型圖片, "png", 輸出檔案);
+			InputStream 組字圖片 = new FileInputStream(圖片存放路徑 + "/"
+					+ 組字式.replace("⿿", "⿳") + ".png");
+			for (byte 字元 : 輸出檔案.toByteArray())
 			{
-				ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream()
-;
-				ImageIO.write(字型圖片, "png", 輸出檔案);
-				InputStream 組字圖片 = new FileInputStream(圖片存放路徑+"/"+組字式+".png");
-				for(byte 字元:輸出檔案.toByteArray())
-				{
-					assertEquals((字元),(byte)(組字圖片.read()));
-				}
-				assertEquals(組字圖片.read(),-1);
-				
-				組字圖片.close();
-			} catch (IOException e)
-			{
-				e.printStackTrace();
+				assertEquals((字元), (byte) (組字圖片.read()));
 			}
+			assertEquals(組字圖片.read(), -1);
+
+			組字圖片.close();
 		}
 	}
 

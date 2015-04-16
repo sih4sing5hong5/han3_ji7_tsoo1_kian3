@@ -83,21 +83,21 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 		{
 		default:
 			System.out.println("無支援，先用橫的組");
-		case horizontal:
+		case 左右合併:
 			imageMoveableTypeTzu.getRegion().x = firstRegion.x + secondRegion.x;
 			imageMoveableTypeTzu.getRegion().y = Math.max(firstRegion.y,
 					secondRegion.y);
 			firstRegion.y = secondRegion.y = imageMoveableTypeTzu.getRegion().y;
 			secondChild.setPosition(new Point(firstRegion.x, 0));
 			break;
-		case vertical:
+		case 上下合併:
 			imageMoveableTypeTzu.getRegion().x = Math.max(firstRegion.x,
 					secondRegion.x);
 			imageMoveableTypeTzu.getRegion().y = firstRegion.y + secondRegion.y;
 			firstRegion.x = secondRegion.x = imageMoveableTypeTzu.getRegion().x;
 			secondChild.setPosition(new Point(0, firstRegion.y));
 			break;
-		case wrap:
+		case 四面包圍:
 			imageMoveableTypeTzu.getRegion().x = firstRegion.x << 1;
 			imageMoveableTypeTzu.getRegion().y = firstRegion.y << 1;
 			firstChild.setRegion(imageMoveableTypeTzu.getRegion());

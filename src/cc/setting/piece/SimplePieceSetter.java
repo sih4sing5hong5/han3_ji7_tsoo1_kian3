@@ -131,20 +131,17 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 
 		switch (chineseCharacterTzu.getType())
 		{
-		case horizontal:
+		case 左右合併:
 			horizontalSetting(pieceMovableTypeTzu);
 			break;
-		case vertical:
+		case 上下合併:
 			verticalSetting(pieceMovableTypeTzu);
 			break;
-		case wrap:
+		case 四面包圍:
 			wrapSetting(pieceMovableTypeTzu);
 			break;
 		case 注音符號:// TODO 看情形才決定欲修改無，先用垂直的
 			horizontalSetting(pieceMovableTypeTzu);
-			break;
-		case 異寫字編號符號:
-			System.out.println("無事先共異寫字換掉");
 			break;
 		}
 

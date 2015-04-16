@@ -36,26 +36,58 @@ package cc.core;
 public enum ChineseCharacterTzuCombinationType
 {
 	/** 左右水平合併 */
-	horizontal,
+	左右合併,
 	/** 上下垂直合併 */
-	vertical,
+	上下合併,
 	/** 包含關係 */
-	wrap,
-	/** 儲存異寫字編號 */
-	異寫字編號符號,
+	左右三個合併,
+	/*** ***/
+	上下三個合併,
+	/*** ***/
+	四面包圍,
+	/*** ***/
+	左右上包圍,
+	/*** ***/
+	左右下包圍,
+	/*** ***/
+	上下左包圍,
+	/*** ***/
+	左上包圍,
+	/*** ***/
+	右上包圍,
+	/*** ***/
+	左下包圍,
+	/*** ***/
+	重疊,
 	/** 專門處理注音符號 */
 	注音符號;// ⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿿
 	public String toString()
 	{
 		switch (this)
 		{
-		case horizontal:
+		case 左右合併:
 			return "⿰";
-		case vertical:
+		case 上下合併:
 			return "⿱";
-		case wrap:
+		case 左右三個合併:
+			return "⿲";
+		case 上下三個合併:
+			return "⿳";
+		case 四面包圍:
 			return "⿴";
-		case 異寫字編號符號:
+		case 左右上包圍:
+			return "⿵";
+		case 左右下包圍:
+			return "⿶";
+		case 上下左包圍:
+			return "⿷";
+		case 左上包圍:
+			return "⿸";
+		case 右上包圍:
+			return "⿹";
+		case 左下包圍:
+			return "⿺";
+		case 重疊:
 			return "⿻";
 		case 注音符號:
 			return "⿿";
@@ -72,12 +104,21 @@ public enum ChineseCharacterTzuCombinationType
 	{
 		switch (this)
 		{
-		case horizontal:
-		case vertical:
-		case wrap:
-		case 異寫字編號符號:
+		case 左右合併:
+		case 上下合併:
+		case 四面包圍:
+		case 左右上包圍:
+		case 左右下包圍:
+		case 上下左包圍:
+		case 左上包圍:
+		case 右上包圍:
+		case 左下包圍:
+		case 重疊:
 		case 注音符號:
 			return 2;
+		case 左右三個合併:
+		case 上下三個合併:
+			return 3;
 		}
 		return 0;
 	}
@@ -108,12 +149,10 @@ public enum ChineseCharacterTzuCombinationType
 	{
 		switch (this)
 		{
-		case horizontal:
-		case vertical:
-		case 異寫字編號符號:
+		case 左右合併:
+		case 上下合併:
 		case 注音符號:
 			return true;
-		case wrap:
 		default:
 			return false;
 		}

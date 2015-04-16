@@ -121,17 +121,15 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		switch (((ChineseCharacterTzu) pieceMovableTypeTzu
 				.getChineseCharacter()).getType())
 		{
-		case horizontal:
+		case 左右合併:
 			遞迴調整(pieceMovableTypeTzu);
 			horizontalMerging(pieceMovableTypeTzu);
 			break;
-		case 異寫字編號符號:
-			System.out.println("有問題！！！無事先共異寫字換掉!!!");
-		case vertical:
+		case 上下合併:
 			遞迴調整(pieceMovableTypeTzu);
 			verticalMerging(pieceMovableTypeTzu);
 			break;
-		case wrap:
+		case 四面包圍:
 			遞迴調整(pieceMovableTypeTzu);
 			wrapMerging(pieceMovableTypeTzu);
 			break;

@@ -121,7 +121,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 		{
 		default:
 			System.out.println("無支援，先用橫的組");
-		case horizontal:
+		case 左右合併:
 			rectDouble.width = firstChild.getBound().getWidth()
 					+ secondChild.getBound().getWidth();
 			rectDouble.height = Math.max(firstChild.getBound().getHeight(),
@@ -131,7 +131,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 			secondChild.getBound().setRect(firstChild.getBound().getWidth(),
 					0.0, secondChild.getBound().getWidth(), rectDouble.height);
 			break;
-		case vertical:
+		case 上下合併:
 			rectDouble.width = Math.max(firstChild.getBound().getWidth(),
 					secondChild.getBound().getWidth());
 			rectDouble.height = firstChild.getBound().getHeight()
@@ -142,7 +142,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 					firstChild.getBound().getHeight(), rectDouble.width,
 					secondChild.getBound().getHeight());
 			break;
-		case wrap:
+		case 四面包圍:
 			rectDouble.width = firstChild.getBound().getWidth() * 2;
 			rectDouble.height = firstChild.getBound().getHeight() * 2;
 			firstChild.getBound().setRect(0.0, 0.0, rectDouble.width,

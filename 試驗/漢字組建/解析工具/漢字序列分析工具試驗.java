@@ -1,4 +1,4 @@
-package 漢字組建.解析;
+package 漢字組建.解析工具;
 
 import static org.junit.Assert.assertEquals;
 

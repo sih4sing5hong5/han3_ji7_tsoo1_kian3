@@ -45,11 +45,8 @@ public class 組字式字部件 extends ChineseCharacterTzu implements 組字式
 	 *            樹狀結構面頂彼个字部件
 	 * @param 控制碼
 	 *            這个字部件的組合符號統一碼控制碼
-	 * @throws ChineseCharacterFormatException
-	 *             若控制碼毋是組合符號，就傳回這个例外
 	 */
-	組字式字部件(ChineseCharacterTzu 面頂彼个字部件, int 控制碼)
-			throws ChineseCharacterFormatException
+	public 組字式字部件(ChineseCharacterTzu 面頂彼个字部件, int 控制碼)
 	{
 		super(面頂彼个字部件, 控制碼);
 	}

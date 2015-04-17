@@ -85,11 +85,8 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 *            上一層的部件結構。若上層是樹狀的樹根，傳入null
 	 * @param codePoint
 	 *            組合符號的Unicode編碼
-	 * @throws ChineseCharacterFormatException
-	 *             如果字串格式錯誤
 	 */
 	ChineseCharacterTzu(ChineseCharacterTzu parent, int codePoint)
-			throws ChineseCharacterFormatException
 	{
 		super(parent);
 		if (!組合方式.isCombinationType(codePoint))

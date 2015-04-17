@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterTzuCombinationType;
+import cc.core.組合方式;
 import cc.core.ChineseCharacterWen;
 import cc.core.展開式免查詢;
 import cc.core.漢字序列分析工具;
@@ -163,7 +163,7 @@ public class 漢字序列分析工具試驗
 	private void 檢查傳部件(ChineseCharacter 部件)
 	{
 		ChineseCharacterTzu 字部件傳 = (ChineseCharacterTzu) 部件;
-		assertEquals(ChineseCharacterTzuCombinationType.左右合併, 字部件傳.getType());
+		assertEquals(組合方式.左右合併, 字部件傳.getType());
 		assertEquals(2, 字部件傳.getChildren().length);
 		ChineseCharacterWen 文部件人 = (ChineseCharacterWen) 字部件傳.getChildren()[0];
 		ChineseCharacterWen 文部件專 = (ChineseCharacterWen) 字部件傳.getChildren()[1];
@@ -174,12 +174,12 @@ public class 漢字序列分析工具試驗
 	private void 檢查務部件(ChineseCharacter 部件)
 	{
 		ChineseCharacterTzu 字部件務 = (ChineseCharacterTzu) 部件;
-		assertEquals(ChineseCharacterTzuCombinationType.左右合併, 字部件務.getType());
+		assertEquals(組合方式.左右合併, 字部件務.getType());
 		assertEquals(字部件務.getChildren().length, 2);
 		ChineseCharacterWen 文部件矛 = (ChineseCharacterWen) 字部件務.getChildren()[0];
 		assertEquals("矛".codePointAt(0), 文部件矛.getCodePoint());
 		ChineseCharacterTzu 上下字部件 = (ChineseCharacterTzu) 字部件務.getChildren()[1];
-		assertEquals(ChineseCharacterTzuCombinationType.上下合併, 上下字部件.getType());
+		assertEquals(組合方式.上下合併, 上下字部件.getType());
 		assertEquals(2, 字部件務.getChildren().length);
 		ChineseCharacterWen 文部件攵 = (ChineseCharacterWen) 上下字部件.getChildren()[0];
 		ChineseCharacterWen 文部件力 = (ChineseCharacterWen) 上下字部件.getChildren()[1];
@@ -190,7 +190,7 @@ public class 漢字序列分析工具試驗
 	private void 檢查啾部件(ChineseCharacter 部件)
 	{
 		ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 部件;
-		assertEquals(ChineseCharacterTzuCombinationType.左右三個合併, 字部件.getType());
+		assertEquals(組合方式.左右三個合併, 字部件.getType());
 		assertEquals(3, 字部件.getChildren().length);
 		assertEquals("口".codePointAt(0),
 				((ChineseCharacterWen) 字部件.getChildren()[0]).getCodePoint());

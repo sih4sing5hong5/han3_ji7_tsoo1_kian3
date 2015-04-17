@@ -45,7 +45,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	/**
 	 * 部件的組合方式
 	 */
-	private final ChineseCharacterTzuCombinationType type;
+	private final 組合方式 type;
 	/**
 	 * 底下的各個部件
 	 */
@@ -92,9 +92,9 @@ public class ChineseCharacterTzu extends ChineseCharacter
 			throws ChineseCharacterFormatException
 	{
 		super(parent);
-		if (!ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
+		if (!組合方式.isCombinationType(codePoint))
 			throw new IllegalArgumentException("這不是部件組合符號!!");
-		type = ChineseCharacterTzuCombinationType.toCombinationType(codePoint);
+		type = 組合方式.toCombinationType(codePoint);
 		children = new ChineseCharacter[type.getNumberOfChildren()];
 	}
 
@@ -111,7 +111,7 @@ public class ChineseCharacterTzu extends ChineseCharacter
 	 * 
 	 * @return 部件的組合方式
 	 */
-	public ChineseCharacterTzuCombinationType getType()
+	public 組合方式 getType()
 	{
 		return type;
 	}

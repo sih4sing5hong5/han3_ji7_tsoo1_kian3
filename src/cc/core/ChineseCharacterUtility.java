@@ -123,7 +123,7 @@ public class ChineseCharacterUtility
 		}
 		iterator.next();
 		ChineseCharacter chineseCharacter = null;
-		if (ChineseCharacterTzuCombinationType.isCombinationType(codePoint))
+		if (組合方式.isCombinationType(codePoint))
 		{
 			chineseCharacter = new ChineseCharacterTzu(parent, codePoint,
 					iterator);

@@ -80,7 +80,7 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 		if (組合式是毋是結束矣())
 			throw new ChineseCharacterFormatException();
 		ChineseCharacter chineseCharacter = null;
-		if (ChineseCharacterTzuCombinationType.isCombinationType(目前控制碼()))
+		if (組合方式.isCombinationType(目前控制碼()))
 		{
 			ChineseCharacterTzu chineseCharacterTzu = new 組字式字部件(parent,
 					目前控制碼());

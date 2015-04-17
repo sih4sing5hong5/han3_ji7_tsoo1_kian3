@@ -36,7 +36,7 @@ import java.awt.geom.Rectangle2D;
 
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterTzuCombinationType;
+import cc.core.組合方式;
 import cc.core.ChineseCharacterWen;
 import cc.core.組字式部件;
 import cc.moveable_type.ChineseCharacterMovableType;
@@ -215,7 +215,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	 */
 	private ChineseCharacter[] 揣主要結構元件(ChineseCharacter 部件)
 	{
-		if (ChineseCharacterTzuCombinationType.isCombinationType(部件
+		if (組合方式.isCombinationType(部件
 				.getCodePoint()))
 		{
 			ChineseCharacterTzu 這馬字部件 = (ChineseCharacterTzu) 部件;

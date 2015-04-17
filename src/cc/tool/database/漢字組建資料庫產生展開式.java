@@ -32,7 +32,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import cc.core.ChineseCharacter;
-import cc.core.ChineseCharacterTzuCombinationType;
+import cc.core.組合方式;
 import cc.core.展開式免查詢;
 import cc.core.漢字序列分析工具;
 import cc.core.組字式部件;
@@ -147,7 +147,7 @@ public class 漢字組建資料庫產生展開式
 					StringBuilder 展開式 = new StringBuilder();
 					for (int i = 0; i < 組字式控制碼.length; ++i)
 					{
-						if (ChineseCharacterTzuCombinationType
+						if (組合方式
 								.isCombinationType(組字式控制碼[i]))
 						{
 							展開式.append(Character.toChars(組字式控制碼[i]));

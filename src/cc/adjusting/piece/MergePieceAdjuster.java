@@ -33,7 +33,7 @@ import java.awt.geom.AffineTransform;
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
 import cc.core.ChineseCharacter;
 import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterTzuCombinationType;
+import cc.core.組合方式;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;
@@ -381,7 +381,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			{
 				ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 活字
 						.getChineseCharacter();
-				if (字部件.getType() == ChineseCharacterTzuCombinationType.注音符號)
+				if (字部件.getType() == 組合方式.注音符號)
 				{
 					// BasicStroke basicStroke = new BasicStroke();
 					// RectangularArea a = new CopyOfRectangularArea(

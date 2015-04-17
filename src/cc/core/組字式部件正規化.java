@@ -43,7 +43,7 @@ public class 組字式部件正規化
 	 */
 	public void 正規化(ChineseCharacter 部件)
 	{
-		if (ChineseCharacterTzuCombinationType.isCombinationType(部件
+		if (組合方式.isCombinationType(部件
 				.getCodePoint()))
 		{
 			ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 部件;

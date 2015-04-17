@@ -33,7 +33,7 @@ package cc.core;
  * 
  * @author Ihc
  */
-public enum ChineseCharacterTzuCombinationType
+public enum 組合方式
 {
 	/** 左右水平合併⿰ */
 	左右合併,
@@ -167,7 +167,7 @@ public enum ChineseCharacterTzuCombinationType
 	 */
 	static public boolean isCombinationType(int codePoint)
 	{
-		for (ChineseCharacterTzuCombinationType type : ChineseCharacterTzuCombinationType
+		for (組合方式 type : 組合方式
 				.values())
 		{
 			if (codePoint == type.toCodePoint())
@@ -183,10 +183,10 @@ public enum ChineseCharacterTzuCombinationType
 	 *            欲轉換之Unicode編碼
 	 * @return 相對應之組合符號。但是若<code>codePoint</code>不是組合符號的Unicode編碼，回傳null
 	 */
-	static public ChineseCharacterTzuCombinationType toCombinationType(
+	static public 組合方式 toCombinationType(
 			int codePoint)
 	{
-		for (ChineseCharacterTzuCombinationType type : ChineseCharacterTzuCombinationType
+		for (組合方式 type : 組合方式
 				.values())
 		{
 			if (codePoint == type.toCodePoint())

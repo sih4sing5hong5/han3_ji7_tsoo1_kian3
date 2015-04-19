@@ -5,7 +5,7 @@ package cc.setting.piece;
 
 import java.awt.font.FontRenderContext;
 
-import cc.core.ChineseCharacterTzu;
+import cc.core.字部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.分離活字;
@@ -42,7 +42,7 @@ public class MergePieceSetter extends SimplePieceSetter
 
 	@Override
 	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		分離活字 rectangularArea = new 分離活字();
 		rectangularArea.設字範圍(tzuModelTerritory);

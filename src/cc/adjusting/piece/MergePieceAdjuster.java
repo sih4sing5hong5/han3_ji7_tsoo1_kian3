@@ -31,8 +31,8 @@ package cc.adjusting.piece;
 import java.awt.geom.AffineTransform;
 
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
-import cc.core.ChineseCharacter;
-import cc.core.ChineseCharacterTzu;
+import cc.core.部件;
+import cc.core.字部件;
 import cc.core.組合方式;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
@@ -118,7 +118,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
-		switch (((ChineseCharacterTzu) pieceMovableTypeTzu
+		switch (((字部件) pieceMovableTypeTzu
 				.getChineseCharacter()).getType())
 		{
 		case 左右合併:
@@ -190,9 +190,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		if (!分派工具.組合(物件活字))
 		{
 			System.out.println("QQ 沒組合工具");
-			ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) 物件活字
+			字部件 chineseCharacterTzu = (字部件) 物件活字
 					.getChineseCharacter();
-			ChineseCharacter chineseCharacter = chineseCharacterTzu
+			部件 chineseCharacter = chineseCharacterTzu
 					.getChildren()[0];
 			switch (chineseCharacter.getCodePoint())
 			{
@@ -377,9 +377,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		{
 			ChineseCharacterMovableTypeTzu 活字 = (ChineseCharacterMovableTypeTzu) 物件活字;
 			if (活字.getChineseCharacter() != null
-					&& 活字.getChineseCharacter() instanceof ChineseCharacterTzu)
+					&& 活字.getChineseCharacter() instanceof 字部件)
 			{
-				ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 活字
+				字部件 字部件 = (字部件) 活字
 						.getChineseCharacter();
 				if (字部件.getType() == 組合方式.注音符號)
 				{

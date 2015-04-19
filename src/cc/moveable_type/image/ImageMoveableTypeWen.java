@@ -30,7 +30,7 @@ package cc.moveable_type.image;
 
 import java.awt.Point;
 
-import cc.core.ChineseCharacterWen;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 
@@ -52,7 +52,7 @@ public class ImageMoveableTypeWen extends ChineseCharacterMovableTypeWen
 	 *            文部件結構
 	 */
 	public ImageMoveableTypeWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			文部件 chineseCharacterWen)
 	{
 		super(parent, chineseCharacterWen);
 	}

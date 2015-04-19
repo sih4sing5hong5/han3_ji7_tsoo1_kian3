@@ -43,7 +43,7 @@ import javax.swing.JPanel;
 
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.image.SimpleImageAdjuster;
-import cc.core.ChineseCharacter;
+import cc.core.部件;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.image.ImageMoveableType;
@@ -91,7 +91,7 @@ public class AwtImageExample extends JPanel
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
-		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
+		Vector<部件> ccArray = ccUtility.parseText();
 		ChineseCharacterTypeSetter setter = new SimpleImageSetter();
 		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
 		for (int i = 0; i < ccArray.size(); ++i)

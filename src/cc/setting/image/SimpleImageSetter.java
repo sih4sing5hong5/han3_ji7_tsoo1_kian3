@@ -30,8 +30,8 @@ package cc.setting.image;
 
 import java.awt.Point;
 
-import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterWen;
+import cc.core.字部件;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.image.ImageMoveableType;
 import cc.moveable_type.image.ImageMoveableTypeTzu;
@@ -50,7 +50,7 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 {
 	@Override
 	public ImageMoveableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			文部件 chineseCharacterWen)
 	{
 		ImageMoveableTypeWen moveableType = new ImageMoveableTypeWen(parent,
 				chineseCharacterWen);
@@ -62,7 +62,7 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 
 	@Override
 	public ImageMoveableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		ImageMoveableTypeTzu imageMoveableTypeTzu = new ImageMoveableTypeTzu(
 				parent, chineseCharacterTzu);

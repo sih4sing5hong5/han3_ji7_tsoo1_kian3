@@ -31,7 +31,7 @@ package cc.setting.piece;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.ChineseCharacterWen;
+import cc.core.文部件;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.分離活字;
@@ -74,7 +74,7 @@ public abstract class 物件活字基礎設定工具 implements ChineseCharacter
 	 *            所缺的字部件
 	 * @return 替代圖案或文字
 	 */
-	protected 分離活字 findWenForNoBuiltIn(ChineseCharacterWen chineseCharacterWen)
+	protected 分離活字 findWenForNoBuiltIn(文部件 chineseCharacterWen)
 	{
 		return new 分離活字(new 平面幾何(pieceForNoBuiltInWen));
 	}

@@ -71,9 +71,9 @@ public class ChineseCharacterUtility
 	 * 
 	 * @return 字串中全部的漢字部件。若字串格式有錯，不完整的部件不會被加上去，並且在陣列最後會補上一個null當作通知
 	 */
-	public Vector<ChineseCharacter> parseText()
+	public Vector<部件> parseText()
 	{
-		Vector<ChineseCharacter> vector = new Vector<ChineseCharacter>();
+		Vector<部件> vector = new Vector<部件>();
 		try
 		{
 			while (!組合式是毋是結束矣())
@@ -98,7 +98,7 @@ public class ChineseCharacterUtility
 	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
 	 */
 	@Deprecated
-	ChineseCharacter parseCharacter(ChineseCharacterTzu parent)
+	部件 parseCharacter(字部件 parent)
 			throws ChineseCharacterFormatException
 	{
 		if (組合式是毋是結束矣())
@@ -122,15 +122,15 @@ public class ChineseCharacterUtility
 			codePoint = iterator.current();
 		}
 		iterator.next();
-		ChineseCharacter chineseCharacter = null;
+		部件 chineseCharacter = null;
 		if (組合方式.isCombinationType(codePoint))
 		{
-			chineseCharacter = new ChineseCharacterTzu(parent, codePoint,
+			chineseCharacter = new 字部件(parent, codePoint,
 					iterator);
 		}
 		else
 		{
-			chineseCharacter = new ChineseCharacterWen(parent, codePoint);
+			chineseCharacter = new 文部件(parent, codePoint);
 		}
 		return chineseCharacter;
 	}

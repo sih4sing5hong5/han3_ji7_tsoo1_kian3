@@ -29,7 +29,7 @@
 package cc.moveable_type;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.core.ChineseCharacterTzu;
+import cc.core.字部件;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
@@ -56,7 +56,7 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 	 */
 	public ChineseCharacterMovableTypeTzu(
 			ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		super(parent, chineseCharacterTzu);
 		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();

@@ -38,13 +38,13 @@ import org.slf4j.profiler.Profiler;
 
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
-import cc.core.ChineseCharacter;
+import cc.core.部件;
 import cc.core.ChineseCharacterFormatException;
 import cc.core.展開式查詢工具;
 import cc.core.漢字序列分析工具;
 import cc.core.異寫式代換工具;
 import cc.core.異寫式查詢工具;
-import cc.core.組字式部件;
+import cc.core.部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.漢字組建活字;
@@ -175,7 +175,7 @@ public class 組字介面
 		// 記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
 
 		漢字序列分析工具 序列分析工具 = new 漢字序列分析工具(組字式, 查詢方式);
-		ChineseCharacter 部件;
+		部件 部件;
 		try
 		{
 			部件 = 序列分析工具.parseCharacter(null);
@@ -187,10 +187,10 @@ public class 組字介面
 			return "";
 		}
 
-		組字式部件 組字部件 = (組字式部件) 部件;
+		部件 組字部件 = (部件) 部件;
 		// 組字部件.建立組字式(組字式建立工具);
 		// 記錄工具.debug(組字部件.提到組字式());
-		部件 = (ChineseCharacter) 正規化工具.正規化(部件);
+		部件 = (部件) 正規化工具.正規化(部件);
 		組字部件.建立組字式(組字式建立工具);
 		// 記錄工具.debug(組字部件.提到組字式());
 		部件 = 異寫式代換.代換(部件);

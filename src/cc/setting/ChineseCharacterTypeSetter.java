@@ -28,8 +28,8 @@
  ******************************************************************************/
 package cc.setting;
 
-import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterWen;
+import cc.core.字部件;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.漢字組建活字;
 
@@ -51,7 +51,7 @@ public interface ChineseCharacterTypeSetter
 	 * @return 獨體活字
 	 */
 	public 漢字組建活字 setWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen);
+			文部件 chineseCharacterWen);
 
 	/**
 	 * 產生並初使化合體活字
@@ -63,5 +63,5 @@ public interface ChineseCharacterTypeSetter
 	 * @return 合體活字
 	 */
 	public 漢字組建活字 setTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu);
+			字部件 chineseCharacterTzu);
 }

@@ -35,11 +35,11 @@ import java.util.Vector;
 
 import org.slf4j.Logger;
 
-import cc.core.ChineseCharacter;
+import cc.core.部件;
 import cc.core.ChineseCharacterUtility;
 import cc.core.展開式查詢工具;
 import cc.core.漢字序列分析工具;
-import cc.core.組字式部件;
+import cc.core.部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線展開式查詢;
@@ -77,13 +77,13 @@ public class 產生組字式工具
 		while (句 != null)
 		{
 			ChineseCharacterUtility ccUtility = new 漢字序列分析工具(句, 查詢方式);
-			Vector<ChineseCharacter> ccArray = ccUtility.parseText();
+			Vector<部件> ccArray = ccUtility.parseText();
 
 			組字式部件正規化 正規化工具 = new 組字式部件正規化();
 			組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
-			for (ChineseCharacter 部件 : ccArray)
+			for (部件 部件 : ccArray)
 			{
-				組字式部件 組字部件 = (組字式部件) 部件;
+				部件 組字部件 = (部件) 部件;
 				組字部件.建立組字式(組字式建立工具);
 				// 記錄工具.debug(組字部件.提到組字式());
 				正規化工具.正規化(部件);

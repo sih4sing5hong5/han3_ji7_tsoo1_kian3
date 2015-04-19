@@ -31,7 +31,7 @@ package cc.moveable_type.area;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.ChineseCharacterTzu;
+import cc.core.字部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 
 /**
@@ -57,7 +57,7 @@ public class AreaMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	 *            字部件結構
 	 */
 	public AreaMovableTypeTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		super(parent, chineseCharacterTzu);
 	}

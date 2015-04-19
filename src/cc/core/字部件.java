@@ -28,73 +28,133 @@
  ******************************************************************************/
 package cc.core;
 
+import java.text.StringCharacterIterator;
+
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
- * 儲存漢字部件樹狀結構。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。 <code>ChineseCharacter</code>為
- * <code>ChineseCharacterWen</code>及<code>ChineseCharacterTzu</code>
- * 的共用介面，方便以後活字的產生。
+ * 漢字部件樹狀結構的上層節點。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
+ * <code>ChineseCharacterTzu</code>記錄底下部件的組合方式。
  * 
  * @author Ihc
  */
-public abstract class ChineseCharacter
+public class 字部件 extends 部件
 {
 	/**
-	 * 指向上一層的部件結構
+	 * 部件的組合方式
 	 */
-	private final ChineseCharacterTzu parent;
+	private final 組合方式 type;
+	/**
+	 * 底下的各個部件
+	 */
+	private final 部件[] children;
 
 	/**
-	 * 建立漢字部件結構
+	 * 初使化一个新的字部件。
+	 * 
+	 * @param 面頂彼个字部件
+	 *            樹狀結構面頂彼个字部件
+	 * @param 控制碼
+	 *            這个字部件的組合符號統一碼控制碼
+	 */
+	/**
+	 * 建立一個字部件。
 	 * 
 	 * @param parent
 	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
+	 * @param codePoint
+	 *            組合符號的Unicode編碼
+	 * @param iterator
+	 *            目前分析到的字串位置
+	 * @throws ChineseCharacterFormatException
+	 *             如果字串格式錯誤
+	 * @throws IllegalArgumentException
+	 *             如果<code>codePoint</code>不是部件組合符號
 	 */
-	public ChineseCharacter(ChineseCharacterTzu parent)
+	@Deprecated
+	public 字部件(字部件 parent, int codePoint, StringCharacterIterator iterator)
+			throws ChineseCharacterFormatException, IllegalArgumentException
 	{
-		this.parent = parent;
+		this(parent, codePoint);
+		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
+		for (int i = 0; i < children.length; ++i)
+		{
+			children[i] = utility.parseCharacter(this);
+		}
 	}
 
 	/**
-	 * 以此部件結構產生活字結構。用<code>ChineseCharacterTypeSetter</code>
-	 * (活字設定工具)來轉換成ChineseCharacterMovableType(活字)。
+	 * 建立一个字部件。
 	 * 
-	 * @param chineseCharacterTypeSetter
-	 *            欲採用的活字設定工具
 	 * @param parent
-	 *            此活字結構的上層活字
-	 * @return 產生出來的活字結構
+	 *            上一層的部件結構。若上層是樹狀的樹根，傳入null
+	 * @param codePoint
+	 *            組合符號的Unicode編碼
 	 */
-	public abstract 漢字組建活字 typeset(
-			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
-			ChineseCharacterMovableTypeTzu parent);
-
-	/**
-	 * 取得上一層部件結構。
-	 * 
-	 * @return 上一層部件結構
-	 */
-	public ChineseCharacterTzu getParent()
+	public 字部件(字部件 parent, int codePoint)
 	{
-		return parent;
+		super(parent);
+		if (!組合方式.isCombinationType(codePoint))
+			throw new IllegalArgumentException("這不是部件組合符號!!");
+		type = 組合方式.toCombinationType(codePoint);
+		children = new 部件[type.getNumberOfChildren()];
+	}
+
+	@Override
+	public 漢字組建活字 typeset(
+			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+			ChineseCharacterMovableTypeTzu parent)
+	{
+		return chineseCharacterTypeSetter.setTzu(parent, this);
 	}
 
 	/**
-	 * 取得部件Unicode編碼
+	 * 取得部件的組合方式
 	 * 
-	 * @return 部件Unicode編碼
+	 * @return 部件的組合方式
 	 */
-	public abstract int getCodePoint();
+	public 組合方式 getType()
+	{
+		return type;
+	}
 
 	/**
-	 * 取得部件的字元形態
+	 * 取得底下的各個部件
 	 * 
-	 * @return 部件字元形態
+	 * @return 底下的各個部件
 	 */
-	public char[] getChars()
+	public 部件[] getChildren()
 	{
-		return Character.toChars(getCodePoint());
+		return children;
+	}
+
+	@Override
+	public int getCodePoint()
+	{
+		return getType().toCodePoint();
+	}
+
+	/** 這个字部件下跤的組字式 */
+	private String 組字式;
+
+	@Override
+	public String 提到組字式()
+	{
+		return 組字式;
+	}
+
+	@Override
+	public void 設定組字式(String 組字式)
+	{
+		this.組字式 = 組字式;
+		return;
+	}
+
+	@Override
+	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
+	{
+		return 組字式建立工具.建立組字式(this);
 	}
 }

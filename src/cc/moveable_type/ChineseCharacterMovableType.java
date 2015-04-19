@@ -29,7 +29,7 @@
 package cc.moveable_type;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.core.ChineseCharacter;
+import cc.core.部件;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
@@ -45,7 +45,7 @@ public abstract class ChineseCharacterMovableType implements 漢字組建活字
 	/**
 	 * 產生活字的部件結構
 	 */
-	private final ChineseCharacter chineseCharacter;
+	private final 部件 chineseCharacter;
 	/**
 	 * 指向上一層的活字結構
 	 */
@@ -60,7 +60,7 @@ public abstract class ChineseCharacterMovableType implements 漢字組建活字
 	 *            部件結構
 	 */
 	public ChineseCharacterMovableType(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacter chineseCharacter)
+			部件 chineseCharacter)
 	{
 		this.chineseCharacter = chineseCharacter;
 		this.parent = parent;
@@ -77,7 +77,7 @@ public abstract class ChineseCharacterMovableType implements 漢字組建活字
 	 * 
 	 * @return 活字的部件結構
 	 */
-	public ChineseCharacter getChineseCharacter()
+	public 部件 getChineseCharacter()
 	{
 		return chineseCharacter;
 	}

@@ -3,7 +3,7 @@
  */
 package cc.moveable_type.piece;
 
-import cc.core.ChineseCharacterTzu;
+import cc.core.字部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
@@ -35,7 +35,7 @@ public class PieceMovableTypeTzu extends ChineseCharacterMovableTypeTzu
 	 *            物件活字
 	 */
 	public PieceMovableTypeTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu,
+			字部件 chineseCharacterTzu,
 			分離活字 rectangularArea)
 	{
 		super(parent, chineseCharacterTzu);

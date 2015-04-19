@@ -35,8 +35,8 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterWen;
+import cc.core.字部件;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
@@ -98,7 +98,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 
 	@Override
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			文部件 chineseCharacterWen)
 	{
 		分離活字 rectangularArea = null;
 		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
@@ -122,7 +122,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 
 	@Override
 	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
 				parent, chineseCharacterTzu, new 分離活字(new 平面幾何()));
@@ -161,7 +161,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 	 */
 	protected void setChildrenRecursively(
 			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		for (int i = 0; i < chineseCharacterMovableTypeTzu.getChildren().length; ++i)
 		{

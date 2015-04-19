@@ -61,7 +61,7 @@ public class 異寫式代換工具
 	 *            愛換的部件
 	 * @return 換了異寫式的部件
 	 */
-	public ChineseCharacter 代換(ChineseCharacter 部件)
+	public 部件 代換(部件 部件)
 	{
 		return 部件;
 	}

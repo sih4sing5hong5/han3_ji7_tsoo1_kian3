@@ -6,10 +6,10 @@ import java.util.Vector;
 
 import org.junit.Test;
 
-import cc.core.ChineseCharacter;
-import cc.core.ChineseCharacterTzu;
+import cc.core.部件;
+import cc.core.字部件;
 import cc.core.組合方式;
-import cc.core.ChineseCharacterWen;
+import cc.core.文部件;
 import cc.core.展開式免查詢;
 import cc.core.漢字序列分析工具;
 
@@ -22,7 +22,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "意";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(1, 部件樹陣列.size());
 	}
 
@@ -31,8 +31,8 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "意";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
-		檢查意部件((ChineseCharacterWen) 部件樹陣列.get(0));
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
+		檢查意部件((文部件) 部件樹陣列.get(0));
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿰專";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(1, 部件樹陣列.size());
 	}
 
@@ -49,8 +49,8 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿰專";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
-		檢查傳部件((ChineseCharacterTzu) 部件樹陣列.get(0));
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
+		檢查傳部件((字部件) 部件樹陣列.get(0));
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿰矛⿱攵力";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(1, 部件樹陣列.size());
 	}
 
@@ -67,8 +67,8 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿰矛⿱攵力";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
-		檢查務部件((ChineseCharacterTzu) 部件樹陣列.get(0));
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
+		檢查務部件((字部件) 部件樹陣列.get(0));
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿲口禾火";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(1, 部件樹陣列.size());
 	}
 
@@ -85,7 +85,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿲口禾火";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		檢查啾部件(部件樹陣列.get(0));
 	}
 
@@ -94,7 +94,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(部件樹陣列.size(), 0);
 	}
 
@@ -103,7 +103,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "意⿰專";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(2, 部件樹陣列.size());
 	}
 
@@ -112,7 +112,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "意⿰專";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		檢查意部件(部件樹陣列.get(0));
 		檢查傳部件(部件樹陣列.get(1));
 	}
@@ -122,7 +122,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿰";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(1, 部件樹陣列.size());
 	}
 
@@ -131,7 +131,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "⿰";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(null, 部件樹陣列.get(0));
 	}
 
@@ -140,7 +140,7 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "意⿰";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		assertEquals(2, 部件樹陣列.size());
 	}
 
@@ -149,54 +149,54 @@ public class 漢字序列分析工具試驗
 	{
 		String 組字式 = "意⿰";
 		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, 展開式);
-		Vector<ChineseCharacter> 部件樹陣列 = 解析工具.parseText();
+		Vector<部件> 部件樹陣列 = 解析工具.parseText();
 		檢查意部件(部件樹陣列.get(0));
 		assertEquals(null, 部件樹陣列.get(1));
 	}
 
-	private void 檢查意部件(ChineseCharacter 部件)
+	private void 檢查意部件(部件 部件)
 	{
-		ChineseCharacterWen 文部件意 = (ChineseCharacterWen) 部件;
+		文部件 文部件意 = (文部件) 部件;
 		assertEquals("意".codePointAt(0), 文部件意.getCodePoint());
 	}
 
-	private void 檢查傳部件(ChineseCharacter 部件)
+	private void 檢查傳部件(部件 部件)
 	{
-		ChineseCharacterTzu 字部件傳 = (ChineseCharacterTzu) 部件;
+		字部件 字部件傳 = (字部件) 部件;
 		assertEquals(組合方式.左右合併, 字部件傳.getType());
 		assertEquals(2, 字部件傳.getChildren().length);
-		ChineseCharacterWen 文部件人 = (ChineseCharacterWen) 字部件傳.getChildren()[0];
-		ChineseCharacterWen 文部件專 = (ChineseCharacterWen) 字部件傳.getChildren()[1];
+		文部件 文部件人 = (文部件) 字部件傳.getChildren()[0];
+		文部件 文部件專 = (文部件) 字部件傳.getChildren()[1];
 		assertEquals("".codePointAt(0), 文部件人.getCodePoint());
 		assertEquals("專".codePointAt(0), 文部件專.getCodePoint());
 	}
 
-	private void 檢查務部件(ChineseCharacter 部件)
+	private void 檢查務部件(部件 部件)
 	{
-		ChineseCharacterTzu 字部件務 = (ChineseCharacterTzu) 部件;
+		字部件 字部件務 = (字部件) 部件;
 		assertEquals(組合方式.左右合併, 字部件務.getType());
 		assertEquals(字部件務.getChildren().length, 2);
-		ChineseCharacterWen 文部件矛 = (ChineseCharacterWen) 字部件務.getChildren()[0];
+		文部件 文部件矛 = (文部件) 字部件務.getChildren()[0];
 		assertEquals("矛".codePointAt(0), 文部件矛.getCodePoint());
-		ChineseCharacterTzu 上下字部件 = (ChineseCharacterTzu) 字部件務.getChildren()[1];
+		字部件 上下字部件 = (字部件) 字部件務.getChildren()[1];
 		assertEquals(組合方式.上下合併, 上下字部件.getType());
 		assertEquals(2, 字部件務.getChildren().length);
-		ChineseCharacterWen 文部件攵 = (ChineseCharacterWen) 上下字部件.getChildren()[0];
-		ChineseCharacterWen 文部件力 = (ChineseCharacterWen) 上下字部件.getChildren()[1];
+		文部件 文部件攵 = (文部件) 上下字部件.getChildren()[0];
+		文部件 文部件力 = (文部件) 上下字部件.getChildren()[1];
 		assertEquals("攵".codePointAt(0), 文部件攵.getCodePoint());
 		assertEquals("力".codePointAt(0), 文部件力.getCodePoint());
 	}
 
-	private void 檢查啾部件(ChineseCharacter 部件)
+	private void 檢查啾部件(部件 部件)
 	{
-		ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 部件;
+		字部件 字部件 = (字部件) 部件;
 		assertEquals(組合方式.左右三個合併, 字部件.getType());
 		assertEquals(3, 字部件.getChildren().length);
 		assertEquals("口".codePointAt(0),
-				((ChineseCharacterWen) 字部件.getChildren()[0]).getCodePoint());
+				((文部件) 字部件.getChildren()[0]).getCodePoint());
 		assertEquals("禾".codePointAt(0),
-				((ChineseCharacterWen) 字部件.getChildren()[1]).getCodePoint());
+				((文部件) 字部件.getChildren()[1]).getCodePoint());
 		assertEquals("火".codePointAt(0),
-				((ChineseCharacterWen) 字部件.getChildren()[2]).getCodePoint());
+				((文部件) 字部件.getChildren()[2]).getCodePoint());
 	}
 }

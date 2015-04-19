@@ -28,45 +28,97 @@
  ******************************************************************************/
 package cc.core;
 
+import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.漢字組建活字;
+import cc.setting.ChineseCharacterTypeSetter;
+
 /**
- * 加下組字式的文部件。
+ * 儲存漢字部件樹狀結構。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。 <code>ChineseCharacter</code>為
+ * <code>ChineseCharacterWen</code>及<code>ChineseCharacterTzu</code>
+ * 的共用介面，方便以後活字的產生。
  * 
  * @author Ihc
  */
-public class 組字式文部件 extends ChineseCharacterWen implements 組字式部件
+public abstract class 部件
 {
-	/** 這个文部件下跤的組字式 */
-	private String 組字式;
+	/**
+	 * 指向上一層的部件結構
+	 */
+	private final 字部件 parent;
 
 	/**
-	 * 初使化一个新的文部件。
+	 * 建立漢字部件結構
 	 * 
-	 * @param 面頂彼个字部件
-	 *            樹狀結構面頂彼个字部件
-	 * @param 控制碼
-	 *            這个文部件字的統一碼控制碼
+	 * @param parent
+	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
 	 */
-	組字式文部件(ChineseCharacterTzu 面頂彼个字部件, int 控制碼)
+	public 部件(字部件 parent)
 	{
-		super(面頂彼个字部件, 控制碼);
+		this.parent = parent;
 	}
 
-	@Override
-	public String 提到組字式()
+	/**
+	 * 以此部件結構產生活字結構。用<code>ChineseCharacterTypeSetter</code>
+	 * (活字設定工具)來轉換成ChineseCharacterMovableType(活字)。
+	 * 
+	 * @param chineseCharacterTypeSetter
+	 *            欲採用的活字設定工具
+	 * @param parent
+	 *            此活字結構的上層活字
+	 * @return 產生出來的活字結構
+	 */
+	public abstract 漢字組建活字 typeset(
+			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+			ChineseCharacterMovableTypeTzu parent);
+
+	/**
+	 * 取得上一層部件結構。
+	 * 
+	 * @return 上一層部件結構
+	 */
+	public 字部件 getParent()
 	{
-		return 組字式;
+		return parent;
 	}
 
-	@Override
-	public void 設定組字式(String 組字式)
+	/**
+	 * 取得部件Unicode編碼
+	 * 
+	 * @return 部件Unicode編碼
+	 */
+	public abstract int getCodePoint();
+
+	/**
+	 * 取得部件的字元形態
+	 * 
+	 * @return 部件字元形態
+	 */
+	public char[] getChars()
 	{
-		this.組字式 = 組字式;
-		return;
+		return Character.toChars(getCodePoint());
 	}
 
-	@Override
-	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
-	{
-		return 組字式建立工具.建立組字式(this);
-	}
+	/**
+	 * 提到這个部件下跤的組字式。
+	 * 
+	 * @return 這个物件下跤的組字式
+	 */
+	public abstract String 提到組字式();
+
+	/**
+	 * 設定這个部件下跤的組字式。
+	 * 
+	 * @param 組字式
+	 *            新的組字式
+	 */
+	abstract void 設定組字式(String 組字式);
+
+	/**
+	 * 建立規的樹狀結構的組字式。
+	 * 
+	 * @param 組字式建立工具
+	 *            所用的組字式建立工具
+	 * @return 做好的組字式
+	 */
+	public abstract String 建立組字式(組字式部件組字式建立工具 組字式建立工具);
 }

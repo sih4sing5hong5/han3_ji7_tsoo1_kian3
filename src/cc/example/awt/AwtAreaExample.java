@@ -44,7 +44,7 @@ import javax.swing.JPanel;
 
 import cc.adjusting.area.SimpleAreaAdjuster;
 import cc.adjusting.bolder.NullStroke;
-import cc.core.ChineseCharacter;
+import cc.core.部件;
 import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.area.AreaMovableType;
@@ -98,7 +98,7 @@ public class AwtAreaExample extends JPanel
 		g.setStroke(new NullStroke());
 
 		ChineseCharacterUtility ccUtility = new ChineseCharacterUtility(word);
-		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
+		Vector<部件> ccArray = ccUtility.parseText();
 		ChineseCharacterTypeSetter setter = new SimpleAreaSetter(
 				FontName,
 				FontStyle,

@@ -38,13 +38,21 @@ import cc.setting.ChineseCharacterTypeSetter;
  * 
  * @author Ihc
  */
-public class ChineseCharacterWen extends ChineseCharacter
+public class 文部件 extends 部件
 {
 	/**
 	 * 部件的Unicode編碼
 	 */
 	private final int codePoint;
 
+	/**
+	 * 初使化一个新的文部件。
+	 * 
+	 * @param 面頂彼个字部件
+	 *            樹狀結構面頂彼个字部件
+	 * @param 控制碼
+	 *            這个文部件字的統一碼控制碼
+	 */
 	/**
 	 * 建立一個文部件
 	 * 
@@ -53,7 +61,7 @@ public class ChineseCharacterWen extends ChineseCharacter
 	 * @param codePoint
 	 *            部件的Unicode編碼
 	 */
-	ChineseCharacterWen(ChineseCharacterTzu parent, int codePoint)
+	public 文部件(字部件 parent, int codePoint)
 	{
 		super(parent);
 		this.codePoint = codePoint;
@@ -75,5 +83,27 @@ public class ChineseCharacterWen extends ChineseCharacter
 	public int getCodePoint()
 	{
 		return codePoint;
+	}
+
+	/** 這个文部件下跤的組字式 */
+	private String 組字式;
+
+	@Override
+	public String 提到組字式()
+	{
+		return 組字式;
+	}
+
+	@Override
+	public void 設定組字式(String 組字式)
+	{
+		this.組字式 = 組字式;
+		return;
+	}
+
+	@Override
+	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
+	{
+		return 組字式建立工具.建立組字式(this);
 	}
 }

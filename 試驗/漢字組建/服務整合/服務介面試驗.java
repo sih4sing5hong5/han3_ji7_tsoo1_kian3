@@ -20,12 +20,12 @@ import org.junit.Test;
 
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
-import cc.core.ChineseCharacter;
+import cc.core.部件;
 import cc.core.ChineseCharacterUtility;
 import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
 import cc.core.漢字序列分析工具;
-import cc.core.組字式部件;
+import cc.core.部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線異寫式查詢;
@@ -104,12 +104,12 @@ public class 服務介面試驗
 	public void test() throws IOException
 	{
 		ChineseCharacterUtility ccUtility = new 漢字序列分析工具(全部組字式, new 展開式免查詢());
-		Vector<ChineseCharacter> ccArray = ccUtility.parseText();
+		Vector<部件> ccArray = ccUtility.parseText();
 
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
-		for (ChineseCharacter 部件 : ccArray)
+		for (部件 部件 : ccArray)
 		{
-			組字式部件 組字部件 = (組字式部件) 部件;
+			部件 組字部件 = (部件) 部件;
 			String 組字式 = 組字部件.建立組字式(組字式建立工具);
 			System.out.println(組字式);
 			BufferedImage 字型圖片 = new BufferedImage(字型大細, 字型大細,

@@ -28,7 +28,7 @@
  ******************************************************************************/
 package cc.adjusting.piece;
 
-import cc.core.ChineseCharacterTzu;
+import cc.core.字部件;
 import cc.core.組合方式;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
@@ -68,7 +68,7 @@ class 注音符號分開工具
 		if (活字 instanceof PieceMovableTypeTzu)
 		{
 			PieceMovableTypeTzu 字活字 = (PieceMovableTypeTzu) 活字;
-			if (((ChineseCharacterTzu) 字活字.getChineseCharacter()).getType() != 組合方式.注音符號)
+			if (((字部件) 字活字.getChineseCharacter()).getType() != 組合方式.注音符號)
 			{
 				System.out.println("注音下跤有毋是注音的組合符號");
 			}

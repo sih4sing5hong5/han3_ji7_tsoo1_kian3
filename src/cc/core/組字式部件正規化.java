@@ -41,35 +41,35 @@ public class 組字式部件正規化
 	 * @param 部件
 	 *            欲正規化的物件
 	 */
-	public 組字式部件 正規化(ChineseCharacter 部件)
+	public 部件 正規化(部件 部件)
 	{
-		int 部件編碼 = ((ChineseCharacter) 部件).getCodePoint();
+		int 部件編碼 = ((部件) 部件).getCodePoint();
 		if (組合方式.isCombinationType(部件編碼))
 		{
-			ChineseCharacterTzu 字部件 = (ChineseCharacterTzu) 部件;
+			字部件 字部件 = (字部件) 部件;
 			if (字部件.getType().有結合律無()
 					&& 字部件.getChildren()[0].getCodePoint() == 字部件
 							.getCodePoint())
 			{
-				組字式字部件 第一層字部件 = new 組字式字部件(null, 部件編碼);
-				組字式字部件 第二層右邊字部件 = new 組字式字部件(第一層字部件, 部件編碼);
-				第一層字部件.getChildren()[0] = ((ChineseCharacterTzu) 字部件
+				字部件 第一層字部件 = new 字部件(null, 部件編碼);
+				字部件 第二層右邊字部件 = new 字部件(第一層字部件, 部件編碼);
+				第一層字部件.getChildren()[0] = ((字部件) 字部件
 						.getChildren()[0]).getChildren()[0];
 				第一層字部件.getChildren()[1] = 第二層右邊字部件;
-				第二層右邊字部件.getChildren()[0] = ((ChineseCharacterTzu) 字部件
+				第二層右邊字部件.getChildren()[0] = ((字部件) 字部件
 						.getChildren()[0]).getChildren()[1];
 				第二層右邊字部件.getChildren()[1] = 字部件.getChildren()[1];
 				return 正規化(第一層字部件);
 			}
 			else
 			{
-				組字式字部件 新字部件 = new 組字式字部件(null, 部件編碼);
+				字部件 新字部件 = new 字部件(null, 部件編碼);
 				for (int i = 0; i < 新字部件.getChildren().length; i++)
-					新字部件.getChildren()[i] = (ChineseCharacter) 正規化(字部件
+					新字部件.getChildren()[i] = (部件) 正規化(字部件
 							.getChildren()[i]);
 				return 新字部件;
 			}
 		}
-		return (組字式部件) 部件;
+		return (部件) 部件;
 	}
 }

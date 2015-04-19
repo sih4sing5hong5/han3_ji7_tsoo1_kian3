@@ -34,7 +34,7 @@ import java.awt.Point;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 
-import cc.core.ChineseCharacterWen;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.image.ImageMoveableTypeTzu;
@@ -95,7 +95,7 @@ public class AwtForImagePrinter implements ChineseCharacterTypePrinter
 		graphics2d.translate(position.x, position.y);
 		GlyphVector glyphVector = font.createGlyphVector(graphics2d
 				.getFontRenderContext(), Character
-				.toChars((((ChineseCharacterWen) wen.getChineseCharacter())
+				.toChars((((文部件) wen.getChineseCharacter())
 						.getCodePoint())));
 		glyphVector.setGlyphTransform(0, affineTransform);
 		graphics2d.translate(0, scaler.y);

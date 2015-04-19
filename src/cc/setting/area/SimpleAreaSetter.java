@@ -34,8 +34,8 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.ChineseCharacterTzu;
-import cc.core.ChineseCharacterWen;
+import cc.core.字部件;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableType;
 import cc.moveable_type.area.AreaMovableTypeTzu;
@@ -85,7 +85,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 
 	@Override
 	public AreaMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			文部件 chineseCharacterWen)
 	{
 		AreaMovableTypeWen shapeMovableTypeWen = new AreaMovableTypeWen(parent,
 				chineseCharacterWen);
@@ -102,7 +102,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 
 	@Override
 	public AreaMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
 		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(parent,
 				chineseCharacterTzu);

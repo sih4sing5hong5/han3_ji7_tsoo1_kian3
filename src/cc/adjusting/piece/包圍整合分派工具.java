@@ -32,9 +32,9 @@ import java.util.Hashtable;
 
 import org.slf4j.Logger;
 
-import cc.core.ChineseCharacter;
-import cc.core.ChineseCharacterTzu;
-import cc.core.組字式部件;
+import cc.core.部件;
+import cc.core.字部件;
+import cc.core.部件;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.程式記錄.漢字組建記錄工具包;
 
@@ -111,9 +111,9 @@ public class 包圍整合分派工具
 	 */
 	public boolean 組合(PieceMovableTypeTzu pieceMovableTypeTzu)
 	{
-		ChineseCharacterTzu chineseCharacterTzu = (ChineseCharacterTzu) pieceMovableTypeTzu
+		字部件 chineseCharacterTzu = (字部件) pieceMovableTypeTzu
 				.getChineseCharacter();
-		ChineseCharacter chineseCharacter = chineseCharacterTzu.getChildren()[0];
+		部件 chineseCharacter = chineseCharacterTzu.getChildren()[0];
 		int 外部活字控制碼 = chineseCharacter.getCodePoint();
 		物件活字包圍工具 包圍工具 = 包圍部件工具表.get(外部活字控制碼);
 		if (包圍工具 != null)
@@ -123,8 +123,8 @@ public class 包圍整合分派工具
 		}
 		else if (無支援暫時用包圍工具 != null)
 		{
-			if (pieceMovableTypeTzu.getChineseCharacter() instanceof 組字式部件)
-				記錄工具.info("組合符號無支援「{}」組字式", ((組字式部件) pieceMovableTypeTzu
+			if (pieceMovableTypeTzu.getChineseCharacter() instanceof 部件)
+				記錄工具.info("組合符號無支援「{}」組字式", ((部件) pieceMovableTypeTzu
 						.getChineseCharacter()).提到組字式());
 			else
 				記錄工具.info("組合符號無支援「{}」部件", Character.toChars(外部活字控制碼));

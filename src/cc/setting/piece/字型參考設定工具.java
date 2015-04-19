@@ -34,11 +34,11 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.ChineseCharacter;
-import cc.core.ChineseCharacterTzu;
+import cc.core.部件;
+import cc.core.字部件;
 import cc.core.組合方式;
-import cc.core.ChineseCharacterWen;
-import cc.core.組字式部件;
+import cc.core.文部件;
+import cc.core.部件;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
@@ -107,7 +107,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 
 	@Override
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			文部件 chineseCharacterWen)
 	{
 		分離活字 物件活字 = 查物件活字(new 通用字型號碼(chineseCharacterWen.getCodePoint()));
 		return new PieceMovableTypeWen(parent, chineseCharacterWen, 物件活字);
@@ -140,9 +140,9 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 
 	@Override
 	public PieceMovableType setTzu(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterTzu chineseCharacterTzu)
+			字部件 chineseCharacterTzu)
 	{
-		ChineseCharacter[] 主要結構 = 揣主要結構元件(chineseCharacterTzu);
+		部件[] 主要結構 = 揣主要結構元件(chineseCharacterTzu);
 		int[] 頭前彼个位址 = new int[主要結構.length];// -1代表空空，遏袂處理。位址代表有彼个元件有考慮到。
 											// TODO 處理解釋
 		for (int i = 0; i < 頭前彼个位址.length; i++)
@@ -163,7 +163,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 					{
 						if (i + 1 < 結束位址)
 							結構展開式.append(chineseCharacterTzu.getChars());
-						結構展開式.append(((組字式部件) 主要結構[i]).提到組字式());
+						結構展開式.append(((部件) 主要結構[i]).提到組字式());
 					}
 					通用字型號碼 字型號碼 = 查通用字型編號.查通用字型編號(結構展開式.toString());
 					/** [開始位址,結束位址) 佇資料庫內底 */
@@ -213,12 +213,12 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	 *            愛拆的樹狀結構
 	 * @return 上頂懸彼層有結合律的部件
 	 */
-	private ChineseCharacter[] 揣主要結構元件(ChineseCharacter 部件)
+	private 部件[] 揣主要結構元件(部件 部件)
 	{
 		if (組合方式.isCombinationType(部件
 				.getCodePoint()))
 		{
-			ChineseCharacterTzu 這馬字部件 = (ChineseCharacterTzu) 部件;
+			字部件 這馬字部件 = (字部件) 部件;
 			if (這馬字部件.getType().有結合律無() && 這馬字部件.getChildren().length == 2)
 			{
 				int 元件數量 = 2;
@@ -227,16 +227,16 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 						.getCodePoint())
 				{
 					元件數量++;
-					這馬字部件 = (ChineseCharacterTzu) 這馬字部件.getChildren()[1];
+					這馬字部件 = (字部件) 這馬字部件.getChildren()[1];
 				}
-				這馬字部件 = (ChineseCharacterTzu) 部件;
-				ChineseCharacter[] 元件 = new ChineseCharacter[元件數量];
+				這馬字部件 = (字部件) 部件;
+				部件[] 元件 = new 部件[元件數量];
 				int 陣列位置 = 0;
 				while (這馬字部件.getChildren()[1].getCodePoint() == 這馬字部件
 						.getCodePoint())
 				{
 					元件[陣列位置++] = 這馬字部件.getChildren()[0];
-					這馬字部件 = (ChineseCharacterTzu) 這馬字部件.getChildren()[1];
+					這馬字部件 = (字部件) 這馬字部件.getChildren()[1];
 				}
 				元件[陣列位置++] = 這馬字部件.getChildren()[0];
 				元件[陣列位置++] = 這馬字部件.getChildren()[1];
@@ -254,7 +254,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 		}
 		else
 		{
-			return new ChineseCharacter[] { 部件 };
+			return new 部件[] { 部件 };
 		}
 	}
 

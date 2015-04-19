@@ -29,7 +29,7 @@
 package cc.moveable_type;
 
 import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.core.ChineseCharacterWen;
+import cc.core.文部件;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**
@@ -50,7 +50,7 @@ public class ChineseCharacterMovableTypeWen extends ChineseCharacterMovableType
 	 */
 	public ChineseCharacterMovableTypeWen(
 			ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen)
+			文部件 chineseCharacterWen)
 	{
 		super(parent, chineseCharacterWen);
 	}

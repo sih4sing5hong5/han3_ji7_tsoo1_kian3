@@ -28,7 +28,7 @@
  ******************************************************************************/
 package cc.moveable_type.piece;
 
-import cc.core.ChineseCharacterWen;
+import cc.core.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.rectangular_area.分離活字;
@@ -59,7 +59,7 @@ public class PieceMovableTypeWen extends ChineseCharacterMovableTypeWen
 	 *            物件活字
 	 */
 	public PieceMovableTypeWen(ChineseCharacterMovableTypeTzu parent,
-			ChineseCharacterWen chineseCharacterWen,
+			文部件 chineseCharacterWen,
 			分離活字 rectangularArea)
 	{
 		super(parent, chineseCharacterWen);

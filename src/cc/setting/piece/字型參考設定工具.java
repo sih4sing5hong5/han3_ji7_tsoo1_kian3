@@ -34,11 +34,10 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.部件;
-import cc.core.字部件;
-import cc.core.組合方式;
-import cc.core.文部件;
-import cc.core.部件;
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.文部件;
+import 漢字組建.部件.組合方式;
+import 漢字組建.部件.部件;
 import cc.moveable_type.ChineseCharacterMovableType;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;

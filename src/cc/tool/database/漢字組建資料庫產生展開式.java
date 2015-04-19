@@ -31,11 +31,10 @@ package cc.tool.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import cc.core.部件;
-import cc.core.組合方式;
+import 漢字組建.解析工具.組字式序列解析工具;
+import 漢字組建.部件.組合方式;
+import 漢字組建.部件.部件;
 import cc.core.展開式免查詢;
-import cc.core.漢字序列分析工具;
-import cc.core.部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 
@@ -166,7 +165,7 @@ public class 漢字組建資料庫產生展開式
 					String 目標編號 = 要處理的目標.getString("構形資料庫編號");
 					if (目標編號 != null)
 					{
-						漢字序列分析工具 序列分析工具 = new 漢字序列分析工具(展開式.toString(),
+						組字式序列解析工具 序列分析工具 = new 組字式序列解析工具(展開式.toString(),
 								new 展開式免查詢());
 						部件 部件 = 序列分析工具.parseText().firstElement();
 						部件正規化.正規化(部件);

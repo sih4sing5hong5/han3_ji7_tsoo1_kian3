@@ -42,10 +42,10 @@ import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import 漢字組建.解析工具.ChineseCharacterUtility;
+import 漢字組建.部件.部件;
 import cc.adjusting.area.SimpleAreaAdjuster;
 import cc.adjusting.bolder.NullStroke;
-import cc.core.部件;
-import cc.core.ChineseCharacterUtility;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.area.AreaMovableType;
 import cc.moveable_type.area.AreaTool;

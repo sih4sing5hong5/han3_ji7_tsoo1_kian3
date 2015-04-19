@@ -34,8 +34,8 @@ import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.字部件;
-import cc.core.文部件;
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.area.AreaMovableType;
 import cc.moveable_type.area.AreaMovableTypeTzu;

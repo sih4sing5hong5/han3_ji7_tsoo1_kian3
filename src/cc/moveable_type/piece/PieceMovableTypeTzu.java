@@ -3,7 +3,7 @@
  */
 package cc.moveable_type.piece;
 
-import cc.core.字部件;
+import 漢字組建.部件.字部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;

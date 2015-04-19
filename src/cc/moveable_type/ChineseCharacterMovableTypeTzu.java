@@ -28,8 +28,8 @@
  ******************************************************************************/
 package cc.moveable_type;
 
+import 漢字組建.部件.字部件;
 import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.core.字部件;
 import cc.printing.ChineseCharacterTypePrinter;
 
 /**

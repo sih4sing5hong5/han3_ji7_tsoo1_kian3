@@ -26,8 +26,14 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.core;
+package 漢字組建.解析工具;
 
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.文部件;
+import 漢字組建.部件.組合方式;
+import 漢字組建.部件.部件;
+import cc.core.展開式免查詢;
+import cc.core.展開式查詢工具;
 import cc.tool.database.字串與控制碼轉換;
 
 /**
@@ -35,7 +41,7 @@ import cc.tool.database.字串與控制碼轉換;
  * 
  * @author Ihc
  */
-public class 漢字序列分析工具 extends ChineseCharacterUtility
+public class 組字式序列解析工具 extends ChineseCharacterUtility
 {
 	/** 愛分析的統一碼控制碼陣列 */
 	protected int[] 統一碼控制碼;
@@ -52,7 +58,7 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 	 * @param 展開式查詢
 	 *            查詢展開式的工具
 	 */
-	public 漢字序列分析工具(String 漢字字串, 展開式查詢工具 展開式查詢)
+	public 組字式序列解析工具(String 漢字字串, 展開式查詢工具 展開式查詢)
 	{
 		this(字串與控制碼轉換.轉換成控制碼(漢字字串), 展開式查詢);
 	}
@@ -65,7 +71,7 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 	 * @param 展開式查詢
 	 *            查詢展開式的工具
 	 */
-	public 漢字序列分析工具(int[] 統一碼控制碼, 展開式查詢工具 展開式查詢)
+	public 組字式序列解析工具(int[] 統一碼控制碼, 展開式查詢工具 展開式查詢)
 	{
 		super(new String());
 		this.統一碼控制碼 = 統一碼控制碼;
@@ -97,7 +103,7 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 				chineseCharacter = new 文部件(目前控制碼());
 			else
 			{
-				漢字序列分析工具 分析工具 = new 漢字序列分析工具(展開式, new 展開式免查詢());// 避免把異體字給展開
+				組字式序列解析工具 分析工具 = new 組字式序列解析工具(展開式, new 展開式免查詢());// 避免把異體字給展開
 				// TODO 若異寫字已經予儂拆開欲按怎？？
 				chineseCharacter = 分析工具.parseCharacter(parent);
 			}

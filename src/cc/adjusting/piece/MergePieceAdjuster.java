@@ -30,10 +30,10 @@ package cc.adjusting.piece;
 
 import java.awt.geom.AffineTransform;
 
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.組合方式;
+import 漢字組建.部件.部件;
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
-import cc.core.部件;
-import cc.core.字部件;
-import cc.core.組合方式;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.漢字組建活字;

@@ -4,10 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import cc.core.部件;
+import 漢字組建.解析工具.組字式序列解析工具;
+import 漢字組建.部件.部件;
 import cc.core.展開式免查詢;
-import cc.core.漢字序列分析工具;
-import cc.core.部件;
 import cc.core.組字式部件組字式建立工具;
 
 public class 三元素符號代換工具試驗
@@ -35,7 +34,7 @@ public class 三元素符號代換工具試驗
 
 	protected String 代換結果(String 組字式)
 	{
-		漢字序列分析工具 解析工具 = new 漢字序列分析工具(組字式, new 展開式免查詢());
+		組字式序列解析工具 解析工具 = new 組字式序列解析工具(組字式, new 展開式免查詢());
 		部件 部件樹 = 解析工具.parseText().get(0);
 		部件 組字部件樹 = (部件) 代換工具.三元素組合代換成二元素(部件樹);
 		return 組字部件樹.建立組字式(組字式建立工具);

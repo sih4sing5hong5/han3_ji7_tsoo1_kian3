@@ -34,7 +34,7 @@ import java.awt.Point;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 
-import cc.core.文部件;
+import 漢字組建.部件.文部件;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.image.ImageMoveableTypeTzu;

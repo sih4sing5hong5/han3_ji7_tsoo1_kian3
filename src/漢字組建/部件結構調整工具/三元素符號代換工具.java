@@ -1,8 +1,8 @@
 package 漢字組建.部件結構調整工具;
 
-import cc.core.字部件;
-import cc.core.組合方式;
-import cc.core.部件;
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.組合方式;
+import 漢字組建.部件.部件;
 
 public class 三元素符號代換工具
 {

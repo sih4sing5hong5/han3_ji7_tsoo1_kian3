@@ -28,8 +28,8 @@
  ******************************************************************************/
 package cc.adjusting.piece;
 
-import cc.core.字部件;
-import cc.core.組合方式;
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.組合方式;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;

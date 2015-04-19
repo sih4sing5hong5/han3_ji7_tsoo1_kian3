@@ -26,120 +26,15 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.core;
-
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
-import java.util.Vector;
+package 漢字組建.解析工具;
 
 /**
- * 用來分析漢字部件的工具。給一字串，分析出含所有漢字的部件結構。
+ * 分析漢字部件的例外型態。
  * 
  * @author Ihc
  */
-public class ChineseCharacterUtility
+public class ChineseCharacterFormatException extends Exception
 {
-	/**
-	 * 字串目前處理到的位置
-	 */
-	private StringCharacterIterator iterator;
-
-	/**
-	 * 以<code>String</code>建立一個分析工具
-	 * 
-	 * @param string
-	 *            欲分析的字串
-	 */
-	public ChineseCharacterUtility(String string)
-	{
-		this.iterator = new StringCharacterIterator(string);
-	}
-
-	/**
-	 * 以<code>StringCharacterIterator</code>建立一個分析工具
-	 * 
-	 * @param iterator
-	 *            欲分析的字串
-	 */
-	public ChineseCharacterUtility(StringCharacterIterator iterator)
-	{
-		this.iterator = iterator;
-	}
-
-	/**
-	 * 分析字串並回傳字串中全部的漢字部件
-	 * 
-	 * @return 字串中全部的漢字部件。若字串格式有錯，不完整的部件不會被加上去，並且在陣列最後會補上一個null當作通知
-	 */
-	public Vector<部件> parseText()
-	{
-		Vector<部件> vector = new Vector<部件>();
-		try
-		{
-			while (!組合式是毋是結束矣())
-			{
-				vector.add(parseCharacter(null));
-			}
-		}
-		catch (ChineseCharacterFormatException e)
-		{
-			vector.add(null);
-		}
-		return vector;
-	}
-
-	/**
-	 * 分析下一個漢字部件
-	 * 
-	 * @param parent
-	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
-	 * @return 下一個漢字部件
-	 * @throws ChineseCharacterFormatException
-	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
-	 */
-	@Deprecated
-	部件 parseCharacter(字部件 parent) throws ChineseCharacterFormatException
-	{
-		if (組合式是毋是結束矣())
-			throw new ChineseCharacterFormatException();
-		int codePoint = 0;
-		if (Character.isHighSurrogate(iterator.current()))
-		{
-			if (iterator.getIndex() + 1 != iterator.getEndIndex())
-			{
-				codePoint = Character.toCodePoint(iterator.current(),
-						iterator.next());
-			}
-			else
-			{
-				iterator.next();
-				throw new ChineseCharacterFormatException();
-			}
-		}
-		else
-		{
-			codePoint = iterator.current();
-		}
-		iterator.next();
-		部件 chineseCharacter = null;
-		if (組合方式.isCombinationType(codePoint))
-		{
-			chineseCharacter = new 文部件(codePoint);
-		}
-		else
-		{
-			chineseCharacter = new 文部件(codePoint);
-		}
-		return chineseCharacter;
-	}
-
-	/**
-	 * 知影這馬閣有組合式愛分析無。
-	 * 
-	 * @return 閣有組合式愛分析無
-	 */
-	protected boolean 組合式是毋是結束矣()
-	{
-		return iterator.current() == CharacterIterator.DONE;
-	}
+	/** 序列化編號 */
+	private static final long serialVersionUID = 8405277769269381767L;
 }

@@ -26,77 +26,95 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.core;
+package 漢字組建.部件;
 
+import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
 
 /**
- * 漢字部件樹狀結構的葉子。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。 <code>ChineseCharacterWen</code>
- * 記錄使用的部件。
+ * 漢字部件樹狀結構的上層節點。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
+ * <code>ChineseCharacterTzu</code>記錄底下部件的組合方式。
  * 
  * @author Ihc
  */
-public class 文部件 extends 部件
+public class 字部件 extends 部件
 {
 	/**
-	 * 部件的Unicode編碼
+	 * 部件的組合方式
 	 */
-	private final int codePoint;
-
+	private final 組合方式 type;
 	/**
-	 * 初使化一个新的文部件。
-	 * 
-	 * @param 面頂彼个字部件
-	 *            樹狀結構面頂彼个字部件
-	 * @param 控制碼
-	 *            這个文部件字的統一碼控制碼
+	 * 底下的各個部件
 	 */
-	/**
-	 * 建立一個文部件
-	 * 
-	 * @param parent
-	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
-	 * @param codePoint
-	 *            部件的Unicode編碼
-	 */
-	public 文部件(int codePoint)
-	{
-		this.codePoint = codePoint;
-	}
-
-	public 文部件(String 組字式)
-	{
-		this(組字式.charAt(0));
-	}
+	private final 部件[] children;
 
 	@Override
 	public boolean 是文部件()
-	{
-		return true;
-	}
-
-	@Override
-	public boolean 是字部件()
 	{
 		return false;
 	}
 
 	@Override
-	public String 樹狀結構組字式()
+	public boolean 是字部件()
 	{
-		return 部件組字式();
+		return true;
 	}
 
 	/**
-	 * 取得部件Unicode編碼
+	 * 取得部件的組合方式
 	 * 
-	 * @return 部件Unicode編碼
+	 * @return 部件的組合方式
 	 */
+	public 組合方式 組合方式()
+	{
+		return type;
+	}
+
+	/**
+	 * 取得底下的各個部件
+	 * 
+	 * @return 底下的各個部件
+	 */
+	public 部件[] 底下元素()
+	{
+		return children;
+	}
+
+	@Override
 	public int Unicode編號()
 	{
-		return codePoint;
+		return 組合方式().toCodePoint();
+	}
+
+	/**
+	 * 初使化一个新的字部件。
+	 * 
+	 * @param 面頂彼个字部件
+	 *            樹狀結構面頂彼个字部件
+	 * @param 控制碼
+	 *            這个字部件的組合符號統一碼控制碼
+	 */
+	/**
+	 * 建立一个字部件。
+	 * 
+	 * @param parent
+	 *            上一層的部件結構。若上層是樹狀的樹根，傳入null
+	 * @param codePoint
+	 *            組合符號的Unicode編碼
+	 */
+	public 字部件(int codePoint)
+	{
+		if (!組合方式.isCombinationType(codePoint))
+			throw new IllegalArgumentException("這不是部件組合符號!!");
+		type = 組合方式.toCombinationType(codePoint);
+		children = new 部件[type.getNumberOfChildren()];
+	}
+
+	public 字部件(String 組字式)
+	{
+		this(組字式.charAt(0));
 	}
 
 	@Override
@@ -104,10 +122,10 @@ public class 文部件 extends 部件
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
 			ChineseCharacterMovableTypeTzu parent)
 	{
-		return chineseCharacterTypeSetter.setWen(parent, this);
+		return chineseCharacterTypeSetter.setTzu(parent, this);
 	}
 
-	/** 這个文部件下跤的組字式 */
+	/** 這个字部件下跤的組字式 */
 	private String 組字式;
 
 	@Override
@@ -127,5 +145,17 @@ public class 文部件 extends 部件
 	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
 	{
 		return 組字式建立工具.建立組字式(this);
+	}
+
+	@Override
+	public String 樹狀結構組字式()
+	{
+		StringBuilder 組字式 = new StringBuilder();
+		組字式.append(部件組字式());
+		for (部件 子部件 : 底下元素())
+		{
+			組字式.append(子部件.部件組字式());
+		}
+		return 組字式.toString();
 	}
 }

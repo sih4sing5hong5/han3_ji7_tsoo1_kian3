@@ -6,10 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cc.core.字部件;
-import cc.core.文部件;
-import cc.core.組合方式;
-
 public class 字部件試驗
 {
 	@Test

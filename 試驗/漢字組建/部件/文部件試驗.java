@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cc.core.文部件;
-
 public class 文部件試驗
 {
 	@Test

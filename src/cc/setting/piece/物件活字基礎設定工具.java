@@ -31,7 +31,7 @@ package cc.setting.piece;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 
-import cc.core.文部件;
+import 漢字組建.部件.文部件;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.分離活字;

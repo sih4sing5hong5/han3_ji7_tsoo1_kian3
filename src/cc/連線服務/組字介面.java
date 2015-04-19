@@ -36,15 +36,14 @@ import java.awt.RenderingHints;
 import org.slf4j.Logger;
 import org.slf4j.profiler.Profiler;
 
+import 漢字組建.解析工具.ChineseCharacterFormatException;
+import 漢字組建.解析工具.組字式序列解析工具;
+import 漢字組建.部件.部件;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
-import cc.core.部件;
-import cc.core.ChineseCharacterFormatException;
 import cc.core.展開式查詢工具;
-import cc.core.漢字序列分析工具;
 import cc.core.異寫式代換工具;
 import cc.core.異寫式查詢工具;
-import cc.core.部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.漢字組建活字;
@@ -174,7 +173,7 @@ public class 組字介面
 		看時工具.start("分析中");
 		// 記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
 
-		漢字序列分析工具 序列分析工具 = new 漢字序列分析工具(組字式, 查詢方式);
+		組字式序列解析工具 序列分析工具 = new 組字式序列解析工具(組字式, 查詢方式);
 		部件 部件;
 		try
 		{

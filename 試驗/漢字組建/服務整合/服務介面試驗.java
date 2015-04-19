@@ -1,6 +1,5 @@
 package 漢字組建.服務整合;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.*;
 
 import java.awt.Stroke;
@@ -18,14 +17,13 @@ import javax.imageio.ImageIO;
 import org.junit.Before;
 import org.junit.Test;
 
+import 漢字組建.解析工具.ChineseCharacterUtility;
+import 漢字組建.解析工具.組字式序列解析工具;
+import 漢字組建.部件.部件;
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
-import cc.core.部件;
-import cc.core.ChineseCharacterUtility;
 import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
-import cc.core.漢字序列分析工具;
-import cc.core.部件;
 import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線異寫式查詢;
@@ -103,7 +101,7 @@ public class 服務介面試驗
 	@Test
 	public void test() throws IOException
 	{
-		ChineseCharacterUtility ccUtility = new 漢字序列分析工具(全部組字式, new 展開式免查詢());
+		ChineseCharacterUtility ccUtility = new 組字式序列解析工具(全部組字式, new 展開式免查詢());
 		Vector<部件> ccArray = ccUtility.parseText();
 
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();

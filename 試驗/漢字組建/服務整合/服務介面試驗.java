@@ -25,7 +25,6 @@ import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
-import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -104,11 +103,10 @@ public class 服務介面試驗
 		組字式序列解析工具 ccUtility = new 組字式序列解析工具(全部組字式, new 展開式免查詢());
 		Vector<部件> ccArray = ccUtility.解析();
 
-		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 		for (部件 部件 : ccArray)
 		{
 			部件 組字部件 = (部件) 部件;
-			String 組字式 = 組字部件.建立組字式(組字式建立工具);
+			String 組字式 = 組字部件.樹狀結構組字式();
 			System.out.println(組字式);
 			BufferedImage 字型圖片 = new BufferedImage(字型大細, 字型大細,
 					BufferedImage.TYPE_INT_ARGB);

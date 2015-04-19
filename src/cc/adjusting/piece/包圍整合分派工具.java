@@ -124,7 +124,7 @@ public class 包圍整合分派工具
 		{
 			if (pieceMovableTypeTzu.getChineseCharacter() instanceof 部件)
 				記錄工具.info("組合符號無支援「{}」組字式", ((部件) pieceMovableTypeTzu
-						.getChineseCharacter()).提到組字式());
+						.getChineseCharacter()).樹狀結構組字式());
 			else
 				記錄工具.info("組合符號無支援「{}」部件", Character.toChars(外部活字控制碼));
 			無支援暫時用包圍工具.組合(pieceMovableTypeTzu);

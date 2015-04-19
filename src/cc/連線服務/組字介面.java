@@ -45,7 +45,6 @@ import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
 import cc.core.異寫式代換工具;
 import cc.core.異寫式查詢工具;
-import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.rectangular_area.分離活字;
@@ -67,8 +66,6 @@ public class 組字介面
 	protected 展開式查詢工具 查詢方式;
 	/** 決定有需要正規化無佮按怎正規化的物件 */
 	protected 組字式結構正規化工具 正規化工具;
-	/** 設定前先建立逐的部件，伊佮下跤的部件所代表的組字式 */
-	protected 組字式部件組字式建立工具 組字式建立工具;
 	/** 異寫式查詢的方法 */
 	protected 異寫式代換工具 異寫式代換;
 	/** 依據部件佮字體的性質，共部件提來產生活字 */
@@ -147,7 +144,6 @@ public class 組字介面
 		this.組字式上大長度 = 組字式上大長度;
 
 		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
-		組字式建立工具 = new 組字式部件組字式建立工具();
 	}
 
 	/**
@@ -190,7 +186,7 @@ public class 組字介面
 		// 組字部件.建立組字式(組字式建立工具);
 		// 記錄工具.debug(組字部件.提到組字式());
 		部件 = (部件) 正規化工具.正規化(部件);
-		組字部件.建立組字式(組字式建立工具);
+		組字部件.樹狀結構組字式();
 		// 記錄工具.debug(組字部件.提到組字式());
 		部件 = 異寫式代換.代換(部件);
 
@@ -224,6 +220,6 @@ public class 組字介面
 		列印工具.printPiece(上尾欲畫的圖);
 
 		看時工具.stop().log();
-		return 組字部件.提到組字式();
+		return 組字部件.樹狀結構組字式();
 	}
 }

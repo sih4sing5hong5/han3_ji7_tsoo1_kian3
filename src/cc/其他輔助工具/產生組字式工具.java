@@ -39,7 +39,6 @@ import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.core.展開式查詢工具;
-import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線展開式查詢;
 import cc.tool.database.PgsqlConnection;
 import cc.tool.database.字串與控制碼轉換;
@@ -78,15 +77,14 @@ public class 產生組字式工具
 			Vector<部件> ccArray = ccUtility.解析();
 
 			組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
-			組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 			for (部件 部件 : ccArray)
 			{
 				部件 組字部件 = (部件) 部件;
-				組字部件.建立組字式(組字式建立工具);
+				組字部件.樹狀結構組字式();
 				// 記錄工具.debug(組字部件.提到組字式());
 				正規化工具.正規化(部件);
-				組字部件.建立組字式(組字式建立工具);
-				System.out.print(組字部件.提到組字式());
+				組字部件.樹狀結構組字式();
+				System.out.print(組字部件.樹狀結構組字式());
 			}
 
 			try

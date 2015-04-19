@@ -28,7 +28,6 @@
  ******************************************************************************/
 package 漢字組建.部件;
 
-import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -106,27 +105,5 @@ public class 文部件 extends 部件
 			ChineseCharacterMovableTypeTzu parent)
 	{
 		return chineseCharacterTypeSetter.setWen(parent, this);
-	}
-
-	/** 這个文部件下跤的組字式 */
-	private String 組字式;
-
-	@Override
-	public String 提到組字式()
-	{
-		return 組字式;
-	}
-
-	@Override
-	public void 設定組字式(String 組字式)
-	{
-		this.組字式 = 組字式;
-		return;
-	}
-
-	@Override
-	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
-	{
-		return 組字式建立工具.建立組字式(this);
 	}
 }

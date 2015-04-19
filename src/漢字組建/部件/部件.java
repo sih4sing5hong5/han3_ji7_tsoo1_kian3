@@ -28,7 +28,6 @@
  ******************************************************************************/
 package 漢字組建.部件;
 
-import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -47,9 +46,9 @@ public abstract class 部件
 	public abstract boolean 是字部件();
 
 	/**
-	 * 取得部件的字元形態
+	 * 取得部件的字串形態
 	 * 
-	 * @return 部件字元形態
+	 * @return 部件字串形態
 	 */
 	public String 部件組字式()
 	{
@@ -63,6 +62,11 @@ public abstract class 部件
 	 */
 	public abstract int Unicode編號();
 
+	/**
+	 * 提到這个部件下跤的組字式。
+	 * 
+	 * @return 這个物件下跤的組字式
+	 */
 	public abstract String 樹狀結構組字式();
 
 	/**
@@ -79,27 +83,4 @@ public abstract class 部件
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
 			ChineseCharacterMovableTypeTzu parent);
 
-	/**
-	 * 提到這个部件下跤的組字式。
-	 * 
-	 * @return 這个物件下跤的組字式
-	 */
-	public abstract String 提到組字式();
-
-	/**
-	 * 設定這个部件下跤的組字式。
-	 * 
-	 * @param 組字式
-	 *            新的組字式
-	 */
-	abstract void 設定組字式(String 組字式);
-
-	/**
-	 * 建立規的樹狀結構的組字式。
-	 * 
-	 * @param 組字式建立工具
-	 *            所用的組字式建立工具
-	 * @return 做好的組字式
-	 */
-	public abstract String 建立組字式(組字式部件組字式建立工具 組字式建立工具);
 }

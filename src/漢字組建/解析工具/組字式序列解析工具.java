@@ -85,14 +85,14 @@ public class 組字式序列解析工具
 	 * 
 	 * @return 字串中全部的漢字部件。若字串格式有錯，不完整的部件不會被加上去，並且在陣列最後會補上一個null當作通知
 	 */
-	public Vector<部件> parseText()
+	public Vector<部件> 解析()
 	{
 		Vector<部件> vector = new Vector<部件>();
 		try
 		{
 			while (!組合式是毋是結束矣())
 			{
-				vector.add(parseCharacter(null));
+				vector.add(解析一個組字式());
 			}
 		}
 		catch (組字式序列格式例外 e)
@@ -102,7 +102,7 @@ public class 組字式序列解析工具
 		return vector;
 	}
 
-	public 部件 parseCharacter(字部件 parent) throws 組字式序列格式例外
+	public 部件 解析一個組字式() throws 組字式序列格式例外
 	{
 		if (組合式是毋是結束矣())
 			throw new 組字式序列格式例外();
@@ -113,7 +113,7 @@ public class 組字式序列解析工具
 			下一个控制碼();
 			for (int i = 0; i < chineseCharacterTzu.底下元素().length; ++i)
 			{
-				chineseCharacterTzu.底下元素()[i] = parseCharacter(chineseCharacterTzu);
+				chineseCharacterTzu.底下元素()[i] = 解析一個組字式();
 			}
 			chineseCharacter = chineseCharacterTzu;
 		}
@@ -126,8 +126,7 @@ public class 組字式序列解析工具
 			else
 			{
 				組字式序列解析工具 分析工具 = new 組字式序列解析工具(展開式, new 展開式免查詢());// 避免把異體字給展開
-				// TODO 若異寫字已經予儂拆開欲按怎？？
-				chineseCharacter = 分析工具.parseCharacter(parent);
+				chineseCharacter = 分析工具.解析一個組字式();
 			}
 			下一个控制碼();
 		}
@@ -139,13 +138,13 @@ public class 組字式序列解析工具
 	 * 
 	 * @return 目前的控制碼
 	 */
-	private int 目前控制碼()
+	protected int 目前控制碼()
 	{
 		return 統一碼控制碼[陣列位置];
 	}
 
 	/** 換到下一个控制碼。 */
-	private void 下一个控制碼()
+	protected void 下一个控制碼()
 	{
 		陣列位置++;
 		return;

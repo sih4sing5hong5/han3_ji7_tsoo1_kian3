@@ -141,7 +141,7 @@ public class AwtTestExample extends Awt測試樣板
 		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
 		組字式序列解析工具 ccUtility = new 組字式序列解析工具(word, 查詢方式);
-		Vector<部件> ccArray = ccUtility.parseText();
+		Vector<部件> ccArray = ccUtility.解析();
 
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();

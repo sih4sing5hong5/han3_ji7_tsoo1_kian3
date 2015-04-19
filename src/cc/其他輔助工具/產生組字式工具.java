@@ -75,7 +75,7 @@ public class 產生組字式工具
 		while (句 != null)
 		{
 			組字式序列解析工具 ccUtility = new 組字式序列解析工具(句, 查詢方式);
-			Vector<部件> ccArray = ccUtility.parseText();
+			Vector<部件> ccArray = ccUtility.解析();
 
 			組字式部件正規化 正規化工具 = new 組字式部件正規化();
 			組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();

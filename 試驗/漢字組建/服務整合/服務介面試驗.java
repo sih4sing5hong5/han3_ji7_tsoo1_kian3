@@ -102,7 +102,7 @@ public class 服務介面試驗
 	public void test() throws IOException
 	{
 		組字式序列解析工具 ccUtility = new 組字式序列解析工具(全部組字式, new 展開式免查詢());
-		Vector<部件> ccArray = ccUtility.parseText();
+		Vector<部件> ccArray = ccUtility.解析();
 
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 		for (部件 部件 : ccArray)

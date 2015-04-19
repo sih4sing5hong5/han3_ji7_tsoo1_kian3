@@ -177,7 +177,7 @@ public class 組字介面
 		部件 部件;
 		try
 		{
-			部件 = 序列分析工具.parseCharacter(null);
+			部件 = 序列分析工具.解析一個組字式();
 		}
 		catch (組字式序列格式例外 e)
 		{

@@ -7,12 +7,11 @@ import org.junit.Test;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import cc.core.展開式免查詢;
-import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 
-public class 組字式部件正規化工具試驗
+public class 組字式結構正規化工具試驗
 {
-	protected 組字式部件正規化 正規化工具 = new 組字式部件正規化();
+	protected 組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
 	protected 組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 
 	@Test

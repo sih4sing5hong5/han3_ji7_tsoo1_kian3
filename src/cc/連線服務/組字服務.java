@@ -47,11 +47,11 @@ import org.apache.batik.svggen.SVGGraphics2D;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
+import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
 import cc.core.異寫式查詢工具;
-import cc.core.組字式部件正規化;
 import cc.core.資料庫連線展開式查詢;
 import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.rectangular_area.分離活字加粗;
@@ -103,7 +103,7 @@ public class 組字服務 extends HttpServlet {
 
 		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
-		組字式部件正規化 正規化工具 = new 組字式部件正規化();
+		組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
 		異寫式查詢工具 異寫式查詢 = new 資料庫連線異寫式查詢(連線);
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
 		// new FunctinoalBasicBolder(new Stroke[] {}, 01),

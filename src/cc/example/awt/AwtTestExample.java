@@ -44,13 +44,13 @@ import org.slf4j.profiler.Profiler;
 
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
+import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
 import cc.core.異寫式代換工具;
 import cc.core.異寫式查詢工具;
-import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.core.資料庫連線展開式查詢;
 import cc.core.資料庫連線異寫式查詢;
@@ -143,7 +143,7 @@ public class AwtTestExample extends Awt測試樣板
 		組字式序列解析工具 ccUtility = new 組字式序列解析工具(word, 查詢方式);
 		Vector<部件> ccArray = ccUtility.解析();
 
-		組字式部件正規化 正規化工具 = new 組字式部件正規化();
+		組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
 		組字式部件組字式建立工具 組字式建立工具 = new 組字式部件組字式建立工具();
 		for (部件 部件 : ccArray)
 		{

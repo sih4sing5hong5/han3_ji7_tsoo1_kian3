@@ -34,8 +34,8 @@ import java.sql.SQLException;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.組合方式;
 import 漢字組建.部件.部件;
+import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.core.展開式免查詢;
-import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 
 /**
@@ -50,7 +50,7 @@ public class 漢字組建資料庫產生展開式
 	/** 攏總更新幾筆 */
 	int 上傳筆數;
 	/** 正規化工具 */
-	組字式部件正規化 部件正規化;
+	組字式結構正規化工具 部件正規化;
 	/** 建立組字式的工具 */
 	組字式部件組字式建立工具 組字式建立工具;
 
@@ -72,7 +72,7 @@ public class 漢字組建資料庫產生展開式
 	{
 		System.out.println("開始嘍～～ 時間：" + System.currentTimeMillis());
 		連線 = new PgsqlConnection();
-		部件正規化 = new 組字式部件正規化();
+		部件正規化 = new 組字式結構正規化工具();
 		組字式建立工具 = new 組字式部件組字式建立工具();
 		上傳筆數 = 0;
 		try

@@ -39,12 +39,12 @@ import org.slf4j.profiler.Profiler;
 import 漢字組建.解析工具.組字式序列格式例外;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
+import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
 import cc.core.異寫式代換工具;
 import cc.core.異寫式查詢工具;
-import cc.core.組字式部件正規化;
 import cc.core.組字式部件組字式建立工具;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
@@ -66,7 +66,7 @@ public class 組字介面
 	/** 看使用者提供的部件，是毋是愛先換做展開式抑是按怎 */
 	protected 展開式查詢工具 查詢方式;
 	/** 決定有需要正規化無佮按怎正規化的物件 */
-	protected 組字式部件正規化 正規化工具;
+	protected 組字式結構正規化工具 正規化工具;
 	/** 設定前先建立逐的部件，伊佮下跤的部件所代表的組字式 */
 	protected 組字式部件組字式建立工具 組字式建立工具;
 	/** 異寫式查詢的方法 */
@@ -103,7 +103,7 @@ public class 組字介面
 	 * @param 字型大細
 	 *            字體愛偌大
 	 */
-	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
+	public 組字介面(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
 			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
 			分離活字加粗 活字加粗, int 字型屬性, int 字型大細)
 	{
@@ -132,7 +132,7 @@ public class 組字介面
 	 * @param 組字式上大長度
 	 *            限制組字式長度，予儂無法度惡意攻擊
 	 */
-	public 組字介面(展開式查詢工具 查詢方式, 組字式部件正規化 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
+	public 組字介面(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
 			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
 			分離活字加粗 活字加粗, int 字型屬性, int 字型大細, int 組字式上大長度)
 	{

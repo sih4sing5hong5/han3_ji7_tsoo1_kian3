@@ -51,6 +51,44 @@ public class 字部件 extends 部件
 	 */
 	private final 部件[] children;
 
+
+	@Override
+	public boolean 是文部件()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean 是字部件()
+	{
+		return true;
+	}
+
+	/**
+	 * 取得部件的組合方式
+	 * 
+	 * @return 部件的組合方式
+	 */
+	public 組合方式 組合方式()
+	{
+		return type;
+	}
+
+	/**
+	 * 取得底下的各個部件
+	 * 
+	 * @return 底下的各個部件
+	 */
+	public 部件[] 底下元素()
+	{
+		return children;
+	}
+
+	@Override
+	public int Unicode編號()
+	{
+		return 組合方式().toCodePoint();
+	}
 	/**
 	 * 初使化一个新的字部件。
 	 * 
@@ -106,19 +144,6 @@ public class 字部件 extends 部件
 	{
 		this(null, 組字式.charAt(0));
 	}
-
-	@Override
-	public boolean 是文部件()
-	{
-		return false;
-	}
-
-	@Override
-	public boolean 是字部件()
-	{
-		return true;
-	}
-
 	@Override
 	public 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
@@ -127,31 +152,6 @@ public class 字部件 extends 部件
 		return chineseCharacterTypeSetter.setTzu(parent, this);
 	}
 
-	/**
-	 * 取得部件的組合方式
-	 * 
-	 * @return 部件的組合方式
-	 */
-	public 組合方式 組合方式()
-	{
-		return type;
-	}
-
-	/**
-	 * 取得底下的各個部件
-	 * 
-	 * @return 底下的各個部件
-	 */
-	public 部件[] 底下元素()
-	{
-		return children;
-	}
-
-	@Override
-	public int Unicode編號()
-	{
-		return 組合方式().toCodePoint();
-	}
 
 	/** 這个字部件下跤的組字式 */
 	private String 組字式;

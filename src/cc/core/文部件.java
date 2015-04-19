@@ -85,11 +85,9 @@ public class 文部件 extends 部件
 	}
 
 	@Override
-	public 漢字組建活字 typeset(
-			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
-			ChineseCharacterMovableTypeTzu parent)
+	public String 樹狀結構組字式()
 	{
-		return chineseCharacterTypeSetter.setWen(parent, this);
+		return 部件組字式();
 	}
 
 	/**
@@ -100,6 +98,14 @@ public class 文部件 extends 部件
 	public int Unicode編號()
 	{
 		return codePoint;
+	}
+
+	@Override
+	public 漢字組建活字 typeset(
+			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
+			ChineseCharacterMovableTypeTzu parent)
+	{
+		return chineseCharacterTypeSetter.setWen(parent, this);
 	}
 
 	/** 這个文部件下跤的組字式 */
@@ -122,11 +128,5 @@ public class 文部件 extends 部件
 	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
 	{
 		return 組字式建立工具.建立組字式(this);
-	}
-
-	@Override
-	public String 樹狀結構組字式()
-	{
-		return 部件組字式();
 	}
 }

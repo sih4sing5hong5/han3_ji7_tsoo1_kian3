@@ -51,6 +51,25 @@ public abstract class 部件
 	public abstract boolean 是字部件();
 
 	/**
+	 * 取得部件的字元形態
+	 * 
+	 * @return 部件字元形態
+	 */
+	public String 部件組字式()
+	{
+		return new String(Character.toChars(Unicode編號()));
+	}
+
+	/**
+	 * 取得部件Unicode編碼
+	 * 
+	 * @return 部件Unicode編碼
+	 */
+	public abstract int Unicode編號();
+
+	public abstract String 樹狀結構組字式();
+
+	/**
 	 * 建立漢字部件結構
 	 * 
 	 * @param parent
@@ -84,25 +103,6 @@ public abstract class 部件
 	{
 		return parent;
 	}
-
-	/**
-	 * 取得部件Unicode編碼
-	 * 
-	 * @return 部件Unicode編碼
-	 */
-	public abstract int Unicode編號();
-
-	/**
-	 * 取得部件的字元形態
-	 * 
-	 * @return 部件字元形態
-	 */
-	public String 部件組字式()
-	{
-		return new String(Character.toChars(Unicode編號()));
-	}
-
-	public abstract String 樹狀結構組字式();
 
 	/**
 	 * 提到這个部件下跤的組字式。

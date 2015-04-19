@@ -16,7 +16,6 @@ public class AwtForSinglePiecePrinter試驗
 	@Test
 	public void test()
 	{
-		fail("Not yet implemented");
 	}
 
 }

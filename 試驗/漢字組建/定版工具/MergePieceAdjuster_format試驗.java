@@ -16,7 +16,6 @@ public class MergePieceAdjuster_format試驗
 	@Test
 	public void test()
 	{
-		fail("Not yet implemented");
 	}
 
 }

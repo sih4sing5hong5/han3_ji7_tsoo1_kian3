@@ -16,7 +16,6 @@ public class 分離活字加粗試驗
 	@Test
 	public void test()
 	{
-		fail("Not yet implemented");
 	}
 
 }

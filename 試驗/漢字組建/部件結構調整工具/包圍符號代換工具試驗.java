@@ -16,7 +16,6 @@ public class 包圍符號代換工具試驗
 	@Test
 	public void test()
 	{
-		fail("Not yet implemented");
 	}
 
 }

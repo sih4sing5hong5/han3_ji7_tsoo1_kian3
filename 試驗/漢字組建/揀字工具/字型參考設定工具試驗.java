@@ -16,7 +16,6 @@ public class 字型參考設定工具試驗
 	@Test
 	public void test()
 	{
-		fail("Not yet implemented");
 	}
 
 }

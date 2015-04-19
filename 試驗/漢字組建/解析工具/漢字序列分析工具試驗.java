@@ -157,46 +157,46 @@ public class 漢字序列分析工具試驗
 	private void 檢查意部件(部件 部件)
 	{
 		文部件 文部件意 = (文部件) 部件;
-		assertEquals("意".codePointAt(0), 文部件意.getCodePoint());
+		assertEquals("意".codePointAt(0), 文部件意.Unicode編號());
 	}
 
 	private void 檢查傳部件(部件 部件)
 	{
 		字部件 字部件傳 = (字部件) 部件;
-		assertEquals(組合方式.左右合併, 字部件傳.getType());
-		assertEquals(2, 字部件傳.getChildren().length);
-		文部件 文部件人 = (文部件) 字部件傳.getChildren()[0];
-		文部件 文部件專 = (文部件) 字部件傳.getChildren()[1];
-		assertEquals("".codePointAt(0), 文部件人.getCodePoint());
-		assertEquals("專".codePointAt(0), 文部件專.getCodePoint());
+		assertEquals(組合方式.左右合併, 字部件傳.組合方式());
+		assertEquals(2, 字部件傳.底下元素().length);
+		文部件 文部件人 = (文部件) 字部件傳.底下元素()[0];
+		文部件 文部件專 = (文部件) 字部件傳.底下元素()[1];
+		assertEquals("".codePointAt(0), 文部件人.Unicode編號());
+		assertEquals("專".codePointAt(0), 文部件專.Unicode編號());
 	}
 
 	private void 檢查務部件(部件 部件)
 	{
 		字部件 字部件務 = (字部件) 部件;
-		assertEquals(組合方式.左右合併, 字部件務.getType());
-		assertEquals(字部件務.getChildren().length, 2);
-		文部件 文部件矛 = (文部件) 字部件務.getChildren()[0];
-		assertEquals("矛".codePointAt(0), 文部件矛.getCodePoint());
-		字部件 上下字部件 = (字部件) 字部件務.getChildren()[1];
-		assertEquals(組合方式.上下合併, 上下字部件.getType());
-		assertEquals(2, 字部件務.getChildren().length);
-		文部件 文部件攵 = (文部件) 上下字部件.getChildren()[0];
-		文部件 文部件力 = (文部件) 上下字部件.getChildren()[1];
-		assertEquals("攵".codePointAt(0), 文部件攵.getCodePoint());
-		assertEquals("力".codePointAt(0), 文部件力.getCodePoint());
+		assertEquals(組合方式.左右合併, 字部件務.組合方式());
+		assertEquals(字部件務.底下元素().length, 2);
+		文部件 文部件矛 = (文部件) 字部件務.底下元素()[0];
+		assertEquals("矛".codePointAt(0), 文部件矛.Unicode編號());
+		字部件 上下字部件 = (字部件) 字部件務.底下元素()[1];
+		assertEquals(組合方式.上下合併, 上下字部件.組合方式());
+		assertEquals(2, 字部件務.底下元素().length);
+		文部件 文部件攵 = (文部件) 上下字部件.底下元素()[0];
+		文部件 文部件力 = (文部件) 上下字部件.底下元素()[1];
+		assertEquals("攵".codePointAt(0), 文部件攵.Unicode編號());
+		assertEquals("力".codePointAt(0), 文部件力.Unicode編號());
 	}
 
 	private void 檢查啾部件(部件 部件)
 	{
 		字部件 字部件 = (字部件) 部件;
-		assertEquals(組合方式.左右三個合併, 字部件.getType());
-		assertEquals(3, 字部件.getChildren().length);
+		assertEquals(組合方式.左右三個合併, 字部件.組合方式());
+		assertEquals(3, 字部件.底下元素().length);
 		assertEquals("口".codePointAt(0),
-				((文部件) 字部件.getChildren()[0]).getCodePoint());
+				((文部件) 字部件.底下元素()[0]).Unicode編號());
 		assertEquals("禾".codePointAt(0),
-				((文部件) 字部件.getChildren()[1]).getCodePoint());
+				((文部件) 字部件.底下元素()[1]).Unicode編號());
 		assertEquals("火".codePointAt(0),
-				((文部件) 字部件.getChildren()[2]).getCodePoint());
+				((文部件) 字部件.底下元素()[2]).Unicode編號());
 	}
 }

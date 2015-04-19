@@ -66,11 +66,11 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 	{
 		ImageMoveableTypeTzu imageMoveableTypeTzu = new ImageMoveableTypeTzu(
 				parent, chineseCharacterTzu);
-		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
+		int childrenSize = chineseCharacterTzu.組合方式().getNumberOfChildren();
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			imageMoveableTypeTzu.getChildren()[i] = chineseCharacterTzu
-					.getChildren()[i].typeset(this, parent);
+					.底下元素()[i].typeset(this, parent);
 		}
 		ImageMoveableType firstChild = (ImageMoveableType) imageMoveableTypeTzu
 				.getChildren()[0];
@@ -79,7 +79,7 @@ public class SimpleImageSetter implements ChineseCharacterTypeSetter
 		Point firstRegion = firstChild.getRegion();
 		Point secondRegion = secondChild.getRegion();
 		imageMoveableTypeTzu.setRegion(new Point());
-		switch (chineseCharacterTzu.getType())
+		switch (chineseCharacterTzu.組合方式())
 		{
 		default:
 			System.out.println("無支援，先用橫的組");

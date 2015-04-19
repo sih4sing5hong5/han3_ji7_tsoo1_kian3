@@ -109,7 +109,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	public PieceMovableTypeWen setWen(ChineseCharacterMovableTypeTzu parent,
 			文部件 chineseCharacterWen)
 	{
-		分離活字 物件活字 = 查物件活字(new 通用字型號碼(chineseCharacterWen.getCodePoint()));
+		分離活字 物件活字 = 查物件活字(new 通用字型號碼(chineseCharacterWen.Unicode編號()));
 		return new PieceMovableTypeWen(parent, chineseCharacterWen, 物件活字);
 	}
 
@@ -162,7 +162,7 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 					for (int i = 開始位址; i < 結束位址; ++i)
 					{
 						if (i + 1 < 結束位址)
-							結構展開式.append(chineseCharacterTzu.getChars());
+							結構展開式.append(chineseCharacterTzu.部件組字式());
 						結構展開式.append(((部件) 主要結構[i]).提到組字式());
 					}
 					通用字型號碼 字型號碼 = 查通用字型編號.查通用字型編號(結構展開式.toString());
@@ -216,40 +216,40 @@ public class 字型參考設定工具 extends 物件活字基礎設定工具
 	private 部件[] 揣主要結構元件(部件 部件)
 	{
 		if (組合方式.isCombinationType(部件
-				.getCodePoint()))
+				.Unicode編號()))
 		{
 			字部件 這馬字部件 = (字部件) 部件;
-			if (這馬字部件.getType().有結合律無() && 這馬字部件.getChildren().length == 2)
+			if (這馬字部件.組合方式().有結合律無() && 這馬字部件.底下元素().length == 2)
 			{
 				int 元件數量 = 2;
 				// 倒爿部件.getCodePoint() == 字部件.getCodePoint())
-				while (這馬字部件.getChildren()[1].getCodePoint() == 這馬字部件
-						.getCodePoint())
+				while (這馬字部件.底下元素()[1].Unicode編號() == 這馬字部件
+						.Unicode編號())
 				{
 					元件數量++;
-					這馬字部件 = (字部件) 這馬字部件.getChildren()[1];
+					這馬字部件 = (字部件) 這馬字部件.底下元素()[1];
 				}
 				這馬字部件 = (字部件) 部件;
 				部件[] 元件 = new 部件[元件數量];
 				int 陣列位置 = 0;
-				while (這馬字部件.getChildren()[1].getCodePoint() == 這馬字部件
-						.getCodePoint())
+				while (這馬字部件.底下元素()[1].Unicode編號() == 這馬字部件
+						.Unicode編號())
 				{
-					元件[陣列位置++] = 這馬字部件.getChildren()[0];
-					這馬字部件 = (字部件) 這馬字部件.getChildren()[1];
+					元件[陣列位置++] = 這馬字部件.底下元素()[0];
+					這馬字部件 = (字部件) 這馬字部件.底下元素()[1];
 				}
-				元件[陣列位置++] = 這馬字部件.getChildren()[0];
-				元件[陣列位置++] = 這馬字部件.getChildren()[1];
+				元件[陣列位置++] = 這馬字部件.底下元素()[0];
+				元件[陣列位置++] = 這馬字部件.底下元素()[1];
 				return 元件;
 			}
-			else if (這馬字部件.getType().有結合律無())
+			else if (這馬字部件.組合方式().有結合律無())
 			{
 				System.out.println("有三个以上的部件組合符號！！");// TODO log
-				return 這馬字部件.getChildren();
+				return 這馬字部件.底下元素();
 			}
 			else
 			{
-				return 這馬字部件.getChildren();
+				return 這馬字部件.底下元素();
 			}
 		}
 		else

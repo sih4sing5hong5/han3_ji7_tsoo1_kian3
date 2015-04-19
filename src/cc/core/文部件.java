@@ -67,6 +67,23 @@ public class 文部件 extends 部件
 		this.codePoint = codePoint;
 	}
 
+	public 文部件(String 組字式)
+	{
+		this(null, 組字式.charAt(0));
+	}
+
+	@Override
+	public boolean 是文部件()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean 是字部件()
+	{
+		return false;
+	}
+
 	@Override
 	public 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
@@ -80,7 +97,7 @@ public class 文部件 extends 部件
 	 * 
 	 * @return 部件Unicode編碼
 	 */
-	public int getCodePoint()
+	public int Unicode編號()
 	{
 		return codePoint;
 	}
@@ -105,5 +122,11 @@ public class 文部件 extends 部件
 	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
 	{
 		return 組字式建立工具.建立組字式(this);
+	}
+
+	@Override
+	public String 樹狀結構組字式()
+	{
+		return 部件組字式();
 	}
 }

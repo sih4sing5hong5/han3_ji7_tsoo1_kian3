@@ -96,7 +96,7 @@ public class AwtForImagePrinter implements ChineseCharacterTypePrinter
 		GlyphVector glyphVector = font.createGlyphVector(graphics2d
 				.getFontRenderContext(), Character
 				.toChars((((文部件) wen.getChineseCharacter())
-						.getCodePoint())));
+						.Unicode編號())));
 		glyphVector.setGlyphTransform(0, affineTransform);
 		graphics2d.translate(0, scaler.y);
 		graphics2d.draw(glyphVector.getOutline());

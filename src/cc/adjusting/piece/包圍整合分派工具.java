@@ -113,8 +113,8 @@ public class 包圍整合分派工具
 	{
 		字部件 chineseCharacterTzu = (字部件) pieceMovableTypeTzu
 				.getChineseCharacter();
-		部件 chineseCharacter = chineseCharacterTzu.getChildren()[0];
-		int 外部活字控制碼 = chineseCharacter.getCodePoint();
+		部件 chineseCharacter = chineseCharacterTzu.底下元素()[0];
+		int 外部活字控制碼 = chineseCharacter.Unicode編號();
 		物件活字包圍工具 包圍工具 = 包圍部件工具表.get(外部活字控制碼);
 		if (包圍工具 != null)
 		{

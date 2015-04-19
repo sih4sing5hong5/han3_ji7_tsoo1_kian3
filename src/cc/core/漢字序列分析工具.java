@@ -85,9 +85,9 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 			字部件 chineseCharacterTzu = new 字部件(parent,
 					目前控制碼());
 			下一个控制碼();
-			for (int i = 0; i < chineseCharacterTzu.getChildren().length; ++i)
+			for (int i = 0; i < chineseCharacterTzu.底下元素().length; ++i)
 			{
-				chineseCharacterTzu.getChildren()[i] = parseCharacter(chineseCharacterTzu);
+				chineseCharacterTzu.底下元素()[i] = parseCharacter(chineseCharacterTzu);
 			}
 			chineseCharacter = chineseCharacterTzu;
 		} else

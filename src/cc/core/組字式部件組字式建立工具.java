@@ -46,7 +46,7 @@ public class 組字式部件組字式建立工具
 	 */
 	public String 建立組字式(文部件 文部件)
 	{
-		文部件.設定組字式(字串與控制碼轉換.轉換成字串(文部件.getCodePoint()));
+		文部件.設定組字式(字串與控制碼轉換.轉換成字串(文部件.Unicode編號()));
 		return 文部件.提到組字式();
 	}
 
@@ -59,8 +59,8 @@ public class 組字式部件組字式建立工具
 	 */
 	public String 建立組字式(字部件 字部件)
 	{
-		StringBuilder 組字式 = new StringBuilder(字部件.getType().toString());
-		for (部件 部件 : 字部件.getChildren())
+		StringBuilder 組字式 = new StringBuilder(字部件.組合方式().toString());
+		for (部件 部件 : 字部件.底下元素())
 		{
 			部件 子部件 = (部件) 部件;
 			組字式.append(子部件.建立組字式(this));

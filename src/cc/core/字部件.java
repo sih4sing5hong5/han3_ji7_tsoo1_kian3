@@ -102,6 +102,23 @@ public class 字部件 extends 部件
 		children = new 部件[type.getNumberOfChildren()];
 	}
 
+	public 字部件(String 組字式)
+	{
+		this(null, 組字式.charAt(0));
+	}
+
+	@Override
+	public boolean 是文部件()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean 是字部件()
+	{
+		return true;
+	}
+
 	@Override
 	public 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
@@ -115,7 +132,7 @@ public class 字部件 extends 部件
 	 * 
 	 * @return 部件的組合方式
 	 */
-	public 組合方式 getType()
+	public 組合方式 組合方式()
 	{
 		return type;
 	}
@@ -125,15 +142,15 @@ public class 字部件 extends 部件
 	 * 
 	 * @return 底下的各個部件
 	 */
-	public 部件[] getChildren()
+	public 部件[] 底下元素()
 	{
 		return children;
 	}
 
 	@Override
-	public int getCodePoint()
+	public int Unicode編號()
 	{
-		return getType().toCodePoint();
+		return 組合方式().toCodePoint();
 	}
 
 	/** 這个字部件下跤的組字式 */
@@ -156,5 +173,17 @@ public class 字部件 extends 部件
 	public String 建立組字式(組字式部件組字式建立工具 組字式建立工具)
 	{
 		return 組字式建立工具.建立組字式(this);
+	}
+
+	@Override
+	public String 樹狀結構組字式()
+	{
+		StringBuilder 組字式 = new StringBuilder();
+		組字式.append(部件組字式());
+		for (部件 子部件 : 底下元素())
+		{
+			組字式.append(子部件.部件組字式());
+		}
+		return 組字式.toString();
 	}
 }

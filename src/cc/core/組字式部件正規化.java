@@ -43,30 +43,30 @@ public class 組字式部件正規化
 	 */
 	public 部件 正規化(部件 部件)
 	{
-		int 部件編碼 = ((部件) 部件).getCodePoint();
+		int 部件編碼 = ((部件) 部件).Unicode編號();
 		if (組合方式.isCombinationType(部件編碼))
 		{
 			字部件 字部件 = (字部件) 部件;
-			if (字部件.getType().有結合律無()
-					&& 字部件.getChildren()[0].getCodePoint() == 字部件
-							.getCodePoint())
+			if (字部件.組合方式().有結合律無()
+					&& 字部件.底下元素()[0].Unicode編號() == 字部件
+							.Unicode編號())
 			{
 				字部件 第一層字部件 = new 字部件(null, 部件編碼);
 				字部件 第二層右邊字部件 = new 字部件(第一層字部件, 部件編碼);
-				第一層字部件.getChildren()[0] = ((字部件) 字部件
-						.getChildren()[0]).getChildren()[0];
-				第一層字部件.getChildren()[1] = 第二層右邊字部件;
-				第二層右邊字部件.getChildren()[0] = ((字部件) 字部件
-						.getChildren()[0]).getChildren()[1];
-				第二層右邊字部件.getChildren()[1] = 字部件.getChildren()[1];
+				第一層字部件.底下元素()[0] = ((字部件) 字部件
+						.底下元素()[0]).底下元素()[0];
+				第一層字部件.底下元素()[1] = 第二層右邊字部件;
+				第二層右邊字部件.底下元素()[0] = ((字部件) 字部件
+						.底下元素()[0]).底下元素()[1];
+				第二層右邊字部件.底下元素()[1] = 字部件.底下元素()[1];
 				return 正規化(第一層字部件);
 			}
 			else
 			{
 				字部件 新字部件 = new 字部件(null, 部件編碼);
-				for (int i = 0; i < 新字部件.getChildren().length; i++)
-					新字部件.getChildren()[i] = (部件) 正規化(字部件
-							.getChildren()[i]);
+				for (int i = 0; i < 新字部件.底下元素().length; i++)
+					新字部件.底下元素()[i] = (部件) 正規化(字部件
+							.底下元素()[i]);
 				return 新字部件;
 			}
 		}

@@ -59,7 +59,7 @@ public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 			字部件 chineseCharacterTzu)
 	{
 		super(parent, chineseCharacterTzu);
-		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
+		int childrenSize = chineseCharacterTzu.組合方式().getNumberOfChildren();
 		this.children = new ChineseCharacterMovableType[childrenSize];
 	}
 

@@ -119,7 +119,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	{
 		PieceMovableTypeTzu pieceMovableTypeTzu = (PieceMovableTypeTzu) chineseCharacterMovableTypeTzu;
 		switch (((字部件) pieceMovableTypeTzu
-				.getChineseCharacter()).getType())
+				.getChineseCharacter()).組合方式())
 		{
 		case 左右合併:
 			遞迴調整(pieceMovableTypeTzu);
@@ -193,8 +193,8 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			字部件 chineseCharacterTzu = (字部件) 物件活字
 					.getChineseCharacter();
 			部件 chineseCharacter = chineseCharacterTzu
-					.getChildren()[0];
-			switch (chineseCharacter.getCodePoint())
+					.底下元素()[0];
+			switch (chineseCharacter.Unicode編號())
 			{
 			case 2:
 			}
@@ -381,7 +381,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			{
 				字部件 字部件 = (字部件) 活字
 						.getChineseCharacter();
-				if (字部件.getType() == 組合方式.注音符號)
+				if (字部件.組合方式() == 組合方式.注音符號)
 				{
 					// BasicStroke basicStroke = new BasicStroke();
 					// RectangularArea a = new CopyOfRectangularArea(

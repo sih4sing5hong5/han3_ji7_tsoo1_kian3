@@ -68,7 +68,7 @@ class 注音符號分開工具
 		if (活字 instanceof PieceMovableTypeTzu)
 		{
 			PieceMovableTypeTzu 字活字 = (PieceMovableTypeTzu) 活字;
-			if (((字部件) 字活字.getChineseCharacter()).getType() != 組合方式.注音符號)
+			if (((字部件) 字活字.getChineseCharacter()).組合方式() != 組合方式.注音符號)
 			{
 				System.out.println("注音下跤有毋是注音的組合符號");
 			}
@@ -78,7 +78,7 @@ class 注音符號分開工具
 		else if (活字 instanceof PieceMovableTypeWen)
 		{
 			PieceMovableTypeWen 文活字 = (PieceMovableTypeWen) 活字;
-			int 控制碼 = 文活字.getChineseCharacter().getCodePoint();
+			int 控制碼 = 文活字.getChineseCharacter().Unicode編號();
 			switch (分類.目前類別)
 			{
 			case 輕聲:

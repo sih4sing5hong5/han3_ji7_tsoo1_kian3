@@ -101,10 +101,10 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 			文部件 chineseCharacterWen)
 	{
 		分離活字 rectangularArea = null;
-		if (font.canDisplay(chineseCharacterWen.getCodePoint()))
+		if (font.canDisplay(chineseCharacterWen.Unicode編號()))
 		{
 			GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
-					chineseCharacterWen.getChars());
+					chineseCharacterWen.部件組字式());
 			rectangularArea = new 分離活字(new 平面幾何(glyphVector.getOutline()));
 			rectangularArea.設字範圍(tzuModelTerritory);
 			rectangularArea.設目標範圍(rectangularArea.這馬字範圍());
@@ -129,7 +129,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 
 		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
 
-		switch (chineseCharacterTzu.getType())
+		switch (chineseCharacterTzu.組合方式())
 		{
 		case 左右合併:
 			horizontalSetting(pieceMovableTypeTzu);
@@ -166,7 +166,7 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		for (int i = 0; i < chineseCharacterMovableTypeTzu.getChildren().length; ++i)
 		{
 			chineseCharacterMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
-					.getChildren()[i].typeset(this,
+					.底下元素()[i].typeset(this,
 					chineseCharacterMovableTypeTzu);
 		}
 		return;

@@ -91,7 +91,7 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 				chineseCharacterWen);
 		Font font = new Font(fontName, fontStyle, fontResolution);
 		GlyphVector glyphVector = font.createGlyphVector(fontRenderContext,
-				chineseCharacterWen.getChars());
+				chineseCharacterWen.部件組字式());
 		Area area = new Area(glyphVector.getOutline());
 		AreaTool.moveToOrigin(area);
 		shapeMovableTypeWen.setArea(area);
@@ -106,18 +106,18 @@ public class SimpleAreaSetter implements ChineseCharacterTypeSetter
 	{
 		AreaMovableTypeTzu shapeMovableTypeTzu = new AreaMovableTypeTzu(parent,
 				chineseCharacterTzu);
-		int childrenSize = chineseCharacterTzu.getType().getNumberOfChildren();
+		int childrenSize = chineseCharacterTzu.組合方式().getNumberOfChildren();
 		for (int i = 0; i < childrenSize; ++i)
 		{
 			shapeMovableTypeTzu.getChildren()[i] = chineseCharacterTzu
-					.getChildren()[i].typeset(this, parent);
+					.底下元素()[i].typeset(this, parent);
 		}
 		AreaMovableType firstChild = (AreaMovableType) shapeMovableTypeTzu
 				.getChildren()[0], secondChild = (AreaMovableType) shapeMovableTypeTzu
 				.getChildren()[1];
 		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
 
-		switch (chineseCharacterTzu.getType())
+		switch (chineseCharacterTzu.組合方式())
 		{
 		default:
 			System.out.println("無支援，先用橫的組");

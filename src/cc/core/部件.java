@@ -46,6 +46,10 @@ public abstract class 部件
 	 */
 	private final 字部件 parent;
 
+	public abstract boolean 是文部件();
+
+	public abstract boolean 是字部件();
+
 	/**
 	 * 建立漢字部件結構
 	 * 
@@ -86,17 +90,19 @@ public abstract class 部件
 	 * 
 	 * @return 部件Unicode編碼
 	 */
-	public abstract int getCodePoint();
+	public abstract int Unicode編號();
 
 	/**
 	 * 取得部件的字元形態
 	 * 
 	 * @return 部件字元形態
 	 */
-	public char[] getChars()
+	public String 部件組字式()
 	{
-		return Character.toChars(getCodePoint());
+		return new String(Character.toChars(Unicode編號()));
 	}
+
+	public abstract String 樹狀結構組字式();
 
 	/**
 	 * 提到這个部件下跤的組字式。

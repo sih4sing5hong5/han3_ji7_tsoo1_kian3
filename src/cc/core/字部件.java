@@ -28,8 +28,6 @@
  ******************************************************************************/
 package cc.core;
 
-import java.text.StringCharacterIterator;
-
 import cc.moveable_type.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.漢字組建活字;
 import cc.setting.ChineseCharacterTypeSetter;
@@ -50,7 +48,6 @@ public class 字部件 extends 部件
 	 * 底下的各個部件
 	 */
 	private final 部件[] children;
-
 
 	@Override
 	public boolean 是文部件()
@@ -89,6 +86,7 @@ public class 字部件 extends 部件
 	{
 		return 組合方式().toCodePoint();
 	}
+
 	/**
 	 * 初使化一个新的字部件。
 	 * 
@@ -98,32 +96,6 @@ public class 字部件 extends 部件
 	 *            這个字部件的組合符號統一碼控制碼
 	 */
 	/**
-	 * 建立一個字部件。
-	 * 
-	 * @param parent
-	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
-	 * @param codePoint
-	 *            組合符號的Unicode編碼
-	 * @param iterator
-	 *            目前分析到的字串位置
-	 * @throws ChineseCharacterFormatException
-	 *             如果字串格式錯誤
-	 * @throws IllegalArgumentException
-	 *             如果<code>codePoint</code>不是部件組合符號
-	 */
-	@Deprecated
-	public 字部件(字部件 parent, int codePoint, StringCharacterIterator iterator)
-			throws ChineseCharacterFormatException, IllegalArgumentException
-	{
-		this(parent, codePoint);
-		ChineseCharacterUtility utility = new ChineseCharacterUtility(iterator);
-		for (int i = 0; i < children.length; ++i)
-		{
-			children[i] = utility.parseCharacter(this);
-		}
-	}
-
-	/**
 	 * 建立一个字部件。
 	 * 
 	 * @param parent
@@ -131,9 +103,8 @@ public class 字部件 extends 部件
 	 * @param codePoint
 	 *            組合符號的Unicode編碼
 	 */
-	public 字部件(字部件 parent, int codePoint)
+	public 字部件(int codePoint)
 	{
-		super(parent);
 		if (!組合方式.isCombinationType(codePoint))
 			throw new IllegalArgumentException("這不是部件組合符號!!");
 		type = 組合方式.toCombinationType(codePoint);
@@ -142,8 +113,9 @@ public class 字部件 extends 部件
 
 	public 字部件(String 組字式)
 	{
-		this(null, 組字式.charAt(0));
+		this(組字式.charAt(0));
 	}
+
 	@Override
 	public 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
@@ -151,7 +123,6 @@ public class 字部件 extends 部件
 	{
 		return chineseCharacterTypeSetter.setTzu(parent, this);
 	}
-
 
 	/** 這个字部件下跤的組字式 */
 	private String 組字式;

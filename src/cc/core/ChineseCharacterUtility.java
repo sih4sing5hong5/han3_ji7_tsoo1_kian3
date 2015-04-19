@@ -98,8 +98,7 @@ public class ChineseCharacterUtility
 	 *             如果字串結構不對，通常是因為組合符號太多，部件有缺漏，無法形成一個完整的漢字結構。
 	 */
 	@Deprecated
-	部件 parseCharacter(字部件 parent)
-			throws ChineseCharacterFormatException
+	部件 parseCharacter(字部件 parent) throws ChineseCharacterFormatException
 	{
 		if (組合式是毋是結束矣())
 			throw new ChineseCharacterFormatException();
@@ -125,12 +124,11 @@ public class ChineseCharacterUtility
 		部件 chineseCharacter = null;
 		if (組合方式.isCombinationType(codePoint))
 		{
-			chineseCharacter = new 字部件(parent, codePoint,
-					iterator);
+			chineseCharacter = new 文部件(codePoint);
 		}
 		else
 		{
-			chineseCharacter = new 文部件(parent, codePoint);
+			chineseCharacter = new 文部件(codePoint);
 		}
 		return chineseCharacter;
 	}

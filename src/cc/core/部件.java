@@ -41,11 +41,6 @@ import cc.setting.ChineseCharacterTypeSetter;
  */
 public abstract class 部件
 {
-	/**
-	 * 指向上一層的部件結構
-	 */
-	private final 字部件 parent;
-
 	public abstract boolean 是文部件();
 
 	public abstract boolean 是字部件();
@@ -70,17 +65,6 @@ public abstract class 部件
 	public abstract String 樹狀結構組字式();
 
 	/**
-	 * 建立漢字部件結構
-	 * 
-	 * @param parent
-	 *            上一層的部件結構。若上層為樹狀的樹根，傳入null
-	 */
-	public 部件(字部件 parent)
-	{
-		this.parent = parent;
-	}
-
-	/**
 	 * 以此部件結構產生活字結構。用<code>ChineseCharacterTypeSetter</code>
 	 * (活字設定工具)來轉換成ChineseCharacterMovableType(活字)。
 	 * 
@@ -93,16 +77,6 @@ public abstract class 部件
 	public abstract 漢字組建活字 typeset(
 			ChineseCharacterTypeSetter chineseCharacterTypeSetter,
 			ChineseCharacterMovableTypeTzu parent);
-
-	/**
-	 * 取得上一層部件結構。
-	 * 
-	 * @return 上一層部件結構
-	 */
-	public 字部件 getParent()
-	{
-		return parent;
-	}
 
 	/**
 	 * 提到這个部件下跤的組字式。

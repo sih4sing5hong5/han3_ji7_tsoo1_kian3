@@ -74,28 +74,27 @@ public class 漢字序列分析工具 extends ChineseCharacterUtility
 	}
 
 	@Override
-	public 部件 parseCharacter(字部件 parent)
-			throws ChineseCharacterFormatException
+	public 部件 parseCharacter(字部件 parent) throws ChineseCharacterFormatException
 	{
 		if (組合式是毋是結束矣())
 			throw new ChineseCharacterFormatException();
 		部件 chineseCharacter = null;
 		if (組合方式.isCombinationType(目前控制碼()))
 		{
-			字部件 chineseCharacterTzu = new 字部件(parent,
-					目前控制碼());
+			字部件 chineseCharacterTzu = new 字部件(目前控制碼());
 			下一个控制碼();
 			for (int i = 0; i < chineseCharacterTzu.底下元素().length; ++i)
 			{
 				chineseCharacterTzu.底下元素()[i] = parseCharacter(chineseCharacterTzu);
 			}
 			chineseCharacter = chineseCharacterTzu;
-		} else
+		}
+		else
 		{
 			String 展開式 = null;
 			展開式 = 展開式查詢.查詢展開式(目前控制碼());
 			if (展開式 == null)
-				chineseCharacter = new 文部件(parent, 目前控制碼());
+				chineseCharacter = new 文部件(目前控制碼());
 			else
 			{
 				漢字序列分析工具 分析工具 = new 漢字序列分析工具(展開式, new 展開式免查詢());// 避免把異體字給展開

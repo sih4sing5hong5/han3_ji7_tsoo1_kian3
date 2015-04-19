@@ -61,15 +61,14 @@ public class 文部件 extends 部件
 	 * @param codePoint
 	 *            部件的Unicode編碼
 	 */
-	public 文部件(字部件 parent, int codePoint)
+	public 文部件(int codePoint)
 	{
-		super(parent);
 		this.codePoint = codePoint;
 	}
 
 	public 文部件(String 組字式)
 	{
-		this(null, 組字式.charAt(0));
+		this(組字式.charAt(0));
 	}
 
 	@Override

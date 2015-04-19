@@ -42,7 +42,6 @@ import org.slf4j.Logger;
 import org.slf4j.MarkerFactory;
 import org.slf4j.profiler.Profiler;
 
-import 漢字組建.解析工具.ChineseCharacterUtility;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import cc.adjusting.bolder.FunctinoalBasicBolder;
@@ -141,7 +140,7 @@ public class AwtTestExample extends Awt測試樣板
 		記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
 		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
-		ChineseCharacterUtility ccUtility = new 組字式序列解析工具(word, 查詢方式);
+		組字式序列解析工具 ccUtility = new 組字式序列解析工具(word, 查詢方式);
 		Vector<部件> ccArray = ccUtility.parseText();
 
 		組字式部件正規化 正規化工具 = new 組字式部件正規化();

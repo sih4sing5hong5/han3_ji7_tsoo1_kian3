@@ -33,7 +33,7 @@ package 漢字組建.解析工具;
  * 
  * @author Ihc
  */
-public class ChineseCharacterFormatException extends Exception
+public class 組字式序列格式例外 extends Exception
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 8405277769269381767L;

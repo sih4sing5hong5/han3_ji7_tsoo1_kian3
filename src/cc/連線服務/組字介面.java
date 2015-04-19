@@ -36,7 +36,7 @@ import java.awt.RenderingHints;
 import org.slf4j.Logger;
 import org.slf4j.profiler.Profiler;
 
-import 漢字組建.解析工具.ChineseCharacterFormatException;
+import 漢字組建.解析工具.組字式序列格式例外;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import cc.adjusting.bolder.NullStroke;
@@ -179,7 +179,7 @@ public class 組字介面
 		{
 			部件 = 序列分析工具.parseCharacter(null);
 		}
-		catch (ChineseCharacterFormatException e)
+		catch (組字式序列格式例外 e)
 		{
 			// TODO 看欲按怎處理，硬顯示，抑是傳連結毋著？
 			e.printStackTrace();

@@ -28,6 +28,8 @@
  ******************************************************************************/
 package 漢字組建.解析工具;
 
+import java.util.Vector;
+
 import 漢字組建.部件.字部件;
 import 漢字組建.部件.文部件;
 import 漢字組建.部件.組合方式;
@@ -41,7 +43,7 @@ import cc.tool.database.字串與控制碼轉換;
  * 
  * @author Ihc
  */
-public class 組字式序列解析工具 extends ChineseCharacterUtility
+public class 組字式序列解析工具
 {
 	/** 愛分析的統一碼控制碼陣列 */
 	protected int[] 統一碼控制碼;
@@ -73,17 +75,37 @@ public class 組字式序列解析工具 extends ChineseCharacterUtility
 	 */
 	public 組字式序列解析工具(int[] 統一碼控制碼, 展開式查詢工具 展開式查詢)
 	{
-		super(new String());
 		this.統一碼控制碼 = 統一碼控制碼;
 		this.陣列位置 = 0;
 		this.展開式查詢 = 展開式查詢;
 	}
 
-	@Override
-	public 部件 parseCharacter(字部件 parent) throws ChineseCharacterFormatException
+	/**
+	 * 分析字串並回傳字串中全部的漢字部件
+	 * 
+	 * @return 字串中全部的漢字部件。若字串格式有錯，不完整的部件不會被加上去，並且在陣列最後會補上一個null當作通知
+	 */
+	public Vector<部件> parseText()
+	{
+		Vector<部件> vector = new Vector<部件>();
+		try
+		{
+			while (!組合式是毋是結束矣())
+			{
+				vector.add(parseCharacter(null));
+			}
+		}
+		catch (組字式序列格式例外 e)
+		{
+			vector.add(null);
+		}
+		return vector;
+	}
+
+	public 部件 parseCharacter(字部件 parent) throws 組字式序列格式例外
 	{
 		if (組合式是毋是結束矣())
-			throw new ChineseCharacterFormatException();
+			throw new 組字式序列格式例外();
 		部件 chineseCharacter = null;
 		if (組合方式.isCombinationType(目前控制碼()))
 		{
@@ -129,7 +151,6 @@ public class 組字式序列解析工具 extends ChineseCharacterUtility
 		return;
 	}
 
-	@Override
 	protected boolean 組合式是毋是結束矣()
 	{
 		return 統一碼控制碼.length == 陣列位置;

@@ -35,7 +35,6 @@ import java.util.Vector;
 
 import org.slf4j.Logger;
 
-import 漢字組建.解析工具.ChineseCharacterUtility;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import cc.core.展開式查詢工具;
@@ -75,7 +74,7 @@ public class 產生組字式工具
 		String 句 = "媠⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
 		while (句 != null)
 		{
-			ChineseCharacterUtility ccUtility = new 組字式序列解析工具(句, 查詢方式);
+			組字式序列解析工具 ccUtility = new 組字式序列解析工具(句, 查詢方式);
 			Vector<部件> ccArray = ccUtility.parseText();
 
 			組字式部件正規化 正規化工具 = new 組字式部件正規化();

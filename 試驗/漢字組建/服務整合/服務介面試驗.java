@@ -21,18 +21,18 @@ import org.junit.Test;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
-import cc.adjusting.bolder.FunctinoalBasicBolder;
-import cc.adjusting.piece.MergePieceAdjuster;
-import cc.core.展開式免查詢;
-import cc.core.展開式查詢工具;
-import cc.moveable_type.rectangular_area.分離活字加粗;
-import cc.setting.piece.ChineseCharacterTypeSetter;
-import cc.setting.piece.字型參考設定工具;
-import cc.setting.piece.對照字體;
-import cc.setting.piece.展開式查通用字型編號;
-import cc.setting.piece.無愛查通用字型編號;
 import cc.tool.database.字串與控制碼轉換;
+import cc.排版工具.MergePieceAdjuster;
+import cc.揀字工具.ChineseCharacterTypeSetter;
+import cc.揀字工具.字型參考設定工具;
+import cc.揀字工具.對照字體;
+import cc.揀字工具.展開式查通用字型編號;
+import cc.揀字工具.無愛查通用字型編號;
+import cc.筆觸.FunctinoalBasicBolder;
+import cc.筆觸工具.分離活字加粗;
 import cc.連線服務.組字介面;
+import cc.部件結構調整工具.展開式免查詢;
+import cc.部件結構調整工具.展開式查詢工具;
 
 public class 服務介面試驗
 {

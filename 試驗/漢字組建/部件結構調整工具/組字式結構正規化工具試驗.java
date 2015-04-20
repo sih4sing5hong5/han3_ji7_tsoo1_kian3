@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
-import cc.core.展開式免查詢;
+import cc.部件結構調整工具.展開式免查詢;
 
 public class 組字式結構正規化工具試驗
 {

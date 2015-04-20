@@ -10,7 +10,7 @@ import 漢字組建.部件.字部件;
 import 漢字組建.部件.文部件;
 import 漢字組建.部件.組合方式;
 import 漢字組建.部件.部件;
-import cc.core.展開式免查詢;
+import cc.部件結構調整工具.展開式免查詢;
 
 public class 組字式序列解析工具試驗
 {

@@ -43,8 +43,6 @@ import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
-import cc.core.異寫式代換工具;
-import cc.core.異寫式查詢工具;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.rectangular_area.分離活字;
@@ -66,8 +64,6 @@ public class 組字介面
 	protected 展開式查詢工具 查詢方式;
 	/** 決定有需要正規化無佮按怎正規化的物件 */
 	protected 組字式結構正規化工具 正規化工具;
-	/** 異寫式查詢的方法 */
-	protected 異寫式代換工具 異寫式代換;
 	/** 依據部件佮字體的性質，共部件提來產生活字 */
 	protected ChineseCharacterTypeSetter 設定工具;
 	/** 佮頭拄仔產生的活字，組合閣共調整 */
@@ -100,11 +96,11 @@ public class 組字介面
 	 * @param 字型大細
 	 *            字體愛偌大
 	 */
-	public 組字介面(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
+	public 組字介面(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具, int[] 編號陣列,
 			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
 			分離活字加粗 活字加粗, int 字型屬性, int 字型大細)
 	{
-		this(查詢方式, 正規化工具, 異寫式查詢, 編號陣列, 設定工具, 調整工具, 活字加粗, 字型屬性, 字型大細, 50);
+		this(查詢方式, 正規化工具,  編號陣列, 設定工具, 調整工具, 活字加粗, 字型屬性, 字型大細, 50);
 	}
 
 	/**
@@ -129,13 +125,12 @@ public class 組字介面
 	 * @param 組字式上大長度
 	 *            限制組字式長度，予儂無法度惡意攻擊
 	 */
-	public 組字介面(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具, 異寫式查詢工具 異寫式查詢, int[] 編號陣列,
+	public 組字介面(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具,   int[] 編號陣列,
 			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
 			分離活字加粗 活字加粗, int 字型屬性, int 字型大細, int 組字式上大長度)
 	{
 		this.查詢方式 = 查詢方式;
 		this.正規化工具 = 正規化工具;
-		this.異寫式代換 = new 異寫式代換工具(編號陣列, 異寫式查詢);
 		this.設定工具 = 設定工具;
 		this.調整工具 = 調整工具;
 		this.活字加粗 = 活字加粗;
@@ -188,7 +183,6 @@ public class 組字介面
 		部件 = (部件) 正規化工具.正規化(部件);
 		組字部件.樹狀結構組字式();
 		// 記錄工具.debug(組字部件.提到組字式());
-		部件 = 異寫式代換.代換(部件);
 
 		看時工具.start("設定中");
 		// 記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());

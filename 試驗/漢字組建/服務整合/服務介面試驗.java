@@ -25,7 +25,6 @@ import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
-import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.setting.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
@@ -68,8 +67,7 @@ public class 服務介面試驗
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, new 資料庫連線異寫式查詢(null), 編號陣列, 宋體設定工具,
-				調整工具, 活字加粗, 普通字型屬性, 字型大細);
+		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 編號陣列, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 	}
 
 	/** 測試漢字 */
@@ -91,8 +89,8 @@ public class 服務介面試驗
 			+ "⿿⿿⿿˙ㄆㄨˊ⿿⿿ㄅㄧㄚ⿿⿿⿿ㄅㄧㄚˋ⿿⿿⿿ㄅㄧㄚ˪⿿⿿⿿ㄅㄧㄚㆷ⿿⿿⿿ㄅㄧㄚˊ⿿⿿⿿ㄅㄧㄚ˫⿿⿿⿿⿿ㄅㄧㄚ㆐ㆷ⿿⿿⿿⿿ㄅㄧㄚㆷ㆐⿿⿿⿿˙ㄅㄧㄚ⿿⿿⿿ㄅㄧㄚ^"
 			+ "⿿⿿⿿˙ㄆㄨˊ⿿ㆠㄧ⿿⿿ㆠㄧˋ⿿⿿ㆠㄧ˪⿿⿿ㆠㄧㆷ⿿⿿ㆠㄧˊ⿿⿿ㆠㄧ˫⿿⿿⿿ㆠㄧ㆐ㆷ⿿⿿⿿ㆠㄧㆷ㆐⿿⿿˙ㆠㄧ⿿⿿ㆠㄧ^"
 			+ "⿿⿿⿿˙ㄆㄨˊ⿿⿿⿿˙ㄆㄨˊㆬ⿿ㆬ ⿿ㆬˋ⿿ㆬ˪⿿ㆬㆷ⿿ㆬˊ⿿ㆬ˫⿿⿿ㆬ㆐ㆷ⿿⿿ㆬㆷ㆐⿿˙ㆬ⿿ㆬ^"
-			+ "⿰因⿰⿴囗或" + "⿰⿰⿱⿱⿱我薛丞宏愛⿱文莉"
-			+ "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ " + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
+			+ "⿰因⿰⿴囗或" + "⿰⿰⿱⿱⿱我薛丞宏愛⿱文莉" + "ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ "
+			+ "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
 			+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐"
 			+ "⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹" + "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
 	static String 圖片存放路徑 = "組字圖片";
@@ -149,7 +147,8 @@ public class 服務介面試驗
 						return false;
 				}
 			}
-		} else
+		}
+		else
 		{
 			return false;
 		}

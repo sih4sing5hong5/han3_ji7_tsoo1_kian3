@@ -49,10 +49,7 @@ import cc.adjusting.bolder.FunctinoalBasicBolder;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
-import cc.core.異寫式代換工具;
-import cc.core.異寫式查詢工具;
 import cc.core.資料庫連線展開式查詢;
-import cc.core.資料庫連線異寫式查詢;
 import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.rectangular_area.分離活字;
@@ -62,7 +59,6 @@ import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.整合字體;
 import cc.setting.piece.用資料庫查展開式的通用字型編號;
 import cc.tool.database.PgsqlConnection;
-import cc.tool.database.字串與控制碼轉換;
 import cc.程式記錄.漢字組建記錄工具包;
 
 /**
@@ -89,8 +85,6 @@ public class AwtTestExample extends Awt測試樣板
 	static final String 測試字體 = 全字庫正宋體;
 	/** 測試用屬性 */
 	static final int 測試屬性 = Font.BOLD/* 0;// */;
-	/** 定義異寫編號數字 */
-	int[] 編號陣列 = 字串與控制碼轉換.轉換成控制碼("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥陰陽乾坤震巽坎離艮兌");
 
 	/**
 	 * 主函式，設定相關視窗資訊。
@@ -151,13 +145,6 @@ public class AwtTestExample extends Awt測試樣板
 			正規化工具.正規化(部件);
 			組字部件.樹狀結構組字式();
 			// 記錄工具.debug(組字部件.提到組字式());
-		}
-
-		異寫式查詢工具 異寫式查詢 = new 資料庫連線異寫式查詢(連線);
-		異寫式代換工具 異寫式代換 = new 異寫式代換工具(編號陣列, 異寫式查詢);
-		for (int i = 0; i < ccArray.size(); ++i)
-		{
-			ccArray.set(i, 異寫式代換.代換(ccArray.elementAt(i)));
 		}
 
 		看時工具.start("設定中");

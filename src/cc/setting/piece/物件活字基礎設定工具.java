@@ -35,7 +35,6 @@ import 漢字組建.部件.文部件;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;
 import cc.moveable_type.rectangular_area.分離活字;
-import cc.setting.ChineseCharacterTypeSetter;
 
 /**
  * 這是予物件活字設定工具一个共用的型態。用一層較懸頂的收集逐家攏愛用到的物件。

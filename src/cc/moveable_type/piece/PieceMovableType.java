@@ -28,7 +28,6 @@
  ******************************************************************************/
 package cc.moveable_type.piece;
 
-import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.rectangular_area.分離活字;
 
 /**

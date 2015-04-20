@@ -26,46 +26,31 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.moveable_type;
+package cc.printing.awt.piece;
 
-import 漢字組建.部件.文部件;
-import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.printing.ChineseCharacterTypePrinter;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeWen;
 
 /**
- * 漢字活字樹狀結構的葉子。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
- * <code>ChineseCharacterMovableTypeWen</code> 記錄活字的排版資訊。
+ * 活字列印工具。接收活字結構（<code>ChineseCharacterMovableType</code>），並列印出來。
  * 
  * @author Ihc
  */
-public class ChineseCharacterMovableTypeWen extends ChineseCharacterMovableType
+public interface ChineseCharacterTypePrinter
 {
 	/**
-	 * 以<code>ChineseCharacter</code>部件結構建立文活字結構
+	 * 列印獨體活字
 	 * 
-	 * @param parent
-	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
-	 * @param chineseCharacterWen
-	 *            文部件結構
+	 * @param chineseCharacterMovableTypeWen
+	 *            獨體活字
 	 */
-	public ChineseCharacterMovableTypeWen(
-			ChineseCharacterMovableTypeTzu parent,
-			文部件 chineseCharacterWen)
-	{
-		super(parent, chineseCharacterWen);
-	}
+	void printWen(ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen);
 
-	@Override
-	public void adjust(ChineseCharacterTypeAdjuster adjuster)
-	{
-		adjuster.adjustWen(this);
-		return;
-	}
-
-	@Override
-	public void print(ChineseCharacterTypePrinter printer)
-	{
-		printer.printWen(this);
-		return;
-	}
+	/**
+	 * 列印合體活字
+	 * 
+	 * @param chineseCharacterMovableTypeTzu
+	 *            合體活字
+	 */
+	void printTzu(ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu);
 }

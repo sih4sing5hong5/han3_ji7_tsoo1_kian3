@@ -26,42 +26,34 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.setting;
+package cc.moveable_type.piece;
 
-import 漢字組建.部件.字部件;
-import 漢字組建.部件.文部件;
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.漢字組建活字;
+import cc.adjusting.piece.ChineseCharacterTypeAdjuster;
+import cc.printing.awt.piece.ChineseCharacterTypePrinter;
 
 /**
- * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
- * <code>ChineseCharacterMovableType</code>）。
+ * 上基本的物件。原本是<code>ChineseCharacterMovableType</code>
+ * 傷低，但是活字介面型態需要一个閣較低一層，所以閣新增一層予逐家用。
  * 
  * @author Ihc
  */
-public interface ChineseCharacterTypeSetter
+public interface 漢字組建活字
 {
 	/**
-	 * 產生並初使化獨體活字
+	 * 調整活字排法。用<code>ChineseCharacterTypeAdjuster</code>
+	 * (活字調整工具)來調整ChineseCharacterMovableType(活字)。
 	 * 
-	 * @param parent
-	 *            此活字結構的上層活字
-	 * @param chineseCharacterWen
-	 *            要轉化的文（獨體）部件
-	 * @return 獨體活字
+	 * @param adjuster
+	 *            欲採用的活字調整工具
 	 */
-	public 漢字組建活字 setWen(ChineseCharacterMovableTypeTzu parent,
-			文部件 chineseCharacterWen);
+	public abstract void adjust(ChineseCharacterTypeAdjuster adjuster);
 
 	/**
-	 * 產生並初使化合體活字
+	 * 列印活字。用<code>ChineseCharacterTypePrinter</code>
+	 * (活字列印工具)來列印ChineseCharacterMovableType(活字)。
 	 * 
-	 * @param parent
-	 *            此活字結構的上層活字
-	 * @param chineseCharacterTzu
-	 *            要轉化的字（合體）部件
-	 * @return 合體活字
+	 * @param printer
+	 *            欲採用的活字列印工具
 	 */
-	public 漢字組建活字 setTzu(ChineseCharacterMovableTypeTzu parent,
-			字部件 chineseCharacterTzu);
+	public abstract void print(ChineseCharacterTypePrinter printer);
 }

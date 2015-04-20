@@ -26,34 +26,42 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.adjusting;
+package cc.setting.piece;
 
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.ChineseCharacterMovableTypeWen;
+import 漢字組建.部件.字部件;
+import 漢字組建.部件.文部件;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.漢字組建活字;
 
 /**
- * 活字調整工具。依活字結構（<code>ChineseCharacterMovableType</code>）本身的組合調整大小位置粗細…等等資訊。
- * <p>
+ * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（
+ * <code>ChineseCharacterMovableType</code>）。
  * 
  * @author Ihc
  */
-public interface ChineseCharacterTypeAdjuster
+public interface ChineseCharacterTypeSetter
 {
 	/**
-	 * 調整獨體活字
+	 * 產生並初使化獨體活字
 	 * 
-	 * @param chineseCharacterMovableTypeWen
-	 *            欲調整之獨體活字
+	 * @param parent
+	 *            此活字結構的上層活字
+	 * @param chineseCharacterWen
+	 *            要轉化的文（獨體）部件
+	 * @return 獨體活字
 	 */
-	public void adjustWen(
-			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen);
+	public 漢字組建活字 setWen(ChineseCharacterMovableTypeTzu parent,
+			文部件 chineseCharacterWen);
 
 	/**
-	 * 調整合體活字
+	 * 產生並初使化合體活字
 	 * 
-	 * @param chineseCharacterMovableTypeTzu
-	 *            欲調整之合體活字
+	 * @param parent
+	 *            此活字結構的上層活字
+	 * @param chineseCharacterTzu
+	 *            要轉化的字（合體）部件
+	 * @return 合體活字
 	 */
-	public void adjustTzu(
-			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu);
+	public 漢字組建活字 setTzu(ChineseCharacterMovableTypeTzu parent,
+			字部件 chineseCharacterTzu);
 }

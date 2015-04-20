@@ -26,69 +26,64 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.moveable_type;
+package cc.moveable_type.piece;
 
-import 漢字組建.部件.部件;
-import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.printing.ChineseCharacterTypePrinter;
+import 漢字組建.部件.字部件;
+import cc.adjusting.piece.ChineseCharacterTypeAdjuster;
+import cc.printing.awt.piece.ChineseCharacterTypePrinter;
 
 /**
- * 儲存漢字活字樹狀結構。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
- * <code>ChineseCharacterMovableType</code>為
- * <code>ChineseCharacterMovableTypeWen</code>及
- * <code>ChineseCharacterMovableTypeTzu</code> 的共用介面，方便以後活字的調整。
+ * 漢字活字樹狀結構的上層節點。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
+ * <code>ChineseCharacterMovableTypeTzu</code>記錄底下活字的排版資訊。
  * 
  * @author Ihc
  */
-public abstract class ChineseCharacterMovableType implements 漢字組建活字
+public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
 {
-	/**
-	 * 產生活字的部件結構
-	 */
-	private final 部件 chineseCharacter;
-	/**
-	 * 指向上一層的活字結構
-	 */
-	private final ChineseCharacterMovableTypeTzu parent;
 
 	/**
-	 * 以<code>ChineseCharacter</code>部件結構建立部件結構
+	 * 底下的各個活字
+	 */
+	protected 漢字組建活字[] children;
+
+	/**
+	 * 以<code>ChineseCharacter</code>部件結構建立字活字結構
 	 * 
 	 * @param parent
 	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
-	 * @param chineseCharacter
-	 *            部件結構
+	 * @param chineseCharacterTzu
+	 *            字部件結構
 	 */
-	public ChineseCharacterMovableType(ChineseCharacterMovableTypeTzu parent,
-			部件 chineseCharacter)
+	public ChineseCharacterMovableTypeTzu(
+			ChineseCharacterMovableTypeTzu parent,
+			字部件 chineseCharacterTzu)
 	{
-		this.chineseCharacter = chineseCharacter;
-		this.parent = parent;
+		super(parent, chineseCharacterTzu);
+		int childrenSize = chineseCharacterTzu.組合方式().getNumberOfChildren();
+		this.children = new ChineseCharacterMovableType[childrenSize];
 	}
 
 	@Override
-	public abstract void adjust(ChineseCharacterTypeAdjuster adjuster);
+	public void adjust(ChineseCharacterTypeAdjuster adjuster)
+	{
+		adjuster.adjustTzu(this);
+		return;
+	}
 
 	@Override
-	public abstract void print(ChineseCharacterTypePrinter printer);
-
-	/**
-	 * 取得活字的部件結構
-	 * 
-	 * @return 活字的部件結構
-	 */
-	public 部件 getChineseCharacter()
+	public void print(ChineseCharacterTypePrinter printer)
 	{
-		return chineseCharacter;
+		printer.printTzu(this);
+		return;
 	}
 
 	/**
-	 * 取得上一層部件結構。
+	 * 取得底下的各個部件
 	 * 
-	 * @return 上一層部件結構
+	 * @return 底下的各個部件
 	 */
-	public ChineseCharacterMovableType getParent()
+	public 漢字組建活字[] getChildren()
 	{
-		return parent;
+		return children;
 	}
 }

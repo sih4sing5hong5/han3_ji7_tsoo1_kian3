@@ -37,7 +37,7 @@ import java.awt.geom.Rectangle2D;
 
 import 漢字組建.部件.字部件;
 import 漢字組建.部件.文部件;
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableType;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;

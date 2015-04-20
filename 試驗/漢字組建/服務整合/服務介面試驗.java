@@ -26,7 +26,7 @@ import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式免查詢;
 import cc.core.展開式查詢工具;
 import cc.moveable_type.rectangular_area.分離活字加粗;
-import cc.setting.ChineseCharacterTypeSetter;
+import cc.setting.piece.ChineseCharacterTypeSetter;
 import cc.setting.piece.字型參考設定工具;
 import cc.setting.piece.對照字體;
 import cc.setting.piece.展開式查通用字型編號;

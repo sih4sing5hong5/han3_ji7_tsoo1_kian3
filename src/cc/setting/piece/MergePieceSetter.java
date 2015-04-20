@@ -6,7 +6,7 @@ package cc.setting.piece;
 import java.awt.font.FontRenderContext;
 
 import 漢字組建.部件.字部件;
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.平面幾何;

@@ -26,64 +26,46 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.moveable_type;
+package cc.moveable_type.piece;
 
-import 漢字組建.部件.字部件;
-import cc.adjusting.ChineseCharacterTypeAdjuster;
-import cc.printing.ChineseCharacterTypePrinter;
+import 漢字組建.部件.文部件;
+import cc.adjusting.piece.ChineseCharacterTypeAdjuster;
+import cc.printing.awt.piece.ChineseCharacterTypePrinter;
 
 /**
- * 漢字活字樹狀結構的上層節點。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
- * <code>ChineseCharacterMovableTypeTzu</code>記錄底下活字的排版資訊。
+ * 漢字活字樹狀結構的葉子。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。
+ * <code>ChineseCharacterMovableTypeWen</code> 記錄活字的排版資訊。
  * 
  * @author Ihc
  */
-public class ChineseCharacterMovableTypeTzu extends ChineseCharacterMovableType
+public class ChineseCharacterMovableTypeWen extends ChineseCharacterMovableType
 {
-
 	/**
-	 * 底下的各個活字
-	 */
-	protected 漢字組建活字[] children;
-
-	/**
-	 * 以<code>ChineseCharacter</code>部件結構建立字活字結構
+	 * 以<code>ChineseCharacter</code>部件結構建立文活字結構
 	 * 
 	 * @param parent
 	 *            上一層的活字結構。若上層為樹狀的樹根，傳入null
-	 * @param chineseCharacterTzu
-	 *            字部件結構
+	 * @param chineseCharacterWen
+	 *            文部件結構
 	 */
-	public ChineseCharacterMovableTypeTzu(
+	public ChineseCharacterMovableTypeWen(
 			ChineseCharacterMovableTypeTzu parent,
-			字部件 chineseCharacterTzu)
+			文部件 chineseCharacterWen)
 	{
-		super(parent, chineseCharacterTzu);
-		int childrenSize = chineseCharacterTzu.組合方式().getNumberOfChildren();
-		this.children = new ChineseCharacterMovableType[childrenSize];
+		super(parent, chineseCharacterWen);
 	}
 
 	@Override
 	public void adjust(ChineseCharacterTypeAdjuster adjuster)
 	{
-		adjuster.adjustTzu(this);
+		adjuster.adjustWen(this);
 		return;
 	}
 
 	@Override
 	public void print(ChineseCharacterTypePrinter printer)
 	{
-		printer.printTzu(this);
+		printer.printWen(this);
 		return;
-	}
-
-	/**
-	 * 取得底下的各個部件
-	 * 
-	 * @return 底下的各個部件
-	 */
-	public 漢字組建活字[] getChildren()
-	{
-		return children;
 	}
 }

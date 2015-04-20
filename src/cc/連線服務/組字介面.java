@@ -43,12 +43,12 @@ import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.adjusting.bolder.NullStroke;
 import cc.adjusting.piece.MergePieceAdjuster;
 import cc.core.展開式查詢工具;
-import cc.moveable_type.漢字組建活字;
 import cc.moveable_type.piece.PieceMovableType;
+import cc.moveable_type.piece.漢字組建活字;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.moveable_type.rectangular_area.分離活字加粗;
 import cc.printing.awt.piece.AwtForSinglePiecePrinter;
-import cc.setting.ChineseCharacterTypeSetter;
+import cc.setting.piece.ChineseCharacterTypeSetter;
 import cc.程式記錄.漢字組建記錄工具包;
 
 /**

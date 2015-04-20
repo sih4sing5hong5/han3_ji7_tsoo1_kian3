@@ -28,9 +28,9 @@
  ******************************************************************************/
 package 漢字組建.部件;
 
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.漢字組建活字;
-import cc.setting.ChineseCharacterTypeSetter;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.漢字組建活字;
+import cc.setting.piece.ChineseCharacterTypeSetter;
 
 /**
  * 儲存漢字部件樹狀結構。「獨體為文，合體為字」，樹狀結構中的葉子為文，其他上層節點為字。 <code>ChineseCharacter</code>為

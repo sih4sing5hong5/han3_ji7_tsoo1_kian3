@@ -26,31 +26,34 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.printing;
+package cc.adjusting.piece;
 
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.ChineseCharacterMovableTypeWen;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeWen;
 
 /**
- * 活字列印工具。接收活字結構（<code>ChineseCharacterMovableType</code>），並列印出來。
+ * 活字調整工具。依活字結構（<code>ChineseCharacterMovableType</code>）本身的組合調整大小位置粗細…等等資訊。
+ * <p>
  * 
  * @author Ihc
  */
-public interface ChineseCharacterTypePrinter
+public interface ChineseCharacterTypeAdjuster
 {
 	/**
-	 * 列印獨體活字
+	 * 調整獨體活字
 	 * 
 	 * @param chineseCharacterMovableTypeWen
-	 *            獨體活字
+	 *            欲調整之獨體活字
 	 */
-	void printWen(ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen);
+	public void adjustWen(
+			ChineseCharacterMovableTypeWen chineseCharacterMovableTypeWen);
 
 	/**
-	 * 列印合體活字
+	 * 調整合體活字
 	 * 
 	 * @param chineseCharacterMovableTypeTzu
-	 *            合體活字
+	 *            欲調整之合體活字
 	 */
-	void printTzu(ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu);
+	public void adjustTzu(
+			ChineseCharacterMovableTypeTzu chineseCharacterMovableTypeTzu);
 }

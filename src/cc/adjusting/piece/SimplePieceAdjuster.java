@@ -33,7 +33,6 @@ import java.awt.geom.Rectangle2D;
 
 import org.slf4j.Logger;
 
-import cc.adjusting.ChineseCharacterTypeAdjuster;
 import cc.adjusting.bolder.ChineseCharacterTypeBolder;
 import cc.moveable_type.rectangular_area.分離活字;
 import cc.程式記錄.漢字組建記錄工具包;

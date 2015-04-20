@@ -30,11 +30,10 @@ package cc.printing.awt.piece;
 
 import java.awt.Graphics2D;
 
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.ChineseCharacterMovableTypeWen;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
-import cc.printing.ChineseCharacterTypePrinter;
 
 /**
  * 物件活字遞迴列印工具。接收物件活字結構（<code>PieceMovableType</code>），並依結構遞迴列印在

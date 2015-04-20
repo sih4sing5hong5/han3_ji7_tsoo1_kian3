@@ -30,12 +30,11 @@ package cc.printing.awt.piece;
 
 import java.awt.Graphics2D;
 
-import cc.moveable_type.ChineseCharacterMovableTypeTzu;
-import cc.moveable_type.ChineseCharacterMovableTypeWen;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeTzu;
+import cc.moveable_type.piece.ChineseCharacterMovableTypeWen;
 import cc.moveable_type.piece.PieceMovableTypeTzu;
 import cc.moveable_type.piece.PieceMovableTypeWen;
 import cc.moveable_type.rectangular_area.分離活字;
-import cc.printing.ChineseCharacterTypePrinter;
 
 /**
  * 物件活字單一列印工具。接收物件活字結構（<code>PieceMovableType</code>），並列印該活字在<code>Graphics2D</code>上。

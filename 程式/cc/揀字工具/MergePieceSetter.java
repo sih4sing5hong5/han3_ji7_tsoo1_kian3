@@ -9,7 +9,6 @@ import 漢字組建.部件.字部件;
 import cc.活字.ChineseCharacterMovableTypeTzu;
 import cc.活字.PieceMovableTypeTzu;
 import cc.活字.分離活字;
-import cc.活字.平面幾何;
 
 /**
  * 活字設定工具。將部件結構（<code>ChineseCharacter</code>）轉換成活字結構（

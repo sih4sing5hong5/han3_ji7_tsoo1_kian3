@@ -29,7 +29,6 @@
 package cc.筆觸工具;
 
 import java.awt.Stroke;
-import java.awt.geom.AffineTransform;
 import java.util.Vector;
 
 import cc.活字.分離活字;

@@ -35,7 +35,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
-import java.security.InvalidParameterException;
 
 import cc.排版工具.尋找最低點;
 import cc.筆觸工具.PathTravel;

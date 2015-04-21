@@ -41,7 +41,6 @@ import cc.活字.PieceMovableTypeTzu;
 import cc.活字.分離活字;
 import cc.活字.平面幾何;
 import cc.活字.漢字組建活字;
-import cc.筆觸.ChineseCharacterTypeBolder;
 import cc.筆觸工具.ShapeInformation;
 
 /**

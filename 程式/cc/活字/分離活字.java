@@ -31,7 +31,6 @@ package cc.活字;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.security.InvalidParameterException;
 import java.util.Vector;
@@ -295,7 +294,6 @@ public class 分離活字
 		return;
 	}
 
-	@Deprecated
 	public void 減去活字(分離活字 活字物件)
 	{
 		for (平面幾何 幾何 : 字)
@@ -328,7 +326,6 @@ public class 分離活字
 		return 上低的點;
 	}
 
-	@Deprecated
 	public 平面幾何 目前的字體()
 	{
 		平面幾何 字體結果 = new 平面幾何();

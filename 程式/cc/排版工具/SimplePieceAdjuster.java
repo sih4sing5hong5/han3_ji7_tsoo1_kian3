@@ -35,7 +35,6 @@ import org.slf4j.Logger;
 
 import cc.活字.分離活字;
 import cc.程式記錄.漢字組建記錄工具包;
-import cc.筆觸.ChineseCharacterTypeBolder;
 
 /**
  * 區塊活字調整工具。調整<code>PieceMovableType</code>，因為把活字的資訊全部集中在同一個物件上（

@@ -69,7 +69,9 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	protected 右上內勾包圍工具 右上內勾工具;
 	protected 四面包圍工具 四面工具;
 	/** 處理包圍關係的活字時所使用的工具 */
-	protected 包圍整合分派工具 分派工具;
+	protected 包圍整合分派工具 四邊分派工具;
+	protected 包圍整合分派工具 右上分派工具;
+	protected 包圍整合分派工具 左右上分派工具;
 	/** 決定啥物注音會當用，愛下佇佗 */
 	protected 注音符號分類工具 分類工具;
 	/** 注音內底逐个符號間隔寬度 */
@@ -100,18 +102,25 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 		上下左三邊工具 = new 上下左三邊包圍工具(this);
 		右上內勾工具 = new 右上內勾包圍工具(this);
 		四面工具 = new 四面包圍工具(this);
-		
-		分派工具 = new 包圍整合分派工具();
-		分派工具.add(上蓋工具);
-		分派工具.add(左下工具);
-		分派工具.add(左上工具);
-		分派工具.add(右上工具);
-		分派工具.add(左右上內勾工具);
-		分派工具.add(左右下三邊工具);
-		分派工具.add(上下左三邊工具);
-		分派工具.add(右上內勾工具);
-		分派工具.add(四面工具);
-		分派工具.設定無支援暫時用包圍工具(水平工具);
+
+		四邊分派工具 = new 包圍整合分派工具();
+		四邊分派工具.add(上蓋工具);
+		四邊分派工具.add(左下工具);
+		四邊分派工具.add(左上工具);
+		四邊分派工具.add(右上工具);
+		四邊分派工具.add(左右上內勾工具);
+		四邊分派工具.add(左右下三邊工具);
+		四邊分派工具.add(上下左三邊工具);
+		四邊分派工具.add(右上內勾工具);
+		四邊分派工具.add(四面工具);
+		四邊分派工具.設定無支援暫時用包圍工具(水平工具);
+
+		右上分派工具 = new 包圍整合分派工具();
+		右上分派工具.add(右上工具);
+		右上分派工具.add(右上內勾工具);
+		左右上分派工具 = new 包圍整合分派工具();
+		左右上分派工具.add(上蓋工具);
+		左右上分派工具.add(左右上內勾工具);
 
 		int[] 輕聲 = 字串與控制碼轉換.轉換成控制碼("˙");
 		int[] 聲韻 = 字串與控制碼轉換.轉換成控制碼("ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙ" + "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ"
@@ -154,34 +163,36 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 			break;
 		case 上下左包圍:
 			遞迴調整(pieceMovableTypeTzu);
-			上下左三邊工具 = new 上下左三邊包圍工具(this);
+			上下左三邊工具.組合(pieceMovableTypeTzu);
+			;
 			break;
 		case 右上包圍:
 			遞迴調整(pieceMovableTypeTzu);
-			右上工具 = new 右上包圍工具(this);//TODO
-			右上內勾工具 = new 右上內勾包圍工具(this);
+			右上分派工具.組合(pieceMovableTypeTzu);// TODO
 			break;
 		case 左上包圍:
 			遞迴調整(pieceMovableTypeTzu);
-			左上工具 = new 左上包圍工具(this);
+			左上工具.組合(pieceMovableTypeTzu);
 			break;
 		case 左下包圍:
 			遞迴調整(pieceMovableTypeTzu);
-			左下工具 = new 左下包圍工具(this);
+			左下工具.組合(pieceMovableTypeTzu);
 			break;
 		case 左右上包圍:
 			遞迴調整(pieceMovableTypeTzu);
-			左右上內勾工具 = new 左右上內勾包圍工具(this);
-			上蓋工具 = new 上蓋包圍工具(this);//TODO
+			左右上分派工具.組合(pieceMovableTypeTzu);
 			break;
 		case 左右下包圍:
 			遞迴調整(pieceMovableTypeTzu);
-			左右下三邊工具 = new 左右下三邊包圍工具(this);
+			左右下三邊工具.組合(pieceMovableTypeTzu);
 			break;
 		case 重疊:
 			遞迴調整(pieceMovableTypeTzu);
 			wrapMerging(pieceMovableTypeTzu);// TODO
 			break;
+		case 上下三個合併:
+		case 左右三個合併:
+			throw new RuntimeException("排版工具不支援三個元素的組合方式");
 		}
 		return;
 	}
@@ -233,7 +244,7 @@ public class MergePieceAdjuster extends SimplePieceAdjuster
 	 */
 	void wrapMerging(PieceMovableTypeTzu 物件活字)
 	{
-		if (!分派工具.組合(物件活字))
+		if (!四邊分派工具.組合(物件活字))
 		{
 			System.out.println("QQ 沒組合工具");
 			字部件 chineseCharacterTzu = (字部件) 物件活字.getChineseCharacter();

@@ -21,7 +21,6 @@ import org.junit.Test;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
-import cc.tool.database.字串與控制碼轉換;
 import cc.排版工具.MergePieceAdjuster;
 import cc.揀字工具.ChineseCharacterTypeSetter;
 import cc.揀字工具.字型參考設定工具;
@@ -47,8 +46,6 @@ public class 服務介面試驗
 	{
 
 		int 普通字型屬性 = 0;
-		/** 定義異寫編號數字 */
-		int[] 編號陣列 = 字串與控制碼轉換.轉換成控制碼("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥陰陽乾坤震巽坎離艮兌");
 
 		展開式查詢工具 查詢方式 = new 展開式免查詢();
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
@@ -67,7 +64,7 @@ public class 服務介面試驗
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 編號陣列, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
+		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 	}
 
 	/** 測試漢字 */

@@ -49,7 +49,6 @@ import org.w3c.dom.Document;
 
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.tool.database.PgsqlConnection;
-import cc.tool.database.字串與控制碼轉換;
 import cc.排版工具.MergePieceAdjuster;
 import cc.揀字工具.ChineseCharacterTypeSetter;
 import cc.揀字工具.字型參考設定工具;
@@ -98,8 +97,6 @@ public class 組字服務 extends HttpServlet
 		int 粗字型屬性 = Font.BOLD;
 		int 普通字型屬性 = 0;
 		字型大細 = 200;
-		/** 定義異寫編號數字 */
-		int[] 編號陣列 = 字串與控制碼轉換.轉換成控制碼("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戍亥陰陽乾坤震巽坎離艮兌");
 
 		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
 		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
@@ -117,14 +114,14 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 編號陣列, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
+		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 		ChineseCharacterTypeSetter 粗宋設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
 				.提著吳守禮注音摻宋體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 編號陣列, 粗宋設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
+		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
 
 		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
 				.提著吳守禮注音摻楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
@@ -132,7 +129,7 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 編號陣列, 楷體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
+		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 楷體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 
 		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
 				.提著吳守禮注音摻楷體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
@@ -140,7 +137,7 @@ public class 組字服務 extends HttpServlet
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 編號陣列, 粗楷設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
+		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 粗楷設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
 	}
 
 	@Override

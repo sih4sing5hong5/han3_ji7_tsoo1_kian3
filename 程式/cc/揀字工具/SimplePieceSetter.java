@@ -33,13 +33,10 @@ import java.awt.Font;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.Area;
-import java.awt.geom.Rectangle2D;
 
 import 漢字組建.部件.字部件;
 import 漢字組建.部件.文部件;
 import cc.活字.ChineseCharacterMovableTypeTzu;
-import cc.活字.PieceMovableType;
-import cc.活字.PieceMovableTypeTzu;
 import cc.活字.PieceMovableTypeWen;
 import cc.活字.分離活字;
 import cc.活字.平面幾何;
@@ -53,7 +50,7 @@ import cc.活字.平面幾何;
  * 
  * @author Ihc
  */
-public class SimplePieceSetter extends 物件活字基礎設定工具
+public abstract class SimplePieceSetter extends 物件活字基礎設定工具
 {
 	/** 活字字型的名稱 */
 	private String fontName;
@@ -119,37 +116,6 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 		return pieceMovableTypeWen;
 	}
 
-	@Override
-	public PieceMovableTypeTzu setTzu(ChineseCharacterMovableTypeTzu parent,
-			字部件 chineseCharacterTzu)
-	{
-		PieceMovableTypeTzu pieceMovableTypeTzu = new PieceMovableTypeTzu(
-				parent, chineseCharacterTzu, new 分離活字(new 平面幾何()));
-
-		setChildrenRecursively(pieceMovableTypeTzu, chineseCharacterTzu);
-
-		switch (chineseCharacterTzu.組合方式())
-		{
-		case 左右合併:
-			horizontalSetting(pieceMovableTypeTzu);
-			break;
-		case 上下合併:
-			verticalSetting(pieceMovableTypeTzu);
-			break;
-		case 四面包圍:
-			wrapSetting(pieceMovableTypeTzu);
-			break;
-		case 注音符號:// TODO 看情形才決定欲修改無，先用垂直的
-			horizontalSetting(pieceMovableTypeTzu);
-			break;
-		}
-
-		if (pieceMovableTypeTzu.getParent() == null)
-			pieceMovableTypeTzu.getPiece().設目標範圍(tzuModelTerritory);
-
-		return pieceMovableTypeTzu;
-	}
-
 	/**
 	 * 設定底下活字部件
 	 * 
@@ -168,109 +134,6 @@ public class SimplePieceSetter extends 物件活字基礎設定工具
 					.底下元素()[i].typeset(this,
 					chineseCharacterMovableTypeTzu);
 		}
-		return;
-	}
-
-	/**
-	 * 水平組合活字
-	 * 
-	 * @param pieceMovableTypeTzu
-	 *            要設定的合體活字
-	 */
-	protected void horizontalSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
-	{
-		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[1];
-		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = firstChild.getPiece().目標範圍().getWidth()
-				+ secondChild.getPiece().目標範圍().getWidth();
-		rectDouble.height = Math.max(firstChild.getPiece().目標範圍().getHeight(),
-				secondChild.getPiece().目標範圍().getHeight());
-		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
-				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().合併活字(
-				new 分離活字(new 平面幾何(new Area(rectDouble))));
-		firstChild
-				.getPiece()
-				.目標範圍()
-				.setRect(0.0, 0.0, firstChild.getPiece().目標範圍().getWidth(),
-						rectDouble.height);
-		secondChild
-				.getPiece()
-				.目標範圍()
-				.setRect(firstChild.getPiece().目標範圍().getWidth(), 0.0,
-						secondChild.getPiece().目標範圍().getWidth(),
-						rectDouble.height);
-		return;
-
-	}
-
-	/**
-	 * 垂直組合活字
-	 * 
-	 * @param pieceMovableTypeTzu
-	 *            要設定的合體活字
-	 */
-	protected void verticalSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
-	{
-		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[1];
-		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = Math.max(firstChild.getPiece().目標範圍().getWidth(),
-				secondChild.getPiece().目標範圍().getWidth());
-		rectDouble.height = firstChild.getPiece().目標範圍().getHeight()
-				+ secondChild.getPiece().目標範圍().getHeight();
-		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
-				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().合併活字(
-				new 分離活字(new 平面幾何(new Area(rectDouble))));
-		firstChild
-				.getPiece()
-				.目標範圍()
-				.setRect(0.0, 0.0, rectDouble.width,
-						firstChild.getPiece().目標範圍().getHeight());
-		secondChild
-				.getPiece()
-				.目標範圍()
-				.setRect(0.0, firstChild.getPiece().目標範圍().getHeight(),
-						rectDouble.width,
-						secondChild.getPiece().目標範圍().getHeight());
-		return;
-	}
-
-	/**
-	 * 包圍組合活字
-	 * 
-	 * @param pieceMovableTypeTzu
-	 *            要設定的合體活字
-	 */
-	protected void wrapSetting(PieceMovableTypeTzu pieceMovableTypeTzu)
-	{
-		// TODO 暫時替代用
-		PieceMovableType firstChild = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[0], secondChild = (PieceMovableType) pieceMovableTypeTzu
-				.getChildren()[1];
-		Rectangle2D.Double rectDouble = new Rectangle2D.Double();
-		rectDouble.width = firstChild.getPiece().目標範圍().getWidth() * 2;
-		rectDouble.height = firstChild.getPiece().目標範圍().getHeight() * 2;
-		pieceMovableTypeTzu.getPiece().設目標範圍大細(rectDouble.width,
-				rectDouble.height);
-		pieceMovableTypeTzu.getPiece().合併活字(
-				new 分離活字(new 平面幾何(new Area(rectDouble))));
-		firstChild.getPiece().目標範圍()
-				.setRect(0.0, 0.0, rectDouble.width, rectDouble.height);
-		secondChild
-				.getPiece()
-				.目標範圍()
-				.setRect(
-						(firstChild.getPiece().目標範圍().getWidth() - secondChild
-								.getPiece().目標範圍().getWidth()) / 2,
-						(firstChild.getPiece().目標範圍().getHeight() - secondChild
-								.getPiece().目標範圍().getHeight()) / 2,
-						secondChild.getPiece().目標範圍().getWidth(),
-						secondChild.getPiece().目標範圍().getHeight());
 		return;
 	}
 

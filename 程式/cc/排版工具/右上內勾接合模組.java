@@ -28,12 +28,8 @@
  ******************************************************************************/
 package cc.排版工具;
 
-import java.awt.geom.GeneralPath;
-
 import cc.活字.分離活字;
-import cc.筆觸工具.PathTravel;
 import cc.筆觸工具.Point2DWithVector;
-import cc.筆觸工具.控制點循訪;
 
 /**
  * 適用於外部部件有右上二邊並且右下有往內勾的活字接合，如「⿴勹日」為「旬」。在接合時，都固定外部活字，並將內部活字固定在左下縮放。

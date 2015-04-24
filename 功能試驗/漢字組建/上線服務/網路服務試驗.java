@@ -66,6 +66,12 @@ public class 網路服務試驗
 	}
 
 	@Test
+	public void 預設宋體png() throws IOException
+	{
+		比較網路結果("字體", "意", "意", "png");
+	}
+
+	@Test
 	public void 宋體png轉址() throws IOException
 	{
 		舊網址轉址("宋體", "意", "意", "png");

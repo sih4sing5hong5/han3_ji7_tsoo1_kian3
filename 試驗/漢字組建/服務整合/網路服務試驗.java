@@ -1,6 +1,7 @@
 package 漢字組建.服務整合;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,19 +18,121 @@ public class 網路服務試驗
 	static final String 連接埠 = "8080";
 
 	@Test
-	public void 國() throws IOException
+	public void 宋體png() throws IOException
 	{
-		比較網路結果("國");
+		比較網路結果("宋體", "意", "意", "png");
 	}
 
-	private void 比較網路結果(String 組字式) throws IOException
+	@Test
+	public void 宋體粗體png() throws IOException
 	{
-		URL url;
-		HttpURLConnection conn;
-		String 網路路徑 = "http://" + 主機 + ":" + 連接埠 + "/宋體/" + 組字式+".png";
-		String 檔案路徑 = 圖片存放路徑 + "/" + 組字式+".png";
-		url = new URL(網路路徑);
-		conn = (HttpURLConnection) url.openConnection();
+		比較網路結果("宋體粗體", "意", "意宋體粗體", "png");
+	}
+
+	@Test
+	public void 楷體png() throws IOException
+	{
+		比較網路結果("楷體", "意", "意楷體", "png");
+	}
+
+	@Test
+	public void 楷體粗體png() throws IOException
+	{
+		比較網路結果("楷體粗體", "意", "意楷體粗體", "png");
+	}
+
+	@Test
+	public void 宋體svg() throws IOException
+	{
+		比較網路結果("宋體", "意", "意宋體", "svg");
+	}
+
+	@Test
+	public void 宋體粗體svg() throws IOException
+	{
+		比較網路結果("宋體粗體", "意", "意宋體粗體", "svg");
+	}
+
+	@Test
+	public void 楷體svg() throws IOException
+	{
+		比較網路結果("楷體", "意", "意楷體", "svg");
+	}
+
+	@Test
+	public void 楷體粗體svg() throws IOException
+	{
+		比較網路結果("楷體粗體", "意", "意楷體粗體", "svg");
+	}
+
+	@Test
+	public void 宋體png轉址() throws IOException
+	{
+		舊網址轉址("宋體", "意", "意", "png");
+	}
+
+	@Test
+	public void 宋體粗體png轉址() throws IOException
+	{
+		舊網址轉址("宋體粗體", "意", "意宋體粗體", "png");
+	}
+
+	@Test
+	public void 楷體png轉址() throws IOException
+	{
+		舊網址轉址("楷體", "意", "意楷體", "png");
+	}
+
+	@Test
+	public void 楷體粗體png轉址() throws IOException
+	{
+		舊網址轉址("楷體粗體", "意", "意楷體粗體", "png");
+	}
+
+	@Test
+	public void 宋體svg轉址() throws IOException
+	{
+		舊網址轉址("宋體", "意", "意宋體", "svg");
+	}
+
+	@Test
+	public void 宋體粗體svg轉址() throws IOException
+	{
+		舊網址轉址("宋體粗體", "意", "意宋體粗體", "svg");
+	}
+
+	@Test
+	public void 楷體svg轉址() throws IOException
+	{
+		舊網址轉址("楷體", "意", "意楷體", "svg");
+	}
+
+	@Test
+	public void 楷體粗體svg轉址() throws IOException
+	{
+		舊網址轉址("楷體粗體", "意", "意楷體粗體", "svg");
+	}
+
+	private void 舊網址轉址(String 字體, String 組字式, String 檔案名, String 副檔名)
+			throws IOException
+	{
+		String 原本網路路徑 = String.format("http://%s:%s/%s/%s.%s", 主機, 連接埠, 字體,
+				組字式, 副檔名);
+		HttpURLConnection 原本網路連線 = (HttpURLConnection) new URL(原本網路路徑)
+				.openConnection();
+		原本網路連線.setInstanceFollowRedirects(false);
+		原本網路連線.setRequestMethod("GET");
+		assertTrue(原本網路連線.getResponseCode() == HttpURLConnection.HTTP_MOVED_PERM);
+	}
+
+	private void 比較網路結果(String 字體, String 組字式, String 檔案名, String 副檔名)
+			throws IOException
+	{
+		String 新網路路徑 = String.format("http://%s:%s/%s.%s?字體=%s", 主機, 連接埠, 組字式,
+				副檔名, 字體);
+		String 檔案路徑 = String.format("%s/%s.%s", 圖片存放路徑, 檔案名, 副檔名);
+		HttpURLConnection conn = (HttpURLConnection) new URL(新網路路徑)
+				.openConnection();
 		conn.setRequestMethod("GET");
 		InputStream 網路圖片 = conn.getInputStream();
 		InputStream 檔案圖片 = new FileInputStream(檔案路徑);

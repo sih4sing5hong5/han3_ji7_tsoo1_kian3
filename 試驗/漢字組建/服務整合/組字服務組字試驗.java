@@ -33,7 +33,7 @@ import cc.連線服務.組字介面;
 import cc.部件結構調整工具.展開式免查詢;
 import cc.部件結構調整工具.展開式查詢工具;
 
-public class 服務介面試驗
+public class 組字服務組字試驗
 {
 
 	/** 組宋體用的工具 */

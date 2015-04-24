@@ -1,4 +1,4 @@
-package 漢字組建.服務整合;
+package 漢字組建.上線服務;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

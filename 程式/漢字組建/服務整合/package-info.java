@@ -2,4 +2,4 @@
  * 服務整合套件包。
  * @author Ihc
  */
-package cc.連線服務;
+package 漢字組建.服務整合;

@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import cc.連線服務.組字服務;
+import 漢字組建.服務整合.組字服務;
 
 public class 組字服務圖片試驗
 {

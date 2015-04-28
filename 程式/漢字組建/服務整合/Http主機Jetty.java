@@ -26,7 +26,7 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.連線服務;
+package 漢字組建.服務整合;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
@@ -36,7 +36,7 @@ import org.eclipse.jetty.servlet.ServletHandler;
  * 
  * @author Ihc
  */
-public class 姊麶服務程式
+public class Http主機Jetty
 {
 	/** 網路監聽埠口 */
 	static final int 連接埠 = 8080;
@@ -53,7 +53,7 @@ public class 姊麶服務程式
 
 		ServletHandler handler = new ServletHandler();
 		server.setHandler(handler);
-		handler.addServletWithMapping(http組字要求處理.class, "/*");
+		handler.addServletWithMapping(Http組字要求處理.class, "/*");
 		boolean 遏袂啟動 = true;
 		while (遏袂啟動)
 		{

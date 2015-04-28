@@ -26,7 +26,7 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package cc.連線服務;
+package 漢字組建.服務整合;
 
 import java.awt.Font;
 import java.awt.Stroke;
@@ -58,7 +58,7 @@ import cc.部件結構調整工具.資料庫連線展開式查詢;
  * 
  * @author Ihc
  */
-public class http組字要求處理 extends HttpServlet
+public class Http組字要求處理 extends HttpServlet
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1224634082415129183L;
@@ -80,7 +80,7 @@ public class http組字要求處理 extends HttpServlet
 	int 字型大細;
 
 	/** 建立一个組字的服務。 */
-	public http組字要求處理()
+	public Http組字要求處理()
 	{
 		// 系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
 		// .getDefaultScreenDevice().getDefaultConfiguration();

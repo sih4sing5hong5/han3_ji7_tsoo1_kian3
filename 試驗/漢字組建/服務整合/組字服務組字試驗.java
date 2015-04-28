@@ -29,7 +29,7 @@ import cc.揀字工具.展開式查通用字型編號;
 import cc.揀字工具.無愛查通用字型編號;
 import cc.筆觸.FunctinoalBasicBolder;
 import cc.筆觸工具.分離活字加粗;
-import cc.連線服務.組字介面;
+import cc.連線服務.組字服務;
 import cc.部件結構調整工具.展開式免查詢;
 import cc.部件結構調整工具.展開式查詢工具;
 
@@ -37,7 +37,7 @@ public class 組字服務組字試驗
 {
 
 	/** 組宋體用的工具 */
-	protected 組字介面 宋體組字工具;
+	protected 組字服務 宋體組字工具;
 
 	int 字型大細 = 200;
 
@@ -64,7 +64,7 @@ public class 組字服務組字試驗
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
+		宋體組字工具 = new 組字服務(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 	}
 
 	/** 測試漢字 */

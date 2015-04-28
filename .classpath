@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="程式"/>
 	<classpathentry kind="src" path="試驗"/>
+	<classpathentry kind="src" path="功能試驗"/>
 	<classpathentry kind="lib" path="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1.jar" sourcepath="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/漢字組建/函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-javadoc.jar!/"/>
@@ -28,7 +29,7 @@
 	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-io-9.2.7.v20150116.jar"/>
 	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-servlet-9.2.7.v20150116.jar"/>
 	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-util-9.2.7.v20150116.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-awt-util-1.7.jar"/>
 	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-dom-1.7.jar"/>
 	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-ext-1.7.jar"/>

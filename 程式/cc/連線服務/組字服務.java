@@ -32,23 +32,45 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Stroke;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 
+import javax.imageio.ImageIO;
+
+import org.apache.batik.dom.GenericDOMImplementation;
+import org.apache.batik.svggen.SVGGraphics2D;
+import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.slf4j.Logger;
 import org.slf4j.profiler.Profiler;
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
 
 import 漢字組建.解析工具.組字式序列格式例外;
 import 漢字組建.解析工具.組字式序列解析工具;
 import 漢字組建.部件.部件;
+import 漢字組建.部件結構調整工具.三元素符號代換工具;
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.印刷工具.AwtForSinglePiecePrinter;
 import cc.排版工具.MergePieceAdjuster;
 import cc.揀字工具.ChineseCharacterTypeSetter;
+import cc.揀字工具.字型參考設定工具;
+import cc.揀字工具.對照字體;
+import cc.揀字工具.展開式查通用字型編號;
+import cc.揀字工具.無愛查通用字型編號;
 import cc.活字.PieceMovableType;
 import cc.活字.分離活字;
 import cc.活字.漢字組建活字;
 import cc.程式記錄.漢字組建記錄工具包;
+import cc.筆觸.FunctinoalBasicBolder;
 import cc.筆觸.NullStroke;
 import cc.筆觸工具.分離活字加粗;
+import cc.部件結構調整工具.展開式免查詢;
 import cc.部件結構調整工具.展開式查詢工具;
 
 /**
@@ -64,6 +86,8 @@ public class 組字服務
 	protected 展開式查詢工具 查詢方式;
 	/** 決定有需要正規化無佮按怎正規化的物件 */
 	protected 組字式結構正規化工具 正規化工具;
+
+	protected 三元素符號代換工具 代換工具 = new 三元素符號代換工具();
 	/** 依據部件佮字體的性質，共部件提來產生活字 */
 	protected ChineseCharacterTypeSetter 設定工具;
 	/** 佮頭拄仔產生的活字，組合閣共調整 */
@@ -176,7 +200,7 @@ public class 組字服務
 		部件 組字部件 = (部件) 部件;
 		// 組字部件.建立組字式(組字式建立工具);
 		// 記錄工具.debug(組字部件.提到組字式());
-		部件 = (部件) 正規化工具.正規化(部件);
+		部件 = (部件) 正規化工具.正規化(代換工具.三元素組合代換成二元素(部件));
 		組字部件.樹狀結構組字式();
 		// 記錄工具.debug(組字部件.提到組字式());
 
@@ -211,5 +235,62 @@ public class 組字服務
 
 		看時工具.stop().log();
 		return 組字部件.樹狀結構組字式();
+	}
+
+	public static 組字服務 預設組字服務()
+	{
+		int 字型大細 = 200;
+		int 普通字型屬性 = 0;
+
+		展開式查詢工具 查詢方式 = new 展開式免查詢();
+		// 資料庫連線展開式查詢(連線) 展開式免查詢()
+		組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
+		// 異寫式查詢工具 異寫式查詢 = new 資料庫連線異寫式查詢(連線);
+		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
+		// new FunctinoalBasicBolder(new Stroke[] {}, 01),
+				1e-1, 5);
+		展開式查通用字型編號 展開式查通用字型編號工具 = new 無愛查通用字型編號();
+		// 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
+		分離活字加粗 活字加粗 = new 分離活字加粗(
+				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
+		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
+				.提著吳守禮注音摻宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
+				new AffineTransform(),
+				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
+
+		return new 組字服務(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
+	}
+
+	public void 字組成png(String 組字式, OutputStream 輸出檔案) throws IOException
+	{
+		BufferedImage 字型圖片 =
+		// 系統圖畫設定.createCompatibleImage(字型大細,
+		// 字型大細, Transparency.TRANSLUCENT);
+		new BufferedImage(字型大細, 字型大細, BufferedImage.TYPE_INT_ARGB);
+		組字(組字式, 字型圖片.getGraphics());
+		ImageIO.write(字型圖片, "png", 輸出檔案);
+		return;
+	}
+
+	public void 字組成svg(String 組字式, OutputStream 輸出檔案)
+			throws UnsupportedEncodingException, SVGGraphics2DIOException
+	{
+		DOMImplementation domImpl = GenericDOMImplementation
+				.getDOMImplementation();
+
+		// Create an instance of org.w3c.dom.Document.
+		String svgNS = "http://www.w3.org/2000/svg";
+		Document document = domImpl.createDocument(svgNS, "svg", null);
+
+		boolean useCSS = true; // we want to use CSS style
+								// attributes
+		// Create an instance of the SVG Generator.
+		SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+		組字(組字式, svgGenerator);
+		OutputStreamWriter svgOutput = new java.io.OutputStreamWriter(輸出檔案,
+				"UTF-8");
+		svgGenerator.stream(svgOutput, useCSS);
+		return;
 	}
 }

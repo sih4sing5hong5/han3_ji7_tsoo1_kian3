@@ -1,41 +1,89 @@
 package 漢字組建.服務整合;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import org.junit.Test;
+
+import cc.連線服務.組字服務;
 
 public class 組字服務圖片試驗
 {
 	static final String 圖片存放路徑 = "組字圖片";
+	protected final 組字服務 宋體組字服務 = 組字服務.預設組字服務();
 
 	@Test
-	public void 宋體png() throws IOException
+	public void 意png() throws IOException
 	{
-		比較網路結果("宋體", "意", "意", "png");
+		檢查png結果("意");
 	}
-	private void 比較網路結果(String 字體, String 組字式, String 檔案名, String 副檔名)
-			throws IOException
+
+	@Test
+	public void 立日心png() throws IOException
 	{
-		String 新網路路徑 = String.format("http://%s:%s/%s.%s?字體=%s", 主機, 連接埠, 組字式,
-				副檔名, 字體);
-		String 檔案路徑 = String.format("%s/%s.%s", 圖片存放路徑, 檔案名, 副檔名);
-		InputStream 網路圖片 = conn.getInputStream();
+		檢查png結果("⿳立日心");
+	}
+
+	@Test
+	public void 傳png() throws IOException
+	{
+		檢查png結果("⿰專");
+	}
+
+	@Test
+	public void 傳svg() throws IOException
+	{
+		檢查svg結果("⿰專");
+	}
+
+	@Test
+	public void 人因svg() throws IOException
+	{
+		檢查svg結果("⿰因");
+	}
+
+	@Test
+	public void 國svg() throws IOException
+	{
+		檢查svg結果("⿴囗或");
+	}
+
+	@Test
+	public void 招財進寶svg() throws IOException
+	{
+		檢查svg結果("⿺辶⿵宀⿱珤⿰隹⿰貝招");
+	}
+
+	private void 檢查png結果(String 組字式) throws IOException
+	{
+		ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
+		宋體組字服務.字組成png(組字式, 輸出檔案);
+		String 檔案路徑 = String.format("%s/%s.%s", 圖片存放路徑, 組字式, "png");
 		InputStream 檔案圖片 = new FileInputStream(檔案路徑);
-		while (true)
+		for (byte 字元 : 輸出檔案.toByteArray())
 		{
-			int 網路資料 = 網路圖片.read();
-			int 檔案資料 = 檔案圖片.read();
-			assertEquals(網路資料, 檔案資料);
-			if (網路資料 == -1)
-				break;
+			assertEquals((字元), (byte) (檔案圖片.read()));
 		}
+		assertEquals(檔案圖片.read(), -1);
+		檔案圖片.close();
+		return;
+	}
+
+	private void 檢查svg結果(String 組字式) throws IOException
+	{
+		ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
+		宋體組字服務.字組成svg(組字式, 輸出檔案);
+		String 檔案路徑 = String.format("%s/%s.%s", 圖片存放路徑, 組字式, "svg");
+		InputStream 檔案圖片 = new FileInputStream(檔案路徑);
+		for (byte 字元 : 輸出檔案.toByteArray())
+		{
+			assertEquals((字元), (byte) (檔案圖片.read()));
+		}
+		assertEquals(檔案圖片.read(), -1);
 		檔案圖片.close();
 		return;
 	}

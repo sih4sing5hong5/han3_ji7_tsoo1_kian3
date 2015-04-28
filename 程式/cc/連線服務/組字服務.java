@@ -28,225 +28,188 @@
  ******************************************************************************/
 package cc.連線服務;
 
-import java.awt.Font;
-import java.awt.Stroke;
-import java.awt.font.FontRenderContext;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.profiler.Profiler;
 
-import org.apache.batik.dom.GenericDOMImplementation;
-import org.apache.batik.svggen.SVGGraphics2D;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-
+import 漢字組建.解析工具.組字式序列格式例外;
+import 漢字組建.解析工具.組字式序列解析工具;
+import 漢字組建.部件.部件;
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
-import cc.tool.database.PgsqlConnection;
+import cc.印刷工具.AwtForSinglePiecePrinter;
 import cc.排版工具.MergePieceAdjuster;
 import cc.揀字工具.ChineseCharacterTypeSetter;
-import cc.揀字工具.字型參考設定工具;
-import cc.揀字工具.對照字體;
-import cc.揀字工具.展開式查通用字型編號;
-import cc.揀字工具.用資料庫查展開式的通用字型編號;
-import cc.筆觸.FunctinoalBasicBolder;
+import cc.活字.PieceMovableType;
+import cc.活字.分離活字;
+import cc.活字.漢字組建活字;
+import cc.程式記錄.漢字組建記錄工具包;
+import cc.筆觸.NullStroke;
 import cc.筆觸工具.分離活字加粗;
 import cc.部件結構調整工具.展開式查詢工具;
-import cc.部件結構調整工具.資料庫連線展開式查詢;
 
 /**
- * 佮愛規的服務佮提供的字體攏總整合起來。
+ * 共組字規的系統整理起來，紲落來若欲用，就會當自由選擇欲用的工具。
  * 
  * @author Ihc
  */
-public class 組字服務 extends HttpServlet
+public class 組字服務
 {
-	/** 序列化編號 */
-	private static final long serialVersionUID = 1224634082415129183L;
-	/** 組宋體用的工具 */
-	protected 組字介面 宋體組字工具;
-	/** 組宋體粗體用的工具 */
-	protected 組字介面 粗宋組字工具;
-	/** 組楷體用的工具 */
-	protected 組字介面 楷體組字工具;
-	/** 組楷體粗體用的工具 */
-	protected 組字介面 粗楷組字工具;
+	/** 記錄程式狀況 */
+	protected Logger 記錄工具;
+	/** 看使用者提供的部件，是毋是愛先換做展開式抑是按怎 */
+	protected 展開式查詢工具 查詢方式;
+	/** 決定有需要正規化無佮按怎正規化的物件 */
+	protected 組字式結構正規化工具 正規化工具;
+	/** 依據部件佮字體的性質，共部件提來產生活字 */
+	protected ChineseCharacterTypeSetter 設定工具;
+	/** 佮頭拄仔產生的活字，組合閣共調整 */
+	protected MergePieceAdjuster 調整工具;
+	protected 分離活字加粗 活字加粗;
+	/** 主要是控制字體是毋是粗體 */
+	protected final int 字型屬性;
+	/** 字體愛偌大 */
+	protected final int 字型大細;
+	/** 限制組字式長度，予儂無法度惡意攻擊 */
+	protected final int 組字式上大長度;
 
-	/** 產生圖形傳予組字介面畫。毋過無X11、圖形介面就袂使用 */
-	// GraphicsConfiguration 系統圖畫設定;
-	/** 佮資料庫的連線 */
-	protected PgsqlConnection 連線;
-
-	/** 組字出來的字型解析度 */
-	int 字型大細;
-
-	/** 建立一个組字的服務。 */
-	public 組字服務()
-	{
-		// 系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
-		// .getDefaultScreenDevice().getDefaultConfiguration();
-
-		連線 = new PgsqlConnection();
-		// TODO 換專門查的使用者，換讀取權限
-		int 粗字型屬性 = Font.BOLD;
-		int 普通字型屬性 = 0;
-		字型大細 = 200;
-
-		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
-		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
-		組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
-		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
-		// new FunctinoalBasicBolder(new Stroke[] {}, 01),
-				1e-1, 5);
-		展開式查通用字型編號 展開式查通用字型編號工具 = new 用資料庫查展開式的通用字型編號(連線);
-		// TODO 用資料庫查展開式的通用字型編號(連線) 無愛查通用字型編號()
-		分離活字加粗 活字加粗 = new 分離活字加粗(
-				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
-		ChineseCharacterTypeSetter 宋體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
-				.提著吳守禮注音摻宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
-				new AffineTransform(),
-				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
-
-		宋體組字工具 = new 組字介面(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
-		ChineseCharacterTypeSetter 粗宋設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
-				.提著吳守禮注音摻宋體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
-				new AffineTransform(),
-				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
-
-		粗宋組字工具 = new 組字介面(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
-
-		ChineseCharacterTypeSetter 楷體設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
-				.提著吳守禮注音摻楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
-				new AffineTransform(),
-				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
-
-		楷體組字工具 = new 組字介面(查詢方式, 正規化工具, 楷體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
-
-		ChineseCharacterTypeSetter 粗楷設定工具 = new 字型參考設定工具(展開式查通用字型編號工具, 對照字體
-				.提著吳守禮注音摻楷體字體().調整字體參數(粗字型屬性, 字型大細), new FontRenderContext(
-				new AffineTransform(),
-				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
-				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
-
-		粗楷組字工具 = new 組字介面(查詢方式, 正規化工具, 粗楷設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
-	}
-
-	@Override
 	/**
-	 * 會依照使用的目錄，決定用的字體佮檔案類型。
-	 * 用法：<code>/字體/組字式.檔案類型</code>
-	 * 這馬干焦提供：<code>宋體</code>、<code>宋體粗體</code>、<code>楷體</code>、<code>楷體粗體</code>
-	 * 檔案類型：<code>png</code>
+	 * 建立一个組字介面，並決定所有屬性。
+	 * 
+	 * @param 查詢方式
+	 *            看使用者提供的部件，是毋是愛先換做展開式抑是按怎
+	 * @param 正規化工具
+	 *            決定有需要正規化無佮按怎正規化的物件
+	 * @param 異寫式查詢
+	 *            異寫式查詢的方法
+	 * @param 設定工具
+	 *            依據部件佮字體的性質，共部件提來產生活字
+	 * @param 調整工具
+	 *            佮頭拄仔產生的活字，組合閣共調整
+	 * @param 字型屬性
+	 *            主要是控制字體是毋是粗體
+	 * @param 字型大細
+	 *            字體愛偌大
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException
+	public 組字服務(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具,
+			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
+			分離活字加粗 活字加粗, int 字型屬性, int 字型大細)
 	{
-		String 網址字串 = URLDecoder.decode(request.getRequestURI(), "UTF-8")
-				.substring(1);
-		if (是舊網址(網址字串))// TODO ==字體
-		{
-			String[] 目錄 = 網址字串.split("/", 2);
-			String 新網址 = String.format("/%s?%s=%s",
-					URLEncoder.encode(目錄[1], "UTF-8"),
-					URLEncoder.encode("字體", "UTF-8"),
-					URLEncoder.encode(目錄[0], "UTF-8"));
-
-			System.out.println(網址字串);
-			System.out.println(目錄[0]);
-			System.out.println(目錄[1]);
-			System.out.println(新網址);
-			System.out.println("XXXDDDDD---------------------");
-			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-			// response.setHeader("Location", response.encodeRedirectURL(新網址));
-			response.setHeader("Location", 新網址);
-			// response.sendRedirect(String.format("/%s?字體=%s", 目錄[2], 目錄[1]));
-			return;
-		}
-		組字介面 組字工具 = 宋體組字工具;
-		switch (request.getParameter("字體"))
-		{
-		case "宋體":
-			組字工具 = 宋體組字工具;
-			break;
-		case "宋體粗體":
-			組字工具 = 粗宋組字工具;
-			break;
-		case "楷體":
-			組字工具 = 楷體組字工具;
-			break;
-		case "楷體粗體":
-			組字工具 = 粗楷組字工具;
-			break;
-		default:
-			組字工具 = 宋體組字工具;
-			break;
-		}
-
-		int 位置 = 網址字串.length();
-		for (int i = 0; i < 網址字串.length(); ++i)
-			if (網址字串.charAt(i) == '.')
-				位置 = i;
-		String 檔名 = 網址字串.substring(0, 位置);
-		String 附檔名 = 網址字串.substring(位置 + 1);
-		if (!附檔名.equals("svg"))// TODO 只支援png、svg，其他先用png
-			附檔名 = "png";
-		if (附檔名.equals("png"))
-		{
-			// System.err.println(附檔名);
-			BufferedImage 字型圖片 =
-			// 系統圖畫設定.createCompatibleImage(字型大細,
-			// 字型大細, Transparency.TRANSLUCENT);
-			new BufferedImage(字型大細, 字型大細, BufferedImage.TYPE_INT_ARGB);
-			組字工具.組字(檔名, 字型圖片.getGraphics());
-			ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
-		}
-		else
-		// svg
-		{
-			DOMImplementation domImpl = GenericDOMImplementation
-					.getDOMImplementation();
-
-			// Create an instance of org.w3c.dom.Document.
-			String svgNS = "http://www.w3.org/2000/svg";
-			Document document = domImpl.createDocument(svgNS, "svg", null);
-
-			boolean useCSS = true; // we want to use CSS style
-									// attributes
-			// Create an instance of the SVG Generator.
-			SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-			組字工具.組字(檔名, svgGenerator);
-			OutputStreamWriter svgOutput = new java.io.OutputStreamWriter(
-					response.getOutputStream(), "UTF-8");
-			svgGenerator.stream(svgOutput, useCSS);
-		}
+		this(查詢方式, 正規化工具, 設定工具, 調整工具, 活字加粗, 字型屬性, 字型大細, 50);
 	}
 
-	private boolean 是舊網址(String 網址字串)
+	/**
+	 * 建立一个組字介面，並決定所有屬性。
+	 * 
+	 * @param 查詢方式
+	 *            看使用者提供的部件，是毋是愛先換做展開式抑是按怎
+	 * @param 正規化工具
+	 *            決定有需要正規化無佮按怎正規化的物件
+	 * @param 異寫式查詢
+	 *            異寫式查詢的方法
+	 * @param 設定工具
+	 *            依據部件佮字體的性質，共部件提來產生活字
+	 * @param 調整工具
+	 *            佮頭拄仔產生的活字，組合閣共調整
+	 * @param 字型屬性
+	 *            主要是控制字體是毋是粗體
+	 * @param 字型大細
+	 *            字體愛偌大
+	 * @param 組字式上大長度
+	 *            限制組字式長度，予儂無法度惡意攻擊
+	 */
+	public 組字服務(展開式查詢工具 查詢方式, 組字式結構正規化工具 正規化工具,
+			ChineseCharacterTypeSetter 設定工具, MergePieceAdjuster 調整工具,
+			分離活字加粗 活字加粗, int 字型屬性, int 字型大細, int 組字式上大長度)
 	{
-		String[] 目錄 = 網址字串.split("/");
-		if (目錄.length == 2)// TODO ==字體
+		this.查詢方式 = 查詢方式;
+		this.正規化工具 = 正規化工具;
+		this.設定工具 = 設定工具;
+		this.調整工具 = 調整工具;
+		this.活字加粗 = 活字加粗;
+		this.字型屬性 = 字型屬性;
+		this.字型大細 = 字型大細;
+		this.組字式上大長度 = 組字式上大長度;
+
+		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
+	}
+
+	/**
+	 * 組字而且畫出來。
+	 * 
+	 * @param 組字式
+	 *            使用者要求的組字式
+	 * @param 欲畫的所在
+	 *            畫字體的所在
+	 * @return 實際畫的組字式
+	 */
+	public String 組字(String 組字式, Graphics 欲畫的所在)
+	{
+		if (組字式.length() >= 組字式上大長度)
+			組字式 = 組字式.substring(0, 組字式上大長度);
+		Profiler 看時工具 = new Profiler("組字 " + 組字式);
+		看時工具.setLogger(記錄工具);
+
+		看時工具.start("初使化");
+		// 記錄工具.debug(MarkerFactory.getMarker("@@"),
+		// "初使化～～ 時間：" + System.currentTimeMillis());
+
+		看時工具.start("分析中");
+		// 記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
+
+		組字式序列解析工具 序列分析工具 = new 組字式序列解析工具(組字式, 查詢方式);
+		部件 部件;
+		try
 		{
-			switch (目錄[0])
-			{
-			case "宋體":
-			case "宋體粗體":
-			case "楷體":
-			case "楷體粗體":
-				return true;
-			default:
-				return false;
-			}
+			部件 = 序列分析工具.解析一個組字式();
 		}
-		return false;
+		catch (組字式序列格式例外 e)
+		{
+			// TODO 看欲按怎處理，硬顯示，抑是傳連結毋著？
+			e.printStackTrace();
+			return "";
+		}
+
+		部件 組字部件 = (部件) 部件;
+		// 組字部件.建立組字式(組字式建立工具);
+		// 記錄工具.debug(組字部件.提到組字式());
+		部件 = (部件) 正規化工具.正規化(部件);
+		組字部件.樹狀結構組字式();
+		// 記錄工具.debug(組字部件.提到組字式());
+
+		看時工具.start("設定中");
+		// 記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
+
+		漢字組建活字 活字 = 部件.typeset(設定工具, null);
+
+		看時工具.start("調整中");
+		// 記錄工具.debug("調整中～～ 時間：" + System.currentTimeMillis());
+
+		活字.adjust(調整工具);
+
+		看時工具.start("四角中");
+		分離活字 上尾欲畫的圖 = 調整工具.format((PieceMovableType) 活字);
+
+		看時工具.start("加粗中");
+		活字加粗.加粗(上尾欲畫的圖);
+
+		看時工具.start("列印中");
+		// 記錄工具.debug("列印中～～ 時間：" + System.currentTimeMillis());
+		Graphics2D 字型圖版 = (Graphics2D) 欲畫的所在;
+		字型圖版.setColor(Color.black);
+		字型圖版.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		字型圖版.translate(0, 字型大細 * 0.83);// TODO 閣愛研究按怎調整
+		字型圖版.setStroke(new NullStroke());
+
+		AwtForSinglePiecePrinter 列印工具 = new AwtForSinglePiecePrinter(字型圖版);
+
+		列印工具.printPiece(上尾欲畫的圖);
+
+		看時工具.stop().log();
+		return 組字部件.樹狀結構組字式();
 	}
 }

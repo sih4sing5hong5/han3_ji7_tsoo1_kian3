@@ -53,7 +53,7 @@ public class 姊麶服務程式
 
 		ServletHandler handler = new ServletHandler();
 		server.setHandler(handler);
-		handler.addServletWithMapping(組字服務.class, "/*");
+		handler.addServletWithMapping(http組字要求處理.class, "/*");
 		boolean 遏袂啟動 = true;
 		while (遏袂啟動)
 		{

@@ -32,21 +32,13 @@ import java.awt.Font;
 import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.batik.dom.GenericDOMImplementation;
-import org.apache.batik.svggen.SVGGraphics2D;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
 
 import 漢字組建.部件結構調整工具.組字式結構正規化工具;
 import cc.tool.database.PgsqlConnection;
@@ -196,38 +188,18 @@ public class http組字要求處理 extends HttpServlet
 		for (int i = 0; i < 網址字串.length(); ++i)
 			if (網址字串.charAt(i) == '.')
 				位置 = i;
-		String 檔名 = 網址字串.substring(0, 位置);
+		String 組字式 = 網址字串.substring(0, 位置);
 		String 附檔名 = 網址字串.substring(位置 + 1);
 		if (!附檔名.equals("svg"))// TODO 只支援png、svg，其他先用png
 			附檔名 = "png";
 		if (附檔名.equals("png"))
 		{
-			// System.err.println(附檔名);
-			BufferedImage 字型圖片 =
-			// 系統圖畫設定.createCompatibleImage(字型大細,
-			// 字型大細, Transparency.TRANSLUCENT);
-			new BufferedImage(字型大細, 字型大細, BufferedImage.TYPE_INT_ARGB);
-			組字工具.組字(檔名, 字型圖片.getGraphics());
-			ImageIO.write(字型圖片, 附檔名, response.getOutputStream());
+			組字工具.字組成png(組字式, response.getOutputStream());
 		}
 		else
 		// svg
 		{
-			DOMImplementation domImpl = GenericDOMImplementation
-					.getDOMImplementation();
-
-			// Create an instance of org.w3c.dom.Document.
-			String svgNS = "http://www.w3.org/2000/svg";
-			Document document = domImpl.createDocument(svgNS, "svg", null);
-
-			boolean useCSS = true; // we want to use CSS style
-									// attributes
-			// Create an instance of the SVG Generator.
-			SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
-			組字工具.組字(檔名, svgGenerator);
-			OutputStreamWriter svgOutput = new java.io.OutputStreamWriter(
-					response.getOutputStream(), "UTF-8");
-			svgGenerator.stream(svgOutput, useCSS);
+			組字工具.字組成svg(組字式, response.getOutputStream());
 		}
 	}
 

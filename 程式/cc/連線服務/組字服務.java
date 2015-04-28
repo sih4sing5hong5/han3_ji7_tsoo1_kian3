@@ -239,7 +239,11 @@ public class 組字服務
 
 	public static 組字服務 預設組字服務()
 	{
-		int 字型大細 = 200;
+		return 預設組字服務(200);
+	}
+
+	public static 組字服務 預設組字服務(int 字型大細)
+	{
 		int 普通字型屬性 = 0;
 
 		展開式查詢工具 查詢方式 = new 展開式免查詢();

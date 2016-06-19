@@ -43,9 +43,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.example.reference.ControlPointsStroke;
-import cc.筆觸.FunctinoalBasicBolder;
-import cc.筆觸.NullStroke;
-import cc.筆觸.SimplifyStroke;
+import cc.stroke.FunctinoalBasicBolder;
+import cc.stroke.NullStroke;
+import cc.stroke.SimplifyStroke;
 
 /**
  * 加寬工具加寬趨勢分析, 將不同加寬度的字擺放在一起。

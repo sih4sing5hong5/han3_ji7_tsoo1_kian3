@@ -42,38 +42,38 @@ import org.slf4j.Logger;
 import org.slf4j.MarkerFactory;
 import org.slf4j.profiler.Profiler;
 
-import 漢字組建.解析工具.組字式序列解析工具;
-import 漢字組建.部件.部件;
-import 漢字組建.部件結構調整工具.組字式結構正規化工具;
+import cc.movabletype.PieceMovableType;
+import cc.movabletype.SeprateMovabletype;
+import cc.char_indexingtool.FontRefSettingTool;
+import cc.char_indexingtool.IntegratedFont;
+import cc.layouttools.MergePieceAdjuster;
+import cc.ccomponent_adjuster.ExpSequenceLookup;
+import cc.ccomponent_adjuster.ExpSequenceLookup_byDB;
+import cc.char_indexingtool.CommonFontNoSearchbyDB;
+import cc.log.IDSGenLogToolpack;
+import cc.movabletype.ChineseCharCompositeMoveabletype;
+import cc.printtools.AwtForSinglePiecePrinter;
+import cc.stroke.FunctinoalBasicBolder;
+import cc.stroke.NullStroke;
+import cc.stroketool.MkeSeparateMovableType_Bolder;
 import cc.tool.database.PgsqlConnection;
-import cc.印刷工具.AwtForSinglePiecePrinter;
-import cc.排版工具.MergePieceAdjuster;
-import cc.揀字工具.字型參考設定工具;
-import cc.揀字工具.整合字體;
-import cc.揀字工具.用資料庫查展開式的通用字型編號;
-import cc.活字.PieceMovableType;
-import cc.活字.分離活字;
-import cc.活字.漢字組建活字;
-import cc.程式記錄.漢字組建記錄工具包;
-import cc.筆觸.FunctinoalBasicBolder;
-import cc.筆觸.NullStroke;
-import cc.筆觸工具.分離活字加粗;
-import cc.部件結構調整工具.展開式查詢工具;
-import cc.部件結構調整工具.資料庫連線展開式查詢;
+import idsgen.CharComponentStructureAdjuster.IDSnormalizer;
+import idsgen.charcomponent.CharComponent;
+import idsgen.parser.IDSParser;
 
 /**
  * 主要測試的範例。
  * 
  * <pre>
  * 活字型態：<code>PieceMovableType</code>
- * 活字設定工具：<code>字型參考設定工具</code>
+ * 活字設定工具：<code>FontRefSettingTool</code>
  * 活字調整工具：<code>MergePieceAdjuster</code>
  * 活字列印工具：<code>AwtForSinglePiecePrinter</code>
  * </pre>
  * 
  * @author Ihc
  */
-public class AwtTestExample extends Awt測試樣板
+public class AwtTestExample extends AwtTestTemplate
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1L;
@@ -102,7 +102,7 @@ public class AwtTestExample extends Awt測試樣板
 	public void paint(Graphics g1)
 	{
 		// 換讀取權限
-		記錄工具 = new 漢字組建記錄工具包().記錄工具(getClass());
+		記錄工具 = new IDSGenLogToolpack().記錄工具(getClass());
 		Profiler 看時工具 = new Profiler(getName());
 		看時工具.setLogger(記錄工具);
 
@@ -131,27 +131,27 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("分析中");
 		記錄工具.debug("分析中～～ 時間：" + System.currentTimeMillis());
-		展開式查詢工具 查詢方式 = new 資料庫連線展開式查詢(連線);
-		// TODO 資料庫連線展開式查詢(連線) 展開式免查詢()
-		組字式序列解析工具 ccUtility = new 組字式序列解析工具(word, 查詢方式);
-		Vector<部件> ccArray = ccUtility.解析();
+		ExpSequenceLookup 查詢方式 = new ExpSequenceLookup_byDB(連線);
+		// TODO ExpSequenceLookup_byDB(連線) ExpSequenceNoLookup()
+		IDSParser ccUtility = new IDSParser(word, 查詢方式);
+		Vector<CharComponent> ccArray = ccUtility.解析();
 
-		組字式結構正規化工具 正規化工具 = new 組字式結構正規化工具();
-		for (部件 部件 : ccArray)
+		IDSnormalizer 正規化工具 = new IDSnormalizer();
+		for (CharComponent CharComponent : ccArray)
 		{
-			部件 組字部件 = (部件) 部件;
+			CharComponent 組字部件 = (CharComponent) CharComponent;
 			組字部件.樹狀結構組字式();
 			// 記錄工具.debug(組字部件.提到組字式());
-			正規化工具.正規化(部件);
+			正規化工具.正規化(CharComponent);
 			組字部件.樹狀結構組字式();
 			// 記錄工具.debug(組字部件.提到組字式());
 		}
 
 		看時工具.start("設定中");
 		記錄工具.debug("設定中～～ 時間：" + System.currentTimeMillis());
-		分離活字加粗 活字加粗 = new 分離活字加粗(
+		MkeSeparateMovableType_Bolder 活字加粗 = new MkeSeparateMovableType_Bolder(
 				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
-		字型參考設定工具 setter = new 字型參考設定工具(new 用資料庫查展開式的通用字型編號(連線), 整合字體.提著宋體字體()
+		FontRefSettingTool setter = new FontRefSettingTool(new CommonFontNoSearchbyDB(連線), IntegratedFont.提著宋體字體()
 				.調整字體參數(測試屬性, TYPE_SIZE), new FontRenderContext(
 				new AffineTransform(),
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
@@ -163,7 +163,7 @@ public class AwtTestExample extends Awt測試樣板
 		// new FontRenderContext(new AffineTransform(),
 		// java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 		// java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT));
-		Vector<漢字組建活字> ccmvArray = new Vector<漢字組建活字>();
+		Vector<ChineseCharCompositeMoveabletype> ccmvArray = new Vector<ChineseCharCompositeMoveabletype>();
 		for (int i = 0; i < ccArray.size(); ++i)
 		{
 			ccmvArray.add(ccArray.elementAt(i).typeset(setter, null));
@@ -181,7 +181,7 @@ public class AwtTestExample extends Awt測試樣板
 
 		看時工具.start("四角中");
 		記錄工具.debug("四角中～～ 時間：" + System.currentTimeMillis());
-		Vector<分離活字> 活字陣列 = new Vector<分離活字>();
+		Vector<SeprateMovabletype> 活字陣列 = new Vector<SeprateMovabletype>();
 
 		for (int i = 0; i < ccmvArray.size(); ++i)
 		{
@@ -189,7 +189,7 @@ public class AwtTestExample extends Awt測試樣板
 		}
 		看時工具.start("加粗中");
 		記錄工具.debug("加粗中～～ 時間：" + System.currentTimeMillis());
-		for (分離活字 活字 : 活字陣列)
+		for (SeprateMovabletype 活字 : 活字陣列)
 		{
 			活字加粗.加粗(活字);
 		}
@@ -213,11 +213,11 @@ public class AwtTestExample extends Awt測試樣板
 		記錄工具.debug("結束了～～ 時間：" + System.currentTimeMillis());
 		記錄工具.debug(" ");
 		看時工具.stop().log();
-		// 記錄工具.debug(整合字體.提著楷體字體().調整字體參數(測試屬性, TYPE_SIZE)
+		// 記錄工具.debug(IntegratedFont.提著楷體字體().調整字體參數(測試屬性, TYPE_SIZE)
 		// .有這个字型無(25110, 0));
 		// 記錄工具.debug("---------");
-		// 通用字型號碼 字型號碼=new 通用字型號碼(25110);
-		// 記錄工具.debug(整合字體.提著楷體字體().調整字體參數(測試屬性, TYPE_SIZE)
+		// CommonFontNo 字型號碼=new CommonFontNo(25110);
+		// 記錄工具.debug(IntegratedFont.提著楷體字體().調整字體參數(測試屬性, TYPE_SIZE)
 		// .有這个字型無(字型號碼));
 		return;
 	}

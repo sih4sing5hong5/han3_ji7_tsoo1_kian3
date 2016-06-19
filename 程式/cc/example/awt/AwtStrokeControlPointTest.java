@@ -44,9 +44,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import cc.example.reference.ControlPointsStroke;
-import cc.筆觸.NullStroke;
-import cc.筆觸.SimplifyStroke;
-import cc.筆觸工具.ShapeAnalyst;
+import cc.stroke.NullStroke;
+import cc.stroke.SimplifyStroke;
+import cc.stroketool.ShapeAnalyst;
 
 /**
  * 加寬工具效果分析，可用來觀察控制點。

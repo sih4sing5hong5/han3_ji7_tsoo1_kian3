@@ -42,7 +42,7 @@ import java.awt.geom.Area;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.筆觸.NullStroke;
+import cc.stroke.NullStroke;
 
 
 /**

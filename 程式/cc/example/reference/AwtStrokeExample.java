@@ -27,7 +27,7 @@ import java.awt.geom.PathIterator;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.筆觸.NullStroke;
+import cc.stroke.NullStroke;
 
 /** 修改自http://www.java2s.com/Code/Java/2D-Graphics-GUI/CustomStrokes.htm */
 public class AwtStrokeExample extends JPanel

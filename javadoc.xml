@@ -13,7 +13,7 @@
             noindex="false"
             nonavbar="false"
             notree="false"
-            packagenames="cc.moveable_type.rectangular_area,cc.printing.awt.area,cc.printing,cc.core,cc.程式記錄,cc.moveable_type.area,cc.moveable_type.image,cc.adjusting,cc.adjusting.image,cc.tool.database,cc.adjusting.piece,cc.setting.piece,cc.adjusting.bolder,cc.printing.awt.piece,cc.moveable_type.piece,cc.moveable_type,cc.example.reference,cc.printing.awt.image,cc.adjusting.area,cc.setting.area,cc.example.awt,cc.setting.image,cc.setting"
+            packagenames="cc.moveable_type.rectangular_area,cc.printing.awt.area,cc.printing,cc.core,cc.log,cc.moveable_type.area,cc.moveable_type.image,cc.adjusting,cc.adjusting.image,cc.tool.database,cc.adjusting.piece,cc.setting.piece,cc.adjusting.bolder,cc.printing.awt.piece,cc.moveable_type.piece,cc.moveable_type,cc.example.reference,cc.printing.awt.image,cc.adjusting.area,cc.setting.area,cc.example.awt,cc.setting.image,cc.setting"
             source="1.6"
             sourcepath="src"
             splitindex="true"

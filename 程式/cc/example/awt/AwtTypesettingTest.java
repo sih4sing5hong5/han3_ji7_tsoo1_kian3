@@ -51,8 +51,8 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cc.筆觸.NullStroke;
-import cc.筆觸工具.ShapeInformation;
+import cc.stroke.NullStroke;
+import cc.stroketool.ShapeInformation;
 
 /** A demonstration of writing custom Stroke classes */
 public class AwtTypesettingTest extends JPanel

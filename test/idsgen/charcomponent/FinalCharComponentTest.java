@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import idsgen.charcomponent.NonFinalCharComponent;
+import idsrend.charcomponent.NonFinalCharComponent;
 
 public class FinalCharComponentTest
 {

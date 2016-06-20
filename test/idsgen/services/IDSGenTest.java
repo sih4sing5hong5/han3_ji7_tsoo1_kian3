@@ -28,16 +28,16 @@ import cc.char_indexingtool.NonLookingupCommonFontNo;
 import cc.layouttools.MergePieceAdjuster;
 import cc.stroke.FunctinoalBasicBolder;
 import cc.stroketool.MkeSeparateMovableType_Bolder;
-import idsgen.CharComponentStructureAdjuster.IDSnormalizer;
-import idsgen.charcomponent.CharComponent;
-import idsgen.parser.IDSParser;
-import idsgen.services.IDSgenService;
+import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
+import idsrend.charcomponent.CharComponent;
+import idsrend.parser.IDSParser;
+import idsrend.services.IDSrendService;
 
 public class IDSGenTest
 {
 
 	/** 組宋體用的工具 */
-	protected IDSgenService 宋體組字工具;
+	protected IDSrendService 宋體組字工具;
 
 	int 字型大細 = 200;
 
@@ -64,7 +64,7 @@ public class IDSGenTest
 				java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
 				java.awt.RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT), 活字加粗);
 
-		宋體組字工具 = new IDSgenService(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
+		宋體組字工具 = new IDSrendService(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 	}
 
 	/** 測試漢字 */

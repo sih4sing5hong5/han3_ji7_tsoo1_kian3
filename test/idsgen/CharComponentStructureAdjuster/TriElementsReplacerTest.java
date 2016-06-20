@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
-import idsgen.CharComponentStructureAdjuster.TriElementsReplacer;
-import idsgen.charcomponent.CharComponent;
-import idsgen.parser.IDSParser;
+import idsrend.CharComponentStructureAdjuster.TriElementsReplacer;
+import idsrend.charcomponent.CharComponent;
+import idsrend.parser.IDSParser;
 
 public class TriElementsReplacerTest
 {

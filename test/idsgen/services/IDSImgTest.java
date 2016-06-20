@@ -9,12 +9,12 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
-import idsgen.services.IDSgenService;
+import idsrend.services.IDSrendService;
 
 public class IDSImgTest
 {
 	static final String 圖片存放路徑 = "組字圖片";
-	protected final IDSgenService 宋體組字服務 = IDSgenService.預設組字服務();
+	protected final IDSrendService 宋體組字服務 = IDSrendService.預設組字服務();
 
 	@Test
 	public void 意png() throws IOException

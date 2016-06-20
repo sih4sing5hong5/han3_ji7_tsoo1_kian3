@@ -7,11 +7,11 @@ import java.util.Vector;
 import org.junit.Test;
 
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
-import idsgen.charcomponent.FinalCharComponent;
-import idsgen.charcomponent.NonFinalCharComponent;
-import idsgen.parser.IDSParser;
-import idsgen.charcomponent.CompositionMethods;
-import idsgen.charcomponent.CharComponent;
+import idsrend.charcomponent.CharComponent;
+import idsrend.charcomponent.CompositionMethods;
+import idsrend.charcomponent.FinalCharComponent;
+import idsrend.charcomponent.NonFinalCharComponent;
+import idsrend.parser.IDSParser;
 
 public class IDSParserTest
 {

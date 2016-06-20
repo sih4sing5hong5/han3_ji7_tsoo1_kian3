@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
-import idsgen.CharComponentStructureAdjuster.IDSnormalizer;
-import idsgen.charcomponent.CharComponent;
-import idsgen.parser.IDSParser;
+import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
+import idsrend.charcomponent.CharComponent;
+import idsrend.parser.IDSParser;
 
 public class IDSNormalizerTest
 {

@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import idsgen.charcomponent.FinalCharComponent;
-import idsgen.charcomponent.NonFinalCharComponent;
-import idsgen.charcomponent.CompositionMethods;
+import idsrend.charcomponent.CompositionMethods;
+import idsrend.charcomponent.FinalCharComponent;
+import idsrend.charcomponent.NonFinalCharComponent;
 
 public class NonFinalCharComponentTest
 {

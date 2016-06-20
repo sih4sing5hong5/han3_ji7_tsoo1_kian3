@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="程式"/>
-	<classpathentry kind="src" path="試驗"/>
-	<classpathentry kind="src" path="功能試驗"/>
-	<classpathentry kind="lib" path="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1.jar" sourcepath="函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-sources.jar">
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="unittest"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/漢字組建/函式庫/cal10n-api-0.8.1/cal10n-api-0.8.1-javadoc.jar!/"/>
+			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-api-1.7.5.jar" sourcepath="函式庫/slf4j-1.7.5/slf4j-api-1.7.5-sources.jar">
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
 		<attributes>
-			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
+			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5.jar" sourcepath="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5-sources.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://www.slf4j.org/apidocs/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="函式庫/logback-1.0.0/logback-classic-1.0.0.jar"/>
-	<classpathentry kind="lib" path="函式庫/logback-1.0.0/logback-core-1.0.0.jar"/>
-	<classpathentry kind="lib" path="函式庫/postgresql-jdbc4/postgresql-jdbc4-9.1.jar"/>
-	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-api-1.7.5-sources.jar"/>
-	<classpathentry kind="lib" path="函式庫/slf4j-1.7.5/slf4j-ext-1.7.5-sources.jar"/>
-	<classpathentry kind="lib" path="函式庫/servlet-api/servlet-api-3.1.jar"/>
-	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-server-9.2.7.v20150116.jar"/>
-	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-http-9.2.7.v20150116.jar"/>
-	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-io-9.2.7.v20150116.jar"/>
-	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-servlet-9.2.7.v20150116.jar"/>
-	<classpathentry kind="lib" path="函式庫/jetty-distribution-9.2.7.v20150116/jetty-util-9.2.7.v20150116.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-awt-util-1.7.jar"/>
-	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-dom-1.7.jar"/>
-	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-ext-1.7.jar"/>
-	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-svggen-1.7.jar"/>
-	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-util-1.7.jar"/>
-	<classpathentry kind="lib" path="函式庫/batik-1.7/batik-xml-1.7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/batik-awt-util-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/batik-dom-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/batik-ext-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/batik-svggen-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/batik-util-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/batik-xml-1.7.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cal10n-api-0.8.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cal10n-api-0.8.1-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/cal10n-api-0.8.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-http-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-io-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-server-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-servlet-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jetty-util-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/logback-classic-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/logback-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-jdbc4-9.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.7.5-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-ext-1.7.5-sources.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-ext-1.7.5.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
 </classpath>

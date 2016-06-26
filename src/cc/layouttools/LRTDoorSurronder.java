@@ -53,6 +53,7 @@ public class LRTDoorSurronder extends ObjMoveableTypeSurronder
 		支援包圍部件.add("鬥");
 		支援包圍部件.add("乃");
 		支援包圍部件.add("⻔");
+		支援包圍部件.add("几");
 		// TODO　/*冏間鬥盈咼…*/
 	}
 

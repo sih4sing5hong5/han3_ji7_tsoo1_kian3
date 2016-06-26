@@ -3,11 +3,17 @@
 產生方言、古書、古樂譜、姓名等漢語缺字。
 
 ##變遷
- 此版本為MGdesigner對意傳版本的"sih4sing5hong5/han3_ji7_tsoo1_kian3"的改版，修改內容是為了
-* 修改所有檔名為全英文，以讓在純ASCII的檔案系統上也能運作
-* 修改程式到符合標準的Servlet規格以讓引擎到標準JAVA應用程式伺服器也能運作（原來是以Jetty驅動的java標準應用程式）
-* 承上，程式可以打包出標準的war佈署檔
-* 打包出來的war命名為idsrender，掛在Tomcat等java應用伺服器裡時也是叫這個名字，使就算非漢語使用人士也看得懂其作用
+0626 程式執行方法：
+
+jetty獨立模式，單機獨立的server：程式起始點是
+src/idsrend/services/HttpserverJetty.java
+，執行時，需要讓font目錄跟編譯好的classes目錄在同一目錄底下（可用symbolink
+達成）。
+
+Java應用伺服器執行模式：程式起始點 
+src/idsrend/services/IDSrendServlet.java
+在eclipse裡用Javaee模式可以開啟，可以在local的tomcat上執行，也可以包成
+war佈署到遠方Java應用伺服器上。war佈署出去，執行時名稱為idsrender。
 
 ##著作權與授權說明
 * 本軟體原始著作權所有 (C) 民國102年 意傳文化科技

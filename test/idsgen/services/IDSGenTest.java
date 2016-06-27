@@ -100,7 +100,7 @@ public class IDSGenTest
 			+ "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
 			+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐"
 			+ "⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹" + "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
-	static String 圖片存放路徑 = "組字圖片";
+	static String 圖片存放路徑 = "test_resourse";
 
 	@Test
 	public void test() throws IOException

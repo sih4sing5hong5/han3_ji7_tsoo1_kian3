@@ -37,5 +37,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-ext-1.7.5-sources.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-ext-1.7.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api-3.1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

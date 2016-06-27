@@ -56,6 +56,7 @@ public class LeftTopSurrounder extends ObjMoveableTypeSurronder
 		支援包圍部件.add("户");
 		支援包圍部件.add("虍");
 		支援包圍部件.add("耂");
+		支援包圍部件.add("⺶");
 		// TODO　/*歷廈病居房灰老名虐遞…*/
 	}
 

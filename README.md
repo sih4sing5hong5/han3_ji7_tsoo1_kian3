@@ -1,8 +1,20 @@
-
 # 漢字組建
 產生方言、古書、古樂譜、姓名等漢語缺字。
 
-##變遷
+## 使用說明
+
+### 執行Jetty
+```bash
+./gradlew run
+```
+
+### 試驗
+```bash
+./gradlew assemble
+./gradlew check
+```
+
+### 變遷
 0626 程式執行方法：
 
 jetty獨立模式，單機獨立的server：程式起始點是

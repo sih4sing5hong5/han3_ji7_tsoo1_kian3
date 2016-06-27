@@ -100,7 +100,6 @@ public class IDSGenTest
 			+ "ㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ ㄧㄨㄩ ㄪㄫㄬ ㄭㄮ "
 			+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐"
 			+ "⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹" + "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
-	static String 圖片存放路徑 = "test_resourse";
 
 	@Test
 	public void test() throws IOException
@@ -129,11 +128,13 @@ public class IDSGenTest
 			// }
 			ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
 			ImageIO.write(字型圖片, "png", 輸出檔案);
-			InputStream 組字圖片 = new FileInputStream(圖片存放路徑
-					+ "/"
+			String 路徑 = "/"
 					+ 組字式.replace("⿿", "⿳").replace("⿵", "⿴").replace("⿶", "⿴")
-							.replace("⿷", "⿴").replace("⿸", "⿴").replace("⿹", "⿴")
-							.replace("⿺", "⿴") + ".png");
+							.replace("⿷", "⿴")
+							.replace("⿸", "⿴")
+							.replace("⿹", "⿴")
+							.replace("⿺", "⿴") + ".png";
+			InputStream 組字圖片 = IDSGenTest.class.getResourceAsStream(路徑);
 			for (byte 字元 : 輸出檔案.toByteArray())
 			{
 				assertEquals((字元), (byte) (組字圖片.read()));

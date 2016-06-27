@@ -12,7 +12,6 @@ import org.junit.Test;
 import idsrend.services.IDSrendService;
 
 public class IDSImgTest {
-	static final String 圖片存放路徑 = "test_resourse";
 	protected final IDSrendService 宋體組字服務 = IDSrendService.預設組字服務();
 
 	@Test
@@ -53,8 +52,8 @@ public class IDSImgTest {
 	private void 檢查png結果(String 組字式) throws IOException {
 		ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
 		宋體組字服務.字組成png(組字式, 輸出檔案);
-		String 檔案路徑 = String.format("%s/%s.%s", 圖片存放路徑, 組字式, "png");
-		InputStream 檔案圖片 = new FileInputStream(檔案路徑);
+		String 檔案路徑 = String.format("/%s.%s", 組字式, "png");
+		InputStream 檔案圖片 = this.getClass().getResourceAsStream(檔案路徑);
 		for (byte 字元 : 輸出檔案.toByteArray()) {
 			assertEquals((字元), (byte) (檔案圖片.read()));
 		}
@@ -66,9 +65,8 @@ public class IDSImgTest {
 	private void 檢查svg結果(String 組字式) throws IOException {
 		ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
 		宋體組字服務.字組成svg(組字式, 輸出檔案);
-		String 檔案路徑 = String.format("%s/%s/%s.%s",
-				System.getProperty("user.dir"), 圖片存放路徑, 組字式, "svg");
-		InputStream 檔案圖片 = new FileInputStream(檔案路徑);
+		String 檔案路徑 = String.format("/%s.%s", 組字式, "svg");
+		InputStream 檔案圖片 = this.getClass().getResourceAsStream(檔案路徑);
 		for (byte 字元 : 輸出檔案.toByteArray()) {
 			assertEquals((字元), (byte) (檔案圖片.read()));
 		}

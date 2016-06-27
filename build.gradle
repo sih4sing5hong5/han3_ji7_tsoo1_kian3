@@ -12,21 +12,6 @@ apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "idsrend.services.HttpserverJetty"
 
-sourceSets {
-    main {
-        java {
-            srcDir 'src'
-        }
-        resources {
-            srcDir 'config'
-        }
-    }
-    test {
-        java {
-            srcDir 'test'
-        }
-    }
-}
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use 'jcenter' for resolving your dependencies.

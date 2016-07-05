@@ -1,8 +1,22 @@
-
 # 漢字組建
 產生方言、古書、古樂譜、姓名等漢語缺字。
 
-##變遷
+## 使用說明
+
+### 執行Jetty
+```bash
+./gradlew run
+```
+
+之後就可以連到 [localhost:8060](http://localhost:8060/%E2%BF%B1%E2%BF%B0(%E2%BF%B0V%E2%BF%B0)%E2%BF%B0@%E2%BF%B0@%E2%BF%B0(%E2%BF%B0V)%E2%BF%B0%E4%B8%89%E2%BF%B0(%E2%BF%B0_%E2%BF%B0_%E2%BF%B0_%E2%BF%B0_%E2%BF%B0)%E4%B8%89.png?%E5%AD%97%E9%AB%94=%E5%AE%8B%E9%AB%94) 取得 PNG 和 SVG 了。
+
+### 試驗
+```bash
+./gradlew assemble
+./gradlew check
+```
+
+### 變遷
 0626 程式執行方法：
 
 jetty獨立模式，單機獨立的server：程式起始點是

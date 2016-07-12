@@ -1,9 +1,24 @@
 # 漢字組建
 產生方言、古書、古樂譜、姓名等漢語缺字。
 
+## 變遷
+0712 程式修改成通用時jetty/Tomcat server的方式
+
 ## 使用說明
 
-### 執行Jetty
+### 打包成war
+```bash
+./gradlew war
+```
+包好的war會放在 build/libs裡面
+### 打包成war佈署到本地端的tomcat執行
+```bash
+./gradlew tomcatRunWar
+```
+然後就可以連到[localhost:8080](http://localhost:8080/han3_ji7_tsoo1_kian3/⿴辶⿴宀⿱珤⿰隹⿰貝招.png?字體=宋體)取得 PNG 和 SVG 了
+
+
+### 執行Jetty（獨立程式模式）
 ```bash
 ./gradlew run
 ```
@@ -16,18 +31,14 @@
 ./gradlew check
 ```
 
-### 變遷
-0626 程式執行方法：
-
+##程式解說
+###進入點
 jetty獨立模式，單機獨立的server：程式起始點是
 src/idsrend/services/HttpserverJetty.java
-，執行時，需要讓font目錄跟編譯好的classes目錄在同一目錄底下（可用symbolink
-達成）。
 
 Java應用伺服器執行模式：程式起始點 
 src/idsrend/services/IDSrendServlet.java
-在eclipse裡用Javaee模式可以開啟，可以在local的tomcat上執行，也可以包成
-war佈署到遠方Java應用伺服器上。war佈署出去，執行時名稱為idsrender。
+
 
 ##著作權與授權說明
 * 本軟體原始著作權所有 (C) 民國102年 意傳文化科技

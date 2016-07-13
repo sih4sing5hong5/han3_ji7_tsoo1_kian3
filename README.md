@@ -1,4 +1,6 @@
 # 漢字組建
+[![Build Status](https://travis-ci.org/sih4sing5hong5/han3_ji7_tsoo1_kian3.svg?branch=master)](https://travis-ci.org/sih4sing5hong5/han3_ji7_tsoo1_kian3)
+
 產生方言、古書、古樂譜、姓名等漢語缺字。
 * 功能展示
   * [意傳文化科技](http://意傳.台灣/%E7%B7%9A%E4%B8%8A%E7%B5%84%E5%AD%97)

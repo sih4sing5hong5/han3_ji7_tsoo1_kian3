@@ -29,6 +29,7 @@
 package idsrend.services;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -291,6 +292,7 @@ public class IDSrendService
 								// attributes
 		// Create an instance of the SVG Generator.
 		SVGGraphics2D svgGenerator = new SVGGraphics2D(document);
+		svgGenerator.setSVGCanvasSize(new Dimension(字型大細, 字型大細));
 		組字(組字式, svgGenerator);
 		OutputStreamWriter svgOutput = new java.io.OutputStreamWriter(輸出檔案,
 				"UTF-8");

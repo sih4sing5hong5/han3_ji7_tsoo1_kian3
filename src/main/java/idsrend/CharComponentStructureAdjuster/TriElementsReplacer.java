@@ -32,8 +32,9 @@ public class TriElementsReplacer
 				第二層右邊字部件.底下元素()[1] = FinalCharComponent.底下元素()[2];
 				CharComponent = 第一層字部件;
 			}
-			for (int i = 0; i < FinalCharComponent.底下元素().length; i++)
-				FinalCharComponent.底下元素()[i] = 三元素組合代換成二元素(FinalCharComponent.底下元素()[i]);
+			FinalCharComponent 上尾字部件 = (FinalCharComponent) CharComponent;
+			for (int i = 0; i < 上尾字部件.底下元素().length; i++)
+				上尾字部件.底下元素()[i] = 三元素組合代換成二元素(上尾字部件.底下元素()[i]);
 		}
 		return CharComponent;
 	}

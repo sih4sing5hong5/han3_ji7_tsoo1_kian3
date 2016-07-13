@@ -1,15 +1,16 @@
 package idsgen.services;
 
 import static org.junit.Assert.assertEquals;
+import idsrend.services.IDSrendService;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 
 import org.junit.Test;
-
-import idsrend.services.IDSrendService;
 
 public class IDSImgTest {
 	protected final IDSrendService 宋體組字服務 = IDSrendService.預設組字服務();
@@ -66,12 +67,17 @@ public class IDSImgTest {
 		ByteArrayOutputStream 輸出檔案 = new ByteArrayOutputStream();
 		宋體組字服務.字組成svg(組字式, 輸出檔案);
 		String 檔案路徑 = String.format("/%s.%s", 組字式, "svg");
-		InputStream 檔案圖片 = this.getClass().getResourceAsStream(檔案路徑);
-		for (byte 字元 : 輸出檔案.toByteArray()) {
-			assertEquals((字元), (byte) (檔案圖片.read()));
+		BufferedReader 檔案圖片 = new BufferedReader(new InputStreamReader(this
+				.getClass().getResourceAsStream(檔案路徑)));
+		BufferedReader 動態圖片 = new BufferedReader(new StringReader(
+				輸出檔案.toString()));
+		String 結果 = "";
+		while (結果 != null) {
+			結果 = 檔案圖片.readLine();
+			assertEquals(結果, 動態圖片.readLine());
 		}
-		assertEquals(檔案圖片.read(), -1);
 		檔案圖片.close();
+		動態圖片.close();
 		return;
 	}
 }

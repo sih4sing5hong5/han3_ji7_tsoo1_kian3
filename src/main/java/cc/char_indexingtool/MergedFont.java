@@ -86,11 +86,10 @@ public class MergedFont extends CommonFont
 		{
 			try
 			{
-				File 工作目錄 = new File(System.getProperty("user.dir"));
-				System.out.println("工作目錄=" + 工作目錄);
+			    字體集[i] = Font.createFont(Font.TRUETYPE_FONT,
+							this.getClass().getResourceAsStream(字體位置[i] )
+							);
 
-				字體集[i] = Font.createFont(Font.TRUETYPE_FONT,
-						new File(工作目錄.getPath() + "/WebContent/WEB-INF" + 字體位置[i]));// TODO
 				// font
 				// type
 			}

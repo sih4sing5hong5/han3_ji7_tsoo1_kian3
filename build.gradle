@@ -10,13 +10,27 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'application'
+apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'war'
 mainClassName = "idsrend.services.HttpserverJetty"
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+    }
+}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use 'jcenter' for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 
@@ -37,4 +51,16 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+
+    def tomcatVersion = '7.0.52'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+}
+
+
+war{
+    //from 'src/wwwroot'
+    webInf { from 'src/main/webapp/WEB-INF' }
+    webXml = file('src/main/webapp/WEB-INF/web.xml')    
 }

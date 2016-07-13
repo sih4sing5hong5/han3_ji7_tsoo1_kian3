@@ -31,6 +31,12 @@ public class TriElementsReplacerTest
 		assertEquals("⿱⿰糹⿰言糹攵", 代換結果("⿱⿲糹言糹攵"));
 	}
 
+	@Test
+	public void 巢狀三部件組合符號()
+	{
+		assertEquals("⿺辶⿱宀⿱珤⿰隹⿰貝招", 代換結果("⿺辶⿳宀珤⿲隹貝招"));
+	}
+
 	protected String 代換結果(String 組字式)
 	{
 		IDSParser 解析工具 = new IDSParser(組字式, new ExpSequenceNoLookup());

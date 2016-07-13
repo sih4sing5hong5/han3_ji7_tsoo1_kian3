@@ -1,60 +1,50 @@
 # 漢字組建
+[![Build Status](https://travis-ci.org/sih4sing5hong5/han3_ji7_tsoo1_kian3.svg?branch=master)](https://travis-ci.org/sih4sing5hong5/han3_ji7_tsoo1_kian3)
+
 產生方言、古書、古樂譜、姓名等漢語缺字。
+* 功能展示
+  * [意傳文化科技](http://意傳.台灣/%E7%B7%9A%E4%B8%8A%E7%B5%84%E5%AD%97)
 
 ## 變遷
 0712 程式修改成通用時jetty/Tomcat server的方式
 
-## 使用說明
+## 開發說明
+
+### 打包成war佈署到本地端的tomcat執行
+```bash
+./gradlew tomcatRunWar
+```
+* 可以到[localhost:8080/han3_ji7_tsoo1_kian3/組字式.png?字體=宋體](http://localhost:8080/han3_ji7_tsoo1_kian3/⿴辶⿴宀⿱珤⿰隹⿰貝招.png?字體=宋體)取得 PNG 和 SVG 了
+* 程式起始點
+  * `src/main/java/idsrend/services/IDSrendServlet.java`
 
 ### 打包成war
 ```bash
 ./gradlew war
 ```
-包好的war會放在 build/libs裡面
-### 打包成war佈署到本地端的tomcat執行
-```bash
-./gradlew tomcatRunWar
-```
-然後就可以連到[localhost:8080](http://localhost:8080/han3_ji7_tsoo1_kian3/⿴辶⿴宀⿱珤⿰隹⿰貝招.png?字體=宋體)取得 PNG 和 SVG 了
-
-
+* 包好的`war`會放在`build/libs`裡面
+* 程式起始點
+  * `src/main/java/idsrend/services/IDSrendServlet.java`
+  
 ### 執行Jetty（獨立程式模式）
 ```bash
 ./gradlew run
 ```
 
-之後就可以連到 [localhost:8060](http://localhost:8060/%E2%BF%B1%E2%BF%B0(%E2%BF%B0V%E2%BF%B0)%E2%BF%B0@%E2%BF%B0@%E2%BF%B0(%E2%BF%B0V)%E2%BF%B0%E4%B8%89%E2%BF%B0(%E2%BF%B0_%E2%BF%B0_%E2%BF%B0_%E2%BF%B0_%E2%BF%B0)%E4%B8%89.png?%E5%AD%97%E9%AB%94=%E5%AE%8B%E9%AB%94) 取得 PNG 和 SVG 了。
+* 可以到 [localhost:8060/組字式.png?字體=宋體](http://localhost:8060/%E2%BF%B1%E2%BF%B0(%E2%BF%B0V%E2%BF%B0)%E2%BF%B0@%E2%BF%B0@%E2%BF%B0(%E2%BF%B0V)%E2%BF%B0%E4%B8%89%E2%BF%B0(%E2%BF%B0_%E2%BF%B0_%E2%BF%B0_%E2%BF%B0_%E2%BF%B0)%E4%B8%89.png?%E5%AD%97%E9%AB%94=%E5%AE%8B%E9%AB%94) 取得 PNG 和 SVG 了。
+* 程式起始點
+  * `src/main/java/idsrend/services/HttpserverJetty.java`
 
 ### 試驗
 ```bash
 ./gradlew assemble
 ./gradlew check
 ```
-
-##程式解說
-###進入點
-jetty獨立模式，單機獨立的server：程式起始點是
-src/idsrend/services/HttpserverJetty.java
-
-Java應用伺服器執行模式：程式起始點 
-src/idsrend/services/IDSrendServlet.java
+* 若是試驗失敗，無法整合進`master`
+* 程式起始點
+  * `src/tets/java`
 
 
-##著作權與授權說明
-* 本軟體原始著作權所有 (C) 民國102年 意傳文化科技
-* 原始開發者：薛丞宏
-* 字型提供：請看下方字體授權
-
-本程式乃自由軟體，您必須遵照Affero通用公眾特許條款（Affero General Public License, AGPL)來修改和重新發佈這一程式，詳情請參閱條文。授權大略如下，若有歧異，以授權原文為主： 
-1. 得使用、修改、複製並發佈此程式碼，且必須以通用公共授權發行；
-2. 任何以程式碼衍生的執行檔或網路服務，必須公開全部程式碼； 
-3. 將此程式的原始碼當函式庫引用入商業軟體，需公開非關此函式庫的任何程式碼
-
-此開放原始碼、共享軟體或說明文件之使用或散佈不負擔保責任，並拒絕負擔因使用上述軟體或說明文件所致任何及一切賠償責任或損害。
-
-漢字組建緣起於本土文化推廣與傳承，非常歡迎各界推廣使用，但希望在使用之餘，能夠提供建議、錯誤回報或修補，回饋給這塊土地。
-
-謝謝您的使用與推廣～～
 
 ##程式流程
 因為寫兩冬矣，所以寫程式的慣勢有改變，對英文→華文→閩南語，我~~會揣時間~~正在重構成華語。以「cc.連線服務.組字介面」來講，程式攏總有七步：
@@ -76,7 +66,19 @@ src/idsrend/services/IDSrendServlet.java
 
 詳細的功能請看java文件（/doc)
 
-##字體授權
+## 程式授權
+本程式乃自由軟體，您必須遵照Affero通用公眾特許條款（Affero General Public License, AGPL)來修改和重新發佈這一程式，詳情請參閱條文。授權大略如下，若有歧異，以授權原文為主： 
+1. 得使用、修改、複製並發佈此程式碼，且必須以通用公共授權發行；
+2. 任何以程式碼衍生的執行檔或網路服務，必須公開全部程式碼； 
+3. 將此程式的原始碼當函式庫引用入商業軟體，需公開非關此函式庫的任何程式碼
+
+此開放原始碼、共享軟體或說明文件之使用或散佈不負擔保責任，並拒絕負擔因使用上述軟體或說明文件所致任何及一切賠償責任或損害。
+
+漢字組建緣起於本土文化推廣與傳承，非常歡迎各界推廣使用，但希望在使用之餘，能夠提供建議、錯誤回報或修補，回饋給這塊土地。
+
+謝謝您的使用與推廣～～
+
+## 字體授權
 * 全字庫授權說明
     * © 2012 中華民國行政院研究發展考核委員會。本字型檔採用創用CC「姓名標示－禁止改作」3.0臺灣版授權條款釋出。您可以在不變更字型內容之條件下，重製、散布及傳輸本字型檔之著作內容。惟應保留本字型名稱及著作權聲明。
     * http://www.cns11643.gov.tw/AIDB/copyright.do

@@ -26,7 +26,7 @@
  * 
  * 謝謝您的使用與推廣～～
  ******************************************************************************/
-package idsrend.CharComponentStructureAdjuster;
+package 漢字組建.組字式代換工具;
 
 import idsrend.charcomponent.CharComponent;
 import idsrend.charcomponent.CompositionMethods;

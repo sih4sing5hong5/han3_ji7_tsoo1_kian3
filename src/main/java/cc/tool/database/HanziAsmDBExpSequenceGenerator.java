@@ -31,8 +31,8 @@ package cc.tool.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import 漢字組建.組字式代換工具.IDSnormalizer;
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
-import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
 import idsrend.charcomponent.CharComponent;
 import idsrend.charcomponent.CompositionMethods;
 import idsrend.parser.IDSParser;

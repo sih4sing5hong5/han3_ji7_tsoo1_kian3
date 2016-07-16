@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import 漢字組建.組字式代換工具.三元素組合符號代換工具;
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
-import idsrend.CharComponentStructureAdjuster.三元素組合符號代換工具;
 import idsrend.charcomponent.CharComponent;
 import idsrend.parser.IDSParser;
 

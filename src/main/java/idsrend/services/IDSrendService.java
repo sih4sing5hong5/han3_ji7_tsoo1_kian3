@@ -52,6 +52,8 @@ import org.slf4j.profiler.Profiler;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
+import 漢字組建.組字式代換工具.IDSnormalizer;
+import 漢字組建.組字式代換工具.三元素組合符號代換工具;
 import cc.movabletype.PieceMovableType;
 import cc.movabletype.SeprateMovabletype;
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
@@ -68,8 +70,6 @@ import cc.printtools.AwtForSinglePiecePrinter;
 import cc.stroke.FunctinoalBasicBolder;
 import cc.stroke.NullStroke;
 import cc.stroketool.MkeSeparateMovableType_Bolder;
-import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
-import idsrend.CharComponentStructureAdjuster.三元素組合符號代換工具;
 import idsrend.charcomponent.CharComponent;
 import idsrend.parser.IDSExecption;
 import idsrend.parser.IDSParser;

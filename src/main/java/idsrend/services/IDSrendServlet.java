@@ -41,6 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletContext;
 
+import 漢字組建.組字式代換工具.IDSnormalizer;
 import cc.ccomponent_adjuster.ExpSequenceLookup;
 import cc.ccomponent_adjuster.ExpSequenceLookup_byDB;
 import cc.char_indexingtool.ChineseCharacterTypeSetter;
@@ -52,7 +53,6 @@ import cc.char_indexingtool.CommonFontNoSearchbyDB;
 import cc.stroke.FunctinoalBasicBolder;
 import cc.stroketool.MkeSeparateMovableType_Bolder;
 import cc.tool.database.PgsqlConnection;
-import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
 
 import java.lang.System;
 

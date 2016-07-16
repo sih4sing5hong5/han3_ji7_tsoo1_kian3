@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.MarkerFactory;
 import org.slf4j.profiler.Profiler;
 
+import 漢字組建.組字式代換工具.IDSnormalizer;
 import cc.movabletype.PieceMovableType;
 import cc.movabletype.SeprateMovabletype;
 import cc.char_indexingtool.FontRefSettingTool;
@@ -57,7 +58,6 @@ import cc.stroke.FunctinoalBasicBolder;
 import cc.stroke.NullStroke;
 import cc.stroketool.MkeSeparateMovableType_Bolder;
 import cc.tool.database.PgsqlConnection;
-import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
 import idsrend.charcomponent.CharComponent;
 import idsrend.parser.IDSParser;
 

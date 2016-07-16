@@ -35,11 +35,11 @@ import java.util.Vector;
 
 import org.slf4j.Logger;
 
+import 漢字組建.組字式代換工具.IDSnormalizer;
 import cc.ccomponent_adjuster.ExpSequenceLookup;
 import cc.ccomponent_adjuster.ExpSequenceLookup_byDB;
 import cc.tool.database.PgsqlConnection;
 import cc.tool.database.String2ControlCode;
-import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
 import idsrend.charcomponent.CharComponent;
 import idsrend.parser.IDSParser;
 

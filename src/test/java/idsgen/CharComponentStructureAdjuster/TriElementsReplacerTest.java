@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import 漢字組建.組字式代換工具.三元素組合符號代換工具;
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
-import idsrend.CharComponentStructureAdjuster.TriElementsReplacer;
 import idsrend.charcomponent.CharComponent;
 import idsrend.parser.IDSParser;
 
 public class TriElementsReplacerTest
 {
-	protected TriElementsReplacer 代換工具 = new TriElementsReplacer();
+	protected 三元素組合符號代換工具 代換工具 = new 三元素組合符號代換工具();
 
 	@Test
 	public void 左右組字方式()

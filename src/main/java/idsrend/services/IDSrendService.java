@@ -52,6 +52,8 @@ import org.slf4j.profiler.Profiler;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
+import 漢字組建.組字式代換工具.IDSnormalizer;
+import 漢字組建.組字式代換工具.三元素組合符號代換工具;
 import cc.movabletype.PieceMovableType;
 import cc.movabletype.SeprateMovabletype;
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
@@ -68,8 +70,6 @@ import cc.printtools.AwtForSinglePiecePrinter;
 import cc.stroke.FunctinoalBasicBolder;
 import cc.stroke.NullStroke;
 import cc.stroketool.MkeSeparateMovableType_Bolder;
-import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
-import idsrend.CharComponentStructureAdjuster.TriElementsReplacer;
 import idsrend.charcomponent.CharComponent;
 import idsrend.parser.IDSExecption;
 import idsrend.parser.IDSParser;
@@ -88,7 +88,7 @@ public class IDSrendService
 	/** 決定有需要正規化無佮按怎正規化的物件 */
 	protected IDSnormalizer 正規化工具;
 
-	protected TriElementsReplacer 代換工具 = new TriElementsReplacer();
+	protected 三元素組合符號代換工具 代換工具 = new 三元素組合符號代換工具();
 	/** 依據部件佮字體的性質，共部件提來產生活字 */
 	protected ChineseCharacterTypeSetter 設定工具;
 	/** 佮頭拄仔產生的活字，組合閣共調整 */

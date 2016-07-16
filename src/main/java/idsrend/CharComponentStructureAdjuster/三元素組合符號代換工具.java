@@ -4,7 +4,7 @@ import idsrend.charcomponent.CharComponent;
 import idsrend.charcomponent.CompositionMethods;
 import idsrend.charcomponent.FinalCharComponent;
 
-public class TriElementsReplacer
+public class 三元素組合符號代換工具
 {
 	public CharComponent 三元素組合代換成二元素(CharComponent CharComponent)
 	{

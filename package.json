@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "deploy": "./gradlew javadoc && gh-pages -d build/docs/javadoc/"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gh-pages": "^0.11.0"
+  }
+}

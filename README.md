@@ -51,7 +51,7 @@ npm i && npm run deploy
 ```
 
 ##程式流程
-[javadoc](https://sih4sing5hong5.github.io/han3_ji7_tsoo1_kian3/)雖然沒有整理程式流程，不過說明可以加減參考一下
+[javadoc](https://xn--5nqy36c.xn--p8s937b.xn--v0qr21b.xn--kpry57d)雖然沒有整理程式流程，不過說明可以加減參考一下
 
 因為寫兩冬矣，所以寫程式的慣勢有改變，對英文→華文→閩南語，我~~會揣時間~~正在重構成華語。以「cc.連線服務.組字介面」來講，程式攏總有七步：
 

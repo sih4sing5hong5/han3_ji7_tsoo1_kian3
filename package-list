@@ -1,0 +1,16 @@
+cc.ccomponent_adjuster
+cc.char_indexingtool
+cc.example.awt
+cc.example.reference
+cc.layouttools
+cc.log
+cc.movabletype
+cc.othertools
+cc.printtools
+cc.stroke
+cc.stroketool
+cc.tool.database
+idsrend.CharComponentStructureAdjuster
+idsrend.charcomponent
+idsrend.parser
+idsrend.services

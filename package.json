@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "deploy": "./gradlew javadoc && (echo 'xn--5nqy36c.xn--p8s937b.xn--v0qr21b.xn--kpry57d' > build/docs/javadoc/CNAME) && gh-pages -d build/docs/javadoc/"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "gh-pages": "^0.11.0"
+  }
+}

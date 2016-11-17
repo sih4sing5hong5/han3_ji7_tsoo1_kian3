@@ -146,7 +146,8 @@ public class IDSrendServlet extends HttpServlet
 		//System.out.println("網址字串="+網址字串);
 		//System.out.println("輸入的uri="+request.getRequestURI());	
 		//System.out.println("字體是"+request.getParameter("字體"));
-		switch (request.getParameter("字體"))
+		String 字體 = request.getParameter("字體");
+		switch (字體 != null ? 字體 : "")
 		{
 		case "宋體":
 			組字工具 = 宋體組字工具;

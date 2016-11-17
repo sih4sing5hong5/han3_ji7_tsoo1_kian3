@@ -5,14 +5,14 @@ import cc.movabletype.SeprateMovabletype;
 
 /**
  * 用於四面的包圍部件。從四面包住，像是「囗」等等。
- * 
+ *
  * @author Ihc
  */
 public class FullSurronder extends ObjMoveableTypeSurronder
 {
 	/**
 	 * 建立四面包圍工具
-	 * 
+	 *
 	 * @param 調整工具
 	 *            使用此包圍工具的調整工具，並使用其自身合併相關函式
 	 */
@@ -20,6 +20,9 @@ public class FullSurronder extends ObjMoveableTypeSurronder
 	{
 		super(調整工具);
 		支援包圍部件.add("囗");
+		支援包圍部件.add("⼞");
+		支援包圍部件.add("⼝");
+		//這三個unicode都不一樣，直覺能包的都讓它能作用吧
 	}
 
 	@Override

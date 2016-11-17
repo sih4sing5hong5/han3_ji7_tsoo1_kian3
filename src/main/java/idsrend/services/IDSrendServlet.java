@@ -120,6 +120,9 @@ public class IDSrendServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException
 	{
+		response.setHeader("Cache-Control", "public, max-age=31536000");
+		response.setHeader("Server", "han3_ji7_tsoo1_kian3");
+		
 		//System.out.println("PathInfo="+request.getPathInfo());
 		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8")//在通用的應用程式用request.getRequestURI()會取到servlet path本身
 				.substring(1);
@@ -176,10 +179,12 @@ public class IDSrendServlet extends HttpServlet
 		String 附檔名 = 網址字串.substring(位置 + 1);
 		if (附檔名.equals("svg"))
 		{
+			response.setHeader("Content-Type", "image/svg+xml;charset=utf-8");
 			組字工具.字組成svg(組字式, response.getOutputStream());
 		}
 		else // TODO 只支援png、svg，其他先用png
 		{
+			response.setHeader("Content-Type", "image/png");
 			組字工具.字組成png(組字式, response.getOutputStream());
 		}
 	}

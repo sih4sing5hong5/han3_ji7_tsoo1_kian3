@@ -120,8 +120,8 @@ public class IDSrendServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException
 	{
-			//System.out.println("PathInfo="+request.getPathInfo());
-				 String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8")//在通用的應用程式用request.getRequestURI()會取到servlet path本身
+		//System.out.println("PathInfo="+request.getPathInfo());
+		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8")//在通用的應用程式用request.getRequestURI()會取到servlet path本身
 				.substring(1);
 		if (是舊網址(網址字串))// TODO ==字體
 		{
@@ -166,23 +166,21 @@ public class IDSrendServlet extends HttpServlet
 			break;
 		}
 
-		int 位置 = 網址字串.length();
-		for (int i = 0; i < 網址字串.length(); ++i)
-			if (網址字串.charAt(i) == '.')
-				位置 = i;
+		int 位置 = 網址字串.lastIndexOf('.');
+		if (位置 == -1)
+			位置 = 網址字串.length();
+		
 		String 組字式 = 網址字串.substring(0, 位置);
 		System.out.println("組字式="+組字式);
+		
 		String 附檔名 = 網址字串.substring(位置 + 1);
-		if (!附檔名.equals("svg"))// TODO 只支援png、svg，其他先用png
-			附檔名 = "png";
-		if (附檔名.equals("png"))
-		{
-			組字工具.字組成png(組字式, response.getOutputStream());
-		}
-		else
-		// svg
+		if (附檔名.equals("svg"))
 		{
 			組字工具.字組成svg(組字式, response.getOutputStream());
+		}
+		else // TODO 只支援png、svg，其他先用png
+		{
+			組字工具.字組成png(組字式, response.getOutputStream());
 		}
 	}
 

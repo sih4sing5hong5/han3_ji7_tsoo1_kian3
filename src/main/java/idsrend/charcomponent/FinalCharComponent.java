@@ -85,7 +85,7 @@ public class FinalCharComponent extends CharComponent
 
 	public FinalCharComponent(String 組字式)
 	{
-		this(組字式.charAt(0));
+		this(組字式.codePointAt(0));
 	}
 
 	@Override

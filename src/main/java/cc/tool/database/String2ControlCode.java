@@ -16,22 +16,13 @@ public class String2ControlCode
 	 */
 	static public int[] 轉換成控制碼(String 字串)
 	{
-		int 控制碼長度 = 0;
-		int i = 0;
-		while (i < 字串.length())
-		{
-			i += Character.charCount(字串.charAt(i));
-			控制碼長度++;
-		}
-
+		int 控制碼長度 = 字串.codePointCount(0, 字串.length());
 		int[] 控制碼 = new int[控制碼長度];
-		i = 0;
-		int 註標 = 0;
-		while (i < 字串.length())
+		
+		int 註標 = 0, 字串註標 = 0;
+		for (字串註標 = 0, 註標 = 0; 字串註標 < 字串.length(); 字串註標 += Character.charCount(字串.codePointAt(字串註標)), 註標++)
 		{
-			控制碼[註標] = 字串.codePointAt(i);
-			i += Character.charCount(字串.charAt(i));
-			註標++;
+			控制碼[註標] = 字串.codePointAt(字串註標);
 		}
 		return 控制碼;
 	}
@@ -45,12 +36,8 @@ public class String2ControlCode
 	 */
 	static public String 轉換成字串(int[] 控制碼)
 	{
-		StringBuilder 字串結果 = new StringBuilder();
-		for (int i = 0; i < 控制碼.length; ++i)
-		{
-			字串結果.append(Character.toChars(控制碼[i]));
-		}
-		return 字串結果.toString();
+		// String(int[] codePoints, int offset, int count) (Java 1.5+)
+		return new String(控制碼, 0, 控制碼.length);
 	}
 
 	/**

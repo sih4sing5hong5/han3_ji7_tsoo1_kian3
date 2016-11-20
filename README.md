@@ -87,9 +87,9 @@ npm i && npm run deploy
 謝謝您的使用與推廣～～
 
 ## 字體授權
-* 全字庫授權說明
-    * © 2012 中華民國行政院研究發展考核委員會。本字型檔採用創用CC「姓名標示－禁止改作」3.0臺灣版授權條款釋出。您可以在不變更字型內容之條件下，重製、散布及傳輸本字型檔之著作內容。惟應保留本字型名稱及著作權聲明。
-    * http://www.cns11643.gov.tw/AIDB/copyright.do
+* CNS11643全字庫：
+    * [中華民國國家發展委員會](http://data.gov.tw/node/5961)提供
+    * 授權：[政府資料開放授權條款-第1版](http://data.gov.tw/license )，相容「 創用CC授權 姓名標示 4.0 國際版本 」 
 
 * 「中央研究院漢字部件檢字系統」2.65版釋出聲明
     * ……，但於「漢字字型」部份，則考量其具有圖形著作的分殊特性，故另行採用「GNU自由文件授權條款1.2版本(GNU Free Documentation License 1.2，以下簡稱『GFDL1.2』)」，以及「創用CC 姓名標示-相同方式分享台灣授權條款2.5版(Creative Commons Attribution-Share Alike 2.5 Taiwan，以下簡稱為『CC-BY-SA 2.5 TW』)」兩種授權方式併行釋出。

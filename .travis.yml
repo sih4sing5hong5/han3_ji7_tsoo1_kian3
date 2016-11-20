@@ -1,8 +1,15 @@
 sudo: false
 language: java
 jdk:
-- openjdk7
+  - openjdk7
 branches:
   only:
-  - master
+    - master
 
+before_script:
+  - chmod +x gradlew
+script:
+  - ./gradlew check
+  - ./gradlew codeCoverageReport
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

@@ -11,6 +11,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'com.bmuschko.tomcat'
+apply plugin: 'jacoco'
 apply plugin: 'war'
 mainClassName = "idsrend.services.HttpserverJetty"
 
@@ -59,8 +60,14 @@ dependencies {
 }
 
 
-war{
+war {
     //from 'src/wwwroot'
     webInf { from 'src/main/webapp/WEB-INF' }
     webXml = file('src/main/webapp/WEB-INF/web.xml')    
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
 }

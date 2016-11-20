@@ -107,9 +107,9 @@ public class IDSGenTest
 		IDSParser ccUtility = new IDSParser(全部組字式, new ExpSequenceNoLookup());
 		Vector<CharComponent> ccArray = ccUtility.解析();
 
-		for (CharComponent CharComponent : ccArray)
+		for (CharComponent charComponent : ccArray)
 		{
-			CharComponent 組字部件 = (CharComponent) CharComponent;
+			CharComponent 組字部件 = (CharComponent) charComponent;
 			String 組字式 = 組字部件.樹狀結構組字式();
 			System.out.println(組字式);
 			BufferedImage 字型圖片 = new BufferedImage(字型大細, 字型大細,

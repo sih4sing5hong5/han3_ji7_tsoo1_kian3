@@ -123,7 +123,7 @@ public class IDSrendServlet extends HttpServlet
 		response.setHeader("Cache-Control", "public, max-age=31536000");
 		response.setHeader("Server", "han3_ji7_tsoo1_kian3");
 		
-		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8")//在通用的應用程式用request.getRequestURI()會取到servlet path本身
+		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8");//在通用的應用程式用request.getRequestURI()會取到servlet path本身
 		網址字串 = 網址字串.length() != 0 ? 網址字串.substring(1): "";
 		
 		if (是舊網址(網址字串))// TODO ==字體

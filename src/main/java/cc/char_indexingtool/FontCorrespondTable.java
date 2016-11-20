@@ -18,18 +18,18 @@ public class FontCorrespondTable extends MergedFont
 	/** 楷體字體下的所在 */
 	static public final String[] 楷體字體位址表 = new String[] {
 			"/font/WSL_TPS_Font_101/WSL_TPS.ttf",
-			"/font/CNS11643-101_11_28/TW-Kai-98_1.ttf",
-			"/font/CNS11643-101_11_28/TW-Kai-98_1.ttf",
-			"/font/CNS11643-101_11_28/TW-Kai-Ext-B-98_1.ttf",
-			"/font/CNS11643-101_11_28/TW-Kai-Plus-98_1.ttf",
+			"/font/CNS11643/TW-Kai-98_1.ttf",
+			"/font/CNS11643/TW-Kai-98_1.ttf",
+			"/font/CNS11643/TW-Kai-Ext-B-98_1.ttf",
+			"/font/CNS11643/TW-Kai-Plus-98_1.ttf",
 			"/font/cdphanzi-2_7/cdpeudck.tte", };
 	/** 宋體字體下的所在 */
 	static public final String[] 宋體字體位址表 = new String[] {
 			"/font/WSL_TPS_Font_101/WSL_TPS.ttf",
-			"/font/CNS11643-101_11_28/TW-Sung-98_1.ttf",
-			"/font/CNS11643-101_11_28/TW-Sung-98_1.ttf",
-			"/font/CNS11643-101_11_28/TW-Sung-Ext-B-98_1.ttf",
-			"/font/CNS11643-101_11_28/TW-Sung-Plus-98_1.ttf",
+			"/font/CNS11643/TW-Sung-98_1.ttf",
+			"/font/CNS11643/TW-Sung-98_1.ttf",
+			"/font/CNS11643/TW-Sung-Ext-B-98_1.ttf",
+			"/font/CNS11643/TW-Sung-Plus-98_1.ttf",
 			"/font/cdphanzi-2_7/cdpeudc.tte", };
 	/** 吳守禮注音字體，統一碼佮伊字體內部編碼的對照表 */
 	static protected final HashMap<Integer, Integer> 吳守禮注音字體對照表;

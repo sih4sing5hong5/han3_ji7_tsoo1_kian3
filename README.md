@@ -1,5 +1,6 @@
 # 漢字組建
 [![Build Status](https://travis-ci.org/sih4sing5hong5/han3_ji7_tsoo1_kian3.svg?branch=master)](https://travis-ci.org/sih4sing5hong5/han3_ji7_tsoo1_kian3)
+[![Test Coverage](https://img.shields.io/codecov/c/github/sih4sing5hong5/han3_ji7_tsoo1_kian3.svg)](https://codecov.io/gh/sih4sing5hong5/han3_ji7_tsoo1_kian3)
 
 產生方言、古書、古樂譜、姓名等漢語缺字。
 

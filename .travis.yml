@@ -1,7 +1,7 @@
 sudo: false
 language: java
 jdk:
-  - openjdk7
+  - openjdk8
 branches:
   only:
     - master

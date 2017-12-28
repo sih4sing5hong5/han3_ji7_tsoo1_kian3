@@ -5,9 +5,11 @@ jdk:
 branches:
   only:
     - master
-
+install:
+  - gradle assemble
 script:
   - gradle check
   - gradle jacocoTestReport
+  - find "$HOME/.gradle" -type d -maxdepth 4
 after_success:
   - bash <(curl -s https://codecov.io/bash)

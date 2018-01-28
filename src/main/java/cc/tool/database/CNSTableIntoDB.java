@@ -61,17 +61,19 @@ public class CNSTableIntoDB
 				{
 					if (欄位名.equals("Big5"))
 					{
+						// 檢測十六進位字元和跳格（都是 BMP 字元，姑且用個 char 吧）
 						StringBuilder stringBuilder = new StringBuilder();
 						for (int i = 0; i < data.length(); i++)
-							if (data.charAt(i) == '\t'
-									|| Character.isDigit(data.charAt(i))
-									|| data.charAt(i) >= 'A'
-									&& data.charAt(i) <= 'F'
-									|| data.charAt(i) >= 'a'
-									&& data.charAt(i) <= 'f')
+						{
+
+							char ch = data.charAt(i);
+							if (ch == '\t'  || ch >= '0' && ch <= '9'
+									|| ch >= 'A' && ch <= 'F'
+									|| ch >= 'a' && ch <= 'f')
 							{
-								stringBuilder.append(data.charAt(i));
+								stringBuilder.append(ch);
 							}
+						}	
 						data = stringBuilder.toString();
 					}
 					if (!data.equals(""))

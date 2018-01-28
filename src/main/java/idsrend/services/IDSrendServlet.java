@@ -123,9 +123,9 @@ public class IDSrendServlet extends HttpServlet
 		response.setHeader("Cache-Control", "public, max-age=31536000");
 		response.setHeader("Server", "han3_ji7_tsoo1_kian3");
 		
-		//System.out.println("PathInfo="+request.getPathInfo());
-		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8")//在通用的應用程式用request.getRequestURI()會取到servlet path本身
-				.substring(1);
+		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8");//在通用的應用程式用request.getRequestURI()會取到servlet path本身
+		網址字串 = 網址字串.length() != 0 ? 網址字串.substring(1): "";
+		
 		if (是舊網址(網址字串))// TODO ==字體
 		{
 			String[] 目錄 = 網址字串.split("/", 2);
@@ -133,12 +133,14 @@ public class IDSrendServlet extends HttpServlet
 					URLEncoder.encode(目錄[1], "UTF-8"),
 					URLEncoder.encode("字體", "UTF-8"),
 					URLEncoder.encode(目錄[0], "UTF-8"));
-
+			/*
 			System.out.println(網址字串);
 			System.out.println(目錄[0]);
 			System.out.println(目錄[1]);
 			System.out.println(新網址);
 			System.out.println("XXXDDDDD---------------------");
+			*/
+			
 			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 			// response.setHeader("Location", response.encodeRedirectURL(新網址));
 			response.setHeader("Location", 新網址);
@@ -168,21 +170,25 @@ public class IDSrendServlet extends HttpServlet
 			組字工具 = 宋體組字工具;
 			break;
 		}
-
+		
+		// TODO 對於空白網址字串可返回 index.html 之類的頁面
 		int 位置 = 網址字串.lastIndexOf('.');
 		if (位置 == -1)
-			位置 = 網址字串.length();
+		{
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Filename extension missing.");
+			return;
+		}
 		
 		String 組字式 = 網址字串.substring(0, 位置);
 		System.out.println("組字式="+組字式);
 		
 		String 附檔名 = 網址字串.substring(位置 + 1);
-		if (附檔名.equals("svg"))
+		if (附檔名.equalsIgnoreCase("svg"))
 		{
 			response.setHeader("Content-Type", "image/svg+xml;charset=utf-8");
 			組字工具.字組成svg(組字式, response.getOutputStream());
 		}
-		else // TODO 只支援png、svg，其他先用png
+		else // if (副檔名.equalsIgnoreCase("png")) // TODO 只支援png、svg，其他先用png
 		{
 			response.setHeader("Content-Type", "image/png");
 			組字工具.字組成png(組字式, response.getOutputStream());

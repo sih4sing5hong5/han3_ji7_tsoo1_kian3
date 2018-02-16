@@ -22,6 +22,7 @@ public class FontCorrespondTable extends MergedFont
 			"/font/CNS11643-101_11_28/TW-Kai-98_1.ttf",
 			"/font/CNS11643-101_11_28/TW-Kai-Ext-B-98_1.ttf",
 			"/font/CNS11643-101_11_28/TW-Kai-Plus-98_1.ttf",
+			"/font/NanumFont/NanumGothic.ttf",
 			"/font/cdphanzi-2_7/cdpeudck.tte", };
 	/** 宋體字體下的所在 */
 	static public final String[] 宋體字體位址表 = new String[] {
@@ -30,6 +31,7 @@ public class FontCorrespondTable extends MergedFont
 			"/font/CNS11643-101_11_28/TW-Sung-98_1.ttf",
 			"/font/CNS11643-101_11_28/TW-Sung-Ext-B-98_1.ttf",
 			"/font/CNS11643-101_11_28/TW-Sung-Plus-98_1.ttf",
+			"/font/NanumFont/NanumMyeongjo.ttf", 
 			"/font/cdphanzi-2_7/cdpeudc.tte", };
 	/** 吳守禮注音字體，統一碼佮伊字體內部編碼的對照表 */
 	static protected final HashMap<Integer, Integer> 吳守禮注音字體對照表;
@@ -47,6 +49,7 @@ public class FontCorrespondTable extends MergedFont
 		ArrayList<HashMap<Integer, Integer>> 注音字體對照表 = new ArrayList<HashMap<Integer, Integer>>();
 		注音字體對照表.add(吳守禮注音字體對照表);
 		注音字體對照表.add(入聲注音字體對照表);
+		注音字體對照表.add(null);
 		注音字體對照表.add(null);
 		注音字體對照表.add(null);
 		注音字體對照表.add(null);

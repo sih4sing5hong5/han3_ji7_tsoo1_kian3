@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
 import cc.ccomponent_adjuster.ExpSequenceLookup;
@@ -101,15 +102,15 @@ public class IDSGenTest
 			+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐"
 			+ "⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹" + "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
 
-	@Test
+	@Ignore @Test
 	public void test() throws IOException
 	{
 		IDSParser ccUtility = new IDSParser(全部組字式, new ExpSequenceNoLookup());
 		Vector<CharComponent> ccArray = ccUtility.解析();
 
-		for (CharComponent CharComponent : ccArray)
+		for (CharComponent charComponent : ccArray)
 		{
-			CharComponent 組字部件 = (CharComponent) CharComponent;
+			CharComponent 組字部件 = (CharComponent) charComponent;
 			String 組字式 = 組字部件.樹狀結構組字式();
 			System.out.println(組字式);
 			BufferedImage 字型圖片 = new BufferedImage(字型大細, 字型大細,

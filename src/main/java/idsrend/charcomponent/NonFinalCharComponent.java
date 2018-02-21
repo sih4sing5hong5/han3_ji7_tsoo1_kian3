@@ -40,7 +40,7 @@ public class NonFinalCharComponent extends CharComponent
 
 	public NonFinalCharComponent(String 組字式)
 	{
-		this(組字式.charAt(0));
+		this(組字式.codePointAt(0));
 	}
 
 	@Override

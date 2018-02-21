@@ -11,41 +11,42 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 
 import org.junit.Test;
+import org.junit.Ignore;
 
 public class IDSImgTest {
 	protected final IDSrendService 宋體組字服務 = IDSrendService.預設組字服務();
 
-	@Test
+	@Ignore @Test
 	public void 意png() throws IOException {
 		檢查png結果("意");
 	}
 
-	@Test
+	@Ignore @Test
 	public void 立日心png() throws IOException {
 		檢查png結果("⿳立日心");
 	}
 
-	@Test
+	@Ignore @Test
 	public void 傳png() throws IOException {
 		檢查png結果("⿰專");
 	}
 
-	@Test
+	@Ignore @Test
 	public void 傳svg() throws IOException {
 		檢查svg結果("⿰專");
 	}
 
-	@Test
+	@Ignore @Test
 	public void 人因svg() throws IOException {
 		檢查svg結果("⿰因");
 	}
 
-	@Test
+	@Ignore @Test
 	public void 國svg() throws IOException {
 		檢查svg結果("⿴囗或");
 	}
 
-	@Test
+	@Ignore @Test
 	public void 招財進寶svg() throws IOException {
 		檢查svg結果("⿺辶⿵宀⿱珤⿰隹⿰貝招");
 	}

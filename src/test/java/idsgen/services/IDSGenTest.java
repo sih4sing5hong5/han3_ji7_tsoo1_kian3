@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import cc.ccomponent_adjuster.ExpSequenceNoLookup;
 import cc.ccomponent_adjuster.ExpSequenceLookup;
@@ -101,7 +102,7 @@ public class IDSGenTest
 			+ "ㆠㆡㆢㆣ ㆤㆥㆦㆧㆨㆩㆪㆫㆬㆭㆮㆯㆰㆱㆲㆳ ㆴㆵㆶㆷ ㄅㄉㄍㄎㄏ ˊˇˋ˙˪˫㆐"
 			+ "⿱攵力⿱⿰⿰糹言糹攵⿰糹言⿰言糹⿰⿰糹言糹言糹" + "⿰丨丨丨⿱⿰⿰糹言糹攵⿰⿰糹言糹攵";
 
-	@Test
+	@Ignore @Test
 	public void test() throws IOException
 	{
 		IDSParser ccUtility = new IDSParser(全部組字式, new ExpSequenceNoLookup());

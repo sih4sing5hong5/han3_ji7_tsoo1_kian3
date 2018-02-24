@@ -22,7 +22,7 @@ public class FontCorrespondTable extends MergedFont
 			"/font/CNS11643-101_11_28/TW-Kai-98_1.ttf",
 			"/font/CNS11643-101_11_28/TW-Kai-Ext-B-98_1.ttf",
 			"/font/CNS11643-101_11_28/TW-Kai-Plus-98_1.ttf",
-			"/font/NanumFont/NanumGothic.ttf",
+			"/font/UnFont/UnGungseo.ttf",
 			"/font/cdphanzi-2_7/cdpeudck.tte", };
 	/** 宋體字體下的所在 */
 	static public final String[] 宋體字體位址表 = new String[] {

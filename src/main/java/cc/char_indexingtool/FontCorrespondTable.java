@@ -22,7 +22,8 @@ public class FontCorrespondTable extends MergedFont
 			"/font/CNS11643/TW-Kai-98_1.ttf",
 			"/font/CNS11643/TW-Kai-Ext-B-98_1.ttf",
 			"/font/CNS11643/TW-Kai-Plus-98_1.ttf",
-			"/font/cdphanzi-2_7/cdpeudck.tte", };
+			"/font/cdphanzi-2_7/cdpeudck.tte", 
+			"/font/UnFont/UnGungseo.ttf", };
 	/** 宋體字體下的所在 */
 	static public final String[] 宋體字體位址表 = new String[] {
 			"/font/WSL_TPS_Font_101/WSL_TPS.ttf",
@@ -30,7 +31,8 @@ public class FontCorrespondTable extends MergedFont
 			"/font/CNS11643/TW-Sung-98_1.ttf",
 			"/font/CNS11643/TW-Sung-Ext-B-98_1.ttf",
 			"/font/CNS11643/TW-Sung-Plus-98_1.ttf",
-			"/font/cdphanzi-2_7/cdpeudc.tte", };
+			"/font/cdphanzi-2_7/cdpeudc.tte", 
+			"/font/NanumFont/NanumMyeongjo.ttf", };
 	/** 吳守禮注音字體，統一碼佮伊字體內部編碼的對照表 */
 	static protected final HashMap<Integer, Integer> 吳守禮注音字體對照表;
 	/** 因為入聲的符號傷細，所以用原本的注音符號，產生入聲編碼佮原本編碼的對照表。 親像「ㆴ」→「ㄅ」、「ㆵ」→「ㄉ」、「ㆶ」→「ㄍ」、「ㆷ」→「ㄏ」。 */
@@ -47,6 +49,7 @@ public class FontCorrespondTable extends MergedFont
 		ArrayList<HashMap<Integer, Integer>> 注音字體對照表 = new ArrayList<HashMap<Integer, Integer>>();
 		注音字體對照表.add(吳守禮注音字體對照表);
 		注音字體對照表.add(入聲注音字體對照表);
+		注音字體對照表.add(null);
 		注音字體對照表.add(null);
 		注音字體對照表.add(null);
 		注音字體對照表.add(null);

@@ -49,12 +49,6 @@ public class FontCorrespondTable extends MergedFont
 		ArrayList<HashMap<Integer, Integer>> 注音字體對照表 = new ArrayList<HashMap<Integer, Integer>>();
 		注音字體對照表.add(吳守禮注音字體對照表);
 		注音字體對照表.add(入聲注音字體對照表);
-		注音字體對照表.add(null);
-		注音字體對照表.add(null);
-		注音字體對照表.add(null);
-		注音字體對照表.add(null);
-		注音字體對照表.add(null);
-		注音字體對照表.add(null);
 
 		吳守禮注音摻楷體字體 = new FontCorrespondTable(楷體字體位址表, 注音字體對照表);
 		吳守禮注音摻宋體字體 = new FontCorrespondTable(宋體字體位址表, 注音字體對照表);
@@ -113,6 +107,15 @@ public class FontCorrespondTable extends MergedFont
 		return new FontCorrespondTable(super.調整字體參數(字體選項, 字型大小), 對照表集);
 	}
 
+	private int 取對照表字碼(int 對照表號, int 控制碼) {
+		if (對照表號 < 對照表集.length)
+			if (對照表集.get(對照表號) != null)
+				if (對照表集.get(對照表號).containsKey(控制碼))
+					return 對照表集.get(對照表號).get(控制碼);
+		
+		return 控制碼;
+	}
+
 	@Override
 	public boolean 有這个字型無(int 控制碼, int 字體編號)
 	{
@@ -120,24 +123,8 @@ public class FontCorrespondTable extends MergedFont
 		{
 			for (int i = 0; i < 字體集.length; ++i)
 			{
-				if (對照表集.get(i) != null)
-				{
-					if (對照表集.get(i).containsKey(控制碼))
-					{
-						if (字體集[i].canDisplay(對照表集.get(i).get(控制碼)))
-						{
-							return true;
-						}
-					}
-				}
-				else
-				{
-					if (字體集[i].canDisplay(控制碼))
-					{
-						return true;
-					}
-
-				}
+				if (字體集[i].candisplay(取對照表字碼(i, 控制碼))
+				    return true;
 			}
 		}
 		return false;
@@ -150,26 +137,10 @@ public class FontCorrespondTable extends MergedFont
 		{
 			for (int i = 0; i < 字體集.length; ++i)
 			{
-				if (對照表集.get(i) != null)
-				{
-					if (對照表集.get(i).containsKey(控制碼))
-					{
-						if (字體集[i].canDisplay(對照表集.get(i).get(控制碼)))
-						{
-							return 字體集[i].createGlyphVector(渲染選項,
-									Character.toChars(對照表集.get(i).get(控制碼)));
-						}
-					}
-				}
-				else
-				{
-					if (字體集[i].canDisplay(控制碼))
-					{
-						return 字體集[i].createGlyphVector(渲染選項,
-								Character.toChars(控制碼));
-					}
-
-				}
+				int 臨時字碼 = 字體集[i].candisplay(取對照表字碼(i, 控制碼));
+				if (字體集[i].canDisplay(臨時字碼))
+					return 字體集[i].createGlyphVector(渲染選項,
+						Character.toChars(臨時字碼));
 			}
 		}
 		return null;

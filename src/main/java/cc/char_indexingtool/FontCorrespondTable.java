@@ -84,7 +84,7 @@ public class FontCorrespondTable extends MergedFont
 	 *            統一碼佮逐个字體內部編碼對照表。若無需要，彼格傳<code>null</code>
 	 */
 	public FontCorrespondTable(String[] 字體位置, ArrayList<HashMap<Integer, Integer>> 對照表集)
-	
+	{
 		super(字體位置);
 		this.對照表集 = 對照表集;
 	}

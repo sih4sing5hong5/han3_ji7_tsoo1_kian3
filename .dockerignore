@@ -1,0 +1,5 @@
+/bin
+/build/
+docker-compose.yml
+Dockerfile
+.*.swp

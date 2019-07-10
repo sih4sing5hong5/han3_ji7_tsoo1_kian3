@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  gradle:
+    build: .
+    networks:
+      - default
+      - nginx-bridge
+    environment:
+      VIRTUAL_HOST: "xn--p8s937b.xn--v0qr21b.xn--kpry57d"
+      LETSENCRYPT_HOST: "xn--p8s937b.xn--v0qr21b.xn--kpry57d"
+      LETSENCRYPT_EMAIL: "ithuan@xn--v0qr21b.xn--kpry57d"
+    restart: always
+
+networks:
+  nginx-bridge:
+    external: true
+
